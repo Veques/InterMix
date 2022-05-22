@@ -3,7 +3,7 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:Intermix.Pages.Login"
+      xmlns:local="clr-namespace:Intermix.Pages.Login" xmlns:loginpage="clr-namespace:Intermix.ViewModels.LoginPage" d:DataContext="{d:DesignInstance Type=loginpage:CreateAccountViewModel}"
       mc:Ignorable="d" 
       d:DesignHeight="400" d:DesignWidth="300"
 Title="CreateAccountPage" Foreground="{DynamicResource LW_Font}">
@@ -39,7 +39,7 @@ Title="CreateAccountPage" Foreground="{DynamicResource LW_Font}">
             <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Surname}" Style="{StaticResource LoginTextBox}"/>
 
             <TextBlock Grid.Row="2" VerticalAlignment="Center" Text="Login"/>
-            <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Login}" Style="{StaticResource LoginTextBox}"/>
+            <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Username}" Style="{StaticResource LoginTextBox}"/>
 
             <TextBlock Grid.Row="3" VerticalAlignment="Center" Text="Hasło"/>
             <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding Password}" Style="{StaticResource LoginTextBox}"/>

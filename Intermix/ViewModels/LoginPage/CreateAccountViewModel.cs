@@ -1,10 +1,12 @@
 ﻿using Intermix.Commands;
+using Intermix.Models;
 using Intermix.ViewModels.Base;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace Intermix.ViewModels.LoginPage
@@ -17,13 +19,37 @@ namespace Intermix.ViewModels.LoginPage
         public CreateAccountViewModel()
         {
             CreateAccount = new RelayCommand(
-                o => CreateAnAccount(Name, Surname, Login, Password),
-                o => !string.IsNullOrEmpty(Name) && !string.IsNullOrEmpty(Surname) && !string.IsNullOrEmpty(Login) && !string.IsNullOrEmpty(Password));
+                o => CreateAnAccount(Name, Surname, Username, Password),
+                o => !string.IsNullOrEmpty(Name) && !string.IsNullOrEmpty(Surname) && !string.IsNullOrEmpty(Username) && !string.IsNullOrEmpty(Password));
         }
 
-        private void CreateAnAccount(string name, string surname, string login, string password)
+        private void CreateAnAccount(string name, string surname, string username, string password)
         {
 
+            ApplicationDbContext _dbContext = new ApplicationDbContext();
+            _dbContext.Database.EnsureCreated();
+
+            try
+            {
+                Users user = new()
+                {
+                    Name = name,
+                    Surname = surname,
+                    Password = password,
+                    Username = username
+                };
+
+                _dbContext.Users.Add(user);
+                if (_dbContext.SaveChanges() > 0)
+                {
+                    MessageBox.Show("User has been added to db");
+                }
+
+
+            } catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error");
+            }
         }
 
         private string _name;
@@ -50,15 +76,15 @@ namespace Intermix.ViewModels.LoginPage
             }
         }
 
-        private string _login;
+        private string _username;
 
-        public string Login
+        public string Username
         {
-            get { return _login; }
+            get { return _username; }
             set
             {
-                _login = value;
-                OnPropertyChanged("Login");
+                _username = value;
+                OnPropertyChanged("Username");
             }
         }
 
