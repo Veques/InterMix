@@ -27,17 +27,22 @@ namespace Intermix.Pages.Login
             DataContext = new LoginPageViewModel();
         }
 
-        private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
-        {
-            var vm = (LoginPageViewModel) DataContext;
-            vm.Password = PasswordBox.Password;
-        }
-
         private void NewAccount_Click(object sender, RoutedEventArgs e)
         {
-            CreateAccountPage page = new CreateAccountPage();
+            CreateAccountPage page = new();
 
             NavigationService.Navigate(page);
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            PasswordBox.Clear();
+        }
+
+        private void PasswordBox_MouseMove(object sender, MouseEventArgs e)
+        {
+            var vm = (LoginPageViewModel)DataContext;
+            vm.Password = PasswordBox.Password;
         }
     }
 }

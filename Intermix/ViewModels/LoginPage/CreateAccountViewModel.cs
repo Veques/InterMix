@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Navigation;
 
 namespace Intermix.ViewModels.LoginPage
 {
@@ -20,17 +21,32 @@ namespace Intermix.ViewModels.LoginPage
         {
             CreateAccount = new RelayCommand(
                 o => CreateAnAccount(Name, Surname, Username, Password),
-                o => !string.IsNullOrEmpty(Name) && !string.IsNullOrEmpty(Surname) && !string.IsNullOrEmpty(Username) && !string.IsNullOrEmpty(Password));
+
+                o => !string.IsNullOrEmpty(Name) && !string.IsNullOrEmpty(Surname) &&
+                     !string.IsNullOrEmpty(Username) && !string.IsNullOrEmpty(Password) && 
+                     !string.IsNullOrEmpty(PasswordConfirm));
         }
 
         private void CreateAnAccount(string name, string surname, string username, string password)
         {
 
             ApplicationDbContext _dbContext = new ApplicationDbContext();
-            _dbContext.Database.EnsureCreated();
 
             try
             {
+                if(!Password.Equals(PasswordConfirm))
+                {
+                    MessageBox.Show("Hasła się nie zgadzają");
+                    return;
+                }
+
+                if(Password.Length < 8)
+                {
+                    MessageBox.Show("Hasło jest za krótkie");
+                    return;
+                }
+
+                _dbContext.Database.EnsureCreated();
                 Users user = new()
                 {
                     Name = name,
@@ -42,8 +58,12 @@ namespace Intermix.ViewModels.LoginPage
                 _dbContext.Users.Add(user);
                 if (_dbContext.SaveChanges() > 0)
                 {
-                    MessageBox.Show("User has been added to db");
+                    MessageBox.Show("You have been added to database");
                 }
+
+                Name = String.Empty;
+                Surname = String.Empty;
+                Username = String.Empty;
 
 
             } catch (Exception ex)
@@ -61,6 +81,7 @@ namespace Intermix.ViewModels.LoginPage
             {
                 _name = value;
                 OnPropertyChanged("Name");
+
             }
         }
 
@@ -97,6 +118,17 @@ namespace Intermix.ViewModels.LoginPage
             {
                 _password = value;
                 OnPropertyChanged("Password");
+            }
+        }
+
+        private string _passwordConfirm;
+        public string PasswordConfirm
+        {
+            get { return _passwordConfirm; }
+            set
+            {
+                _passwordConfirm = value;
+                OnPropertyChanged("PasswordConfirm");
             }
         }
 

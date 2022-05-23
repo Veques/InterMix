@@ -3,7 +3,7 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:Intermix.Pages.Login" xmlns:fa="http://schemas.fontawesome.com/icons/"
+      xmlns:local="clr-namespace:Intermix.Pages.Login" xmlns:fa="http://schemas.fontawesome.com/icons/" xmlns:loginpage="clr-namespace:Intermix.ViewModels.LoginPage" d:DataContext="{d:DesignInstance Type=loginpage:LoginPageViewModel}"
       mc:Ignorable="d" 
       d:DesignHeight="400" d:DesignWidth="300"
       Title="LoginPage">
@@ -36,15 +36,18 @@
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                 <fa:ImageAwesome HorizontalAlignment="Left" Margin="0 0 10 0"  Width="15" Icon="Solid_User" Foreground="{DynamicResource LW_TextBoxIcons}"/>
-                <TextBox Name="LoginBox" Text="{Binding Username}" Style="{StaticResource LoginTextBox}"/>
+                <TextBox Name="LoginBox" Text="{Binding Username}"
+                         Style="{StaticResource LoginTextBox}"/>
             </StackPanel>
 
             <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
                 <fa:ImageAwesome Margin="0 0 10 0" HorizontalAlignment="Left" Width="15" Icon="Solid_Lock" Foreground="{DynamicResource LW_TextBoxIcons}"/>
-                <PasswordBox Name="PasswordBox" PasswordChanged="PasswordBox_PasswordChanged" Style="{StaticResource PasswordBox}"/>
+                <PasswordBox Name="PasswordBox" MouseMove="PasswordBox_MouseMove"
+                             Style="{StaticResource PasswordBox}"/>
             </StackPanel>
 
-            <Button Grid.Row="2" Margin="7" Content="Log in" VerticalAlignment="Bottom" Command="{Binding LogIn}" Style="{StaticResource LW_Buttons}"/>
+            <Button Grid.Row="2" Margin="7" Content="Log in" VerticalAlignment="Bottom"
+                    Command="{Binding LogIn}" Click="Button_Click" Style="{StaticResource LW_Buttons}"/>
 
         </Grid>
 

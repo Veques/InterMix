@@ -1,6 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
+    <!-- LOGIN WINDOW -->
     <SolidColorBrush x:Key="LW_Background" Color="#383838"/>
     <SolidColorBrush x:Key="LW_Font" Color="white"/>
     <SolidColorBrush x:Key="LW_Icon" Color="Lime"/>
@@ -14,5 +15,12 @@
     <SolidColorBrush x:Key="LW_onHoverBorder" Color="red" Opacity="0.7"/>
     <Color x:Key="LW_onHoverShadow" >white</Color>
     <Color x:Key="LW_onHoverButtonShadow">lime</Color>
+    
+    <!-- MAIN WINDOW -->
+
+    <SolidColorBrush x:Key="MW_Background" Color="#383838"/>
+    <SolidColorBrush x:Key="MW_Font" Color="white"/>
+
+
 
 </ResourceDictionary>

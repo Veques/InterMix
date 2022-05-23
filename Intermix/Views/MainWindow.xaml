@@ -3,10 +3,43 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Intermix"
+        xmlns:local="clr-namespace:Intermix" xmlns:fa="http://schemas.fontawesome.com/icons/"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="MainWindow" Height="720" Width="1280" ResizeMode="CanResizeWithGrip" WindowStyle="None" WindowStartupLocation="CenterScreen"
+        Background="Transparent" AllowsTransparency="True">
+    
+    <Border Background="{StaticResource MW_Background}">
+        
+        <!-- Górny pasek -->
+        <Grid>
 
-    </Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="15*"/>
+            </Grid.RowDefinitions>
+            
+            <Grid Height="30" VerticalAlignment="Top" MouseDown="Drag_MouseDown" >
+
+                <Label Margin="5 0 0 0" VerticalAlignment="Center" Foreground="{DynamicResource MW_Font}" FontWeight="SemiBold">InterMIX</Label>
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0 0 5 0">
+                    <Button fa:Awesome.Content="Regular_WindowMinimize" FontWeight="SemiBold" Click="Minimize_Click" Style="{StaticResource WindowBarButtons}"/>
+                    <Button fa:Awesome.Content="Regular_WindowMaximize" Click="Maximize_Click" Style="{StaticResource WindowBarButtons}"/>
+                    <Button Content="✖" FontSize="11" Click="Exit_Click" Style="{StaticResource WindowBarButtons}"/>
+                </StackPanel>
+            </Grid>
+                
+        <!-- Środek -->
+
+            <Grid Grid.Row="1">
+        
+                <Frame Name="frame" NavigationUIVisibility="Hidden" Source="../../Pages/MainWindow/ChooseActivity.xaml"/>
+                
+            </Grid>
+            
+            
+        </Grid>
+            
+        
+    </Border>
 </Window>

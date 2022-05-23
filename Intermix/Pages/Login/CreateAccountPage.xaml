@@ -32,24 +32,24 @@ Title="CreateAccountPage" Foreground="{DynamicResource LW_Font}">
                 <ColumnDefinition Width="2.5*"/>
             </Grid.ColumnDefinitions>
 
-            <TextBlock Text="Imię" VerticalAlignment="Center"/>
+            <TextBlock Text="Name" VerticalAlignment="Center"/>
             <TextBox Text="{Binding Name}" Grid.Column="1" Style="{StaticResource LoginTextBox}"/>
 
-            <TextBlock Grid.Row="1" VerticalAlignment="Center" Text="Nazwisko"/>
+            <TextBlock Grid.Row="1" VerticalAlignment="Center" Text="Surname"/>
             <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Surname}" Style="{StaticResource LoginTextBox}"/>
 
             <TextBlock Grid.Row="2" VerticalAlignment="Center" Text="Login"/>
             <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Username}" Style="{StaticResource LoginTextBox}"/>
 
-            <TextBlock Grid.Row="3" VerticalAlignment="Center" Text="Hasło"/>
-            <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding Password}" Style="{StaticResource LoginTextBox}"/>
+            <TextBlock Grid.Row="3" VerticalAlignment="Center" Text="Password"/>
+            <PasswordBox Name="PasswordBox" LostFocus="PasswordBox_LostFocus" Grid.Row="3" Grid.Column="1" Style="{StaticResource PasswordBox}"/>
 
-            <TextBlock Grid.Row="4" VerticalAlignment="Center" Text="Powtórz Hasło"/>
-            <TextBox Grid.Row="4" Grid.Column="1" Style="{StaticResource LoginTextBox}"/>
+            <TextBlock Grid.Row="4" VerticalAlignment="Center" Text="Confirm psword"/>
+            <PasswordBox Name="PasswordBoxConfirm" MouseMove="PasswordBoxConfirm_MouseMove"  Grid.Row="4" Grid.Column="1" Style="{StaticResource PasswordBox}"/>
         </Grid>
 
         <Grid Grid.Row="2">
-            <Button Command="{Binding CreateAccount}" Content="Create account" Width="150" Height=" 50" Style="{StaticResource LW_Buttons}"></Button>
+            <Button Command="{Binding CreateAccount}" Click="Button_Click"  Content="Create account" Width="150" Height=" 50" Style="{StaticResource LW_Buttons}"></Button>
         </Grid>
     </Grid>
 </Page>

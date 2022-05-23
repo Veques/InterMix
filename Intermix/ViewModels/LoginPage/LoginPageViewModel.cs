@@ -1,5 +1,7 @@
 ﻿using Intermix.Commands;
+using Intermix.Models;
 using Intermix.ViewModels.Base;
+using Intermix.Views.LoginPage;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,23 +15,36 @@ namespace Intermix.ViewModels.LoginPage
     public class LoginPageViewModel : BaseViewModel
     {
         public ICommand LogIn { get; set; }
-        public ICommand CreateAccount { get; set; }
 
         public LoginPageViewModel()
         {
-            LogIn = new RelayCommand(o => LogInCommand(Username, Password), o => !string.IsNullOrEmpty(Username) && !string.IsNullOrEmpty(Password));
-            CreateAccount = new RelayCommand(o => NewAccount(), o => true);
+            LogIn = new RelayCommand(o => LogInCommand(Username, Password),
+                                     o => !string.IsNullOrEmpty(Username) && !string.IsNullOrEmpty(Password));
 
         }
-        private void NewAccount()
-        {
 
-        }
         private void LogInCommand(string Username, string Password)
         {
-            MessageBox.Show(Password);
-        }
+            ApplicationDbContext _dbContext = new ApplicationDbContext();
 
+            var isValid = _dbContext.Users.FirstOrDefault(u => u.Username == Username && u.Password == Password);
+
+            if (isValid == null)
+            {
+                MessageBox.Show("Hasło i nazwa użytkownika nie zgadzają się");
+                
+            } else
+            {
+                MainWindow window = new MainWindow();
+                
+                var w = Application.Current.Windows[0];
+                w.Hide();
+
+                window.Show();
+            }
+
+        }
+       
         private string _username;
 
         public string Username
@@ -40,7 +55,7 @@ namespace Intermix.ViewModels.LoginPage
             {
                 _username = value;
                 OnPropertyChanged("Username");
-            }
+           }
         }
 
         private string _password;
