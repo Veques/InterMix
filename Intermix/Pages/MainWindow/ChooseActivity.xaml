@@ -5,17 +5,36 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Intermix.Pages.MainWindow" xmlns:fa="http://schemas.fontawesome.com/icons/"
       mc:Ignorable="d" 
-      Height="720" Width="1280"
       Title="ChooseActivity">
 
     <Grid>
 
-        <Button Click="Button_Click" Width="200" Height="200" Background="Transparent" >
-            <Button.Content>
-        <Image Source="/Images/TicTacToe.png"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="3*"/>
+        </Grid.ColumnDefinitions>
+
+        <ListView BorderThickness="0" Name="listView1" SelectionChanged="listView1_SelectionChanged" Background="Transparent">
+            <ListViewItem>
+                <StackPanel  Orientation="Horizontal" HorizontalAlignment="Stretch">
+                    <Image Source="/Images/TicTacToe.png" Style="{StaticResource MW_Images}"/>
+                    <Label Margin="15 0 0 0" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Stretch" Content="TicTacToe" Foreground="{StaticResource MW_Font}"/>
+                </StackPanel>
+
                 
-            </Button.Content>
-        </Button>
+            </ListViewItem>
+        </ListView>
+
+        <Grid Grid.Column="1">
+
+            <TextBlock VerticalAlignment="Top" HorizontalAlignment="Center"
+                       Foreground="{StaticResource MW_Font}" FontSize="40"
+                       Margin="10"
+                       Text="{Binding ChosenUsername, StringFormat={} HI {0}}"/>
+
+        </Grid>
+        
+                
 
     </Grid>
 </Page>

@@ -1,0 +1,58 @@
+﻿<Page x:Class="Intermix.Pages.MainWindow.TicTacToe.GameType"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Intermix.Pages.MainWindow.TicTacToe" xmlns:base="clr-namespace:Intermix.ViewModels.Base" xmlns:fa="http://schemas.fontawesome.com/icons/" 
+      xmlns:tictactoeview="clr-namespace:Intermix.ViewModels.MainWindowView.TicTacToeView" d:DataContext="{d:DesignInstance Type=tictactoeview:GameTypeViewModel}"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="GameType">
+
+    <Grid>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition Width="9*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <Grid x:Name="Back" Background="Transparent" Grid.RowSpan="4" VerticalAlignment="Stretch" HorizontalAlignment="Center" >
+            <Button HorizontalAlignment="Center" Style="{StaticResource BackButtons}" Click="Back_Click">
+                <Button.Content>
+                    <fa:FontAwesome Icon="Solid_AngleLeft" Foreground="{DynamicResource MW_Font}" FontSize="70"/>
+                </Button.Content>
+            </Button>
+        </Grid>
+        
+        <TextBlock Grid.Column="1" Text="Choose Game Type" VerticalAlignment="Center" HorizontalAlignment="Center" 
+                   FontSize="40" Foreground="{StaticResource MW_Font}" Margin="0 10 0 0"
+                   />
+
+        <StackPanel Grid.Column="1" HorizontalAlignment="Center" Orientation="Horizontal" Grid.Row="1">
+
+            <RadioButton HorizontalAlignment="Left" Content="1 player" Click="IsDifficultySellectableYes_Click"
+                    Style="{StaticResource {x:Type ToggleButton}}" IsChecked="{Binding OnePlayer}"/>
+            <RadioButton HorizontalAlignment="Right" Content="2 players"
+                    Style="{StaticResource {x:Type ToggleButton}}" Click="IsDifficultySellectableNo_Click" />
+        </StackPanel>
+
+        <StackPanel Grid.Column="1" HorizontalAlignment="Center" Orientation="Horizontal" Grid.Row="2">
+            <RadioButton Name="Easy"  HorizontalAlignment="Left" Content="Łatwy" IsEnabled="{Binding IsSelectableDifficulty}"
+                    Style="{StaticResource {x:Type ToggleButton}}" IsChecked="{Binding EasyMode}"/>
+            <RadioButton Name="Hard" HorizontalAlignment="Right" Content="Trudny" IsEnabled="{Binding IsSelectableDifficulty}"
+                    Style="{StaticResource {x:Type ToggleButton}}"/>
+        </StackPanel>
+
+        <Button Grid.Column="1" Grid.Row="3" HorizontalAlignment="Center" Content="Start"
+                Width="100" Height="50" Click="Start_Click" Command="{Binding StartGame}"
+                Style="{StaticResource LW_Buttons}" />
+
+    </Grid>
+</Page>

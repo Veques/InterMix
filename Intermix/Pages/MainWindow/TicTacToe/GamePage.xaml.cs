@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Intermix.ViewModels.MainWindowView.TicTacToeView;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,12 @@ namespace Intermix.Pages.MainWindow.TicTacToe
         public GamePage()
         {
             InitializeComponent();
+            DataContext = new GamePageViewModel();
+        }
+
+        private void Back_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.GoBack();
         }
     }
 }

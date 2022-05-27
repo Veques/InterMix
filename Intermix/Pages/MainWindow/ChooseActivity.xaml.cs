@@ -1,4 +1,5 @@
 ﻿using Intermix.Pages.MainWindow.TicTacToe;
+using Intermix.ViewModels.MainWindowView.TicTacToeView;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,17 +25,11 @@ namespace Intermix.Pages.MainWindow
         public ChooseActivity()
         {
             InitializeComponent();
+            DataContext = new ChooseActivityViewModel();
         }
-        private void TicTacToe_MouseDown(object sender, MouseButtonEventArgs e)
+        private void listView1_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            
-   
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-
-            GamePage page = new();
+            GameType page = new();
             NavigationService.Navigate(page);
         }
     }

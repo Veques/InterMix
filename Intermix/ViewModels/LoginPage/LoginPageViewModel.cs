@@ -1,6 +1,7 @@
 ﻿using Intermix.Commands;
 using Intermix.Models;
 using Intermix.ViewModels.Base;
+using Intermix.ViewModels.MainWindowView.TicTacToeView;
 using Intermix.Views.LoginPage;
 using System;
 using System.Collections.Generic;
@@ -20,29 +21,31 @@ namespace Intermix.ViewModels.LoginPage
         {
             LogIn = new RelayCommand(o => LogInCommand(Username, Password),
                                      o => !string.IsNullOrEmpty(Username) && !string.IsNullOrEmpty(Password));
-
         }
-
-        private void LogInCommand(string Username, string Password)
+        private static void LogInCommand(string Username, string Password)
         {
-            ApplicationDbContext _dbContext = new ApplicationDbContext();
+            ApplicationDbContext _dbContext = new();
 
             var isValid = _dbContext.Users.FirstOrDefault(u => u.Username == Username && u.Password == Password);
 
             if (isValid == null)
             {
-                MessageBox.Show("Hasło i nazwa użytkownika nie zgadzają się");
-                
-            } else
+                MessageBox.Show("Hasło i nazwa użytkownika nie zgadzają się");   
+            } 
+            else
             {
-                MainWindow window = new MainWindow();
+                MainWindow window = new();
                 
                 var w = Application.Current.Windows[0];
                 w.Hide();
 
+                var vm = new ChooseActivityViewModel
+                {
+                    ChosenUsername = Username.ToUpper()
+                };
+
                 window.Show();
             }
-
         }
        
         private string _username;

@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Intermix" xmlns:fa="http://schemas.fontawesome.com/icons/"
         mc:Ignorable="d"
         Title="MainWindow" Height="720" Width="1280" ResizeMode="CanResizeWithGrip" WindowStyle="None" WindowStartupLocation="CenterScreen"
-        Background="Transparent" AllowsTransparency="True">
+        Background="Transparent" AllowsTransparency="True" FontWeight="SemiBold">
     
     <Border Background="{StaticResource MW_Background}">
         
@@ -15,18 +15,18 @@
 
             <Grid.RowDefinitions>
                 <RowDefinition/>
-                <RowDefinition Height="15*"/>
+                <RowDefinition Height="14*"/>
             </Grid.RowDefinitions>
             
-            <Grid Height="30" VerticalAlignment="Top" MouseDown="Drag_MouseDown" >
+            <Grid VerticalAlignment="Stretch" MouseDown="Drag_MouseDown" >
 
-                <Label Margin="5 0 0 0" VerticalAlignment="Center" Foreground="{DynamicResource MW_Font}" FontWeight="SemiBold">InterMIX</Label>
+                <Label Margin="5 0 0 0" VerticalAlignment="Stretch" Foreground="{DynamicResource MW_Font}" FontSize="20" FontWeight="Light">InterMIX</Label>
 
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0 0 5 0">
-                    <Button fa:Awesome.Content="Regular_WindowMinimize" FontWeight="SemiBold" Click="Minimize_Click" Style="{StaticResource WindowBarButtons}"/>
-                    <Button fa:Awesome.Content="Regular_WindowMaximize" Click="Maximize_Click" Style="{StaticResource WindowBarButtons}"/>
-                    <Button Content="✖" FontSize="11" Click="Exit_Click" Style="{StaticResource WindowBarButtons}"/>
-                </StackPanel>
+                <Grid Width="150" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0 0 5 0">
+                    <Button fa:Awesome.Content="Regular_WindowMinimize" HorizontalAlignment="Left" FontWeight="SemiBold" Click="Minimize_Click" Style="{StaticResource WindowBarButtons}"/>
+                    <Button fa:Awesome.Content="Regular_WindowMaximize" Click="Maximize_Click" HorizontalAlignment="Center" Style="{StaticResource WindowBarButtons}"/>
+                    <Button Content="✖" Click="Exit_Click" HorizontalAlignment="Right" Style="{StaticResource WindowBarButtons}"/>
+                </Grid>
             </Grid>
                 
         <!-- Środek -->

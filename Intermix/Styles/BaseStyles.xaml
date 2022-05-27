@@ -2,10 +2,9 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
 
-    <!-- Exit Button styles -->
+    <!-- Window Button styles -->
     <Style x:Key="WindowBarButtons" TargetType="Button">
-        <Setter Property="Width" Value="20"/>
-        <Setter Property="Height" Value="20"/>
+        <Setter Property="FontSize" Value="25"/>
         <Setter Property="Foreground" Value="{DynamicResource LW_Font}"/>
         <Setter Property="Margin" Value="2 0 2 0"/>
         <Setter Property="OverridesDefaultStyle" Value="True" />
@@ -14,9 +13,9 @@
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
                     <Border Name="border" BorderThickness="0" 
-                   Padding="2" 
-                   Background="{TemplateBinding Background}" 
-                   CornerRadius="2">
+                            Padding="6"
+                            Background="{TemplateBinding Background}" 
+                            CornerRadius="2">
                         <ContentPresenter HorizontalAlignment="Center"
                        VerticalAlignment="Center" />
                         <Border.Style>
@@ -96,7 +95,7 @@
         </Setter>
     </Style>
 
-    <!-- Loading Window Buttons -->
+    <!-- Login Window Buttons -->
     <Style x:Key="LW_Buttons" TargetType="Button">
 
         <Setter Property="Background" Value="{DynamicResource LW_ButtonBackground}"/>
@@ -128,7 +127,7 @@
                                     <Trigger Property="IsMouseOver" Value="True">
                                         <Setter Property="Background" Value="{DynamicResource LW_ButtonBackground}"/>
                                         <Setter Property="Opacity" Value="0.8"/>
-                                        <Setter Property="BorderBrush" Value="{DynamicResource BT_onHoverBorder}"/>
+                                        <Setter Property="BorderBrush" Value="{DynamicResource LW_onHoverBorder}"/>
                                     </Trigger>
                                 </Style.Triggers>
                             </Style>
@@ -151,5 +150,108 @@
             </Setter.Value>
         </Setter>
     </Style>
+    
+    <!-- Main Window Images -->
+    <Style x:Key="MW_Images" TargetType="Image">
+        <Setter Property="Width" Value="100"/>
+        <Setter Property="Height" Value="auto"/>
+        <Setter Property="RenderOptions.BitmapScalingMode" Value="HighQuality" />
+    </Style>
+
+    <!-- Main Window TicTacToe Buttons -->
+    <Style TargetType="ToggleButton">
+        <Setter Property="Foreground" Value="{DynamicResource MW_Font}"/>
+        <Setter Property="Background" Value="{DynamicResource TTT_ButtonsColor}"/>
+        <Setter Property="Height" Value="75"/>
+        <Setter Property="Margin" Value="2"/>
+        <Setter Property="Width" Value="150"/>
+        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="FontWeight" Value="SemiBold"/>
+        
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ToggleButton">
+                    <Border BorderBrush="{TemplateBinding BorderBrush}" 
+                                Background="{TemplateBinding Background}">
+                        <Border.Style>
+                            <Style TargetType="{x:Type Border}">
+                                <Setter Property="Background" Value="{DynamicResource TTT_ButtonsColor}"/>
+                                <Setter Property="BorderThickness" Value="2"/>
+                                <Style.Triggers>
+                                    <Trigger Property="Border.IsMouseOver" Value="True">
+                                        <Setter Property="Effect">
+                                            <Setter.Value>
+                                                <DropShadowEffect BlurRadius="5" ShadowDepth="1" Color="{DynamicResource TTT_onHoverButtonShadow}"  Opacity="1"/>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Trigger>
+
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="{DynamicResource TTT_ButtonsColor}"/>
+                                        <Setter Property="Opacity" Value="0.8"/>
+                                        <Setter Property="BorderBrush" Value="{DynamicResource TTT_onHoverBorder}"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Border.Style>
+                        <ContentPresenter HorizontalAlignment="Center"                  
+                                              VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsChecked" Value="True">
+                <Setter Property="Background" Value="{DynamicResource TTT_ButtonChecked}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <!-- Back Buttons with animation -->
+    <Style x:Key="BackButtons" TargetType="{x:Type Button}">
+        <Setter Property="Background" Value="#2F2F2F"/>
+        <Setter Property="Height" Value="150"/>
+        <Setter Property="Width" Value="50"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Background="{TemplateBinding Background}" CornerRadius="3">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Trigger.EnterActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ThicknessAnimation Duration="0:0:0.250" To="0" 
+                                                            Storyboard.TargetProperty="BorderThickness" />
+                            <DoubleAnimation Duration="0:0:0.550" To="120" 
+                                                            Storyboard.TargetProperty="Height" />
+                            <DoubleAnimation Duration="0:0:0.550" To="120" 
+                                                            Storyboard.TargetProperty="Width" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.EnterActions>
+                <Trigger.ExitActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ThicknessAnimation Duration="0:0:0.250" To="0" 
+                                                            Storyboard.TargetProperty="BorderThickness" />
+                            <DoubleAnimation Duration="0:0:0.550" To="100" 
+                                                            Storyboard.TargetProperty="Height" />
+                            <DoubleAnimation Duration="0:0:0.550" To="100" 
+                                                            Storyboard.TargetProperty="Width" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.ExitActions>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+
+
 
 </ResourceDictionary>
