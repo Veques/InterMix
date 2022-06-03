@@ -25,8 +25,17 @@ namespace Intermix.Pages.MainWindow.TicTacToe
         {
             InitializeComponent();
             DataContext = new GamePageViewModel();
+
+            //NewGame();
         }
 
+        private void NewGame()
+        {
+            GameGrid.Children.Cast<Button>().ToList().ForEach(button =>
+            {
+                button.Content = string.Empty;
+            });
+        }
         private void Back_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.GoBack();

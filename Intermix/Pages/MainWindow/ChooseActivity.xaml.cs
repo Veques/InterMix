@@ -27,8 +27,9 @@ namespace Intermix.Pages.MainWindow
             InitializeComponent();
             DataContext = new ChooseActivityViewModel();
         }
-        private void listView1_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void ListViewItem_PreviewMouseLeftButtonDown_1(object sender, MouseButtonEventArgs e)
         {
+
             GameType page = new();
             NavigationService.Navigate(page);
         }

@@ -1,19 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Intermix.Commands;
+using Intermix.Enums;
+using Intermix.Pages.MainWindow.TicTacToe;
+using System;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace Intermix.ViewModels.MainWindowView.TicTacToeView
 {
     public class GamePageViewModel
     {
-        public void NewGame(bool onePlayer, bool easyMode)
+        public GamePageViewModel()
         {
-            
-            MessageBox.Show(onePlayer.ToString());
-            MessageBox.Show(easyMode.ToString());
+
         }
+
     }
 }

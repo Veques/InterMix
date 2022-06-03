@@ -1,31 +1,18 @@
 ﻿using Intermix.Commands;
 using Intermix.ViewModels.Base;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace Intermix.ViewModels.MainWindowView.TicTacToeView
 {
     public class GameTypeViewModel : BaseViewModel
     {
-
-        public ICommand StartGame {get; set;}
+        
         public GameTypeViewModel()
         {
-            var vm = new GamePageViewModel();
-
-            StartGame = new RelayCommand(
-                o => vm.NewGame(OnePlayer, EasyMode),
-                o => IsStartClickable
-                );
 
         }
 
         private bool _onePlayer ;
-
         public bool OnePlayer
         {
             get { return _onePlayer; }
@@ -40,7 +27,9 @@ namespace Intermix.ViewModels.MainWindowView.TicTacToeView
         public bool EasyMode
         {
             get { return _easyMode; }
-            set { _easyMode = value;
+            set
+            {
+                _easyMode = value;
                 OnPropertyChanged("EasyMode");
             }
         }

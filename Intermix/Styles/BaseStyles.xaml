@@ -251,6 +251,76 @@
         </Style.Triggers>
     </Style>
 
+    <Style x:Key="TTTG_Buttons" TargetType="Button">
+        <Setter Property="Background" Value="{DynamicResource LW_ButtonBackground}"/>
+        <Setter Property="Foreground" Value="{DynamicResource LW_Font}"/>
+        <Setter Property="Margin" Value="2"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border CornerRadius="3">
+                        <!--<Border.Effect>
+                            <DropShadowEffect BlurRadius="40" ShadowDepth="3" Color="Black"  Opacity="0.6" />
+                        </Border.Effect>-->
+                        <Border.Style>
+                            <Style TargetType="{x:Type Border}">
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="BorderThickness" Value="0.5"/>
+                                <Setter Property="BorderBrush" Value="{DynamicResource TTTG_ButtonBackground}"/>
+                               
+                                <Style.Triggers>
+                                    <Trigger Property="Border.IsMouseOver" Value="True">
+                                        <Trigger.EnterActions>
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <ThicknessAnimation Duration="0:0:0.200" To="4" 
+                                                            Storyboard.TargetProperty="BorderThickness" />
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </Trigger.EnterActions>
+                                        <Trigger.ExitActions>
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <ThicknessAnimation Duration="0:0:0.200" To="0.5" 
+                                                            Storyboard.TargetProperty="BorderThickness" />
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </Trigger.ExitActions>
+                                    </Trigger>
+                                    
+                                    <!--<Trigger Property="Border.IsMouseOver" Value="True">
+                                        <Setter Property="Effect">
+                                            <Setter.Value>
+                                                <DropShadowEffect BlurRadius="5" ShadowDepth="1" Color="{DynamicResource TTT_onHoverButtonShadow}"  Opacity="1"/>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Trigger>-->
+
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="{DynamicResource TTTG_ButtonBackgroundOnHover}"/>
+                                        <Setter Property="Opacity" Value="0.8"/>
+                                        <Setter Property="BorderBrush" Value="{DynamicResource TTTG_onHoverBorder}"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Border.Style>
+                        <StackPanel HorizontalAlignment="Center"
+                                    VerticalAlignment="Center">
+                            <TextBlock Text="{TemplateBinding Button.Content}"
+                                       FontSize="110"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Center"
+                                       Margin="{TemplateBinding Padding}"
+                                       TextWrapping="Wrap"
+                                       Padding="2"
+                                       TextAlignment="Center"
+                                       Height="auto"/>
+                        </StackPanel>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 
 
 

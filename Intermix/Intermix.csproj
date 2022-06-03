@@ -12,6 +12,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Page Remove="Styles\DarkTheme.xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Expression.Blend.Sdk" Version="1.0.2" />
     <PackageReference Include="FontAwesome5" Version="2.1.6" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.5" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.5" />
@@ -22,10 +27,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Page Update="Styles\DarkTheme.xaml">
-      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Update="Styles\LightTheme.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
@@ -38,6 +39,10 @@
 
   <ItemGroup>
     <Resource Include="Images\TicTacToe.png" />
+    <Resource Include="Styles\DarkTheme.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Resource>
   </ItemGroup>
 
 </Project>

@@ -14,8 +14,13 @@
             <ColumnDefinition Width="3*"/>
         </Grid.ColumnDefinitions>
 
-        <ListView BorderThickness="0" Name="listView1" SelectionChanged="listView1_SelectionChanged" Background="Transparent">
-            <ListViewItem>
+        <ListView BorderThickness="0" Name="listView1" Background="Transparent">
+            <ListView.ItemContainerStyle>
+            <Style TargetType="ListViewItem">
+                <EventSetter Event="PreviewMouseLeftButtonDown" Handler="ListViewItem_PreviewMouseLeftButtonDown_1" />
+            </Style>
+            </ListView.ItemContainerStyle>
+            <ListViewItem >
                 <StackPanel  Orientation="Horizontal" HorizontalAlignment="Stretch">
                     <Image Source="/Images/TicTacToe.png" Style="{StaticResource MW_Images}"/>
                     <Label Margin="15 0 0 0" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Stretch" Content="TicTacToe" Foreground="{StaticResource MW_Font}"/>

@@ -7,6 +7,7 @@
     <Color x:Key="LeadingFont">white</Color>
 
     <SolidColorBrush x:Key="LW_Background" Color="#383838"/>
+    
     <SolidColorBrush x:Key="LW_Font" Color="{DynamicResource LeadingFont}"/>
     <SolidColorBrush x:Key="LW_Icon" Color="{DynamicResource LeadingColor}"/>
     <SolidColorBrush x:Key="LW_TextBoxIcons" Color="{DynamicResource LeadingColor}"/>
@@ -30,6 +31,9 @@
     <Color x:Key="TTT_onHoverShadow" >white</Color>
     <Color x:Key="TTT_onHoverButtonShadow">lime</Color>
     
+    <SolidColorBrush x:Key="TTTG_ButtonBackgroundOnHover" Color="Transparent" />
+    <SolidColorBrush x:Key="TTTG_ButtonBackground" Color="{DynamicResource LeadingColor}" />
+    <SolidColorBrush x:Key="TTTG_onHoverBorder" Color="{DynamicResource LeadingColor}" Opacity="0.7"/>
 
 
 </ResourceDictionary>

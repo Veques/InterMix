@@ -25,19 +25,42 @@ namespace Intermix.Pages.MainWindow.TicTacToe
         {
             InitializeComponent();
             DataContext = new GameTypeViewModel();
+
         }
 
         private void Back_Click(object sender, RoutedEventArgs e)
         {
-            ChooseActivity page = new();
-            NavigationService.Navigate(page);
-
+            NavigationService.GoBack();
         }
         private void Start_Click(object sender, RoutedEventArgs e)
         {
-            GamePage page = new();
-            NavigationService.Navigate(page);
+            Page twoPlayers = new GamePageForTwoPlayers();
+            var vm = (GameTypeViewModel) DataContext;
+            Page onePlayerEz = new GamePageForOnePlayerEasy();
+            Page onePlayerHard = new GamePageForOnePlayerHard();
 
+            switch (vm.OnePlayer)
+            {
+                case false:
+                    NavigationService.Navigate(twoPlayers);
+                    new GamePageForTwoPlayers();
+                    break;
+                
+                case true:
+                    {
+                        if(vm.EasyMode)
+                        {
+                            NavigationService.Navigate(onePlayerEz);
+                            new GamePageForOnePlayerEasy();
+                        }
+                        else
+                        {
+                            NavigationService.Navigate(onePlayerHard);
+                            new GamePageForOnePlayerEasy();
+                        } 
+                        break;
+                    }      
+            }
         }
 
         private void IsDifficultySellectableNo_Click(object sender, RoutedEventArgs e)
