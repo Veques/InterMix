@@ -1,5 +1,8 @@
 ﻿using Intermix.Pages.MainWindow.TicTacToe;
 using Intermix.ViewModels;
+using Intermix.Views;
+using System;
+using System.Configuration;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Navigation;
@@ -44,5 +47,10 @@ namespace Intermix
             this.Close();  
         }
 
+        private void Settings_Click(object sender, RoutedEventArgs e)
+        {
+            Settings setting = new Settings();
+            setting.Show();
+        }
     }
 }

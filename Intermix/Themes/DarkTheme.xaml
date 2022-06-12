@@ -1,13 +1,14 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-
-    <!-- LOGIN WINDOW -->
+    <!-- BASE -->
     <Color x:Key="LeadingColor">lime</Color>
     <Color x:Key="SecondaryLeadingColor">blue</Color>
     <Color x:Key="LeadingFont">white</Color>
+    <Color x:Key="Background">#383838</Color>
 
-    <SolidColorBrush x:Key="LW_Background" Color="#383838"/>
-    
+    <!-- Logging Window -->
+    <SolidColorBrush x:Key="LW_Background" Color="{DynamicResource Background}"/>
+
     <SolidColorBrush x:Key="LW_Font" Color="{DynamicResource LeadingFont}"/>
     <SolidColorBrush x:Key="LW_Icon" Color="{DynamicResource LeadingColor}"/>
     <SolidColorBrush x:Key="LW_TextBoxIcons" Color="{DynamicResource LeadingColor}"/>
@@ -20,9 +21,9 @@
     <SolidColorBrush x:Key="LW_onHoverBorder" Color="red" Opacity="0.7"/>
     <Color x:Key="LW_onHoverShadow" >white</Color>
     <Color x:Key="LW_onHoverButtonShadow">lime</Color>
-    
+
     <!-- MAIN WINDOW -->
-    <SolidColorBrush x:Key="MW_Background" Color="#383838"/>
+    <SolidColorBrush x:Key="MW_Background" Color="{DynamicResource Background}"/>
     <SolidColorBrush x:Key="MW_Font" Color="{DynamicResource LeadingFont}"/>
     <!-- TicTacToe  -->
     <SolidColorBrush x:Key="TTT_ButtonsColor" Color="{DynamicResource LeadingColor}"/>
@@ -30,10 +31,9 @@
     <SolidColorBrush x:Key="TTT_ButtonChecked" Color="{DynamicResource SecondaryLeadingColor}" />
     <Color x:Key="TTT_onHoverShadow" >white</Color>
     <Color x:Key="TTT_onHoverButtonShadow">lime</Color>
-    
+
     <SolidColorBrush x:Key="TTTG_ButtonBackgroundOnHover" Color="Transparent" />
     <SolidColorBrush x:Key="TTTG_ButtonBackground" Color="{DynamicResource LeadingColor}" />
     <SolidColorBrush x:Key="TTTG_onHoverBorder" Color="{DynamicResource LeadingColor}" Opacity="0.7"/>
-
 
 </ResourceDictionary>

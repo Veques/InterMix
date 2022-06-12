@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Intermix.Themes;
+using Intermix.ViewModels;
 using System.Windows;
+
 
 namespace Intermix
 {
@@ -13,5 +10,24 @@ namespace Intermix
     /// </summary>
     public partial class App : Application
     {
+        public App()
+        {
+
+        }
+
+        private void Application_LoadCompleted(object sender, System.Windows.Navigation.NavigationEventArgs e)
+        {
+            switch(Config.Default.Theme)
+            {
+                case 0: 
+                    ThemeController.SetTheme(ThemeController.ThemesTypes.Light);
+
+                    break;
+                case 1: 
+                    ThemeController.SetTheme(ThemeController.ThemesTypes.Dark);
+
+                    break;
+            }
+        }
     }
 }

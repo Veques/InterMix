@@ -3,12 +3,61 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:Intermix.Pages.MainWindow.TicTacToe"
+      xmlns:local="clr-namespace:Intermix.Pages.MainWindow.TicTacToe" xmlns:fa="http://schemas.fontawesome.com/icons/"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="GamePageForOnePlayerEasy">
 
     <Grid>
-        <TextBlock>Easy</TextBlock>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="80"/>
+            <ColumnDefinition Width="9*"/>
+            <ColumnDefinition Width="3*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid x:Name="Back" Background="Transparent" Grid.RowSpan="4" VerticalAlignment="Stretch" HorizontalAlignment="Center" >
+            <Button HorizontalAlignment="Center" Style="{StaticResource BackButtons}" Click="Back_Click">
+                <Button.Content>
+                    <fa:FontAwesome Icon="Solid_AngleLeft" Foreground="{DynamicResource MW_Font}" FontSize="70"/>
+                </Button.Content>
+            </Button>
+        </Grid>
+
+        <Grid Grid.Column="1" Name="ggg">
+            <Grid Margin="20 20 0 20" Name="GameGrid">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <Button BorderThickness="0 0 1 1" Style="{StaticResource TTTG_Buttons}" x:Name="x1y1" Click="Button_Click"/>
+                <Button BorderThickness="1 0 1 1" Style="{StaticResource TTTG_Buttons}" x:Name="x1y2" Click="Button_Click" Grid.Column="1"  />
+                <Button BorderThickness="1 0 0 1" Style="{StaticResource TTTG_Buttons}" x:Name="x1y3" Click="Button_Click" Grid.Column="2" />
+
+                <Button BorderThickness="0 1 1 1" Style="{StaticResource TTTG_Buttons}" x:Name="x2y1" Click="Button_Click" Grid.Row="1" />
+                <Button BorderThickness="1 1 1 1" Style="{StaticResource TTTG_Buttons}" x:Name="x2y2" Click="Button_Click" Grid.Row="1" Grid.Column="1"/>
+                <Button BorderThickness="1 1 0 1" Style="{StaticResource TTTG_Buttons}" x:Name="x2y3" Click="Button_Click" Grid.Row="1" Grid.Column="2"/>
+
+                <Button BorderThickness="0 1 1 0" Style="{StaticResource TTTG_Buttons}" x:Name="x3y1" Click="Button_Click" Grid.Row="2"/>
+                <Button BorderThickness="1 1 1 0" Style="{StaticResource TTTG_Buttons}" x:Name="x3y2" Click="Button_Click" Grid.Row="2" Grid.Column="1"/>
+                <Button BorderThickness="1 1 0 0" Style="{StaticResource TTTG_Buttons}" x:Name="x3y3" Click="Button_Click" Grid.Row="2" Grid.Column="2" />
+
+
+            </Grid>
+        </Grid>
+        <TextBlock x:Name="Winner" Text="" Grid.Column="2" VerticalAlignment="Center" Grid.Row="0"
+                           Foreground="{DynamicResource MW_Font}" HorizontalAlignment="Center"
+                           FontSize="25" TextWrapping="WrapWithOverflow"/>
+
+        <Button  Content="Reset" Grid.Column="2" VerticalAlignment="Bottom" Click="Reset_Click"
+                        Width="150" Height="60" Style="{StaticResource LW_Buttons}"/>
     </Grid>
 </Page>

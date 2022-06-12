@@ -3,7 +3,7 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:Intermix.Pages.MainWindow" xmlns:fa="http://schemas.fontawesome.com/icons/"
+      xmlns:local="clr-namespace:Intermix.Pages.MainWindow" xmlns:fa="http://schemas.fontawesome.com/icons/" xmlns:tictactoeview="clr-namespace:Intermix.ViewModels.MainWindowView.TicTacToeView" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" d:DataContext="{d:DesignInstance Type=tictactoeview:ChooseActivityViewModel}"
       mc:Ignorable="d" 
       Title="ChooseActivity">
 
@@ -11,29 +11,38 @@
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="2.8*"/>
         </Grid.ColumnDefinitions>
 
-        <ListView BorderThickness="0" Name="listView1" Background="Transparent">
+        <ListView ScrollViewer.VerticalScrollBarVisibility="Hidden" BorderThickness="0" Name="listView1" Background="Transparent">
             <ListView.ItemContainerStyle>
             <Style TargetType="ListViewItem">
                 <EventSetter Event="PreviewMouseLeftButtonDown" Handler="ListViewItem_PreviewMouseLeftButtonDown_1" />
             </Style>
             </ListView.ItemContainerStyle>
-            <ListViewItem >
-                <StackPanel  Orientation="Horizontal" HorizontalAlignment="Stretch">
-                    <Image Source="/Images/TicTacToe.png" Style="{StaticResource MW_Images}"/>
-                    <Label Margin="15 0 0 0" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Stretch" Content="TicTacToe" Foreground="{StaticResource MW_Font}"/>
+            <ListViewItem Name="TicTacToe">
+                <StackPanel ScrollViewer.VerticalScrollBarVisibility="Disabled"  Orientation="Horizontal" HorizontalAlignment="Stretch">
+                    <Image Source="/Images/TicTacToe.png" Visibility="{Binding LightLogo_TTT}"
+                           Style="{StaticResource MW_Images}"/>
+                    <Image Source="/Images/TicTacToe_Black.png" Visibility="{Binding DarkLogo_TTT}"
+                           Style="{StaticResource MW_Images}"/>
+                    <TextBlock Margin="15 0 0 0" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Stretch" 
+                               Text="TicTacToe" Foreground="{DynamicResource MW_Font}"/>
                 </StackPanel>
-
-                
+            </ListViewItem>
+            <ListViewItem Name="CurrencyConverter">
+                <StackPanel Orientation="Horizontal">
+                    <materialDesign:PackIcon Kind="CurrencyEur" Width="100" Height="100" Foreground="{DynamicResource LW_Font}"/>
+                    <TextBlock Margin="15 0 0 0" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Stretch" 
+                               Text="API Currency Converter" Foreground="{DynamicResource MW_Font}"/>
+                </StackPanel>
             </ListViewItem>
         </ListView>
 
         <Grid Grid.Column="1">
 
             <TextBlock VerticalAlignment="Top" HorizontalAlignment="Center"
-                       Foreground="{StaticResource MW_Font}" FontSize="40"
+                       Foreground="{DynamicResource MW_Font}" FontSize="40"
                        Margin="10"
                        Text="{Binding ChosenUsername, StringFormat={} HI {0}}"/>
 

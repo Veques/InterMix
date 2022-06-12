@@ -9,28 +9,19 @@
 
   <ItemGroup>
     <None Remove="Images\TicTacToe.png" />
+    <None Remove="Images\TicTacToe_Black.png" />
   </ItemGroup>
 
   <ItemGroup>
-    <Page Remove="Styles\DarkTheme.xaml" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Expression.Blend.Sdk" Version="1.0.2" />
-    <PackageReference Include="FontAwesome5" Version="2.1.6" />
+    <PackageReference Include="FontAwesome5" Version="2.1.11" />
+    <PackageReference Include="MaterialDesignThemes" Version="4.5.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.5" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.5" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.5">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Page Update="Styles\LightTheme.xaml">
-      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
-      <SubType>Designer</SubType>
-    </Page>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
   </ItemGroup>
 
   <ItemGroup>
@@ -39,10 +30,22 @@
 
   <ItemGroup>
     <Resource Include="Images\TicTacToe.png" />
-    <Resource Include="Styles\DarkTheme.xaml">
-      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
-      <SubType>Designer</SubType>
-    </Resource>
+    <Resource Include="Images\TicTacToe_Black.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Config.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Config.settings</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Config.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Config.Designer.cs</LastGenOutput>
+    </None>
   </ItemGroup>
 
 </Project>

@@ -1,19 +1,11 @@
-﻿using Intermix.Pages.MainWindow.TicTacToe;
+﻿using Intermix.Pages.MainWindow.CurrencyConverter;
+using Intermix.Pages.MainWindow.TicTacToe;
 using Intermix.ViewModels.MainWindowView.TicTacToeView;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Intermix.Pages.MainWindow
 {
@@ -29,9 +21,27 @@ namespace Intermix.Pages.MainWindow
         }
         private void ListViewItem_PreviewMouseLeftButtonDown_1(object sender, MouseButtonEventArgs e)
         {
+            var item = sender as ListViewItem;
+            if (item == null)
+                return;
 
-            GameType page = new();
-            NavigationService.Navigate(page);
+            switch(item.Name)
+            {
+                case "TicTacToe":
+
+                    GameType page = new();
+                    NavigationService.Navigate(page);
+                    break;
+
+                case "CurrencyConverter":
+
+                    CurrencyConverterPage currencyConverter = new();
+                    NavigationService.Navigate(currencyConverter);
+                    break;
+
+            }
+
         }
+
     }
 }

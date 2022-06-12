@@ -13,8 +13,10 @@
         <Grid>
             <TextBlock Foreground="{DynamicResource LW_Font}" Text="InterMix" Margin="5 5 0 0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
             <Button Click="Exit_Click" Content="✖" Width="20" Height="20" HorizontalAlignment="Right" Margin="0 5 5 0" VerticalAlignment="Top" Style="{StaticResource WindowBarButtons}" />
-
             <Frame Margin="5 20 5 5" Name="frame" NavigationUIVisibility="Hidden" Source="../../Pages/Login/LoginPage.xaml"/>
+            
+            
+            
         </Grid>
     </Border>
 </Window>

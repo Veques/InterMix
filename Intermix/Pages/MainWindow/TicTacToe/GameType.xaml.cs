@@ -25,7 +25,6 @@ namespace Intermix.Pages.MainWindow.TicTacToe
         {
             InitializeComponent();
             DataContext = new GameTypeViewModel();
-
         }
 
         private void Back_Click(object sender, RoutedEventArgs e)
