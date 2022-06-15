@@ -1,28 +1,30 @@
 ﻿using Intermix.Commands;
-using Intermix.ViewModels.Base;
-using Intermix.ViewModels.MainWindowView.TicTacToeView;
-using System;
-using System.Windows.Input;
-using System.Windows;
 using Intermix.Themes;
-using Intermix.Pages.MainWindow;
-using System.Configuration;
-using System.Diagnostics;
-using System.Windows.Media;
-using System.Collections.Generic;
+using Intermix.ViewModels.Base;
 using System.Collections.ObjectModel;
+using System.Linq;
+using System.Windows;
+using System.Windows.Input;
+using System.Windows.Media;
 
 namespace Intermix.ViewModels
 {
-    public class Colors
+    #region Models 
+    public class LeadingColors
     {
-        public string Name {get; set; }
-        public SolidColorBrush Brush { get; set; }
+        public SolidColorBrush color { get; set; }
+        public bool isSelected { get; set; }
     }
+    public class SecondaryColors
+    {
+        public SolidColorBrush color { get; set; }
+        public bool isSelected { get; set; }
+    }
+
+    #endregion
     public class SettingsViewModel : BaseViewModel
     {
         public ICommand SaveTheme { get; set; }
-
 
         #region Constructor
         public SettingsViewModel()
@@ -40,12 +42,35 @@ namespace Intermix.ViewModels
             }
 
             SaveTheme = new RelayCommand(o => Save(), o => true);
-            ObservableCollection<Colors> ListOfColors = new()
+
+            LeadingColorCollection = new ObservableCollection<LeadingColors>()
             {
-                new Colors { Name = "Red", Brush = new SolidColorBrush(Color.FromArgb(255,27,161,226)),
-                } 
-            };
                 
+                new LeadingColors { color =new SolidColorBrush (Color.FromArgb(255, (byte)191, (byte)255, (byte)0)), isSelected = false },
+                new LeadingColors { color =new SolidColorBrush (Color.FromArgb(255, (byte)255, (byte)0, (byte)175)), isSelected = false },
+                new LeadingColors { color =new SolidColorBrush (Color.FromArgb(255, (byte)224, (byte)255, (byte)0)), isSelected = false }, 
+                new LeadingColors { color =new SolidColorBrush (Color.FromArgb(255, (byte)58, (byte)0, (byte)255)), isSelected = false }, 
+                new LeadingColors { color =new SolidColorBrush (Color.FromArgb(255, (byte)255, (byte)0, (byte)0)), isSelected = false }, 
+                new LeadingColors { color =new SolidColorBrush (Color.FromArgb(255, (byte)3, (byte)250, (byte)224)), isSelected = false }, 
+                new LeadingColors { color =new SolidColorBrush (Color.FromArgb(255, (byte)141, (byte)0, (byte)255)), isSelected = false }
+            
+            };
+
+            SecondaryColorCollection = new ObservableCollection<SecondaryColors>()
+            {
+
+                new SecondaryColors { color = new SolidColorBrush(Color.FromArgb(255, (byte)255, (byte)127, (byte)80)), isSelected = false },
+                new SecondaryColors { color = new SolidColorBrush(Color.FromArgb(255, (byte)154, (byte)39, (byte)169)), isSelected = false },
+                new SecondaryColors { color = new SolidColorBrush(Color.FromArgb(255, (byte)56, (byte)58, (byte)135)), isSelected = false },
+                new SecondaryColors { color = new SolidColorBrush(Color.FromArgb(255, (byte)22, (byte)118, (byte)115)), isSelected = false },
+                new SecondaryColors { color = new SolidColorBrush(Color.FromArgb(255, (byte)24, (byte)180, (byte)129)), isSelected = false },
+                new SecondaryColors { color = new SolidColorBrush(Color.FromArgb(255, (byte)221, (byte)133, (byte)197)), isSelected = false },
+                new SecondaryColors { color = new SolidColorBrush(Color.FromArgb(255, (byte)90, (byte)189, (byte)246)), isSelected = false }
+
+            };
+
+
+
         }
         #endregion
 
@@ -77,37 +102,58 @@ namespace Intermix.ViewModels
                     break;
             }
 
+            LeadingColorChosen = (LeadingColorCollection.Where(x => x.isSelected == true).FirstOrDefault().color as SolidColorBrush).Color;
+            SecondaryColorChosen = (SecondaryColorCollection.Where(x => x.isSelected == true).FirstOrDefault().color as SolidColorBrush).Color;
+
+            Application.Current.Resources["LeadingColor"] = SecondaryColorChosen;
+            Application.Current.Resources["SecondaryLeadingColor"] = LeadingColorChosen;
+
+
             //reset aplikacji tutaj jeszcze
-
-            var myResourceDictionary = new ResourceDictionary();
-            myResourceDictionary.Source = new Uri("Themes/LightTheme.xaml", UriKind.RelativeOrAbsolute);
-
-            Color colorr = (Color)myResourceDictionary["LeadingColor"];
-
-
-
         }
 
-        private ObservableCollection<Colors> _listOfColors;
-        public ObservableCollection<Colors> ListOfColors
+        private ObservableCollection<LeadingColors> _leadingColorCollection;
+        public ObservableCollection<LeadingColors> LeadingColorCollection
         {
-            get { return _listOfColors; }
-            set { _listOfColors = value;
-                OnPropertyChanged("ListOfColors");
-            }
-        }
-
-        private SolidColorBrush _chosenColor = Brushes.Red;
-
-        public SolidColorBrush ChosenColor
-        {
-            get { return _chosenColor; }
+            get { return _leadingColorCollection; }
             set {
-                _chosenColor = value;
-                OnPropertyChanged("Red");
+                _leadingColorCollection = value;
+                OnPropertyChanged("LeadingColorCollection");
+            }
+        }
+        private ObservableCollection<SecondaryColors> _secondaryColorCollection;
+        public ObservableCollection<SecondaryColors> SecondaryColorCollection
+        {
+            get { return _secondaryColorCollection; }
+            set
+            {
+                _secondaryColorCollection = value;
+                OnPropertyChanged("SecondaryColorCollection");
             }
         }
 
+        private Color _leadingColorChosen ;
+
+        public Color LeadingColorChosen
+        {
+            get { return _leadingColorChosen; }
+            set {
+                _leadingColorChosen = value;
+                OnPropertyChanged("LeadingColorChosen");
+            }
+        }
+
+        private Color _secondaryColorChosen;
+
+        public Color SecondaryColorChosen
+        {
+            get { return _secondaryColorChosen; }
+            set
+            {
+                _secondaryColorChosen = value;
+                OnPropertyChanged("SecondaryColorChosen");
+            }
+        }
 
         private bool _lightTheme;
 

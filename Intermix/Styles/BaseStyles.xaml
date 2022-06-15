@@ -111,7 +111,7 @@
     <!-- MAIN WINDOW -->
     <!-- Window Button styles -->
     <Style x:Key="WindowBarButtons" TargetType="Button">
-        <Setter Property="FontSize" Value="25"/>
+        <Setter Property="FontSize" Value="20"/>
         <Setter Property="Foreground" Value="{DynamicResource LW_Font}"/>
         <Setter Property="Margin" Value="2 0 2 0"/>
         <Setter Property="OverridesDefaultStyle" Value="True" />
