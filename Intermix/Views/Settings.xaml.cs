@@ -18,6 +18,7 @@ namespace Intermix.Views
             InitializeComponent();
             DataContext = new SettingsViewModel();
 
+
         }
         private void Drag_MouseDown(object sender, MouseButtonEventArgs e)
         {

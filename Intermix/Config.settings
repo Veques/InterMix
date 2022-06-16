@@ -5,14 +5,14 @@
     <Setting Name="Theme" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
-    <Setting Name="LeadingColor" Type="System.Drawing.Color" Scope="User">
-      <Value Profile="(Default)">Lime</Value>
-    </Setting>
-    <Setting Name="SecondaryColor" Type="System.Drawing.Color" Scope="User">
-      <Value Profile="(Default)">Purple</Value>
-    </Setting>
     <Setting Name="FirstTime" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="Leading" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="Secondary" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
     </Setting>
   </Settings>
 </SettingsFile>

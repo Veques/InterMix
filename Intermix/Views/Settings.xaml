@@ -49,26 +49,26 @@
 
                     <TextBlock VerticalAlignment="Center" Grid.Row="1" FontSize="20">Leading Color</TextBlock>
                     <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Horizontal" >
-                        <RadioButton Margin="2" Foreground="{Binding LeadingColorCollection[0].color}" IsChecked="{Binding LeadingColorCollection[0].isSelected}" Style="{StaticResource PRS_RadioButton}"/>
-                        <RadioButton Margin="2" Foreground="{Binding LeadingColorCollection[1].color}" IsChecked="{Binding LeadingColorCollection[1].isSelected}" Style="{StaticResource PRS_RadioButton}"/>
-                        <RadioButton Margin="2" Foreground="{Binding LeadingColorCollection[2].color}" IsChecked="{Binding LeadingColorCollection[2].isSelected}" Style="{StaticResource PRS_RadioButton}"/>
-                        <RadioButton Margin="2" Foreground="{Binding LeadingColorCollection[3].color}" IsChecked="{Binding LeadingColorCollection[3].isSelected}" Style="{StaticResource PRS_RadioButton}"/>
-                        <RadioButton Margin="2" Foreground="{Binding LeadingColorCollection[4].color}" IsChecked="{Binding LeadingColorCollection[4].isSelected}" Style="{StaticResource PRS_RadioButton}"/>
-                        <RadioButton Margin="2" Foreground="{Binding LeadingColorCollection[5].color}" IsChecked="{Binding LeadingColorCollection[5].isSelected}" Style="{StaticResource PRS_RadioButton}"/>
-                        <RadioButton Margin="2" Foreground="{Binding LeadingColorCollection[6].color}" IsChecked="{Binding LeadingColorCollection[6].isSelected}" Style="{StaticResource PRS_RadioButton}"/>
+                        <RadioButton Margin="2" Foreground="{Binding LeadingColorCollection[0].color}" IsChecked="{Binding LeadingColorSelection[0]}" Style="{StaticResource PRS_RadioButton}"/>
+                        <RadioButton Margin="2" Foreground="{Binding LeadingColorCollection[1].color}" IsChecked="{Binding LeadingColorSelection[1]}" Style="{StaticResource PRS_RadioButton}"/>
+                        <RadioButton Margin="2" Foreground="{Binding LeadingColorCollection[2].color}" IsChecked="{Binding LeadingColorSelection[2]}" Style="{StaticResource PRS_RadioButton}"/>
+                        <RadioButton Margin="2" Foreground="{Binding LeadingColorCollection[3].color}" IsChecked="{Binding LeadingColorSelection[3]}" Style="{StaticResource PRS_RadioButton}"/>
+                        <RadioButton Margin="2" Foreground="{Binding LeadingColorCollection[4].color}" IsChecked="{Binding LeadingColorSelection[4]}" Style="{StaticResource PRS_RadioButton}"/>
+                        <RadioButton Margin="2" Foreground="{Binding LeadingColorCollection[5].color}" IsChecked="{Binding LeadingColorSelection[5]}" Style="{StaticResource PRS_RadioButton}"/>
+                        <RadioButton Margin="2" Foreground="{Binding LeadingColorCollection[6].color}" IsChecked="{Binding LeadingColorSelection[6]}" Style="{StaticResource PRS_RadioButton}"/>
 
                     </StackPanel>
 
                     <TextBlock VerticalAlignment="Center" Grid.Row="2" FontSize="20">Secondary Color</TextBlock>
                     <StackPanel Grid.Column="1" Grid.Row="2" Orientation="Horizontal" >
 
-                        <RadioButton Margin="2" Foreground="{Binding SecondaryColorCollection[0].color}" IsChecked="{Binding SecondaryColorCollection[0].isSelected}" Style="{StaticResource PRS_RadioButton}"/>
-                        <RadioButton Margin="2" Foreground="{Binding SecondaryColorCollection[1].color}" IsChecked="{Binding SecondaryColorCollection[1].isSelected}" Style="{StaticResource PRS_RadioButton}"/>
-                        <RadioButton Margin="2" Foreground="{Binding SecondaryColorCollection[2].color}" IsChecked="{Binding SecondaryColorCollection[2].isSelected}" Style="{StaticResource PRS_RadioButton}"/>
-                        <RadioButton Margin="2" Foreground="{Binding SecondaryColorCollection[3].color}" IsChecked="{Binding SecondaryColorCollection[3].isSelected}" Style="{StaticResource PRS_RadioButton}"/>
-                        <RadioButton Margin="2" Foreground="{Binding SecondaryColorCollection[4].color}" IsChecked="{Binding SecondaryColorCollection[4].isSelected}" Style="{StaticResource PRS_RadioButton}"/>
-                        <RadioButton Margin="2" Foreground="{Binding SecondaryColorCollection[5].color}" IsChecked="{Binding SecondaryColorCollection[5].isSelected}" Style="{StaticResource PRS_RadioButton}"/>
-                        <RadioButton Margin="2" Foreground="{Binding SecondaryColorCollection[6].color}" IsChecked="{Binding SecondaryColorCollection[6].isSelected}" Style="{StaticResource PRS_RadioButton}"/>
+                        <RadioButton Margin="2" Foreground="{Binding SecondaryColorCollection[0].color}" IsChecked="{Binding SecondaryColorSelection[0]}" Style="{StaticResource PRS_RadioButton}"/>
+                        <RadioButton Margin="2" Foreground="{Binding SecondaryColorCollection[1].color}" IsChecked="{Binding SecondaryColorSelection[1]}" Style="{StaticResource PRS_RadioButton}"/>
+                        <RadioButton Margin="2" Foreground="{Binding SecondaryColorCollection[2].color}" IsChecked="{Binding SecondaryColorSelection[2]}" Style="{StaticResource PRS_RadioButton}"/>
+                        <RadioButton Margin="2" Foreground="{Binding SecondaryColorCollection[3].color}" IsChecked="{Binding SecondaryColorSelection[3]}" Style="{StaticResource PRS_RadioButton}"/>
+                        <RadioButton Margin="2" Foreground="{Binding SecondaryColorCollection[4].color}" IsChecked="{Binding SecondaryColorSelection[4]}" Style="{StaticResource PRS_RadioButton}"/>
+                        <RadioButton Margin="2" Foreground="{Binding SecondaryColorCollection[5].color}" IsChecked="{Binding SecondaryColorSelection[5]}" Style="{StaticResource PRS_RadioButton}"/>
+                        <RadioButton Margin="2" Foreground="{Binding SecondaryColorCollection[6].color}" IsChecked="{Binding SecondaryColorSelection[6]}" Style="{StaticResource PRS_RadioButton}"/>
                     </StackPanel>
 
                     <Button Content="Save and reset application" Background="{DynamicResource LW_ButtonBackground}" Command="{Binding SaveTheme}" Grid.Row="3" Grid.ColumnSpan="2"/>
