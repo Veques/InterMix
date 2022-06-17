@@ -65,6 +65,7 @@ namespace Intermix.ViewModels
 
                     break;
 
+
                 case false:
                     ThemeController.SetTheme(ThemeController.ThemesTypes.Dark);
                     
