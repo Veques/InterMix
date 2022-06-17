@@ -1,5 +1,5 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:fa="http://schemas.fontawesome.com/icons/">
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:fa="http://schemas.fontawesome.com/icons/" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes">
 
     <!-- LOGIN WINDOW -->
     <!-- Login Window - TextBox -->
@@ -69,7 +69,7 @@
                         <Border.Style>
                             <Style TargetType="{x:Type Border}">
                                 <Setter Property="Background" Value="{DynamicResource LW_ButtonBackground}"/>
-                                <Setter Property="BorderThickness" Value="1"/>
+                                <Setter Property="BorderThickness" Value="0"/>
 
                                 <Style.Triggers>
                                     <Trigger Property="Border.IsMouseOver" Value="True">
@@ -133,7 +133,7 @@
                                     <Trigger Property="Border.IsMouseOver" Value="True">
                                         <Setter Property="Effect">
                                             <Setter.Value>
-                                                <DropShadowEffect BlurRadius="10" ShadowDepth="1" Color="{DynamicResource LW_onHoverShadow}"  Opacity="0.1"/>
+                                                <DropShadowEffect BlurRadius="15" ShadowDepth="2" Color="{DynamicResource LW_onHoverShadow}"  Opacity="0.25"/>
                                             </Setter.Value>
                                         </Setter>
                                     </Trigger>
@@ -162,7 +162,7 @@
 
     <!-- Back Buttons with animation -->
     <Style x:Key="BackButtons" TargetType="{x:Type Button}">
-        <Setter Property="Background" Value="#2F2F2F"/>
+        <Setter Property="Background" Value="{DynamicResource MW_BackgroundBackButton}"/>
         <Setter Property="Height" Value="150"/>
         <Setter Property="Width" Value="50"/>
         <Setter Property="Template">
@@ -205,30 +205,31 @@
     </Style>
 
     <!-- TICTACTOE GAME -->
-    <!-- Main Window TicTacToe Buttons -->
+    <!-- Choose Game Type | TicTacToe Buttons -->
     <Style TargetType="ToggleButton">
         <Setter Property="Foreground" Value="{DynamicResource MW_Font}"/>
         <Setter Property="Background" Value="{DynamicResource TTT_ButtonsColor}"/>
         <Setter Property="Height" Value="75"/>
-        <Setter Property="Margin" Value="2"/>
+        <Setter Property="Margin" Value="10"/>
         <Setter Property="Width" Value="150"/>
         <Setter Property="FontSize" Value="20"/>
         <Setter Property="FontWeight" Value="SemiBold"/>
-        
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ToggleButton">
                     <Border BorderBrush="{TemplateBinding BorderBrush}" 
-                                Background="{TemplateBinding Background}">
+                            Background="{TemplateBinding Background}">
                         <Border.Style>
                             <Style TargetType="{x:Type Border}">
                                 <Setter Property="Background" Value="{DynamicResource TTT_ButtonsColor}"/>
-                                <Setter Property="BorderThickness" Value="2"/>
+                                <Setter Property="BorderThickness" Value="3"/>
+                                <Setter Property="BorderBrush" Value="{DynamicResource TTT_ButtonsColor}"/>
+                                <Setter Property="CornerRadius" Value="4"/>
                                 <Style.Triggers>
                                     <Trigger Property="Border.IsMouseOver" Value="True">
                                         <Setter Property="Effect">
                                             <Setter.Value>
-                                                <DropShadowEffect BlurRadius="5" ShadowDepth="1" Color="{DynamicResource TTT_onHoverButtonShadow}"  Opacity="1"/>
+                                                <DropShadowEffect BlurRadius="20" ShadowDepth="2" Direction="0" Color="{DynamicResource TTT_onHoverButtonShadow}"  Opacity="1"/>
                                             </Setter.Value>
                                         </Setter>
                                     </Trigger>
@@ -236,7 +237,6 @@
                                     <Trigger Property="IsMouseOver" Value="True">
                                         <Setter Property="Background" Value="{DynamicResource TTT_ButtonsColor}"/>
                                         <Setter Property="Opacity" Value="0.8"/>
-                                        <Setter Property="BorderBrush" Value="{DynamicResource TTT_onHoverBorder}"/>
                                     </Trigger>
                                 </Style.Triggers>
                             </Style>
@@ -327,26 +327,29 @@
         </Setter>
     </Style>
     
+    <!-- PERSONALIZATION -->
     <!-- Radio Buttons for Personalization-->
     <Style x:Key="PRS_RadioButton" TargetType="RadioButton">
-        <Style.Triggers>
-            <Trigger Property="IsChecked" Value="False">
-                <Setter Property="Opacity" Value="0.5"/>
-                <Setter Property="BorderThickness" Value="0"/>
-            </Trigger>
-        </Style.Triggers>
+        <Setter Property="Margin" Value="10"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="RadioButton">
-                    <Border BorderThickness="4"
-                                BorderBrush="Gray"
-                                Background="Transparent"
-                                CornerRadius="25">
-                        <fa:ImageAwesome Width="30" Height="30" Icon="Solid_Circle" Foreground="{TemplateBinding Foreground}"/>
+                    <Border>
+                        <materialDesign:PackIcon Name="Icon" Height="40" Width="38" Kind="HexagonSlice6"/>
+                        <!--<fa:ImageAwesome Width="30" Height="30" Icon="Solid_Circle" Foreground="{TemplateBinding Foreground}"/>-->
                     </Border>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsChecked" Value="False">
+                <Setter Property="Opacity" Value="0.35"/>
+            </Trigger>
+            <Trigger Property="IsChecked" Value="True">
+                <Setter Property="Height" Value="60"/>
+                <Setter Property="Width" Value="38"/>
+            </Trigger>
+        </Style.Triggers>
     </Style>
     
     

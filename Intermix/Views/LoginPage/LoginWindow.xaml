@@ -5,15 +5,24 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Intermix.Views.LoginPage"
         mc:Ignorable="d"
-      Title="LoginPage" Height="400" Width="300" MouseDown="Grid_MouseDown" AllowsTransparency="True" WindowStyle="None" ResizeMode="NoResize" WindowStartupLocation="CenterScreen"
+      Title="LoginPage" Height="400" Width="300" MouseDown="Grid_MouseDown" AllowsTransparency="True" WindowStyle="None" ResizeMode="NoResize" 
+        WindowStartupLocation="CenterScreen"
         Background="Transparent"  FontWeight="SemiBold">
     <Border Background="{DynamicResource LW_Background}" CornerRadius="3" BorderThickness="0" >
 
         <!-- Exit Button -->
         <Grid>
-            <TextBlock Foreground="{DynamicResource LW_Font}" Text="InterMix" Margin="5 5 0 0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-            <Button Click="Exit_Click" Content="✖" Width="20" Height="20" HorizontalAlignment="Right" Margin="0 5 5 0" VerticalAlignment="Top" Style="{StaticResource WindowBarButtons}" />
-            <Frame Margin="5 20 5 5" Name="frame" NavigationUIVisibility="Hidden" Source="../../Pages/Login/LoginPage.xaml"/>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Foreground="{DynamicResource LW_Font}" Text="InterMix" FontSize="15" Margin="5 0 0 0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <Button Click="Exit_Click" Content="✖" FontSize="15" HorizontalAlignment="Right" VerticalAlignment="Center" Style="{StaticResource WindowBarButtons}" />
+            
+            
+            <Frame Grid.Row="1" Margin="5 10 5 5" Name="frame" NavigationUIVisibility="Hidden" Source="../../Pages/Login/LoginPage.xaml"/>
             
             
             

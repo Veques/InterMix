@@ -49,13 +49,13 @@ namespace Intermix.ViewModels
             LeadingColorCollection = new ObservableCollection<LeadingColors>()
             {
                 
-                new LeadingColors { color =new SolidColorBrush (Color.FromArgb(255, (byte)191, (byte)255, (byte)0))},
-                new LeadingColors { color =new SolidColorBrush (Color.FromArgb(255, (byte)255, (byte)0, (byte)175))},
                 new LeadingColors { color =new SolidColorBrush (Color.FromArgb(255, (byte)224, (byte)255, (byte)0))}, 
-                new LeadingColors { color =new SolidColorBrush (Color.FromArgb(255, (byte)58, (byte)0, (byte)255))}, 
+                new LeadingColors { color =new SolidColorBrush (Color.FromArgb(255, (byte)0, (byte)255, (byte)68))},
                 new LeadingColors { color =new SolidColorBrush (Color.FromArgb(255, (byte)255, (byte)0, (byte)0))}, 
-                new LeadingColors { color =new SolidColorBrush (Color.FromArgb(255, (byte)3, (byte)250, (byte)224))}, 
-                new LeadingColors { color =new SolidColorBrush (Color.FromArgb(255, (byte)141, (byte)0, (byte)255))}
+                new LeadingColors { color =new SolidColorBrush (Color.FromArgb(255, (byte)255, (byte)0, (byte)175))},
+                new LeadingColors { color =new SolidColorBrush (Color.FromArgb(255, (byte)141, (byte)0, (byte)255))},
+                new LeadingColors { color =new SolidColorBrush (Color.FromArgb(255, (byte)58, (byte)0, (byte)255))}, 
+                new LeadingColors { color =new SolidColorBrush (Color.FromArgb(255, (byte)3, (byte)250, (byte)224))} 
             
             };
 
@@ -63,12 +63,12 @@ namespace Intermix.ViewModels
             {
 
                 new SecondaryColors { color = new SolidColorBrush(Color.FromArgb(255, (byte)255, (byte)127, (byte)80))},
-                new SecondaryColors { color = new SolidColorBrush(Color.FromArgb(255, (byte)154, (byte)39, (byte)169))},
-                new SecondaryColors { color = new SolidColorBrush(Color.FromArgb(255, (byte)56, (byte)58, (byte)135)) } ,
-                new SecondaryColors { color = new SolidColorBrush(Color.FromArgb(255, (byte)22, (byte)118, (byte)115)) },
-                new SecondaryColors { color = new SolidColorBrush(Color.FromArgb(255, (byte)24, (byte)180, (byte)129)) },
+                new SecondaryColors { color = new SolidColorBrush(Color.FromArgb(255, (byte)0, (byte)138, (byte)208))},
+                new SecondaryColors { color = new SolidColorBrush(Color.FromArgb(255, (byte)255, (byte)69, (byte)0)) },
+                new SecondaryColors { color = new SolidColorBrush(Color.FromArgb(255, (byte)148, (byte)28, (byte)208)) } ,
                 new SecondaryColors { color = new SolidColorBrush(Color.FromArgb(255, (byte)221, (byte)133, (byte)197)) },
-                new SecondaryColors { color = new SolidColorBrush(Color.FromArgb(255, (byte)90, (byte)189, (byte)246)) }
+                new SecondaryColors { color = new SolidColorBrush(Color.FromArgb(255, (byte)90, (byte)189, (byte)246)) },
+                new SecondaryColors { color = new SolidColorBrush(Color.FromArgb(255, (byte)24, (byte)180, (byte)129)) }
 
             };
 
