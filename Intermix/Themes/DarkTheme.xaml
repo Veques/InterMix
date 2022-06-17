@@ -5,10 +5,10 @@
     <Color x:Key="SecondaryLeadingColor">blue</Color>
     <Color x:Key="LeadingFont">white</Color>
     <Color x:Key="Background">#383838</Color>
+    <Color x:Key="BackgroundBackButton">#2F2F2F</Color>
 
     <!-- Logging Window -->
     <SolidColorBrush x:Key="LW_Background" Color="{DynamicResource Background}"/>
-
     <SolidColorBrush x:Key="LW_Font" Color="{DynamicResource LeadingFont}"/>
     <SolidColorBrush x:Key="LW_Icon" Color="{DynamicResource LeadingColor}"/>
     <SolidColorBrush x:Key="LW_TextBoxIcons" Color="{DynamicResource LeadingColor}"/>
@@ -18,19 +18,18 @@
     <SolidColorBrush x:Key="LW_onHoverBackground" Color="white" Opacity="0.05"/>
     <!-- Buttons -->
     <SolidColorBrush x:Key="LW_ButtonBackground" Color="{DynamicResource LeadingColor}" Opacity="0.7"/>
-    <SolidColorBrush x:Key="LW_onHoverBorder" Color="red" Opacity="0.7"/>
     <Color x:Key="LW_onHoverShadow" >white</Color>
-    <Color x:Key="LW_onHoverButtonShadow">lime</Color>
+    <Color x:Key="LW_onHoverButtonShadow">white</Color>
 
     <!-- MAIN WINDOW -->
     <SolidColorBrush x:Key="MW_Background" Color="{DynamicResource Background}"/>
+    <SolidColorBrush x:Key="MW_BackgroundBackButton" Color="{DynamicResource BackgroundBackButton}"/>
     <SolidColorBrush x:Key="MW_Font" Color="{DynamicResource LeadingFont}"/>
     <!-- TicTacToe  -->
     <SolidColorBrush x:Key="TTT_ButtonsColor" Color="{DynamicResource LeadingColor}"/>
-    <SolidColorBrush x:Key="TTT_onHoverBorder" Color="{DynamicResource LeadingColor}" Opacity="0.4"/>
+    <SolidColorBrush x:Key="TTT_onHoverBorder" Color="{DynamicResource SecondaryLeadingColor}" Opacity="0.4"/>
     <SolidColorBrush x:Key="TTT_ButtonChecked" Color="{DynamicResource SecondaryLeadingColor}" />
-    <Color x:Key="TTT_onHoverShadow" >white</Color>
-    <Color x:Key="TTT_onHoverButtonShadow">lime</Color>
+    <Color x:Key="TTT_onHoverButtonShadow">white</Color> 
 
     <SolidColorBrush x:Key="TTTG_ButtonBackgroundOnHover" Color="Transparent" />
     <SolidColorBrush x:Key="TTTG_ButtonBackground" Color="{DynamicResource LeadingColor}" />

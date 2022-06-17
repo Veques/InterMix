@@ -1,32 +1,38 @@
 ﻿using Intermix.Commands;
-using Intermix.ViewModels.Base;
-using Intermix.ViewModels.MainWindowView.TicTacToeView;
-using System;
-using System.Windows.Input;
-using System.Windows;
 using Intermix.Themes;
-using Intermix.Pages.MainWindow;
-using System.Configuration;
-using System.Diagnostics;
-using System.Windows.Media;
+using Intermix.ViewModels.Base;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
+using System.Windows;
+using System.Windows.Input;
+using System.Windows.Media;
 
 namespace Intermix.ViewModels
 {
-    public class Colors
+    #region Models 
+    public class LeadingColors
     {
-        public string Name {get; set; }
-        public SolidColorBrush Brush { get; set; }
+        public SolidColorBrush color { get; set; }
     }
+    public class SecondaryColors
+    {
+        public SolidColorBrush color { get; set; }
+    }
+
+    #endregion
+
+
     public class SettingsViewModel : BaseViewModel
     {
         public ICommand SaveTheme { get; set; }
-
+        
+        private static bool firstTime = true;
 
         #region Constructor
         public SettingsViewModel()
         {
+            SaveTheme = new RelayCommand(o => Save(), o => true);
 
             if (Config.Default.Theme == 0)
             {
@@ -39,13 +45,53 @@ namespace Intermix.ViewModels
                 LightThemeIsChecked = false;
             }
 
-            SaveTheme = new RelayCommand(o => Save(), o => true);
-            ObservableCollection<Colors> ListOfColors = new()
+
+            LeadingColorCollection = new ObservableCollection<LeadingColors>()
             {
-                new Colors { Name = "Red", Brush = new SolidColorBrush(Color.FromArgb(255,27,161,226)),
-                } 
-            };
                 
+                new LeadingColors { color =new SolidColorBrush (Color.FromArgb(255, (byte)224, (byte)255, (byte)0))}, 
+                new LeadingColors { color =new SolidColorBrush (Color.FromArgb(255, (byte)0, (byte)255, (byte)68))},
+                new LeadingColors { color =new SolidColorBrush (Color.FromArgb(255, (byte)255, (byte)0, (byte)0))}, 
+                new LeadingColors { color =new SolidColorBrush (Color.FromArgb(255, (byte)255, (byte)0, (byte)175))},
+                new LeadingColors { color =new SolidColorBrush (Color.FromArgb(255, (byte)141, (byte)0, (byte)255))},
+                new LeadingColors { color =new SolidColorBrush (Color.FromArgb(255, (byte)58, (byte)0, (byte)255))}, 
+                new LeadingColors { color =new SolidColorBrush (Color.FromArgb(255, (byte)3, (byte)250, (byte)224))} 
+            
+            };
+
+            SecondaryColorCollection = new ObservableCollection<SecondaryColors>()
+            {
+
+                new SecondaryColors { color = new SolidColorBrush(Color.FromArgb(255, (byte)255, (byte)127, (byte)80))},
+                new SecondaryColors { color = new SolidColorBrush(Color.FromArgb(255, (byte)0, (byte)138, (byte)208))},
+                new SecondaryColors { color = new SolidColorBrush(Color.FromArgb(255, (byte)255, (byte)69, (byte)0)) },
+                new SecondaryColors { color = new SolidColorBrush(Color.FromArgb(255, (byte)148, (byte)28, (byte)208)) } ,
+                new SecondaryColors { color = new SolidColorBrush(Color.FromArgb(255, (byte)221, (byte)133, (byte)197)) },
+                new SecondaryColors { color = new SolidColorBrush(Color.FromArgb(255, (byte)90, (byte)189, (byte)246)) },
+                new SecondaryColors { color = new SolidColorBrush(Color.FromArgb(255, (byte)24, (byte)180, (byte)129)) }
+
+            };
+
+            LeadingColorSelection = new();
+            SecondaryColorSelection = new();
+
+            for (int i = 0; i < 7; i++)
+            {
+                LeadingColorSelection.Add(false);
+            }
+
+            for (int i = 0; i < 7; i++)
+            {
+                SecondaryColorSelection.Add(false);
+            }
+
+            LeadingColorSelection[Config.Default.Leading] = true;
+            SecondaryColorSelection[Config.Default.Secondary] = true;
+
+            LeadingColorChosen = (LeadingColorCollection.ElementAt(Config.Default.Leading).color as SolidColorBrush).Color;
+            SecondaryColorChosen = (SecondaryColorCollection.ElementAt(Config.Default.Secondary).color as SolidColorBrush).Color;
+
+            ApplyColors(LeadingColorChosen, SecondaryColorChosen);
         }
         #endregion
 
@@ -60,55 +106,111 @@ namespace Intermix.ViewModels
                     LightThemeIsChecked = true;
 
                     Config.Default.Theme = 0;
-                    Config.Default.Save();
-
 
                     break;
 
 
                 case false:
                     ThemeController.SetTheme(ThemeController.ThemesTypes.Dark);
-                    
+
                     DarkThemeIsChecked = true;
                     LightThemeIsChecked = false;
 
                     Config.Default.Theme = 1;
-                    Config.Default.Save();
 
                     break;
             }
 
-            //reset aplikacji tutaj jeszcze
+            var LeadingIndex = (LeadingColorSelection.ToList().FindIndex(x => x == true));
+            var SecondaryIndex = (SecondaryColorSelection.ToList().FindIndex(x => x == true));
 
-            var myResourceDictionary = new ResourceDictionary();
-            myResourceDictionary.Source = new Uri("Themes/LightTheme.xaml", UriKind.RelativeOrAbsolute);
+            Config.Default.Leading = LeadingIndex;
+            Config.Default.Secondary = SecondaryIndex;
 
-            Color colorr = (Color)myResourceDictionary["LeadingColor"];
+            LeadingColorChosen = (LeadingColorCollection.ElementAt(LeadingIndex).color as SolidColorBrush).Color;
+            SecondaryColorChosen = (SecondaryColorCollection.ElementAt(SecondaryIndex).color as SolidColorBrush).Color;
+
+            Config.Default.Save();
+            ApplyColors(LeadingColorChosen, SecondaryColorChosen);
 
 
+            System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
+            Application.Current.Shutdown();
 
         }
 
-        private ObservableCollection<Colors> _listOfColors;
-        public ObservableCollection<Colors> ListOfColors
+
+        private void ApplyColors(Color leading, Color secondary)
         {
-            get { return _listOfColors; }
-            set { _listOfColors = value;
-                OnPropertyChanged("ListOfColors");
-            }
+            Application.Current.Resources["LeadingColor"] = leading;
+            Application.Current.Resources["SecondaryLeadingColor"] = secondary;
         }
 
-        private SolidColorBrush _chosenColor = Brushes.Red;
 
-        public SolidColorBrush ChosenColor
+        private ObservableCollection<LeadingColors> _leadingColorCollection;
+        public ObservableCollection<LeadingColors> LeadingColorCollection
         {
-            get { return _chosenColor; }
+            get { return _leadingColorCollection; }
             set {
-                _chosenColor = value;
-                OnPropertyChanged("Red");
+                _leadingColorCollection = value;
+                OnPropertyChanged("LeadingColorCollection");
+            }
+        }
+        private ObservableCollection<SecondaryColors> _secondaryColorCollection;
+        public ObservableCollection<SecondaryColors> SecondaryColorCollection
+        {
+            get { return _secondaryColorCollection; }
+            set
+            {
+                _secondaryColorCollection = value;
+                OnPropertyChanged("SecondaryColorCollection");
             }
         }
 
+        private ObservableCollection<bool> _leadingColorSelection;
+        public ObservableCollection<bool> LeadingColorSelection
+        {
+            get { return _leadingColorSelection; }
+            set
+            {
+                _leadingColorSelection = value;
+                OnPropertyChanged("LeadingColorSelection");
+            }
+        }
+
+        private ObservableCollection<bool> _secondaryColorSelection;
+        public ObservableCollection<bool> SecondaryColorSelection
+        {
+            get { return _secondaryColorSelection; }
+            set
+            {
+                _secondaryColorSelection = value;
+                OnPropertyChanged("SecondaryColorSelection");
+            }
+        }
+
+        private Color _leadingColorChosen ;
+
+        public Color LeadingColorChosen
+        {
+            get { return _leadingColorChosen; }
+            set {
+                _leadingColorChosen = value;
+                OnPropertyChanged("LeadingColorChosen");
+            }
+        }
+
+        private Color _secondaryColorChosen;
+
+        public Color SecondaryColorChosen
+        {
+            get { return _secondaryColorChosen; }
+            set
+            {
+                _secondaryColorChosen = value;
+                OnPropertyChanged("SecondaryColorChosen");
+            }
+        }
 
         private bool _lightTheme;
 

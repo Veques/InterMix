@@ -21,13 +21,15 @@ namespace Intermix
             {
                 case 0: 
                     ThemeController.SetTheme(ThemeController.ThemesTypes.Light);
-
                     break;
                 case 1: 
                     ThemeController.SetTheme(ThemeController.ThemesTypes.Dark);
-
                     break;
             }
+
+            _ = new SettingsViewModel();
+
+
         }
     }
 }
