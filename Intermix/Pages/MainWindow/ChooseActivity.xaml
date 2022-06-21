@@ -21,7 +21,7 @@
             </Style>
             </ListView.ItemContainerStyle>
             <ListViewItem Name="TicTacToe">
-                <StackPanel ScrollViewer.VerticalScrollBarVisibility="Disabled"  Orientation="Horizontal" HorizontalAlignment="Stretch">
+                <StackPanel ScrollViewer.VerticalScrollBarVisibility="Disabled" Orientation="Horizontal" HorizontalAlignment="Stretch">
                     <Image Source="/Images/TicTacToe.png" Visibility="{Binding LightLogo_TTT}"
                            Style="{StaticResource MW_Images}"/>
                     <Image Source="/Images/TicTacToe_Black.png" Visibility="{Binding DarkLogo_TTT}"
@@ -29,6 +29,11 @@
                     <TextBlock Margin="15 0 0 0" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Stretch" 
                                Text="TicTacToe" Foreground="{DynamicResource MW_Font}"/>
                 </StackPanel>
+                <ListViewItem.Style>
+                    <Style BasedOn="{StaticResource ListViewItemStyle}" TargetType="ListViewItem">
+                        <EventSetter Event="PreviewMouseLeftButtonDown" Handler="ListViewItem_PreviewMouseLeftButtonDown_1" />
+                    </Style>
+                </ListViewItem.Style>
             </ListViewItem>
             <ListViewItem Name="CurrencyConverter">
                 <StackPanel Orientation="Horizontal">
@@ -36,6 +41,11 @@
                     <TextBlock Margin="15 0 0 0" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Stretch" 
                                Text="API Currency Converter" Foreground="{DynamicResource MW_Font}"/>
                 </StackPanel>
+                <ListViewItem.Style>
+                    <Style BasedOn="{StaticResource ListViewItemStyle}" TargetType="ListViewItem">
+                        <EventSetter Event="PreviewMouseLeftButtonDown" Handler="ListViewItem_PreviewMouseLeftButtonDown_1" />
+                    </Style>
+                </ListViewItem.Style>
             </ListViewItem>
         </ListView>
 

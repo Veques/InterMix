@@ -1,8 +1,5 @@
 ﻿using Intermix.ViewModels.Base;
-using System;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Media.Imaging;
 
 namespace Intermix.ViewModels.MainWindowView.TicTacToeView
 {
@@ -13,10 +10,12 @@ namespace Intermix.ViewModels.MainWindowView.TicTacToeView
         public static ChooseActivityViewModel Instance { get { return _instance; } }
 
         private string _chosenUsername;
-        public string ChosenUsername 
+        public string ChosenUsername
         {
             get { return _chosenUsername; }
-            set { _chosenUsername = value;
+            set
+            {
+                _chosenUsername = value;
                 OnPropertyChanged("ChosenUsername");
             }
         }
@@ -42,7 +41,9 @@ namespace Intermix.ViewModels.MainWindowView.TicTacToeView
         public Visibility LightLogo_TTT
         {
             get { return _lightLogo_TTT; }
-            set { _lightLogo_TTT = value;
+            set
+            {
+                _lightLogo_TTT = value;
                 OnPropertyChanged("LightLogo_TTT");
             }
         }
@@ -52,7 +53,9 @@ namespace Intermix.ViewModels.MainWindowView.TicTacToeView
         public Visibility DarkLogo_TTT
         {
             get { return _darkLogo_TTT; }
-            set {_darkLogo_TTT = value;
+            set
+            {
+                _darkLogo_TTT = value;
                 OnPropertyChanged("DarkLogo_TTT");
             }
         }

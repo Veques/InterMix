@@ -30,9 +30,11 @@
     <SolidColorBrush x:Key="TTT_onHoverBorder" Color="{DynamicResource SecondaryLeadingColor}" Opacity="0.4"/>
     <SolidColorBrush x:Key="TTT_ButtonChecked" Color="{DynamicResource SecondaryLeadingColor}" />
     <Color x:Key="TTT_onHoverButtonShadow">white</Color> 
-
     <SolidColorBrush x:Key="TTTG_ButtonBackgroundOnHover" Color="Transparent" />
     <SolidColorBrush x:Key="TTTG_ButtonBackground" Color="{DynamicResource LeadingColor}" />
     <SolidColorBrush x:Key="TTTG_onHoverBorder" Color="{DynamicResource LeadingColor}" Opacity="0.7"/>
+    <!-- Converter -->
+    <SolidColorBrush x:Key="CC_ComboBoxUnderline" Color="{DynamicResource LeadingColor}"/>
+    <SolidColorBrush x:Key="CC_ComboBoxBorder" Color="{DynamicResource SecondaryLeadingColor}"/>
 
 </ResourceDictionary>

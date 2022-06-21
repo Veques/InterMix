@@ -1,10 +1,8 @@
 ﻿using Intermix.Pages.MainWindow.CurrencyConverter;
 using Intermix.Pages.MainWindow.TicTacToe;
 using Intermix.ViewModels.MainWindowView.TicTacToeView;
-using System;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 
 namespace Intermix.Pages.MainWindow
@@ -25,7 +23,7 @@ namespace Intermix.Pages.MainWindow
             if (item == null)
                 return;
 
-            switch(item.Name)
+            switch (item.Name)
             {
                 case "TicTacToe":
 

@@ -3,68 +3,165 @@ using Intermix.ViewModels.Base;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace Intermix.ViewModels.CurrencyConverter
 {
+    #region Model
+
+    public class CurrenciesModel
+    {
+        public string ShortName { get; set; }
+        public string LongName { get; set; }
+    }
+
+    #endregion
     public class CurrencyConverterPageViewModel : BaseViewModel
     {
+        #region CONST
+        private const string BASE_HTTPS_URL = @"https://api.currencyapi.com/v3/latest?";
+        private const string CURRENCY_FROM = "currencies=";
+        private const string CURRENCY_TO = "&base_currency=";
+        private const string API_KEY = "apikey=fc3685a0-39a4-11ec-87f9-a764dd5862af&";
+        #endregion
 
-        private const string API_KEY = "fc3685a0-39a4-11ec-87f9-a764dd5862af";
-        private const string BASE_HTTPS_URL = @"https://free.currencyconverterapi.com";
-
-        public ICommand Convert { get; set; }
+        public ICommand ConvertCommand { get; set; }
         public CurrencyConverterPageViewModel()
         {
-            Convert = new RelayCommand(o => GetExchangeRate(PrimaryCurrency, SecondaryCurrency), o => true);
+            ConvertCommand = new RelayCommand(o => ConvertCurrencies(), o => true);
+
+            LoadMethodAsync();
         }
 
-        public async Task<string> GetExchangeRate(string from, string to)
+        private async Task LoadMethodAsync()
         {
+            List<List<string>> tableData = new(await GetCurrencies());
+            List<string> tableValues = new();
+
+            tableValues = tableData.SelectMany(x => x).ToList();
+
+            Currencies = new ObservableCollection<CurrenciesModel>();
+
+            for (int i = 0; i < tableValues.Count; i += 2)
+            {
+                string x = tableValues[i];
+                string y = tableValues[i + 1];
+
+                Currencies.Add(new CurrenciesModel { ShortName = x, LongName = y });
+            }
+        }
+
+        public async Task<List<List<string>>> GetCurrencies()
+        {
+            string url = @"https://currencyapi.com/docs/currency-list#currency-list";
+            using (var client = new HttpClient())
+            {
+                var html = await client.GetStringAsync(url);
+                var doc = new HtmlAgilityPack.HtmlDocument();
+                doc.LoadHtml(html);
+
+                var table = doc.DocumentNode.SelectSingleNode("//table");
+                return table.Descendants("tr")
+                            .Skip(2)
+                            .Select(tr => tr.Descendants("td")
+                                            .Select(td => WebUtility.HtmlDecode(td.InnerText))
+                                            .ToList())
+                            .ToList();
+            }
+        }
+
+        private async void ConvertCurrencies()
+        {
+            IsConverting = true;
             using (var client = new HttpClient())
             {
                 try
                 {
-                    client.BaseAddress = new Uri(BASE_HTTPS_URL);
-                    var response = await client.GetAsync($"/api/v6/convert?q={from}_{to}&compact=y");
+                    string primary = Currencies.Select(x => x.ShortName).ElementAt(PrimaryCurrency);
+                    string secondary = Currencies.Select(x => x.ShortName).ElementAt(SecondaryCurrency);
+
+                    var response = await client.GetAsync(BASE_HTTPS_URL + API_KEY + CURRENCY_FROM + secondary + CURRENCY_TO + primary);
                     var stringResult = await response.Content.ReadAsStringAsync();
 
-                    var dictResult = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<string, string>>>(stringResult);
-                    return dictResult[$"{from}_{to}"]["val"];
+                    dynamic deserialize = JsonConvert.DeserializeObject(stringResult);
+                    double exchangeRate = deserialize["data"][secondary]["value"];
 
+                    CalculatedValue = exchangeRate * Amount;
+                    CalculatedValue = Math.Round(CalculatedValue, 2);
 
                 }
                 catch (HttpRequestException httpRequestException)
-                {
-                    Console.WriteLine(httpRequestException.StackTrace);
-                    return "Error calling API. Please do manual lookup.";
-                }
+                { }
+                catch (NullReferenceException e)
+                { }
+
+            }
+            IsConverting = false;
+            HasConverted = true;
+
+        }
+
+        private ObservableCollection<CurrenciesModel> _currencies;
+        public ObservableCollection<CurrenciesModel> Currencies
+
+        {
+            get { return _currencies; }
+            set
+            {
+                _currencies = value;
+                OnPropertyChanged("Currencies");
             }
         }
 
-        private string _primaryCurrency;
-
-        public string PrimaryCurrency
+        private int _primaryCurrency;
+        public int PrimaryCurrency
         {
             get { return _primaryCurrency; }
-            set { _primaryCurrency = value;
+            set
+            {
+                _primaryCurrency = value;
                 OnPropertyChanged("PrimaryCurrency");
             }
-        
+
         }
 
-        private string _secondaryCurrency;
+        private double _amount;
 
-        public string SecondaryCurrency
+        public double Amount
+        {
+            get { return _amount; }
+            set
+            {
+                _amount = value;
+                OnPropertyChanged("Amount");
+            }
+        }
+
+        private double _calculatedValue;
+        public double CalculatedValue
+        {
+            get { return _calculatedValue; }
+            set
+            {
+                _calculatedValue = value;
+                OnPropertyChanged("CalculatedValue");
+            }
+        }
+
+        private int _secondaryCurrency;
+
+        public int SecondaryCurrency
         {
             get { return _secondaryCurrency; }
             set
-            {_secondaryCurrency = value;
-             OnPropertyChanged("SecondaryCurrency");
+            {
+                _secondaryCurrency = value;
+                OnPropertyChanged("SecondaryCurrency");
             }
 
         }
@@ -74,8 +171,23 @@ namespace Intermix.ViewModels.CurrencyConverter
         public bool IsConverting
         {
             get { return _isConverting; }
-            set { _isConverting = value;
+            set
+            {
+                _isConverting = value;
                 OnPropertyChanged("IsConverting");
+            }
+        }
+
+        private bool _hasConverted = false;
+        public bool HasConverted
+        {
+            get { return _hasConverted; }
+            set
+            {
+                _hasConverted = value;
+                OnPropertyChanged("HasConverted");
+
+
             }
         }
 

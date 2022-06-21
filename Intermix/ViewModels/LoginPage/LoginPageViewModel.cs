@@ -2,12 +2,7 @@
 using Intermix.Models;
 using Intermix.ViewModels.Base;
 using Intermix.ViewModels.MainWindowView.TicTacToeView;
-using Intermix.Views.LoginPage;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
@@ -30,12 +25,12 @@ namespace Intermix.ViewModels.LoginPage
 
             if (isValid == null)
             {
-                MessageBox.Show("Hasło i nazwa użytkownika nie zgadzają się");   
-            } 
+                MessageBox.Show("Hasło i nazwa użytkownika nie zgadzają się");
+            }
             else
             {
                 MainWindow window = new();
-                
+
                 var w = Application.Current.Windows[0];
                 w.Hide();
 
@@ -47,7 +42,7 @@ namespace Intermix.ViewModels.LoginPage
                 window.Show();
             }
         }
-       
+
         private string _username;
 
         public string Username
@@ -58,7 +53,7 @@ namespace Intermix.ViewModels.LoginPage
             {
                 _username = value;
                 OnPropertyChanged("Username");
-           }
+            }
         }
 
         private string _password;

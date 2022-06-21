@@ -1,17 +1,11 @@
 ﻿using Intermix.Enums;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
-using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
@@ -77,8 +71,8 @@ namespace Intermix.Pages.MainWindow.TicTacToe
             _hasGameEnded = false;
         }
         private void Button_Click(object sender, RoutedEventArgs e)
-        {   
-            if(_hasGameEnded)
+        {
+            if (_hasGameEnded)
             {
                 NewGame();
                 return;
@@ -93,12 +87,13 @@ namespace Intermix.Pages.MainWindow.TicTacToe
             if (_results[index] != MarkTypeTTT.Blank)
             {
                 return;
-            }  
+            }
 
             if (_isPlayerOneTurn)
             {
                 _results[index] = MarkTypeTTT.Cross;
-            } else
+            }
+            else
             {
                 _results[index] = MarkTypeTTT.Circle;
             }
@@ -107,7 +102,8 @@ namespace Intermix.Pages.MainWindow.TicTacToe
             {
                 button.Content = "X";
                 button.Foreground = Brushes.Red;
-            } else
+            }
+            else
             {
                 button.Content = "O";
                 button.Foreground = Brushes.Blue;
@@ -133,7 +129,7 @@ namespace Intermix.Pages.MainWindow.TicTacToe
                     Winner.Text = "Draw";
                 });
             }
-            
+
             #endregion
 
             #region HorizontalWins
@@ -144,9 +140,9 @@ namespace Intermix.Pages.MainWindow.TicTacToe
             double GridWidth = GameGrid.ActualWidth;
             double buttonHeight = x1y1.ActualHeight;
             double buttonWidth = x1y1.ActualWidth;
-                
+
             double różnica = (ParentGridHeight - GridHeight) / 2;
-                
+
             //1 row
             if (_results[0] != MarkTypeTTT.Blank && _results[1] == _results[0] && _results[2] == _results[0])
             {

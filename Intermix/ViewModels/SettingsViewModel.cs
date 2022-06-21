@@ -1,7 +1,6 @@
 ﻿using Intermix.Commands;
 using Intermix.Themes;
 using Intermix.ViewModels.Base;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
@@ -26,8 +25,6 @@ namespace Intermix.ViewModels
     public class SettingsViewModel : BaseViewModel
     {
         public ICommand SaveTheme { get; set; }
-        
-        private static bool firstTime = true;
 
         #region Constructor
         public SettingsViewModel()
@@ -48,15 +45,15 @@ namespace Intermix.ViewModels
 
             LeadingColorCollection = new ObservableCollection<LeadingColors>()
             {
-                
-                new LeadingColors { color =new SolidColorBrush (Color.FromArgb(255, (byte)224, (byte)255, (byte)0))}, 
+
+                new LeadingColors { color =new SolidColorBrush (Color.FromArgb(255, (byte)224, (byte)255, (byte)0))},
                 new LeadingColors { color =new SolidColorBrush (Color.FromArgb(255, (byte)0, (byte)255, (byte)68))},
-                new LeadingColors { color =new SolidColorBrush (Color.FromArgb(255, (byte)255, (byte)0, (byte)0))}, 
+                new LeadingColors { color =new SolidColorBrush (Color.FromArgb(255, (byte)255, (byte)0, (byte)0))},
                 new LeadingColors { color =new SolidColorBrush (Color.FromArgb(255, (byte)255, (byte)0, (byte)175))},
                 new LeadingColors { color =new SolidColorBrush (Color.FromArgb(255, (byte)141, (byte)0, (byte)255))},
-                new LeadingColors { color =new SolidColorBrush (Color.FromArgb(255, (byte)58, (byte)0, (byte)255))}, 
-                new LeadingColors { color =new SolidColorBrush (Color.FromArgb(255, (byte)3, (byte)250, (byte)224))} 
-            
+                new LeadingColors { color =new SolidColorBrush (Color.FromArgb(255, (byte)58, (byte)0, (byte)255))},
+                new LeadingColors { color =new SolidColorBrush (Color.FromArgb(255, (byte)3, (byte)250, (byte)224))}
+
             };
 
             SecondaryColorCollection = new ObservableCollection<SecondaryColors>()
@@ -151,7 +148,8 @@ namespace Intermix.ViewModels
         public ObservableCollection<LeadingColors> LeadingColorCollection
         {
             get { return _leadingColorCollection; }
-            set {
+            set
+            {
                 _leadingColorCollection = value;
                 OnPropertyChanged("LeadingColorCollection");
             }
@@ -189,12 +187,13 @@ namespace Intermix.ViewModels
             }
         }
 
-        private Color _leadingColorChosen ;
+        private Color _leadingColorChosen;
 
         public Color LeadingColorChosen
         {
             get { return _leadingColorChosen; }
-            set {
+            set
+            {
                 _leadingColorChosen = value;
                 OnPropertyChanged("LeadingColorChosen");
             }
@@ -217,7 +216,9 @@ namespace Intermix.ViewModels
         public bool LightThemeIsChecked
         {
             get { return _lightTheme; }
-            set { _lightTheme = value;
+            set
+            {
+                _lightTheme = value;
                 OnPropertyChanged("LightThemeIsChecked");
             }
         }

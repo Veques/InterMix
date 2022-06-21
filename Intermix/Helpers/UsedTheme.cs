@@ -1,9 +1,4 @@
 ﻿using Intermix.ViewModels.Base;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Intermix.Helpers
 {
@@ -14,7 +9,9 @@ namespace Intermix.Helpers
         public bool DarkTheme
         {
             get { return _darkTheme; }
-            set { _darkTheme = value;
+            set
+            {
+                _darkTheme = value;
                 OnPropertyChanged("DarkTheme");
             }
         }

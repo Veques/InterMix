@@ -1,17 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 
 namespace Intermix.Models
 {
     public class ApplicationDbContext : DbContext
     {
-        protected override void  OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             //DO POPRAWY BO TO SYF KOD
 

@@ -1,28 +1,27 @@
-﻿using Intermix.Commands;
-using Intermix.ViewModels.Base;
-using System.Windows.Input;
+﻿using Intermix.ViewModels.Base;
 
 namespace Intermix.ViewModels.MainWindowView.TicTacToeView
 {
     public class GameTypeViewModel : BaseViewModel
     {
-        
+
         public GameTypeViewModel()
         {
 
         }
 
-        private bool _onePlayer ;
+        private bool _onePlayer;
         public bool OnePlayer
         {
             get { return _onePlayer; }
-            set {
+            set
+            {
                 _onePlayer = value;
                 OnPropertyChanged("OnePlayer");
             }
         }
 
-        private bool _easyMode ;
+        private bool _easyMode;
 
         public bool EasyMode
         {
@@ -39,7 +38,9 @@ namespace Intermix.ViewModels.MainWindowView.TicTacToeView
         public bool IsSelectableDifficulty
         {
             get { return _isSelectableDifficulty; }
-            set { _isSelectableDifficulty = value;
+            set
+            {
+                _isSelectableDifficulty = value;
                 OnPropertyChanged("IsSelectableDifficulty");
             }
         }

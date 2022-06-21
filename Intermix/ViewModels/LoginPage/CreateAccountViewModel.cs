@@ -2,13 +2,8 @@
 using Intermix.Models;
 using Intermix.ViewModels.Base;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
-using System.Windows.Navigation;
 
 namespace Intermix.ViewModels.LoginPage
 {
@@ -23,7 +18,7 @@ namespace Intermix.ViewModels.LoginPage
                 o => CreateAnAccount(Name, Surname, Username, Password),
 
                 o => !string.IsNullOrEmpty(Name) && !string.IsNullOrEmpty(Surname) &&
-                     !string.IsNullOrEmpty(Username) && !string.IsNullOrEmpty(Password) && 
+                     !string.IsNullOrEmpty(Username) && !string.IsNullOrEmpty(Password) &&
                      !string.IsNullOrEmpty(PasswordConfirm));
         }
 
@@ -34,13 +29,13 @@ namespace Intermix.ViewModels.LoginPage
 
             try
             {
-                if(!Password.Equals(PasswordConfirm))
+                if (!Password.Equals(PasswordConfirm))
                 {
                     MessageBox.Show("Hasła się nie zgadzają");
                     return;
                 }
 
-                if(Password.Length < 8)
+                if (Password.Length < 8)
                 {
                     MessageBox.Show("Hasło jest za krótkie");
                     return;
@@ -66,7 +61,8 @@ namespace Intermix.ViewModels.LoginPage
                 Username = String.Empty;
 
 
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error");
             }

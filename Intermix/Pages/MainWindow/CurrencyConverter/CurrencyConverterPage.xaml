@@ -5,7 +5,8 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Intermix.Pages.MainWindow.CurrencyConverter" 
       xmlns:fa="http://schemas.fontawesome.com/icons/"
-      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:currencyconverter="clr-namespace:Intermix.ViewModels.CurrencyConverter" d:DataContext="{d:DesignInstance Type=currencyconverter:CurrencyConverterPageViewModel}"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:currencyconverter="clr-namespace:Intermix.ViewModels.CurrencyConverter" xmlns:domain="http://materialdesigninxaml.net/winfx/xaml/themes"  
+      d:DataContext="{d:DesignInstance Type=currencyconverter:CurrencyConverterPageViewModel}"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="CurrencyConverterPage">
@@ -26,36 +27,127 @@
         </Grid>
 
         <Grid Grid.Column="1" >
-
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="3*"/>
                 <ColumnDefinition/>
                 <ColumnDefinition Width="3*"/>
             </Grid.ColumnDefinitions>
 
-            <ComboBox materialDesign:HintAssist.Hint="Choose Primary Currency"  materialDesign:HintAssist.Background="{DynamicResource LW_Background}"
-                      
-                       Style="{StaticResource ComboBoxes_CC}">
-                <ComboBoxItem Content="USD"></ComboBoxItem>
-
-            </ComboBox>
-
-            <Button Grid.Column="1" Command="{Binding Convert}"
-            Style="{StaticResource MaterialDesignIconButton}"
-            ToolTip="MaterialDesignIconButton"
-            IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}">
-                <Button.Content>
-                    <fa:ImageAwesome Icon="Brands_Confluence" Foreground="{DynamicResource MW_Font}" Width="50" Height="50" Spin="{Binding IsConverting}"/>
-                </Button.Content>
             
+            <Grid VerticalAlignment="Center">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <TextBox Style="{StaticResource TextBoxes_CC}" VerticalAlignment="Center"
+                         Margin=" 0 0 0 10" Text="{Binding Amount}" PreviewTextInput="TextBox_PreviewTextInput" >
+                    <materialDesign:HintAssist.Hint>
+                        <StackPanel
+                          Orientation="Horizontal"
+                          Margin="-2 0 0 0">
+                            <TextBlock Text="Wprowadź kwotę" />
+                        </StackPanel>
+                    </materialDesign:HintAssist.Hint>
+                </TextBox>
+
+                <ComboBox Grid.Row="1" materialDesign:HintAssist.Hint="Choose Primary Currency" ItemsSource="{Binding Currencies}"
+                          Style="{StaticResource ComboBoxes_CC}" SelectedIndex="{Binding PrimaryCurrency}" materialDesign:HintAssist.Background="{DynamicResource MW_Background}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="3*"/>
+                                </Grid.ColumnDefinitions>
+                                
+                                <TextBlock HorizontalAlignment="Left" Margin="0 0 20 0"  Text="{Binding ShortName}"/>
+                                <TextBlock Grid.Column="1" HorizontalAlignment="Center" Text="{Binding LongName}"/>
+                            </Grid>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+
+
+            </Grid>
+
+            <Button Grid.Column="1"
+                      Style="{StaticResource ConvertButton_CC}"
+                      Command="{Binding ConvertCommand}"
+                      materialDesign:ButtonProgressAssist.IsIndicatorVisible="true"
+                      materialDesign:ButtonProgressAssist.Value="{Binding IsConverting}">
+                <!-- simple example of toggling/animating pack icon with a data trigger-->
+                <materialDesign:PackIcon Height="24" Width="24">
+                    <materialDesign:PackIcon.Style>
+                        <Style TargetType="materialDesign:PackIcon" BasedOn="{StaticResource {x:Type materialDesign:PackIcon}}">
+                            <Setter Property="Kind" Value="Cached" />
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding HasConverted}" Value="True">
+                                    <Setter Property="Kind" Value="Check" />
+                                    <Setter Property="Background" Value="{DynamicResource CC_ComboBoxBorder}"/>
+                                    <DataTrigger.EnterActions>
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation
+                                                    Storyboard.TargetProperty="Opacity"
+                                                    From="0"
+                                                    To="1"
+                                                    Duration="0:0:0.8" />
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </DataTrigger.EnterActions>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding HasConverted}" Value="False">
+                                    <Setter Property="Kind" Value="Cached" />
+                                    <DataTrigger.EnterActions>
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation
+                                                    Storyboard.TargetProperty="Opacity"
+                                                    From="0"
+                                                    To="1"
+                                                    Duration="0:0:0.8" />
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </DataTrigger.EnterActions>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </materialDesign:PackIcon.Style>
+                </materialDesign:PackIcon>
             </Button>
 
-            <ComboBox Grid.Column="2"  materialDesign:HintAssist.Background="{DynamicResource LW_Background}" materialDesign:HintAssist.Hint="Choose Secondary Currency"
-                       Style="{StaticResource ComboBoxes_CC}">
-                <ComboBoxItem Content="EUR"/>
-            </ComboBox>
 
+            <Grid VerticalAlignment="Center" Grid.Column="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <ComboBox materialDesign:HintAssist.Hint="Choose Secondary Currency" 
+                      materialDesign:HintAssist.Background="{DynamicResource MW_Background}" 
+                      Style="{StaticResource ComboBoxes_CC}" SelectedIndex="{Binding SecondaryCurrency}" ItemsSource="{Binding Currencies}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="3*"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock HorizontalAlignment="Left" Margin="0 0 20 0"  Text="{Binding ShortName}"/>
+                                <TextBlock HorizontalAlignment="Center" Grid.Column="1" Text="{Binding LongName}"/>
+                            </Grid>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+
+                <TextBox Grid.Row="1"
+                    Style="{StaticResource TextBoxes_CC}"
+                    IsEnabled="False"
+                    materialDesign:HintAssist.Hint="Your converted value"
+                    Text="{Binding CalculatedValue}"/>
+
+            </Grid>
         </Grid>
-
     </Grid>
 </Page>

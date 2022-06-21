@@ -17,12 +17,12 @@ namespace Intermix
 
         private void Application_LoadCompleted(object sender, System.Windows.Navigation.NavigationEventArgs e)
         {
-            switch(Config.Default.Theme)
+            switch (Config.Default.Theme)
             {
-                case 0: 
+                case 0:
                     ThemeController.SetTheme(ThemeController.ThemesTypes.Light);
                     break;
-                case 1: 
+                case 1:
                     ThemeController.SetTheme(ThemeController.ThemesTypes.Dark);
                     break;
             }
