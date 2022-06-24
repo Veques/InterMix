@@ -1,6 +1,7 @@
 ﻿using Intermix.Pages.MainWindow.CurrencyConverter;
 using Intermix.Pages.MainWindow.TicTacToe;
 using Intermix.ViewModels.MainWindowView.TicTacToeView;
+using Intermix.Views.LoginPage;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Navigation;
@@ -25,6 +26,12 @@ namespace Intermix.Pages.MainWindow
 
             switch (item.Name)
             {
+                case "Info":
+
+                    Info info = new();
+                    NavigationService.Navigate(info);
+                    break;
+
                 case "TicTacToe":
 
                     GameType page = new();
@@ -35,6 +42,12 @@ namespace Intermix.Pages.MainWindow
 
                     CurrencyConverterPage currencyConverter = new();
                     NavigationService.Navigate(currencyConverter);
+                    break;
+
+                case "LibraryManagementSystem":
+
+                    LoginWindow loginWindow = new();
+                    loginWindow.Show();
                     break;
 
             }

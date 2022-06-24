@@ -1,0 +1,109 @@
+﻿<Page x:Class="Intermix.Pages.Info"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Intermix.Pages" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:fa="http://schemas.fontawesome.com/icons/"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Info">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel x:Name="Panel1" Orientation="Vertical">
+            <materialDesign:PackIcon Kind="InformationOutline" HorizontalAlignment="Center" Margin="0 0 0 20"
+                                     Height="120" Width="120" Foreground="{DynamicResource MW_Font}"/>
+            <TextBlock Text="Project description" HorizontalAlignment="Center" FontSize="18" FontWeight="DemiBold"/>
+            <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                    HorizontalAlignment="Center"
+                    Width="{Binding ElementName=Panel1, Path=ActualWidth}"
+                    Margin="1 0 0 0" BorderThickness="0"
+                    TextWrapping="WrapWithOverflow"
+                    IsReadOnly="True"
+                    VerticalScrollBarVisibility="Auto"
+                    FontSize="17"
+                    FontWeight="Light" >
+                Projekt zawiera wszystko co kiedykolwiek chciałem przećwiczyć lub się nauczyć. Kod tej aplikacji nie jest idealny 
+                i często był utrudniany na siłę (np. w przypadku walut z konwertera, które są pobierane ze strony zamiast z APi, 
+                ponieważ chciałem dowiedzieć się jak to robić, a nigdy nie miałem okazji). Zdaję sobię sprawę, że przede mną jeszcze 
+                wiele nauki itp ..
+            </TextBox>
+
+            
+        </StackPanel>
+            <Grid VerticalAlignment="Bottom" x:Name="Back" Background="Transparent" Grid.RowSpan="4" HorizontalAlignment="Left" >
+                <Button HorizontalAlignment="Center" Style="{StaticResource BackButtons}" Click="Back_Click">
+                    <Button.Content>
+                        <fa:FontAwesome Icon="Solid_AngleLeft" Foreground="{DynamicResource MW_Font}" FontSize="70"/>
+                    </Button.Content>
+                </Button>
+            </Grid>
+
+        <StackPanel Grid.Column="1">
+            <Image Source="/Images/TicTacToe.png" Visibility="{Binding LightLogo_TTT}"
+                   Style="{StaticResource MW_Images}" Height="120" Width="120"
+                   Margin="0 0 0 20"/>
+            <Image Source="/Images/TicTacToe_Black.png" Visibility="{Binding DarkLogo_TTT}"
+                   Style="{StaticResource MW_Images}" Height="120" Width="120"
+                   Margin="0 0 0 20"/>
+            <TextBlock Text="TicTacToe" HorizontalAlignment="Center" FontSize="18" FontWeight="DemiBold"/>
+            <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                    HorizontalAlignment="Center"
+                    Width="{Binding ElementName=Panel1, Path=ActualWidth}"
+                    Margin="1 0 0 0" BorderThickness="0"
+                    TextWrapping="WrapWithOverflow"
+                    IsReadOnly="True"
+                    VerticalScrollBarVisibility="Auto"
+                    FontSize="17"
+                    FontWeight="Light" >
+                Kółko- krzyżyk zawiera możliwość gry w dwóch graczy, a także z komputerem. Przy wyborze poziomu łatwego, komputer wybiera losowe wolne pole
+                i tam stawia kółko. Natomiast w trybie trudnym, komputer stara się, biorąc pod uwagę strategię wygrywania w kółko- krzyżyk, ustawiać kółko w taki sposób by
+                wygrać lub minimum - zremisować.
+            </TextBox>
+        </StackPanel>
+
+        <StackPanel Grid.Column="2">
+            <materialDesign:PackIcon Kind="CurrencyEur" Width="120" Height="120" Foreground="{DynamicResource LW_Font}" Margin="0 0 0 15"
+                                     HorizontalAlignment="Center"/>
+            <TextBlock Text="Currency Converter" HorizontalAlignment="Center" FontSize="18" FontWeight="DemiBold"/>
+            <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                    HorizontalAlignment="Center"
+                    Width="{Binding ElementName=Panel1, Path=ActualWidth}"
+                    Margin="1 0 0 0" BorderThickness="0"
+                    TextWrapping="WrapWithOverflow"
+                    IsReadOnly="True"
+                    VerticalScrollBarVisibility="Auto"
+                    FontSize="17"
+                    FontWeight="Light">
+                Konwerter Walut pobiera listę walut korzystając z tabeli na stronie znajdującej się w dokumentacji API. Po wybraniu odpowiedniej kwoty, walut i kliknięciu przycisku
+                zostaje wysłanie zapytanie do API na stronie https://currencyapi.com/docs. Następnie aplikacje przeprowadza deserializację przychodzącego skryptu w JSON i przelicza 
+                wartość jednej waluty na drugą. API jest darmowe, ale ma 300 darmowych zapytań. Na własną aplikację jest to zdecydowanie wystarczająco.
+            </TextBox>
+        </StackPanel>
+        
+        <StackPanel Grid.Column="3">
+            <materialDesign:PackIcon Kind="LibraryShelves" Width="120" Height="120" Foreground="{DynamicResource MW_Font}" Margin="0 0 0 15"
+                                     HorizontalAlignment="Center"/>
+            <TextBlock Text="Library Management System" HorizontalAlignment="Center" FontSize="18" FontWeight="DemiBold"/>
+            <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                    HorizontalAlignment="Center"
+                    Width="{Binding ElementName=Panel1, Path=ActualWidth}"
+                    Margin="1 0 0 0" BorderThickness="0"
+                    TextWrapping="WrapWithOverflow"
+                    IsReadOnly="True"
+                    VerticalScrollBarVisibility="Auto"
+                    FontSize="17"
+                    FontWeight="Light">
+                Prosty system zarządzania biblioteką stworzony za pomocą C#, WPF, SQLite i Entity Framework. Nie jestem w stanie postawić własnego serwera dlatego SQLite wydaje się
+                świetnym wyborem do tego typu aplikacji. Aby wejść do systemu należy się zalogować lub zarejestrować, jeśli aplikacja jest używana przez daną osobę po raz pierwszy. 
+                Aplikacja zawiera dane książek importowanych z przykładowej strony internetowej, listę studentów i wypożyczonych przez nich książek.
+            </TextBox>
+        </StackPanel>
+    </Grid>
+</Page>

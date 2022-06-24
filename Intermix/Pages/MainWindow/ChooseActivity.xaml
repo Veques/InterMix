@@ -15,11 +15,52 @@
         </Grid.ColumnDefinitions>
 
         <ListView ScrollViewer.VerticalScrollBarVisibility="Hidden" BorderThickness="0" Name="listView1" Background="Transparent">
-            <ListView.ItemContainerStyle>
-            <Style TargetType="ListViewItem">
-                <EventSetter Event="PreviewMouseLeftButtonDown" Handler="ListViewItem_PreviewMouseLeftButtonDown_1" />
-            </Style>
-            </ListView.ItemContainerStyle>
+
+            <!-- Info -->
+            <ListViewItem Name="Info" Height="150" >
+                <StackPanel ScrollViewer.VerticalScrollBarVisibility="Disabled" Orientation="Horizontal" HorizontalAlignment="Stretch">
+                    <materialDesign:PackIcon Kind="InformationOutline" Width="100" Height="100" Foreground="{DynamicResource MW_Font}" />
+                    <TextBlock Margin="15 0 0 0" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Stretch" 
+                               Text="Project description" Foreground="{DynamicResource MW_Font}"/>
+                </StackPanel>
+                <ListViewItem.Style>
+                    <Style BasedOn="{StaticResource ListViewItemStyle}" TargetType="ListViewItem">
+                        <EventSetter Event="PreviewMouseLeftButtonDown" Handler="ListViewItem_PreviewMouseLeftButtonDown_1" />
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type ListViewItem}">
+                                    <Border x:Name="Bd" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}" SnapsToDevicePixels="true">
+                                        <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background">
+                                                <Setter.Value>
+                                                    <LinearGradientBrush EndPoint="1,1" StartPoint="0.5,0">
+                                                        <GradientStop Color="OrangeRed" Offset="0.5"/>
+                                                        <GradientStop Color="Red" Offset="0"/>
+                                                    </LinearGradientBrush>
+                                                </Setter.Value>
+                                            </Setter>
+                                            <Setter Property="Effect" TargetName="Bd">
+                                                <Setter.Value>
+                                                    <DropShadowEffect BlurRadius="100" ShadowDepth="0" Opacity="0.2"/>
+                                                </Setter.Value>
+                                            </Setter>
+
+                                            <!--<Setter Property="Background" TargetName="Bd" Value="red"/>
+                            <Setter Property="BorderBrush" TargetName="Bd" Value="blue"/>-->
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </ListViewItem.Style>
+            </ListViewItem>
+            <Grid></Grid>
+
+            <!-- TicTacToe -->
             <ListViewItem Name="TicTacToe">
                 <StackPanel ScrollViewer.VerticalScrollBarVisibility="Disabled" Orientation="Horizontal" HorizontalAlignment="Stretch">
                     <Image Source="/Images/TicTacToe.png" Visibility="{Binding LightLogo_TTT}"
@@ -35,6 +76,8 @@
                     </Style>
                 </ListViewItem.Style>
             </ListViewItem>
+
+            <!-- Currency Converter -->
             <ListViewItem Name="CurrencyConverter">
                 <StackPanel Orientation="Horizontal">
                     <materialDesign:PackIcon Kind="CurrencyEur" Width="100" Height="100" Foreground="{DynamicResource LW_Font}"/>
@@ -47,14 +90,28 @@
                     </Style>
                 </ListViewItem.Style>
             </ListViewItem>
+
+            <!-- Currency Converter -->
+            <ListViewItem Name="LibraryManagementSystem">
+                <StackPanel Orientation="Horizontal">
+                    <materialDesign:PackIcon Kind="LibraryShelves" Height="100" Width="100" Foreground="{DynamicResource MW_Font}" />
+                    <TextBlock Margin="15 0 0 0" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Stretch" 
+                               Text="Library Management" Foreground="{DynamicResource MW_Font}"/>
+                </StackPanel>
+                <ListViewItem.Style>
+                    <Style BasedOn="{StaticResource ListViewItemStyle}" TargetType="ListViewItem">
+                        <EventSetter Event="PreviewMouseLeftButtonDown" Handler="ListViewItem_PreviewMouseLeftButtonDown_1" />
+                    </Style>
+                </ListViewItem.Style>
+            </ListViewItem>
         </ListView>
 
         <Grid Grid.Column="1">
 
-            <TextBlock VerticalAlignment="Top" HorizontalAlignment="Center"
+            <TextBlock VerticalAlignment="Stretch" HorizontalAlignment="Center"
                        Foreground="{DynamicResource MW_Font}" FontSize="40"
                        Margin="10"
-                       Text="{Binding ChosenUsername, StringFormat={} HI {0}}"/>
+                       Text="Welcome to InterMIX"/>
 
         </Grid>
         
