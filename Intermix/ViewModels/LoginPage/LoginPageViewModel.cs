@@ -2,6 +2,7 @@
 using Intermix.Models;
 using Intermix.ViewModels.Base;
 using Intermix.ViewModels.MainWindowView.TicTacToeView;
+using Intermix.Views;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
@@ -29,16 +30,13 @@ namespace Intermix.ViewModels.LoginPage
             }
             else
             {
-                MainWindow window = new();
 
-                var w = Application.Current.Windows[0];
-                w.Hide();
-
-                var vm = new ChooseActivityViewModel
+                foreach (Window item in Application.Current.Windows)
                 {
-                    ChosenUsername = Username.ToUpper()
-                };
+                    item.Hide();
+                }
 
+                LibraryMainWindow window = new();
                 window.Show();
             }
         }
