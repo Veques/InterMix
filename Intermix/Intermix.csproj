@@ -9,6 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Images\Library.jpg" />
     <None Remove="Images\TicTacToe.png" />
     <None Remove="Images\TicTacToe_Black.png" />
   </ItemGroup>
@@ -35,6 +36,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Images\Library.jpg" />
     <Resource Include="Images\TicTacToe.png" />
     <Resource Include="Images\TicTacToe_Black.png" />
   </ItemGroup>

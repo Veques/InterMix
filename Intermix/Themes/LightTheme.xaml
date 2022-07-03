@@ -36,4 +36,9 @@
     <SolidColorBrush x:Key="TTTG_ButtonBackground" Color="{DynamicResource LeadingColor}" />
     <SolidColorBrush x:Key="TTTG_onHoverBorder" Color="{DynamicResource LeadingColor}" Opacity="0.7"/>
 
+    <!-- LIBRARY MANAGEMENT SYSTEM -->
+    <SolidColorBrush x:Key="LMS_MainBackgrond" Color="#9933FF"/>
+    <SolidColorBrush x:Key="LMS_MainBackgrondSimilar" Color="#832ED8"/>
+    <SolidColorBrush x:Key="LMS_OnHoverButtons" Color="red"/>
+    
 </ResourceDictionary>

@@ -3,12 +3,50 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:Intermix.Pages.LibrarySystem"
+      xmlns:local="clr-namespace:Intermix.Pages.LibrarySystem" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="MainLibraryPage">
 
     <Grid>
-        
+        <Image Source="/Images/Library.jpg" Stretch="UniformToFill" />
+
+        <UniformGrid Width="350" Height="320" VerticalAlignment="Bottom" Columns="2">
+
+            <Button Background="Green" Style="{StaticResource LMS_MainButtons}" Click="LoanBooks_Click" >
+                <Button.Content>
+                    <StackPanel>
+                        <materialDesign:PackIcon Kind="BookArrowRight" Width="70" Height="70" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <TextBlock Text="Wypożycz książki" VerticalAlignment="Center" Margin="0 5 0 0" HorizontalAlignment="Center" FontWeight="SemiBold"/>
+                    </StackPanel>
+                </Button.Content>
+            </Button>
+            <Button Background="Yellow" Style="{StaticResource LMS_MainButtons}" Click="ReturnBooks_Click" >
+                <Button.Content>
+                    <StackPanel>
+                        <materialDesign:PackIcon Kind="BookArrowLeft" Width="70" Height="70" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <TextBlock Text="Oddaj książki" VerticalAlignment="Center" Margin="0 5 0 0" HorizontalAlignment="Center" FontWeight="SemiBold"/>
+                    </StackPanel>
+                </Button.Content>
+            </Button>
+            <Button Background="red" Style="{StaticResource LMS_MainButtons}" Click="BrowseBooks_Click" >
+                <Button.Content>
+                    <StackPanel>
+                        <materialDesign:PackIcon Kind="BookSearch" Width="70" Height="70" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <TextBlock Text="Przeglądaj książki" VerticalAlignment="Center" Margin="0 5 0 0" HorizontalAlignment="Center" FontWeight="SemiBold"/>
+                    </StackPanel>
+                </Button.Content>
+            </Button>
+            <Button Background="red" Style="{StaticResource LMS_MainButtons}" Click="AdminPage_Click" >
+                <Button.Content>
+                    <StackPanel>
+                        <materialDesign:PackIcon Kind="StarCircle" Width="70" Height="70" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <TextBlock Text="Admin" VerticalAlignment="Center" Margin="0 5 0 0" HorizontalAlignment="Center" FontWeight="SemiBold"/>
+                    </StackPanel>
+                </Button.Content>
+            </Button>
+        </UniformGrid>
+
+
     </Grid>
 </Page>

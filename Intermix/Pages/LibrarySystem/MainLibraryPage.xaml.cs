@@ -24,5 +24,25 @@ namespace Intermix.Pages.LibrarySystem
         {
             InitializeComponent();
         }
+
+        private void LoanBooks_Click(object sender, RoutedEventArgs e)
+        {
+            LoanBooksPage page = new();
+            NavigationService.Navigate(page);       
+        }
+        private void ReturnBooks_Click(object sender, RoutedEventArgs e)
+        {
+            ReturnBooksPage page = new();
+            NavigationService.Navigate(page);
+        }
+        private void BrowseBooks_Click(object sender, RoutedEventArgs e)
+        {
+            BrowseBooksPage page = new();
+            NavigationService.Navigate(page);
+        }
+        private void AdminPage_Click(object sender, RoutedEventArgs e)
+        {
+            //TODO: Admin
+        }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System;
 
 namespace Intermix.Models
 {
@@ -6,12 +7,27 @@ namespace Intermix.Models
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            // TODO: Do naprawy ścieżka
 
-            optionsBuilder.UseSqlite(@"Data Source = C:\Users\Daniel\Desktop\Repozytorium GIT\InterMix\Intermix\Database\Intermix.db");
+            optionsBuilder.UseSqlite(@"Data Source = Database\Intermix.db");
 
         }
         
         public DbSet<Users> Users { get; set; }
+    }
+
+    public class ApplicationDb : IDisposable
+    {
+
+        private ApplicationDbContext dbc = new();
+
+        public ApplicationDb()
+        {
+            dbc.Database.EnsureCreated();
+        }
+
+        public void Dispose()
+        {
+            dbc.Dispose();
+        }
     }
 }
