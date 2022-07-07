@@ -9,6 +9,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Database\**" />
+    <EmbeddedResource Remove="Database\**" />
+    <None Remove="Database\**" />
+    <Page Remove="Database\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="Images\Library.jpg" />
     <None Remove="Images\TicTacToe.png" />
     <None Remove="Images\TicTacToe_Black.png" />
@@ -29,10 +36,6 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Database\" />
   </ItemGroup>
 
   <ItemGroup>
