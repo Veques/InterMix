@@ -9,7 +9,7 @@
       Title="MainLibraryPage">
 
     <Grid>
-        <Image Source="/Images/Library.jpg" Stretch="UniformToFill" />
+
 
         <UniformGrid Width="350" Height="320" VerticalAlignment="Bottom" Columns="2">
 

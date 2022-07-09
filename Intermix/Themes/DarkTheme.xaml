@@ -39,6 +39,7 @@
     
     <!-- LIBRARY MANAGEMENT SYSTEM -->
     <SolidColorBrush x:Key="LMS_MainBackgrond" Color="#9933FF"/>
+    <SolidColorBrush x:Key="LMS_Font" Color="white"/>
     <SolidColorBrush x:Key="LMS_MainBackgrondSimilar" Color="#832ED8"/>
     <SolidColorBrush x:Key="LMS_OnHoverButtons" Color="red"/>
     <Color x:Key="LMS_HoverColor">#1BE4BB</Color> 

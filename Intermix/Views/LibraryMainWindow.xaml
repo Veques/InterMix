@@ -3,33 +3,41 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:po="http://schemas.microsoft.com/winfx/2006/xaml/presentation/options"
-        xmlns:local="clr-namespace:Intermix.Views" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        mc:Ignorable="d"
-        Title="LibraryMainWindow" Height="500" Width="900" WindowStyle="None" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" 
-        Background="Transparent"
->
-
+        xmlns:local="clr-namespace:Intermix.Views" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:viewmodels="clr-namespace:Intermix.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:LibraryMainWindowViewModel}"
+        mc:Ignorable="d" MouseDown="Grid_MouseDown" 
+        Title="LibraryMainWindow" Height="500" Width="900" WindowStyle="None" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" >
+    <Window.Background>
+        <ImageBrush ImageSource="/Images/Library.jpg" Stretch="UniformToFill" Opacity="0.7" />
+    </Window.Background>
 
     <Border BorderBrush="{DynamicResource MW_Font}" BorderThickness="3" CornerRadius="1">
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="40"/>
+                <RowDefinition Height="45"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
 
-            <Grid Grid.RowSpan="2" MouseDown="Grid_MouseDown" >
-
-                <Frame Source="/Pages/LibrarySystem/MainLibraryPage.xaml" NavigationUIVisibility="Hidden"/>
-               
+            <Grid>
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Center">
 
+
+                    
                     <Button Style="{StaticResource LMS_WindowButtons}" Click="Exit_Click" >
                         <Button.Content>
                             <materialDesign:PackIcon Margin="2 0 2 0" Kind="PowerStandby" Width="30" Height="30"      />
                         </Button.Content>
                     </Button>
+                    
                 </StackPanel>
+                <!--<TextBlock Text="Ładowanie" Margin="0 0 0 2" Foreground="White" VerticalAlignment="Bottom" Visibility="{Binding LoadingVisibility}" 
+                           HorizontalAlignment="Center"/>
+                <ProgressBar IsIndeterminate="True" Height="4" VerticalAlignment="Bottom" Background="Transparent" 
+                             Foreground="red" Visibility="{Binding LoadingVisibility, FallbackValue=Visibility.Collapsed}" 
+                             BorderBrush="Transparent"/>-->
 
+            </Grid>
+            <Grid Grid.Row="1">
+                <Frame Source="/Pages/LibrarySystem/MainLibraryPage.xaml" NavigationUIVisibility="Hidden"/>
             </Grid>
                
     </Grid>

@@ -421,7 +421,7 @@
 
     </Style>
     
-    <!-- Convert Buttpn -->
+    <!-- Convert Button -->
     <Style x:Key="ConvertButton_CC" TargetType="Button" BasedOn="{StaticResource MaterialDesignFloatingActionLightButton}">
         <Setter Property="BorderBrush" Value="{DynamicResource CC_ComboBoxBorder}"/>
         <Setter Property="Foreground" Value="{DynamicResource MW_Font}"/>
@@ -472,6 +472,7 @@
         </Setter>
     </Style>
 
+    <!-- Main Buttons -->
     <Style x:Key="LMS_MainButtons" TargetType="Button">
         <Setter Property="Width" Value="135"/>
         <Setter Property="Height" Value="135"/>
@@ -513,5 +514,40 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+    </Style>
+    
+    <!-- DataGrid Headers -->
+    <Style x:Key="DataGridHeader" TargetType="DataGridColumnHeader" 
+           BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
+        
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        
+    </Style>
+    <!-- DataGrid Cells -->
+    <Style x:Key="DataGridCell" TargetType="DataGridCell" 
+           BasedOn="{StaticResource MaterialDesignDataGridCell}">
+
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+
+    </Style>
+    <!-- Filters -->
+    <Style x:Key="LMS_Filters" TargetType="TextBox" BasedOn="{StaticResource MaterialDesignFilledTextBox}">
+
+        <Setter Property="Height" Value="50"/>
+        <Setter Property="IsEnabled" Value="true"/>
+        <Setter Property="materialDesign:HintAssist.Foreground" Value="White"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="Background" Value="White"/>
+        <Setter Property="materialDesign:HintAssist.Hint" Value="Filter"/>
+        <Setter Property="AcceptsReturn" Value="True"/>
+        <Setter Property="materialDesign:TextFieldAssist.HasClearButton" Value="True"/>
+        <Setter Property="materialDesign:TextFieldAssist.UnderlineBrush" Value="white"/>
+    </Style>
+
+     <!-- Back Buttons in LMS -->
+    <Style x:Key="LMS_BackButton" TargetType="Button" BasedOn="{StaticResource MaterialDesignIconButton}">
+        
     </Style>
 </ResourceDictionary>

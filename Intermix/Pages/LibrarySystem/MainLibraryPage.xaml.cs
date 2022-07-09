@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Intermix.ViewModels;
+using Intermix.ViewModels.LibrarySystem;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +25,7 @@ namespace Intermix.Pages.LibrarySystem
         public MainLibraryPage()
         {
             InitializeComponent();
+            DataContext = new MainLibraryPageViewModel();
         }
 
         private void LoanBooks_Click(object sender, RoutedEventArgs e)
@@ -37,6 +40,12 @@ namespace Intermix.Pages.LibrarySystem
         }
         private void BrowseBooks_Click(object sender, RoutedEventArgs e)
         {
+            Dispatcher.Invoke(() =>
+            {
+                LibraryMainWindowViewModel.Instance.LoadingVisibility = Visibility.Collapsed;
+
+            });
+
             BrowseBooksPage page = new();
             NavigationService.Navigate(page);
         }
