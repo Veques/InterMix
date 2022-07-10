@@ -24,13 +24,12 @@
         
         <DataGrid Name="Grid" Grid.Row="1" ItemsSource="{Binding AllBooks}" AutoGenerateColumns="False" HorizontalAlignment="Center"
                   IsReadOnly="True" CellStyle="{StaticResource DataGridCell}" BorderBrush="Black" BorderThickness="3"
-                  CanUserResizeColumns="False" CanUserResizeRows="False"
-                  >
+                  CanUserResizeColumns="False" CanUserResizeRows="False">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="70" HeaderStyle="{StaticResource DataGridHeader}"/>
+                <DataGridTextColumn HeaderStyle="{StaticResource DataGridHeader}" Header="ID" Binding="{Binding Id}" Width="70"/>
                 <DataGridTextColumn HeaderStyle="{StaticResource DataGridHeader}" Header="Tytuł" Binding="{Binding Title}" Width="200"/>
                 <DataGridTextColumn HeaderStyle="{StaticResource DataGridHeader}" Header="Imię autora" Binding="{Binding AuthorName}" Width="170"/>
-                <DataGridTextColumn HeaderStyle="{StaticResource DataGridHeader}" Header="Nazwisko autora" Binding="{Binding AuthorSurname}" Width="170"/>
+                <DataGridTextColumn HeaderStyle="{StaticResource DataGridHeader}"  Header="Nazwisko autora" Binding="{Binding AuthorSurname}" Width="170"/>
             </DataGrid.Columns>
 
         </DataGrid>  

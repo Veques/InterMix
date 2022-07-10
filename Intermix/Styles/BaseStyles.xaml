@@ -519,7 +519,6 @@
     <!-- DataGrid Headers -->
     <Style x:Key="DataGridHeader" TargetType="DataGridColumnHeader" 
            BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
-        
         <Setter Property="HorizontalAlignment" Value="Center"/>
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
         
@@ -546,8 +545,6 @@
         <Setter Property="materialDesign:TextFieldAssist.UnderlineBrush" Value="white"/>
     </Style>
 
-     <!-- Back Buttons in LMS -->
-    <Style x:Key="LMS_BackButton" TargetType="Button" BasedOn="{StaticResource MaterialDesignIconButton}">
-        
-    </Style>
+
+
 </ResourceDictionary>
