@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Intermix.ViewModels.LibrarySystem
+namespace Intermix.ViewModels.LibrarySystem.ForUCs
 {
     public class BooksDataGridViewModel : BaseViewModel
     {
@@ -16,7 +16,7 @@ namespace Intermix.ViewModels.LibrarySystem
         {
             using (var db = new ApplicationDbContext())
             {
-                AllBooks= new(db.Books);
+                AllBooks = new(db.Books);
             }
         }
 
@@ -25,7 +25,9 @@ namespace Intermix.ViewModels.LibrarySystem
         public ObservableCollection<Books> AllBooks
         {
             get { return _allBooks; }
-            set { _allBooks = value;
+            set
+            {
+                _allBooks = value;
                 OnPropertyChanged("AllBooks");
             }
         }

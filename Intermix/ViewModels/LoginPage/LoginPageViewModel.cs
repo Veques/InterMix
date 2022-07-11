@@ -30,7 +30,7 @@ namespace Intermix.ViewModels.LoginPage
             }
             else
             {
-
+                UserId = isValid.Id;
                 foreach (Window item in Application.Current.Windows)
                 {
                     item.Hide();
@@ -40,6 +40,8 @@ namespace Intermix.ViewModels.LoginPage
                 window.Show();
             }
         }
+
+        public static int UserId { get; private set; }
 
         private string _username;
 

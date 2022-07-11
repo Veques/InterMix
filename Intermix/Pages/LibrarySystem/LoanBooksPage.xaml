@@ -4,7 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Intermix.Pages.LibrarySystem" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-      mc:Ignorable="d"  xmlns:usercontrol="clr-namespace:Intermix.UserControls"
+      mc:Ignorable="d"  xmlns:usercontrol="clr-namespace:Intermix.UserControls" xmlns:forpages="clr-namespace:Intermix.ViewModels.LibrarySystem.ForPages" d:DataContext="{d:DesignInstance Type=forpages:LoanBooksPageViewModel}"
       d:DesignHeight="450" d:DesignWidth="800"
       Title="LoanBooksPage">
 
@@ -26,7 +26,32 @@
         </Grid>
 
         <Grid Grid.Row="1">
-            <usercontrol:LoanBooksDataGridUserControl/>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <DataGrid Name="Grid" ItemsSource="{Binding LoanBooks}" AutoGenerateColumns="False" CanUserAddRows="False" Width="600"
+                  Margin="0 10 0 20" CellStyle="{StaticResource DataGridCell}" CanUserResizeColumns="False" CanUserResizeRows="False" 
+                  BorderBrush="Black" BorderThickness="3" RowDetailsVisibilityMode="Visible" >
+
+                <DataGrid.Columns>
+                    <DataGridCheckBoxColumn HeaderStyle="{StaticResource DataGridHeader}" Width="auto" Header="Do wypożyczenia" Binding="{Binding isChecked}"/>
+                    <DataGridTextColumn HeaderStyle="{StaticResource DataGridHeader}" IsReadOnly="True" Width="230" Header="Tytuł" Binding="{Binding Title}"/>
+                    <DataGridTextColumn HeaderStyle="{StaticResource DataGridHeader}" IsReadOnly="True" Width="200" Header="Autor" Binding="{Binding FullName}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <StackPanel Grid.Column="1" Margin="0 10 10 20">
+
+                <Button HorizontalAlignment="Center" Content="Wypożycz" Style="{StaticResource LW_Buttons}"
+                        Command="{Binding LoanCommand}" ToolTip="Wypożycz książki"/>
+
+
+
+            </StackPanel>
+            
         </Grid>
         
     </Grid>

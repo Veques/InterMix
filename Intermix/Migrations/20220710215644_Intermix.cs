@@ -4,7 +4,7 @@
 
 namespace Intermix.Migrations
 {
-    public partial class inital : Migration
+    public partial class Intermix : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -16,7 +16,8 @@ namespace Intermix.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     Title = table.Column<string>(type: "TEXT", nullable: false),
                     AuthorName = table.Column<string>(type: "TEXT", nullable: false),
-                    AuthorSurname = table.Column<string>(type: "TEXT", nullable: false)
+                    AuthorSurname = table.Column<string>(type: "TEXT", nullable: false),
+                    IsAvailable = table.Column<bool>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Intermix.ViewModels.LibrarySystem.ForPages;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,7 @@ namespace Intermix.Pages.LibrarySystem
         public LoanBooksPage()
         {
             InitializeComponent();
+            DataContext = new LoanBooksPageViewModel();
         }
 
         private void Back_Click(object sender, RoutedEventArgs e)

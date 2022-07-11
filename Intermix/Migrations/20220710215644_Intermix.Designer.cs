@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Intermix.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220707165555_inital")]
-    partial class inital
+    [Migration("20220710215644_Intermix")]
+    partial class Intermix
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -31,6 +31,9 @@ namespace Intermix.Migrations
                     b.Property<string>("AuthorSurname")
                         .IsRequired()
                         .HasColumnType("TEXT");
+
+                    b.Property<bool>("IsAvailable")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Title")
                         .IsRequired()
