@@ -350,5 +350,5 @@ MigrationBackup/
 .ionide/
 
 # SQLite DB changes
-.db-shm
-.db-wal
+*.db-shm
+*.db-wal

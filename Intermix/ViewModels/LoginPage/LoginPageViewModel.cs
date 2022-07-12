@@ -31,6 +31,7 @@ namespace Intermix.ViewModels.LoginPage
             else
             {
                 UserId = isValid.Id;
+                User = $"{isValid.Name} {isValid.Surname}";
                 foreach (Window item in Application.Current.Windows)
                 {
                     item.Hide();
@@ -41,6 +42,7 @@ namespace Intermix.ViewModels.LoginPage
             }
         }
 
+        public static string? User { get; private set; }
         public static int UserId { get; private set; }
 
         private string _username;
