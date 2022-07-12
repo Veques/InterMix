@@ -3,12 +3,56 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:Intermix.Pages.LibrarySystem"
+      xmlns:local="clr-namespace:Intermix.Pages.LibrarySystem" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:forpages="clr-namespace:Intermix.ViewModels.LibrarySystem.ForPages" d:DataContext="{d:DesignInstance Type=forpages:ReturnBooksPageViewModel}"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="ReturnBooksPage">
 
     <Grid>
+
+
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Grid VerticalAlignment="Center" HorizontalAlignment="Center" >
+            <Button Click="Back_Click" Style="{StaticResource LMS_WindowButtons}" Background="red" >
+                <materialDesign:PackIcon Kind="Play" Foreground="black" Width="30" Height="30">
+                    <materialDesign:PackIcon.LayoutTransform>
+                        <RotateTransform Angle="180"/>
+                    </materialDesign:PackIcon.LayoutTransform>
+                </materialDesign:PackIcon>
+            </Button>
+        </Grid>
         
+        <Grid Grid.Row="1">
+            
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            
+            <DataGrid Name="Grid" ItemsSource="{Binding ReturnBooks}" AutoGenerateColumns="False" CanUserAddRows="False"
+                  Margin="0,10,0,10" CellStyle="{StaticResource DataGridCell}" CanUserResizeColumns="False" CanUserResizeRows="False" 
+                  BorderBrush="Black" BorderThickness="3" RowDetailsVisibilityMode="Visible" >
+
+                <DataGrid.Columns>
+                    <DataGridCheckBoxColumn HeaderStyle="{StaticResource DataGridHeader}" Width="130" Header="Do oddania" Binding="{Binding isChecked}"/>
+                    <DataGridTextColumn HeaderStyle="{StaticResource DataGridHeader}" IsReadOnly="True" Width="230" Header="Tytuł" Binding="{Binding Title}"/>
+                    <DataGridTextColumn HeaderStyle="{StaticResource DataGridHeader}" IsReadOnly="True" Width="200" Header="Autor" Binding="{Binding FullName}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+
+        <StackPanel Grid.Column="1" Margin="5 0 5 10">
+
+            <Button Content="Oddaj" Style="{StaticResource LW_Buttons}" Command="{Binding ReturnBooksCommand}"/>
+
+        </StackPanel>
+        </Grid>
+
+
+
     </Grid>
 </Page>

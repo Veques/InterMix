@@ -37,7 +37,7 @@
                   BorderBrush="Black" BorderThickness="3" RowDetailsVisibilityMode="Visible" >
 
                 <DataGrid.Columns>
-                    <DataGridCheckBoxColumn HeaderStyle="{StaticResource DataGridHeader}" Width="auto" Header="Do wypożyczenia" Binding="{Binding isChecked}"/>
+                    <DataGridCheckBoxColumn HeaderStyle="{StaticResource DataGridHeader}" Width="auto" Header="Do wypożyczenia" Binding="{Binding IsChecked}"/>
                     <DataGridTextColumn HeaderStyle="{StaticResource DataGridHeader}" IsReadOnly="True" Width="230" Header="Tytuł" Binding="{Binding Title}"/>
                     <DataGridTextColumn HeaderStyle="{StaticResource DataGridHeader}" IsReadOnly="True" Width="200" Header="Autor" Binding="{Binding FullName}"/>
                 </DataGrid.Columns>

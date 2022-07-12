@@ -13,11 +13,11 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
 
     public class LoanBooksModel 
     {
-        public bool isChecked { get; set; }
+        public bool IsChecked { get; set; }
         public int Id { get; set; }
         public string? Title { get; set; }
         public string? FullName { get; set; }
-        public int? isAvailable { get; set; }
+        public int? IsAvailable { get; set; }
     }
 
     public class LoanBooksPageViewModel : BaseViewModel
@@ -41,7 +41,7 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
 
                     LoanBooks.Add(new LoanBooksModel
                     {
-                        isChecked = false,
+                        IsChecked = false,
                         Id = book.Id,
                         FullName = $"{book.AuthorName} {book.AuthorSurname}",
                         Title = book.Title
@@ -60,7 +60,7 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
             using ApplicationDbContext db = new();
             foreach (var book in LoanBooks)
             {
-                if (book.isChecked)
+                if (book.IsChecked)
                 {
                     db.Loans.Add(new Loans { UserId= LoginPageViewModel.UserId, BookId = book.Id });
 
@@ -86,7 +86,7 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
 
                     LoanBooks.Add(new LoanBooksModel
                     {
-                        isChecked = false,
+                        IsChecked = false,
                         Id = book.Id,
                         FullName = $"{book.AuthorName} {book.AuthorSurname}",
                         Title = book.Title
