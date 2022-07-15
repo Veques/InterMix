@@ -24,6 +24,21 @@ namespace Intermix.ViewModels.LoginPage
 
             var isValid = _dbContext.Users.FirstOrDefault(u => u.Username == Username && u.Password == Password);
 
+            if (!_dbContext.Users.Any(o => o.Username == "Admin"))
+            {
+            _dbContext.Users.Add(new Users
+            {
+                Name = "",
+                Surname = "",
+                Username = "Admin",
+                Password = "1234",
+            });
+
+            _dbContext.SaveChanges();
+            }
+
+
+
             if (isValid == null)
             {
                 MessageBox.Show("Hasło i nazwa użytkownika nie zgadzają się");
@@ -32,6 +47,7 @@ namespace Intermix.ViewModels.LoginPage
             {
                 UserId = isValid.Id;
                 User = $"{isValid.Name} {isValid.Surname}";
+
                 foreach (Window item in Application.Current.Windows)
                 {
                     item.Hide();

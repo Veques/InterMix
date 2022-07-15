@@ -10,6 +10,7 @@ namespace Intermix.Models
         public ApplicationDbContext()
         {
             Database.EnsureCreated();
+
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -23,19 +24,4 @@ namespace Intermix.Models
         public DbSet<Loans> Loans { get; set; }
     }
 
-    //public class ApplicationDb : IDisposable
-    //{
-
-    //    private ApplicationDbContext dbc = new();
-
-    //    public ApplicationDb()
-    //    {
-    //        dbc.Database.EnsureCreated();
-    //    }
-
-    //    public void Dispose()
-    //    {
-    //        dbc.Dispose();
-    //    }
-    //}
 }

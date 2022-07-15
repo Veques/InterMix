@@ -112,10 +112,10 @@
                                 <ControlTemplate TargetType="Button">
                                     <Border Name="border" BorderThickness="2" CornerRadius="15">
                                         <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
-                                            <Grid  Width="120" Height="120" Name="grid1" Opacity="1">
-                                                <ContentPresenter Visibility="Visible" Name="Presenter" Opacity="1" />
+                                            <Grid Width="120" Height="120" Name="grid1" Opacity="1">
+                                                <ContentPresenter Visibility="Visible" VerticalAlignment="Center" HorizontalAlignment="Center" Name="Presenter" Opacity="1" />
                                             </Grid>
-                                            <Grid  Name="grid2" Opacity="0" Width="120" Height="120">
+                                            <Grid Name="grid2" Opacity="0" Width="120" Height="120">
                                                 <materialDesign:PackIcon VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0 10 0 0 "
                                                                      Name="LockIcon"  Kind="LockOpen"
                                                                      Width="70" Height="70" />

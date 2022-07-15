@@ -3,7 +3,7 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:Intermix.Pages.LibrarySystem" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:local="clr-namespace:Intermix.Pages.LibrarySystem" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:forpages="clr-namespace:Intermix.ViewModels.LibrarySystem.ForPages" d:DataContext="{d:DesignInstance Type=forpages:AdminPageViewModel}"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800" FontSize="19"
       Title="AdminPage">
@@ -23,10 +23,70 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         
-        <Button  Style="{StaticResource LMS_MainButtons}" ToolTip="Zmiana PIN konta Admina">
+        <Button ToolTip="Zmiana PIN konta Admina">
             <Button.Content>
                 <TextBlock TextWrapping="WrapWithOverflow" Text="Zmień PIN" TextBlock.TextAlignment="Center"/>
             </Button.Content>
+            <Button.Style>
+                <Style TargetType="Button" BasedOn="{StaticResource LMS_MainButtons}">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="Button">
+                                <Border Name="border" BorderThickness="2" CornerRadius="15">
+                                    <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
+                                        <Grid Width="120" Height="120" Name="grid1" Opacity="1">
+                                            <ContentPresenter Visibility="Visible" VerticalAlignment="Center" HorizontalAlignment="Center" Name="Presenter" Opacity="1" />
+                                        </Grid>
+                                        <StackPanel Name="grid2" Opacity="0" Width="120" Height="120">
+                                            <TextBox FontSize="15" Width="70" TextBlock.TextAlignment="Center" MaxLength="4" 
+                                                     PreviewTextInput="TextBox_PreviewTextInput" Text="{Binding FirstPin, UpdateSourceTrigger=PropertyChanged}"/>
+
+                                            <TextBox FontSize="15" Width="70" TextBlock.TextAlignment="Center" MaxLength="4" Margin="0 10 0 10" 
+                                                     PreviewTextInput="TextBox_PreviewTextInput" Text="{Binding SecondPin, UpdateSourceTrigger=PropertyChanged}"/>
+
+
+                                            <Button Margin="0 10 0 0" Width="75" Content="Zmień" Command="{Binding ChangePINCommand}"/>
+                                        </StackPanel>
+                                    </Grid>
+                                    <Border.Style>
+                                        <Style TargetType="Border">
+                                            <Setter Property="Background" Value="white"/>
+                                            <Setter Property="BorderThickness" Value="3"/>
+                                            <Style.Triggers>
+                                                <Trigger Property="Border.IsMouseOver" Value="True">
+                                                    <Setter Property="Effect">
+                                                        <Setter.Value>
+                                                            <DropShadowEffect BlurRadius="15" ShadowDepth="2" Color="{DynamicResource LW_onHoverShadow}"  Opacity="0.25"/>
+                                                        </Setter.Value>
+                                                    </Setter>
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Border.Style>
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <EventTrigger RoutedEvent="MouseEnter">
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation Storyboard.TargetProperty="Opacity" Storyboard.TargetName="Presenter" To="0" Duration="0:0:0.15"/>
+                                                <DoubleAnimation Storyboard.TargetProperty="Opacity" Storyboard.TargetName="grid2" To="1" Duration="0:0:0.15"/>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </EventTrigger>
+                                    <EventTrigger RoutedEvent="MouseLeave">
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation Storyboard.TargetProperty="Opacity" Storyboard.TargetName="Presenter" To="1" Duration="0:0:0.15"/>
+                                                <DoubleAnimation Storyboard.TargetProperty="Opacity" Storyboard.TargetName="grid2" To="0" Duration="0:0:0.15"/>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </EventTrigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Button.Style>
         </Button>
 
         <Button Grid.Column="1" Style="{StaticResource LMS_MainButtons}" ToolTip="Kliknięcie przycisku Wypełni bazę danych książkami z załączonego w projekcie Pliku Excel">
