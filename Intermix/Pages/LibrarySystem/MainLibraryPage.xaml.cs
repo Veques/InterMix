@@ -1,5 +1,7 @@
-﻿using Intermix.ViewModels;
+﻿using Intermix.Models;
+using Intermix.ViewModels;
 using Intermix.ViewModels.LibrarySystem;
+using Intermix.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,10 +24,24 @@ namespace Intermix.Pages.LibrarySystem
     /// </summary>
     public partial class MainLibraryPage : Page
     {
+
+        public string PIN { get; private set; }
+
         public MainLibraryPage()
         {
             InitializeComponent();
             DataContext = new MainLibraryPageViewModel();
+
+            using var db = new ApplicationDbContext();
+
+            foreach (var user in db.Users)
+            {
+                if (user.Username.Equals("Admin"))
+                {
+                    PIN = user.Password;
+                }
+            }
+
         }
 
         private void LoanBooks_Click(object sender, RoutedEventArgs e)
@@ -49,9 +65,27 @@ namespace Intermix.Pages.LibrarySystem
             BrowseBooksPage page = new();
             NavigationService.Navigate(page);
         }
-        private void AdminPage_Click(object sender, RoutedEventArgs e)
+
+        private void PswdBox_PasswordChanged(object sender, RoutedEventArgs e)
         {
-            //TODO: Admin
+
+            var PswdBox = sender as PasswordBox;
+            AdminPage page = new();
+
+            if (PswdBox.Password.Length == 4)
+            {
+                if (PswdBox.Password.Equals(PIN))
+                {
+                    NavigationService.Navigate(page);
+                }
+                else
+                {
+                    MessageBox.Show("Nieprawidłowe Hasło");
+                    PswdBox.Password = String.Empty;
+                }
+            }
+
+
         }
     }
 }

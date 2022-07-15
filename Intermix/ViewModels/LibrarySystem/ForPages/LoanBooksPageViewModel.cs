@@ -30,23 +30,23 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
                 o => LoanClicked(),
                 o => true);
 
-            using var db = new ApplicationDbContext();
-
             LoanBooks = new();
+            FillDataGrid();
 
-            foreach (var book in db.Books)
+        }
+
+        private void FillDataGrid()
+        {            
+            using var db = new ApplicationDbContext();
+            foreach (var book in db.Books.Where(d => d.IsAvailable == 1))
             {
-                if (book.IsAvailable == 1)
+                LoanBooks.Add(new LoanBooksModel
                 {
-
-                    LoanBooks.Add(new LoanBooksModel
-                    {
-                        IsChecked = false,
-                        Id = book.Id,
-                        FullName = $"{book.AuthorName} {book.AuthorSurname}",
-                        Title = book.Title
-                    });
-                }
+                    IsChecked = false,
+                    Id = book.Id,
+                    FullName = $"{book.AuthorName} {book.AuthorSurname}",
+                    Title = book.Title
+                });
             }
         }
 
@@ -58,42 +58,23 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
                 return;
 
             using ApplicationDbContext db = new();
-            foreach (var book in LoanBooks)
+            foreach (var book in LoanBooks.Where(a => a.IsChecked == true))
             {
-                if (book.IsChecked)
-                {
-                    db.Loans.Add(new Loans { UserId= LoginPageViewModel.UserId, BookId = book.Id });
+                db.Loans.Add(new Loans { UserId= LoginPageViewModel.UserId, BookId = book.Id });
 
-                    var cell = db.Books.FirstOrDefault(x => x.Id == book.Id);
+                var cell = db.Books.FirstOrDefault(x => x.Id == book.Id);
 
-                    if (cell == null)
-                        return;
+                if (cell == null)
+                    return;
                     
-                    cell.IsAvailable = 0;
-                } 
+                cell.IsAvailable = 0;
             }
 
             if(db.SaveChanges() > 1) 
                 MessageBox.Show("Wypożyczenie udane");
 
-            //TODO: możnaby to zoptymalizować
             LoanBooks.Clear();
-
-            foreach (var book in db.Books)
-            {
-                if (book.IsAvailable == 1)
-                {
-
-                    LoanBooks.Add(new LoanBooksModel
-                    {
-                        IsChecked = false,
-                        Id = book.Id,
-                        FullName = $"{book.AuthorName} {book.AuthorSurname}",
-                        Title = book.Title
-                    });
-                }
-            }
-
+            FillDataGrid();
         }
 
         private ObservableCollection<Books> _books;

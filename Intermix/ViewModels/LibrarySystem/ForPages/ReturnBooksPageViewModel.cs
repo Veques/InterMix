@@ -33,22 +33,22 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
                 o => true);
 
             ReturnBooks = new();
+            FillDataGrid();
+
+        }
+        private void FillDataGrid()
+        {
             using var db = new ApplicationDbContext();
-           
-
-            foreach(var book in db.Books)
+            foreach (var book in db.Books.Where(d => d.IsAvailable == 0))
             {
-                if (book.IsAvailable == 0)
+                ReturnBooks.Add(new ReturnBookModel
                 {
-                    ReturnBooks.Add( new ReturnBookModel { 
-                        IsChecked = true,
-                        Id = book.Id,
-                        FullName = $"{book.AuthorName} {book.AuthorSurname}", 
-                        Title= book.Title
-                    });
-                }
+                    IsChecked = false,
+                    Id = book.Id,
+                    FullName = $"{book.AuthorName} {book.AuthorSurname}",
+                    Title = book.Title
+                });
             }
-
         }
 
         private void ReturnBooksClicked()
@@ -63,9 +63,7 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
             {
                 if (book.IsChecked)
                 {
-                    var bookId = book.Id;
                     db.Loans.Remove(db.Loans.SingleOrDefault(s => s.BookId == book.Id));
-
 
                     var cell = db.Books.FirstOrDefault(x => x.Id == book.Id);
 
@@ -77,25 +75,11 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
             }
 
             if (db.SaveChanges() > 1)
-                MessageBox.Show("Wypożyczenie udane");
+                MessageBox.Show("Usunięto z twojego konta");
 
             //TODO: możnaby to zoptymalizować
             ReturnBooks.Clear();
-
-            foreach (var book in db.Books)
-            {
-                if (book.IsAvailable == 0)
-                {
-
-                    ReturnBooks.Add(new ReturnBookModel
-                    {
-                        IsChecked = false,
-                        Id = book.Id,
-                        FullName = $"{book.AuthorName} {book.AuthorSurname}",
-                        Title = book.Title
-                    });
-                }
-            }
+            FillDataGrid();
         }
 
         private ObservableCollection<ReturnBookModel> _returnBooks;
