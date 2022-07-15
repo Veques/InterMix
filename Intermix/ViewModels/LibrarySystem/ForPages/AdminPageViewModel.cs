@@ -3,7 +3,10 @@ using Intermix.Models;
 using Intermix.ViewModels.Base;
 using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.OleDb;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,16 +19,106 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
     public class AdminPageViewModel : BaseViewModel
     {
         ApplicationDbContext db = new();
-        public ICommand ChangePINCommand { get; set; }
 
+        #region Commands
+
+        public ICommand ChangePINCommand { get; set; }
+        public ICommand ImportBooksCommand { get; set; }
+        #endregion
+
+        #region Constructor
         public AdminPageViewModel()
         {
+
+            if (db.Books.Count() > 99)
+            {
+                IsEnabled = false;
+            }
+            else
+            {
+                IsEnabled = true;
+            }
             ChangePINCommand = new RelayCommand(
                 o => ChangePIN(),
                 o => Validate(FirstPin, SecondPin)
                 );
+
+            ImportBooksCommand = new RelayCommand(
+                o => ImportBooks(),
+                o => true
+                );
         }
-        private bool Validate(string first, string second)
+        #endregion
+
+        #region ImportBooks
+        private void ImportBooks()
+        {
+            var path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\Other\Top100Books.xlsx");
+            try
+            {
+                OleDbConnection connection = new((@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + path + ";Extended Properties='Excel 12.0;HDR=YES;IMEX=1;';"));
+                connection.Open();
+                OleDbCommand command = new("SELECT * FROM [" + "Arkusz1" + "$]", connection);
+                DataTable Data = new();
+                OleDbDataAdapter adapter = new(command);
+                adapter.Fill(Data);
+                connection.Close();
+                for (int i = Data.Rows.Count - 1; i >= 0; i--)
+                {
+                    if (Data.Rows[i][0].ToString() == String.Empty)
+                    {
+                        Data.Rows.RemoveAt(i);
+                    }
+                }
+
+                List<Books> list = new();
+
+                list = (from DataRow dr in Data.Rows
+                        select new Books()
+                        {
+                            Id = Convert.ToInt32(dr["Position"]),
+                            Title = dr["Title"].ToString(),
+                            AuthorName = dr["Name"].ToString(),
+                            AuthorSurname = dr["Surname"].ToString(),
+                            PublishDate = (DateTime)dr["DataWydania"],
+                            Publisher = dr["Wydawnictwo"].ToString(),
+                            IsAvailable = 1
+                        }).ToList();
+
+                foreach (Books item in list)
+                {
+                    db.Books.Add(item);
+                }
+                if (db.SaveChanges() > 1)
+                {
+                    MessageBox.Show("Dodano 100 rekordów");
+                    IsEnabled = false;
+                }
+
+            }
+            catch (OleDbException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+            
+        }
+
+
+        private bool _isEnabled;
+
+        public bool IsEnabled
+        {
+            get { return _isEnabled; }
+            set { _isEnabled = value;
+                OnPropertyChanged("IsEnabled");
+            }
+        }
+
+        #endregion
+
+        #region ChangePin
+        private static bool Validate(string first, string second)
         {
             if (first == null || second == null)
                 return false;
@@ -54,7 +147,6 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
         }
 
         private string _firstPIN;
-        private string _secondPIN;
         public string FirstPin
         {
             get { return _firstPIN; }
@@ -62,6 +154,7 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
                 OnPropertyChanged("FirstPIN");
             }
         }
+        private string _secondPIN;
         public string SecondPin
         {
             get { return _secondPIN; }
@@ -71,6 +164,6 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
                 OnPropertyChanged("SecondPin");
             }
         }
-
+        #endregion
     }
 }

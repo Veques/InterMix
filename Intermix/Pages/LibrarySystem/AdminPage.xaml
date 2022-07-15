@@ -89,7 +89,7 @@
             </Button.Style>
         </Button>
 
-        <Button Grid.Column="1" Style="{StaticResource LMS_MainButtons}" ToolTip="Kliknięcie przycisku Wypełni bazę danych książkami z załączonego w projekcie Pliku Excel">
+        <Button Grid.Column="1" IsEnabled="{Binding IsEnabled}" Command="{Binding ImportBooksCommand}" Style="{StaticResource LMS_MainButtons}" ToolTip="Kliknięcie przycisku Wypełni bazę danych książkami z załączonego w projekcie Pliku Excel">
             <Button.Content>
                 <TextBlock TextWrapping="WrapWithOverflow" Text="Wypełnij Bazę Danych" TextBlock.TextAlignment="Center"/>
             </Button.Content>
