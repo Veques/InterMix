@@ -1,6 +1,7 @@
 ﻿using Intermix.Commands;
 using Intermix.Models;
 using Intermix.ViewModels.Base;
+using Intermix.ViewModels.LoginPage;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -39,15 +40,20 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
         private void FillDataGrid()
         {
             using var db = new ApplicationDbContext();
-            foreach (var book in db.Books.Where(d => d.IsAvailable == 0))
+
+            foreach (var loan in db.Loans.Where(d => d.UserId == LoginPageViewModel.UserId))
             {
-                ReturnBooks.Add(new ReturnBookModel
+                foreach (var book in db.Books.Where(d => d.Id == loan.BookId))
                 {
-                    IsChecked = false,
-                    Id = book.Id,
-                    FullName = $"{book.AuthorName} {book.AuthorSurname}",
-                    Title = book.Title
-                });
+
+                    ReturnBooks.Add(new ReturnBookModel
+                    {
+                        IsChecked = false,
+                        Id = book.Id,
+                        FullName = $"{book.AuthorName} {book.AuthorSurname}",
+                        Title = book.Title
+                    });
+                }
             }
         }
 
