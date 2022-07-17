@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:Intermix.UserControls" xmlns:librarysystem="clr-namespace:Intermix.ViewModels.LibrarySystem" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" d:DataContext="{d:DesignInstance Type=librarysystem:BooksDataGridViewModel}"
+             xmlns:local="clr-namespace:Intermix.UserControls" xmlns:librarysystem="clr-namespace:Intermix.ViewModels.LibrarySystem" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
              mc:Ignorable="d" >
     <Grid>
 
@@ -17,19 +17,71 @@
                 <SolidColorBrush Color="black" Opacity="0.3"/>
             </StackPanel.Background>
             <TextBox Name="Title" Style="{StaticResource LMS_Filters}" TextChanged="Filter_TextChanged"  Margin="70 0 0 0" Width="200"/>
-            <TextBox Name="AuthorName" Style="{StaticResource LMS_Filters}" TextChanged="Filter_TextChanged"  Margin="1 0 0 0" Width="170"/>
-            <TextBox Name="AuthorSurname"  Style="{StaticResource LMS_Filters}" TextChanged="Filter_TextChanged" Margin="1 0 0 0" Width="170"/>
+            <TextBox Name="Author" Style="{StaticResource LMS_Filters}" TextChanged="Filter_TextChanged"  Margin="1 0 0 0" Width="170"/>
+            <TextBox Name="PublishDate"  Style="{StaticResource LMS_Filters}" TextChanged="Filter_TextChanged" Margin="1 0 0 0" Width="170"/>
+            <TextBox Name="Publisher"  Style="{StaticResource LMS_Filters}" TextChanged="Filter_TextChanged" Margin="1 0 0 0" Width="170"/>
         </StackPanel>
         
         
         <DataGrid Name="Grid" Grid.Row="1" ItemsSource="{Binding AllBooks}" AutoGenerateColumns="False" HorizontalAlignment="Center"
-                  IsReadOnly="True" CellStyle="{StaticResource DataGridCell}" BorderBrush="Black" BorderThickness="3"
+                  IsReadOnly="True" CellStyle="{StaticResource DataGridCell}" BorderBrush="Black" BorderThickness="3" Margin="10 0 10 20"
                   CanUserResizeColumns="False" CanUserResizeRows="False">
             <DataGrid.Columns>
-                <DataGridTextColumn HeaderStyle="{StaticResource DataGridHeader}" Header="ID" Binding="{Binding Id}" Width="70"/>
-                <DataGridTextColumn HeaderStyle="{StaticResource DataGridHeader}" Header="Tytuł" Binding="{Binding Title}" Width="200"/>
-                <DataGridTextColumn HeaderStyle="{StaticResource DataGridHeader}" Header="Imię autora" Binding="{Binding AuthorName}" Width="170"/>
-                <DataGridTextColumn HeaderStyle="{StaticResource DataGridHeader}"  Header="Nazwisko autora" Binding="{Binding AuthorSurname}" Width="170"/>
+                <DataGridTextColumn HeaderStyle="{StaticResource DataGridHeader}" Header="ID" Binding="{Binding Id}" Width="70">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style>
+                            <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+                            <Setter Property="TextBlock.TextAlignment" Value="Center"/>
+                            <Setter Property="TextBlock.VerticalAlignment" Value="Center"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                
+                <DataGridTextColumn HeaderStyle="{StaticResource DataGridHeader}" Header="Tytuł" Binding="{Binding Title}" Width="200">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style>
+                            <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+                            <Setter Property="TextBlock.TextAlignment" Value="Center"/>
+                            <Setter Property="TextBlock.VerticalAlignment" Value="Center"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                
+                <DataGridTextColumn HeaderStyle="{StaticResource DataGridHeader}" Header="Autor" Width="170">
+                    <DataGridTextColumn.Binding>
+                        <MultiBinding StringFormat="{}{0} {1}">
+                            <Binding Path="AuthorName"/>
+                            <Binding Path="AuthorSurname"/>
+                        </MultiBinding>
+                    </DataGridTextColumn.Binding>
+                    <DataGridTextColumn.ElementStyle>
+                        <Style>
+                            <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+                            <Setter Property="TextBlock.TextAlignment" Value="Center"/>
+                            <Setter Property="TextBlock.VerticalAlignment" Value="Center"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+
+                <DataGridTextColumn HeaderStyle="{StaticResource DataGridHeader}" Header="Data Wydania" Binding="{Binding PublishDate, StringFormat='{}{0:dd.MM.yyyy}'}" Width="170">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style>
+                            <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+                            <Setter Property="TextBlock.TextAlignment" Value="Center"/>
+                            <Setter Property="TextBlock.VerticalAlignment" Value="Center"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                
+                <DataGridTextColumn HeaderStyle="{StaticResource DataGridHeader}" Header="Wydawca" Binding="{Binding Publisher}" Width="170">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style>
+                            <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+                            <Setter Property="TextBlock.TextAlignment" Value="Center"/>
+                            <Setter Property="TextBlock.VerticalAlignment" Value="Center"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
             </DataGrid.Columns>
 
         </DataGrid>  

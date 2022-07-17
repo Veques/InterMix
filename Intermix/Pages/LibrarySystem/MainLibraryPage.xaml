@@ -5,15 +5,15 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="clr-namespace:Intermix.Pages.LibrarySystem" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
       xmlns:librarysystem="clr-namespace:Intermix.ViewModels.LibrarySystem" d:DataContext="{d:DesignInstance Type=librarysystem:MainLibraryPageViewModel}"
-      mc:Ignorable="d" Name="Window"
+      mc:Ignorable="d"
       d:DesignHeight="450" d:DesignWidth="800" 
       Title="MainLibraryPage">
 
-    <Grid>
+    <Grid x:Name="Grid">
 
-        <materialDesign:DrawerHost Grid.RowSpan="2" x:Name="DrawerHost" Width="260" 
-                                        Height="{Binding ElementName=Window, Path=ActualHeight}" HorizontalAlignment="Left" VerticalAlignment="Center" 
-                                        LeftDrawerCornerRadius="0 10 10 0" >
+        <materialDesign:DrawerHost Grid.RowSpan="2" x:Name="DrawerHost" Width="300" 
+                                        HorizontalAlignment="Left" VerticalAlignment="Center" 
+                                        LeftDrawerCornerRadius="0 10 1 0" ScrollViewer.CanContentScroll="True">
 
             <StackPanel VerticalAlignment="Top" HorizontalAlignment="Left">
                 <Button Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand}" CommandParameter="{x:Static Dock.Left}" HorizontalAlignment="Left">
@@ -25,48 +25,63 @@
                     </Button.Content>
                 </Button>
             </StackPanel>
+                
             <materialDesign:DrawerHost.LeftDrawerContent>
-                <StackPanel Width="260">
-                    
-                    <TextBlock Margin="0 20" HorizontalAlignment="Center" FontWeight="SemiBold" FontSize="17" Text="{Binding LoggedUser}" />
-                    <!--<TextBlock HorizontalAlignment="Left" Margin="3 0 0 0" FontSize="11" Text="Wypożyczono"/>-->
 
-                    <TreeView Width="260" DisplayMemberPath="Title" ItemsSource="{Binding LoanedBooks}">
-                        <materialDesign:TreeViewAssist.AdditionalTemplate>
-                            <DataTemplate>
-                                <Grid TextElement.FontSize="10" TextElement.FontStyle="Italic" Margin="8 0 0 0">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition/>
-                                        <ColumnDefinition/>
-                                    </Grid.ColumnDefinitions>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition/>
-                                        <RowDefinition/>
-                                    </Grid.RowDefinitions>
+                <StackPanel Width="300">
 
-                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                                        <TextBlock FontWeight="DemiBold" Text="Autor: " />
-                                        <TextBlock Text="{Binding Author}" />
-                                    </StackPanel>
+                        <StackPanel HorizontalAlignment="Center" Orientation="Vertical">
+                            
+                            <Button Margin="0 0 20 0" Width="50" Height="50" Background="White" BorderBrush="Wheat"
+                                    Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}" CommandParameter="{x:Static Dock.Left}">
+                                <Button.Content>
+                                    <materialDesign:PackIcon Kind="ArrowLeftBold" Width="20" Height="20" Foreground="Black" BorderBrush="Black"/>
+                                    
+                                </Button.Content>
+                            </Button>
+                            
+                            <TextBlock Margin="0 20 0 0" HorizontalAlignment="Center" FontWeight="SemiBold" FontSize="17" Text="{Binding LoggedUser}" />
+                            <TextBlock  Margin="0 5 0 20" HorizontalAlignment="Center" FontSize="11" Text="Wypożyczono"/>
+                            
+                        </StackPanel>
+                    <Border Height="425" >
+                        
+                        <TreeView Margin="0 0 0 10" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Width="295" ScrollViewer.CanContentScroll="True"
+                                  DisplayMemberPath="Title"  ItemsSource="{Binding LoanedBooks}">
 
-                                    <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Left">
-                                        <TextBlock FontWeight="DemiBold" Text="Wypożyczono: "/>
-                                        <TextBlock HorizontalAlignment="Right" Text="12.10.1999r." />
-                                    </StackPanel>
+                            <materialDesign:TreeViewAssist.AdditionalTemplate>
+                                <DataTemplate>
+                                    <Grid TextElement.FontSize="10" TextElement.FontStyle="Italic" Margin="8 0 0 0">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition/>
+                                            <RowDefinition/>
+                                        </Grid.RowDefinitions>
 
-                                    <StackPanel Grid.Row="1" Grid.ColumnSpan="2" Orientation="Horizontal">
-                                        <TextBlock FontWeight="DemiBold" Text="Data oddania: " />
-                                        <TextBlock Text="12.10.1999r." />
-                                    </StackPanel>
+                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                                            <TextBlock FontWeight="DemiBold" Text="Autor: " />
+                                            <TextBlock Text="{Binding Author}" />
+                                        </StackPanel>
 
-                                </Grid>
-                            </DataTemplate>
-                        </materialDesign:TreeViewAssist.AdditionalTemplate>
-                    </TreeView>
-                    <Button Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}" CommandParameter="{x:Static Dock.Left}" 
-                                Margin="4" HorizontalAlignment="Center"
-                                Style="{StaticResource MaterialDesignFlatButton}" Content="CLOSE THIS" />
-                </StackPanel>
+                                        <StackPanel Grid.Column="1" Orientation="Horizontal" Margin="0 0 20 0" HorizontalAlignment="Left">
+                                            <TextBlock FontWeight="DemiBold" Text="Wypożyczono: "/>
+                                            <TextBlock HorizontalAlignment="Right" Text="{Binding LoanDate,  StringFormat='{}{0:dd.MM.yyyy}'}" />
+                                        </StackPanel>
+
+                                        <StackPanel Grid.Row="1" Grid.ColumnSpan="2" Orientation="Horizontal">
+                                            <TextBlock FontWeight="DemiBold" Text="Data oddania: " />
+                                            <TextBlock Text="{Binding ReturnDate,  StringFormat='{}{0:dd.MM.yyyy}'}" />
+                                        </StackPanel>
+                                    </Grid>
+                                </DataTemplate>
+                            </materialDesign:TreeViewAssist.AdditionalTemplate>
+                        </TreeView>
+                    </Border>
+                    </StackPanel>
+
             </materialDesign:DrawerHost.LeftDrawerContent >
 
         </materialDesign:DrawerHost>

@@ -20,6 +20,8 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
         public int Id { get; set; }
         public string Title { get; set; }
         public string FullName { get; set; }
+        public DateTime LoanDate { get; set; }
+        public DateTime ReturnDate { get; set; }
 
     }
 
@@ -51,7 +53,9 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
                         IsChecked = false,
                         Id = book.Id,
                         FullName = $"{book.AuthorName} {book.AuthorSurname}",
-                        Title = book.Title
+                        Title = book.Title,
+                        LoanDate = loan.LoanDate,
+                        ReturnDate = loan.ExpectedReturn
                     });
                 }
             }

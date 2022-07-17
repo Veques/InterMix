@@ -14,9 +14,10 @@ namespace Intermix.ViewModels.LibrarySystem
     {
         public string Author { get; set; }
         public string Title { get; set; }
+        public DateTime LoanDate { get; set; }
+        public DateTime ReturnDate { get; set; }
     }
 
- 
     public class MainLibraryPageViewModel : BaseViewModel
     {
 
@@ -31,13 +32,14 @@ namespace Intermix.ViewModels.LibrarySystem
 
             foreach (var loanElement in db.Loans.Where(x => x.UserId == UserId))
             {
-
                 foreach(var bookElement in db.Books.Where(x => x.Id == loanElement.BookId))
                 {
                     LoanedBooks.Add(new PrivateLoans
                     {
                         Author = $"{bookElement.AuthorName} {bookElement.AuthorSurname}",
                         Title = bookElement.Title,
+                        LoanDate = loanElement.LoanDate,
+                        ReturnDate = loanElement.ExpectedReturn
                         
                     });
 

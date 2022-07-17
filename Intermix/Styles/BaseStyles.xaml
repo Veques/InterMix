@@ -519,16 +519,25 @@
            BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
         <Setter Property="HorizontalAlignment" Value="Center"/>
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
-        
-    </Style>
+
+            <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+            <Setter Property="TextBlock.TextAlignment" Value="Center"/>
+
+        </Style>
     <!-- DataGrid Cells -->
     <Style x:Key="DataGridCell" TargetType="DataGridCell" 
            BasedOn="{StaticResource MaterialDesignDataGridCell}">
-
+        <Setter Property="Height" Value="auto"/>
         <Setter Property="HorizontalAlignment" Value="Center"/>
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
-
+        <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+        <Setter Property="TextBlock.TextAlignment" Value="Center"/>
     </Style>
+
+    <Style x:Key="DataGridRow" TargetType="DataGridRow">
+        <Setter Property="Height" Value="auto"/>
+    </Style>
+    
     <!-- Filters -->
     <Style x:Key="LMS_Filters" TargetType="TextBox" BasedOn="{StaticResource MaterialDesignFilledTextBox}">
 
@@ -537,6 +546,7 @@
         <Setter Property="materialDesign:HintAssist.Foreground" Value="White"/>
         <Setter Property="Foreground" Value="White"/>
         <Setter Property="Background" Value="White"/>
+        <Setter Property="TextBlock.TextAlignment" Value="Center"/>
         <Setter Property="materialDesign:HintAssist.Hint" Value="Filter"/>
         <Setter Property="AcceptsReturn" Value="True"/>
         <Setter Property="materialDesign:TextFieldAssist.HasClearButton" Value="True"/>

@@ -27,7 +27,7 @@ namespace Intermix.UserControls
                     {
                         if (textBox.Text != "")
                         {
-                            var filtered = vm.AllBooks.Where(x => x.Title.ToLower().Contains(textBox.Text));
+                            var filtered = vm.AllBooks.Where(x => x.Title.ToLower().Contains(textBox.Text.ToLower()));
                             Grid.ItemsSource = null;
                             Grid.ItemsSource = filtered;
                         }
@@ -37,11 +37,11 @@ namespace Intermix.UserControls
                         }
                     }
                     break;
-                case "AuthorName":
+                case "Author":
                     {
                     if (textBox.Text != "")
                     {
-                        var filtered = vm.AllBooks.Where(x => x.AuthorName.ToLower().Contains(textBox.Text));
+                        var filtered = vm.AllBooks.Where(x => x.AuthorName.ToLower().Contains(textBox.Text.ToLower()));
                         Grid.ItemsSource = null;
                         Grid.ItemsSource = filtered;
                     }
@@ -51,11 +51,11 @@ namespace Intermix.UserControls
                     }
                 }
                     break;
-                case "AuthorSurname":
+                case "PublishDate":
                     {
                     if (textBox.Text != "")
                     {
-                        var filtered = vm.AllBooks.Where(x => x.AuthorSurname.ToLower().Contains(textBox.Text));
+                        var filtered = vm.AllBooks.Where(x => x.PublishDate.ToString().Contains(textBox.Text));
                         Grid.ItemsSource = null;
                         Grid.ItemsSource = filtered;
                     }
@@ -64,6 +64,20 @@ namespace Intermix.UserControls
                         Grid.ItemsSource = vm.AllBooks;
                     }
                 }
+                    break;
+                case "Publisher":
+                    {
+                        if (textBox.Text != "")
+                        {
+                            var filtered = vm.AllBooks.Where(x => x.Publisher.ToLower().Contains(textBox.Text.ToLower()));
+                            Grid.ItemsSource = null;
+                            Grid.ItemsSource = filtered;
+                        }
+                        else
+                        {
+                            Grid.ItemsSource = vm.AllBooks;
+                        }
+                    }
                     break;
             }
 

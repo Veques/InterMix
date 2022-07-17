@@ -7,6 +7,7 @@ using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Input;
 using System.Linq;
+using System;
 
 namespace Intermix.ViewModels.LibrarySystem.ForPages
 {
@@ -17,6 +18,8 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
         public int Id { get; set; }
         public string? Title { get; set; }
         public string? FullName { get; set; }
+        public DateTime PublishDate { get; set; }
+        public string Publisher { get; set; }
         public int? IsAvailable { get; set; }
     }
 
@@ -45,7 +48,9 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
                     IsChecked = false,
                     Id = book.Id,
                     FullName = $"{book.AuthorName} {book.AuthorSurname}",
-                    Title = book.Title
+                    Title = book.Title,
+                    PublishDate = book.PublishDate,
+                    Publisher = book.Publisher
                 });
             }
         }
@@ -60,7 +65,12 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
             using ApplicationDbContext db = new();
             foreach (var book in LoanBooks.Where(a => a.IsChecked == true))
             {
-                db.Loans.Add(new Loans { UserId= LoginPageViewModel.UserId, BookId = book.Id });
+                db.Loans.Add(new Loans { 
+                    UserId= LoginPageViewModel.UserId,
+                    BookId = book.Id,
+                    LoanDate = DateTime.Now.Date,
+                    ExpectedReturn = DateTime.Now.Date.AddDays(14)
+                });
 
                 var cell = db.Books.FirstOrDefault(x => x.Id == book.Id);
 
