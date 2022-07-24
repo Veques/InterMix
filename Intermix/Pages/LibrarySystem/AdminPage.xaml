@@ -3,7 +3,8 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:Intermix.Pages.LibrarySystem" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:forpages="clr-namespace:Intermix.ViewModels.LibrarySystem.ForPages" d:DataContext="{d:DesignInstance Type=forpages:AdminPageViewModel}"
+      xmlns:local="clr-namespace:Intermix.Pages.LibrarySystem" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
+      xmlns:forpages="clr-namespace:Intermix.ViewModels.LibrarySystem.ForPages" d:DataContext="{d:DesignInstance Type=forpages:AdminPageViewModel}"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800" FontSize="19"
       Title="AdminPage">
@@ -96,7 +97,7 @@
         </Button>
         
 
-        <Button Grid.Column="2" Style="{StaticResource LMS_MainButtons}" ToolTip="Umożliwia dodanie nowej książki możliwej do wypożyczenia">
+        <Button Grid.Column="2" Style="{StaticResource LMS_MainButtons}" Command="{Binding AddBookCommand}" ToolTip="Umożliwia dodanie nowej książki możliwej do wypożyczenia">
             <Button.Content>
                 <TextBlock TextWrapping="WrapWithOverflow" Text="Dodaj książkę do Bazy Danych" TextBlock.TextAlignment="Center"/>
             </Button.Content>
@@ -107,7 +108,8 @@
                 <TextBlock TextWrapping="WrapWithOverflow" Text="Sprawdź wszystkie wypożyczenia" TextBlock.TextAlignment="Center"/>
             </Button.Content>
         </Button>
-        <Button Grid.Column="4"  Style="{StaticResource LMS_MainButtons}" ToolTip="Zmiana PIN konta Admina">
+        
+        <Button Grid.Column="4"  Style="{StaticResource LMS_MainButtons}" Click="AllLoand_Click" ToolTip="Zmiana PIN konta Admina">
             <Button.Content>
                 <TextBlock TextWrapping="WrapWithOverflow" Text="Sprawdź wszystkie wypożyczenia" TextBlock.TextAlignment="Center"/>
             </Button.Content>

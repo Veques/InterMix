@@ -42,5 +42,11 @@ namespace Intermix.Pages.LibrarySystem
 
             e.Handled = regex.IsMatch(e.Text);
         }
+
+        private void AllLoand_Click(object sender, RoutedEventArgs e)
+        {
+            AdminAllLoansDataGridPage page = new();
+            NavigationService.Navigate(page);
+        }
     }
 }

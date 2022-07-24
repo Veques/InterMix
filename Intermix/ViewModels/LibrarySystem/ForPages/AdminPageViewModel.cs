@@ -1,6 +1,7 @@
 ﻿using Intermix.Commands;
 using Intermix.Models;
 using Intermix.ViewModels.Base;
+using Intermix.Views;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -18,12 +19,13 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
 {
     public class AdminPageViewModel : BaseViewModel
     {
-        ApplicationDbContext db = new();
+        readonly ApplicationDbContext db = new();
 
         #region Commands
-
+        public ICommand AddBookCommand { get; set; }
         public ICommand ChangePINCommand { get; set; }
         public ICommand ImportBooksCommand { get; set; }
+
         #endregion
 
         #region Constructor
@@ -38,6 +40,11 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
             {
                 IsEnabled = true;
             }
+
+            AddBookCommand = new RelayCommand(
+                o => AddBook(),
+                o => true);
+
             ChangePINCommand = new RelayCommand(
                 o => ChangePIN(),
                 o => Validate(FirstPin, SecondPin)
@@ -47,7 +54,17 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
                 o => ImportBooks(),
                 o => true
                 );
+
         }
+        #endregion
+
+        #region AddBook
+        private void AddBook()
+        {
+            AddBookWindow window = new();
+            window.Show();
+        }
+
         #endregion
 
         #region ImportBooks
