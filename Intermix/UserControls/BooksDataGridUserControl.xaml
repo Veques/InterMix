@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:Intermix.UserControls" xmlns:librarysystem="clr-namespace:Intermix.ViewModels.LibrarySystem" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
+             xmlns:local="clr-namespace:Intermix.UserControls" xmlns:librarysystem="clr-namespace:Intermix.ViewModels.LibrarySystem"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:forucs="clr-namespace:Intermix.ViewModels.LibrarySystem.ForUCs" d:DataContext="{d:DesignInstance Type=forucs:BooksDataGridViewModel}"
              mc:Ignorable="d" >
     <Grid>
 
@@ -16,16 +17,15 @@
             <StackPanel.Background>
                 <SolidColorBrush Color="black" Opacity="0.3"/>
             </StackPanel.Background>
-            <TextBox Name="Title" Style="{StaticResource LMS_Filters}" TextChanged="Filter_TextChanged"  Margin="70 0 0 0" Width="200"/>
-            <TextBox Name="Author" Style="{StaticResource LMS_Filters}" TextChanged="Filter_TextChanged"  Margin="1 0 0 0" Width="170"/>
-            <TextBox Name="PublishDate"  Style="{StaticResource LMS_Filters}" TextChanged="Filter_TextChanged" Margin="1 0 0 0" Width="170"/>
-            <TextBox Name="Publisher"  Style="{StaticResource LMS_Filters}" TextChanged="Filter_TextChanged" Margin="1 0 0 0" Width="170"/>
+            <TextBox Name="Title" Style="{StaticResource LMS_Filters}" Text="{Binding TitleFilter, UpdateSourceTrigger=PropertyChanged}" Margin="70 0 0 0" Width="200"/>
+            <TextBox Name="Author" Style="{StaticResource LMS_Filters}" Text="{Binding AuthorFilter, UpdateSourceTrigger=PropertyChanged}" Margin="1 0 0 0" Width="170"/>
+            <TextBox Name="PublishDate"  Style="{StaticResource LMS_Filters}" Text="{Binding PublishDateFilter, UpdateSourceTrigger=PropertyChanged}" Margin="1 0 0 0" Width="170"/>
+            <TextBox Name="Publisher"  Style="{StaticResource LMS_Filters}" Text="{Binding PublisherFilter, UpdateSourceTrigger=PropertyChanged}" Margin="1 0 0 0" Width="170"/>
         </StackPanel>
-        
-        
-        <DataGrid Name="Grid" Grid.Row="1" ItemsSource="{Binding AllBooks}" AutoGenerateColumns="False" HorizontalAlignment="Center"
-                  IsReadOnly="True" CellStyle="{StaticResource DataGridCell}" BorderBrush="Black" BorderThickness="3" Margin="10 0 10 20"
-                  CanUserResizeColumns="False" CanUserResizeRows="False">
+
+
+        <DataGrid Name="Grid" Grid.Row="1" ItemsSource="{Binding BooksCollectionView}" 
+                  CellStyle="{StaticResource DataGridCell}" Style="{StaticResource LMS_DataGrids}">
             <DataGrid.Columns>
                 <DataGridTextColumn HeaderStyle="{StaticResource DataGridHeader}" Header="ID" Binding="{Binding Id}" Width="70">
                     <DataGridTextColumn.ElementStyle>

@@ -12,9 +12,7 @@
         <SolidColorBrush Color="black" Opacity="0.17"/>
     </Page.Background>
 
-
     <Grid>
-
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
@@ -33,7 +31,6 @@
                 </materialDesign:PackIcon>
             </Button>
         </Grid>
-
 
         <Grid Grid.Column="1" Grid.Row="1">
             <usercontrol:BooksDataGridUserControl  Margin="0 10 0 20"/>

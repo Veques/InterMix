@@ -42,16 +42,15 @@
                 <StackPanel.Background>
                     <SolidColorBrush Color="black" Opacity="0.3"/>
                 </StackPanel.Background>
-                <TextBox Name="Title" Style="{StaticResource LMS_Filters}" TextChanged="Filter_TextChanged" Margin="130 0 0 0" Width="230"/>
-                <TextBox Name="Author" Style="{StaticResource LMS_Filters}" TextChanged="Filter_TextChanged"  Margin="1 0 0 0" Width="200"/>
-                <TextBox Name="LoanDate"  Style="{StaticResource LMS_Filters}" TextChanged="Filter_TextChanged" Margin="1 0 0 0" Width="150"/>
-                <TextBox Name="ExpectedReturn"  Style="{StaticResource LMS_Filters}" TextChanged="Filter_TextChanged" Margin="1 0 0 0" Width="150"/>
+                <TextBox Name="Title" Style="{StaticResource LMS_Filters}" Text="{Binding TitleFilter, UpdateSourceTrigger=PropertyChanged}" Margin="130 0 0 0" Width="230"/>
+                <TextBox Name="Author" Style="{StaticResource LMS_Filters}"  Text="{Binding AuthorFilter, UpdateSourceTrigger=PropertyChanged}" Margin="1 0 0 0" Width="200"/>
+                <TextBox Name="LoanDate"  Style="{StaticResource LMS_Filters}" Text="{Binding LoanDateFilter, UpdateSourceTrigger=PropertyChanged}" Margin="1 0 0 0" Width="150"/>
+                <TextBox Name="ExpectedReturn"  Style="{StaticResource LMS_Filters}" Text="{Binding ReturnDateFilter, UpdateSourceTrigger=PropertyChanged}" Margin="1 0 0 0" Width="150"/>
             </StackPanel>
 
 
-            <DataGrid Grid.Row="1" Name="Grid" Width="auto" ItemsSource="{Binding ReturnBooks}" AutoGenerateColumns="False" CanUserAddRows="False"
-                  Margin="25 0 25 15" CellStyle="{StaticResource DataGridCell}" CanUserResizeColumns="False" CanUserResizeRows="False" 
-                  BorderBrush="Black" BorderThickness="3" RowDetailsVisibilityMode="Visible" >
+            <DataGrid Grid.Row="1" Name="Grid" ItemsSource="{Binding ReturnBooksCollectionView}"
+                   CellStyle="{StaticResource DataGridCell}" Style="{StaticResource LMS_DataGrids}">
 
                 <DataGrid.Columns>
                     <DataGridCheckBoxColumn HeaderStyle="{StaticResource DataGridHeader}" Width="130" Header="Do oddania" Binding="{Binding IsChecked}">

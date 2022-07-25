@@ -41,17 +41,16 @@
                 <StackPanel.Background>
                     <SolidColorBrush Color="black" Opacity="0.3"/>
                 </StackPanel.Background>
-                <TextBox Name="Title" Style="{StaticResource LMS_Filters}" TextChanged="Filter_TextChanged" Margin="120 0 0 0" Width="250"/>
-                <TextBox Name="Author" Style="{StaticResource LMS_Filters}" TextChanged="Filter_TextChanged"  Margin="1 0 0 0" Width="150"/>
-                <TextBox Name="PublishDate"  Style="{StaticResource LMS_Filters}" TextChanged="Filter_TextChanged" Margin="1 0 0 0" Width="150"/>
-                <TextBox Name="Publisher"  Style="{StaticResource LMS_Filters}" TextChanged="Filter_TextChanged" Margin="1 0 0 0" Width="200"/>
+                <TextBox Name="Title" Style="{StaticResource LMS_Filters}" Text="{Binding TitleFilter, UpdateSourceTrigger=PropertyChanged}" Margin="120 0 0 0" Width="250"/>
+                <TextBox Name="Author" Style="{StaticResource LMS_Filters}" Text="{Binding NameFilter, UpdateSourceTrigger=PropertyChanged}"  Margin="1 0 0 0" Width="150"/>
+                <TextBox Name="PublishDate"  Style="{StaticResource LMS_Filters}" Text="{Binding PublishDateFilter, UpdateSourceTrigger=PropertyChanged}" Margin="1 0 0 0" Width="150"/>
+                <TextBox Name="Publisher"  Style="{StaticResource LMS_Filters}" Text="{Binding PublisherFilter, UpdateSourceTrigger=PropertyChanged}" Margin="1 0 0 0" Width="200"/>
             </StackPanel>
 
 
-            <DataGrid Grid.Row="1" Name="Grid" ItemsSource="{Binding LoanBooks}" AutoGenerateColumns="False" CanUserAddRows="False" Width="auto"
-                  Margin="25 0 25 15" CellStyle="{StaticResource DataGridCell}" CanUserResizeColumns="False" CanUserResizeRows="False" 
-                  BorderBrush="Black" BorderThickness="3" RowDetailsVisibilityMode="Visible" RowStyle="{StaticResource DataGridRow}" 
-                  ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+            <DataGrid Grid.Row="1" Name="Grid" ItemsSource="{Binding LoanBooksCollectionView}"
+                  CellStyle="{StaticResource DataGridCell}" Style="{StaticResource LMS_DataGrids}"
+                  RowStyle="{StaticResource DataGridRow}" >
 
                 <DataGrid.Columns>
                     <DataGridCheckBoxColumn HeaderStyle="{StaticResource DataGridHeader}" Width="120" Binding="{Binding IsChecked}">
@@ -67,17 +66,8 @@
                         </DataGridCheckBoxColumn.ElementStyle>
                     </DataGridCheckBoxColumn>
                     
-                    <DataGridTextColumn HeaderStyle="{StaticResource DataGridHeader}"  Width="250" Header="Tytuł" Binding="{Binding Title}">
-                        <DataGridTextColumn.ElementStyle>
-                            <Style>
-                                <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
-                                <Setter Property="TextBlock.TextAlignment" Value="Center"/>
-                                <Setter Property="TextBlock.VerticalAlignment" Value="Center"/>
-                            </Style>
-                        </DataGridTextColumn.ElementStyle>
-                    </DataGridTextColumn>
-                    
-                    <DataGridTextColumn HeaderStyle="{StaticResource DataGridHeader}"  Width="150" Header="Autor" Binding="{Binding FullName}">
+                    <DataGridTextColumn HeaderStyle="{StaticResource DataGridHeader}" IsReadOnly="True" 
+                                        Width="250" Header="Tytuł" Binding="{Binding Title}">
                         <DataGridTextColumn.ElementStyle>
                             <Style>
                                 <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
@@ -87,7 +77,8 @@
                         </DataGridTextColumn.ElementStyle>
                     </DataGridTextColumn>
 
-                    <DataGridTextColumn HeaderStyle="{StaticResource DataGridHeader}"  Width="150" Header="Data Wydania" Binding="{Binding PublishDate, StringFormat='{}{0:dd.MM.yyyy}'}">
+                    <DataGridTextColumn HeaderStyle="{StaticResource DataGridHeader}" IsReadOnly="True" 
+                                        Width="150" Header="Autor" Binding="{Binding FullName}">
                         <DataGridTextColumn.ElementStyle>
                             <Style>
                                 <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
@@ -97,7 +88,19 @@
                         </DataGridTextColumn.ElementStyle>
                     </DataGridTextColumn>
 
-                    <DataGridTextColumn HeaderStyle="{StaticResource DataGridHeader}"  Width="200" Header="Wydawca" Binding="{Binding Publisher}">
+                    <DataGridTextColumn HeaderStyle="{StaticResource DataGridHeader}" IsReadOnly="True" 
+                                        Width="150" Header="Data Wydania" Binding="{Binding PublishDate, StringFormat='{}{0:dd.MM.yyyy}'}">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style>
+                                <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+                                <Setter Property="TextBlock.TextAlignment" Value="Center"/>
+                                <Setter Property="TextBlock.VerticalAlignment" Value="Center"/>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+
+                    <DataGridTextColumn HeaderStyle="{StaticResource DataGridHeader}" IsReadOnly="True" 
+                                        Width="200" Header="Wydawca" Binding="{Binding Publisher}">
                         <DataGridTextColumn.ElementStyle>
                             <Style>
                                 <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
@@ -112,7 +115,6 @@
             
         </Grid>
             <StackPanel Grid.Row="2">
-
                 <Button HorizontalAlignment="Center" Content="Wypożycz" Style="{StaticResource LW_Buttons}"
                         Command="{Binding LoanCommand}" ToolTip="Wypożycz książki"/>
             </StackPanel>

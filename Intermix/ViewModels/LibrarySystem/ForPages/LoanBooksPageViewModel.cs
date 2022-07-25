@@ -8,6 +8,8 @@ using System.Windows;
 using System.Windows.Input;
 using System.Linq;
 using System;
+using System.ComponentModel;
+using System.Windows.Data;
 
 namespace Intermix.ViewModels.LibrarySystem.ForPages
 {
@@ -36,6 +38,21 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
             LoanBooks = new();
             FillDataGrid();
 
+            LoanBooksCollectionView = CollectionViewSource.GetDefaultView(LoanBooks);
+            LoanBooksCollectionView.Filter = Filter;
+        }
+
+        private bool Filter(object obj)
+        {
+            if (obj is LoanBooksModel book)
+            {
+                return book.Title.Contains(TitleFilter, StringComparison.InvariantCultureIgnoreCase) &&
+                    book.FullName.Contains(NameFilter, StringComparison.InvariantCultureIgnoreCase) &&
+                    book.PublishDate.ToString().Contains(PublishDateFilter, StringComparison.InvariantCultureIgnoreCase) &&
+                    book.Publisher.Contains(PublisherFilter, StringComparison.InvariantCultureIgnoreCase);
+            }
+
+            return false;
         }
 
         private void FillDataGrid()
@@ -54,7 +71,6 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
                 });
             }
         }
-
         private void LoanClicked()
         {
             var result = MessageBox.Show("Czy napewno chcesz wypożyczyć te książki?", "fdf",MessageBoxButton.YesNo);
@@ -87,16 +103,77 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
             FillDataGrid();
         }
 
-        private ObservableCollection<Books> _books;
 
-        public ObservableCollection<Books> Books
+
+        private ICollectionView _loanBooksCollectionView;
+        public ICollectionView LoanBooksCollectionView
         {
-            get { return Books; }
-            set { Books = value;
-                OnPropertyChanged("Books");
+            get { return _loanBooksCollectionView; }
+            set { _loanBooksCollectionView = value;
+                OnPropertyChanged("LoanBooksCollectionView");
             }
         }
 
+        private string _titleFilter = string.Empty;
+
+        public string TitleFilter
+        {
+            get { return _titleFilter; }
+            set
+            {
+                _titleFilter = value != null ? _titleFilter = value : _titleFilter = string.Empty;
+                OnPropertyChanged("TitleFilter");
+                LoanBooksCollectionView.Refresh();
+            }
+        }
+
+        private string _nameFilter = string.Empty;
+        public string NameFilter
+        {
+            get { return _nameFilter; }
+            set
+            {
+                _nameFilter = value != null ? _nameFilter = value : _nameFilter = string.Empty;
+                OnPropertyChanged("NameFilter");
+                LoanBooksCollectionView.Refresh();
+            }
+        }
+
+
+        private string _publishDateFilter = string.Empty;
+        public string PublishDateFilter
+        {
+            get { return _publishDateFilter; }
+            set
+            {
+                _publishDateFilter = value != null ? _publishDateFilter = value : _publishDateFilter = string.Empty;
+                OnPropertyChanged("PublishDateFilter");
+                LoanBooksCollectionView.Refresh();
+            }
+        }
+
+
+        private string _publisherFilter = string.Empty;
+        public string PublisherFilter
+        {
+            get { return _publisherFilter; }
+            set
+            {
+                _publisherFilter = value != null ? _publisherFilter = value : _publisherFilter = string.Empty;
+                OnPropertyChanged("PublisherFilter");
+                LoanBooksCollectionView.Refresh();
+            }
+        }
+
+        private ObservableCollection<Books> _books;
+        public ObservableCollection<Books> Books
+        {
+            get { return _books; }
+            set {
+                _books = value;
+                OnPropertyChanged("Books");
+            }
+        }
 
         private ObservableCollection<LoanBooksModel> _loanBooks;
         public ObservableCollection<LoanBooksModel> LoanBooks

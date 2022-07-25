@@ -9,18 +9,10 @@
       Title="AdminAllLoansDataGridPage">
 
     <Grid>
-
-        <Grid.Resources>
-            <CollectionViewSource Source="{Binding Data}" x:Key="xd">
-                <CollectionViewSource.GroupDescriptions>
-                    <PropertyGroupDescription PropertyName="Username"/>
-                </CollectionViewSource.GroupDescriptions>
-            </CollectionViewSource>
-        </Grid.Resources>
-
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
             <RowDefinition/>
+            <RowDefinition Height="10*"/>
         </Grid.RowDefinitions>
 
         <Grid VerticalAlignment="Center" HorizontalAlignment="Center" >
@@ -33,11 +25,19 @@
             </Button>
         </Grid>
 
-        <DataGrid Name="Grid" Grid.Row="1" ItemsSource="{Binding Data}" AutoGenerateColumns="False" HorizontalAlignment="Center"
-                  IsReadOnly="True" CellStyle="{StaticResource DataGridCell}" BorderBrush="Black" BorderThickness="3" Margin="10 0 10 20"
-                  CanUserResizeColumns="False" CanUserResizeRows="False">
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0 0 0 3" Width="{Binding ActualWidth, ElementName=Grid}">
+            <StackPanel.Background>
+                <SolidColorBrush Color="black" Opacity="0.3"/>
+            </StackPanel.Background>
+            <TextBox Name="Title" Style="{StaticResource LMS_Filters}" Text="{Binding TitleFilter, UpdateSourceTrigger=PropertyChanged}" Margin="0 0 0 0" Width="200" />
+            <TextBox Name="Author" Style="{StaticResource LMS_Filters}" Text="{Binding AuthorFilter, UpdateSourceTrigger=PropertyChanged}" Margin="1 0 0 0" Width="170"/>
+            <TextBox Name="PublishDate"  Style="{StaticResource LMS_Filters}" Text="{Binding PublishDateFilter, UpdateSourceTrigger=PropertyChanged}" Margin="1 0 0 0" Width="170"/>
+            <TextBox Name="ReturnDate"  Style="{StaticResource LMS_Filters}" Text="{Binding ReturnDateFilter, UpdateSourceTrigger=PropertyChanged}" Margin="1 0 0 0" Width="170"/>
+        </StackPanel>
+
+        <DataGrid Name="Grid" Grid.Row="2" ItemsSource="{Binding LoansCollectionView}"
+                  CellStyle="{StaticResource DataGridCell}" Style="{StaticResource LMS_DataGrids}">
             <DataGrid.GroupStyle>
-                <!-- Style for groups at top level. -->
                 <GroupStyle>
                     <GroupStyle.ContainerStyle>
                         <Style TargetType="{x:Type GroupItem}">
@@ -69,14 +69,7 @@
                     </GroupStyle.ContainerStyle>
                 </GroupStyle>
             </DataGrid.GroupStyle>
-
-
-
-
-
             <DataGrid.Columns>
-
-
                 <DataGridTextColumn HeaderStyle="{StaticResource DataGridHeader}" Header="Tytuł" Binding="{Binding Title}" Width="200">
                     <DataGridTextColumn.ElementStyle>
                         <Style>

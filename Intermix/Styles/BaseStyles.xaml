@@ -532,6 +532,7 @@
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
         <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
         <Setter Property="TextBlock.TextAlignment" Value="Center"/>
+
     </Style>
 
     <Style x:Key="DataGridRow" TargetType="DataGridRow">
@@ -553,6 +554,21 @@
         <Setter Property="materialDesign:TextFieldAssist.UnderlineBrush" Value="white"/>
     </Style>
 
+    <Style x:Key="LMS_DataGrids" TargetType="DataGrid" BasedOn="{StaticResource MaterialDesignDataGrid}">
+
+        <Setter Property="AutoGenerateColumns" Value="False"/>
+        <Setter Property="CanUserAddRows" Value="False"/>
+        <Setter Property="CanUserResizeColumns" Value="False"/>
+        <Setter Property="CanUserResizeRows" Value="False"/>
+        <Setter Property="BorderBrush" Value="Black"/>
+        <Setter Property="BorderThickness" Value="3"/>
+        <Setter Property="RowDetailsVisibilityMode" Value="Visible"/>
+        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled"/>
+        <Setter Property="IsReadOnly" Value="True"/>
+        <Setter Property="Width" Value="auto"/>
+        <Setter Property="Margin" Value="25 0 25 15"/>
+
+    </Style>
 
 
 </ResourceDictionary>
