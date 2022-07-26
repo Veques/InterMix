@@ -23,15 +23,32 @@
                 <Label Margin="5 0 0 0" VerticalAlignment="Center" Foreground="{DynamicResource MW_Font}" FontSize="20" FontWeight="Light">InterMIX</Label>
 
 
-                <StackPanel Width="160" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0 0 0 0">
-                    <Button Click="Settings_Click" HorizontalAlignment="Left" Margin="0 0 1 0" FontWeight="SemiBold"  Style="{StaticResource WindowBarButtons}">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0 0 5 0">
+                    <Button HorizontalAlignment="Left" ToolTip="Rate" Click="Button_Click"
+                            Margin="0 0 1 0" FontWeight="SemiBold"  Style="{StaticResource WindowBarButtons}">
+                        <Button.Content>
+                            <materialDesign:PackIcon Kind="Star" Width="30" Height="30"/>
+                        </Button.Content>
+                    </Button>
+                    <Button Click="Settings_Click" HorizontalAlignment="Left" Margin="0 0 1 0" 
+                            ToolTip="Personalization" FontWeight="SemiBold"  Style="{StaticResource WindowBarButtons}">
                         <Button.Content>
                             <materialDesign:PackIcon Kind="ThemeLightDark" Width="30" Height="30"/>
                         </Button.Content>
                     </Button>
-                    <Button fa:Awesome.Content="Regular_WindowMinimize" HorizontalAlignment="Left" FontWeight="SemiBold" Click="Minimize_Click" Style="{StaticResource WindowBarButtons}"/>
-                    <Button fa:Awesome.Content="Regular_WindowMaximize" Click="Maximize_Click" HorizontalAlignment="Center" Style="{StaticResource WindowBarButtons}"/>
-                    <Button Content="✖" Click="Exit_Click" FontWeight="SemiBold" Style="{StaticResource WindowBarButtons}"/>
+                    <Button fa:Awesome.Content="Regular_WindowMinimize" ToolTip="Minimize"
+                            HorizontalAlignment="Left" FontWeight="SemiBold" Click="Minimize_Click" Style="{StaticResource WindowBarButtons}">
+                        <Button.Content>
+                            <materialDesign:PackIcon Kind="WindowMinimize" Width="30" Height="30" />
+                        </Button.Content>
+                    </Button>
+                    <Button ToolTip="Maximize" 
+                            Click="Maximize_Click" HorizontalAlignment="Center" Style="{StaticResource WindowBarButtons}">
+                        <Button.Content>
+                            <materialDesign:PackIcon Kind="WindowMaximize" Width="30" Height="30" />
+                        </Button.Content>
+                    </Button>
+                    <Button Content="✖" Click="Exit_Click" ToolTip="Exit" FontWeight="SemiBold" Style="{StaticResource WindowBarButtons}"/>
                 </StackPanel>
             </Grid>
                 

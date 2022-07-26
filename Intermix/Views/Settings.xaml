@@ -9,7 +9,7 @@
         Background="Transparent" AllowsTransparency="True" FontWeight="SemiBold" Foreground="{DynamicResource MW_Font}">
 
 
-    <Border Background="{DynamicResource MW_Background}" BorderBrush="{DynamicResource LW_Font}" BorderThickness="1">
+    <Border Background="{DynamicResource MW_Background}" BorderBrush="{DynamicResource LW_Font}" BorderThickness="1.5" CornerRadius="5">
 
         <Grid>
 
@@ -42,7 +42,6 @@
 
                     <TextBlock VerticalAlignment="Center"  FontSize="20">Theme</TextBlock>
                     <StackPanel Grid.Column="1" Orientation="Horizontal" >
-
                         <RadioButton IsChecked="{Binding LightThemeIsChecked, FallbackValue=True}"  Margin="2" Foreground="White" Style="{StaticResource PRS_RadioButton}"/>
                         <RadioButton IsChecked="{Binding DarkThemeIsChecked}" Margin="2" Foreground="Black" Style="{StaticResource PRS_RadioButton}" />
                     </StackPanel>
@@ -56,12 +55,10 @@
                         <RadioButton Margin="2" Foreground="{Binding LeadingColorCollection[4].color}" IsChecked="{Binding LeadingColorSelection[4]}" Style="{StaticResource PRS_RadioButton}"/>
                         <RadioButton Margin="2" Foreground="{Binding LeadingColorCollection[5].color}" IsChecked="{Binding LeadingColorSelection[5]}" Style="{StaticResource PRS_RadioButton}"/>
                         <RadioButton Margin="2" Foreground="{Binding LeadingColorCollection[6].color}" IsChecked="{Binding LeadingColorSelection[6]}" Style="{StaticResource PRS_RadioButton}"/>
-
                     </StackPanel>
 
                     <TextBlock VerticalAlignment="Center" Grid.Row="2" FontSize="20">Secondary Color</TextBlock>
                     <StackPanel Grid.Column="1" Grid.Row="2" Orientation="Horizontal" >
-
                         <RadioButton Margin="2" Foreground="{Binding SecondaryColorCollection[0].color}" IsChecked="{Binding SecondaryColorSelection[0]}" Style="{StaticResource PRS_RadioButton}"/>
                         <RadioButton Margin="2" Foreground="{Binding SecondaryColorCollection[1].color}" IsChecked="{Binding SecondaryColorSelection[1]}" Style="{StaticResource PRS_RadioButton}"/>
                         <RadioButton Margin="2" Foreground="{Binding SecondaryColorCollection[2].color}" IsChecked="{Binding SecondaryColorSelection[2]}" Style="{StaticResource PRS_RadioButton}"/>

@@ -103,7 +103,7 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
             FillDataGrid();
         }
 
-
+        #region Properties
 
         private ICollectionView _loanBooksCollectionView;
         public ICollectionView LoanBooksCollectionView
@@ -185,5 +185,6 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
                 OnPropertyChanged("LoanBooks");
             }
         }
+        #endregion
     }
 }

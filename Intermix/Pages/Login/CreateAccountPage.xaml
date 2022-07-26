@@ -4,21 +4,28 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Intermix.Pages.Login" xmlns:loginpage="clr-namespace:Intermix.ViewModels.LoginPage" d:DataContext="{d:DesignInstance Type=loginpage:CreateAccountViewModel}"
-      mc:Ignorable="d" 
+      mc:Ignorable="d" xmlns:components="clr-namespace:Intermix.Components"
       d:DesignHeight="400" d:DesignWidth="300"
 Title="CreateAccountPage" Foreground="{DynamicResource LW_Font}">
 
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
-            <RowDefinition Height="2*"/>
+            <RowDefinition Height="4.5*"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <TextBlock Text="Insert your data" Margin="0 30 0 0" FontWeight="DemiBold" FontSize="26" HorizontalAlignment="Center" VerticalAlignment="Center" />
-        <Button Width="50" Height="30" Content="Back" Click="Back_Click" VerticalAlignment="Top" HorizontalAlignment="Left" Style="{StaticResource LW_Buttons}"></Button>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="50"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
 
-        <Grid Grid.Row="1">
+            <Button Width="50" Height="30" Content="Back" Click="Back_Click" VerticalAlignment="Top" HorizontalAlignment="Left" Style="{StaticResource LW_Buttons}"/>
+            <TextBlock Grid.Column="1" Text="Enter your data" FontWeight="Regular" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Top" />
+        </Grid>
+
+        <Grid Margin="8 0 0 0" Grid.Row="1">
 
             <Grid.RowDefinitions>
                 <RowDefinition />
@@ -29,7 +36,7 @@ Title="CreateAccountPage" Foreground="{DynamicResource LW_Font}">
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
-                <ColumnDefinition Width="2.5*"/>
+                <ColumnDefinition Width="3*"/>
             </Grid.ColumnDefinitions>
 
             <TextBlock Text="Name" VerticalAlignment="Center"/>
@@ -42,14 +49,16 @@ Title="CreateAccountPage" Foreground="{DynamicResource LW_Font}">
             <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Username}" Style="{StaticResource LoginTextBox}"/>
 
             <TextBlock Grid.Row="3" VerticalAlignment="Center" Text="Password"/>
-            <PasswordBox Name="PasswordBox" LostFocus="PasswordBox_LostFocus" Grid.Row="3" Grid.Column="1" Style="{StaticResource PasswordBox}"/>
+            <components:BindablePasswordBoxMVVM Grid.Row="3" Grid.Column="1" 
+                                                Password="{Binding Password, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
 
-            <TextBlock Grid.Row="4" VerticalAlignment="Center" Text="Confirm psword"/>
-            <PasswordBox Name="PasswordBoxConfirm" MouseMove="PasswordBoxConfirm_MouseMove"  Grid.Row="4" Grid.Column="1" Style="{StaticResource PasswordBox}"/>
+            <TextBlock Grid.Row="4" VerticalAlignment="Center" Text="Confirm"/>
+            <components:BindablePasswordBoxMVVM Grid.Row="4" Grid.Column="1" 
+                                                Password="{Binding PasswordConfirm, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
         </Grid>
 
-        <Grid Grid.Row="2">
-            <Button Command="{Binding CreateAccount}" Click="Button_Click"  Content="Create account" Width="150" Height=" 50" Style="{StaticResource LW_Buttons}"></Button>
+        <Grid Margin="0 5 0 5" Grid.Row="2">
+            <Button Command="{Binding CreateAccount}" Content="Create account" Width="150" Height="35" Style="{StaticResource LW_Buttons}"></Button>
         </Grid>
     </Grid>
 </Page>

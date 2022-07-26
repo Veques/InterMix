@@ -143,6 +143,7 @@ namespace Intermix.ViewModels
             Application.Current.Resources["SecondaryLeadingColor"] = secondary;
         }
 
+        #region Properties
 
         private ObservableCollection<LeadingColors> _leadingColorCollection;
         public ObservableCollection<LeadingColors> LeadingColorCollection
@@ -234,6 +235,7 @@ namespace Intermix.ViewModels
                 OnPropertyChanged("DarkThemeIsChecked");
             }
         }
+        #endregion
 
     }
 }

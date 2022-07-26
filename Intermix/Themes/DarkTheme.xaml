@@ -19,7 +19,7 @@
     <!-- Buttons -->
     <SolidColorBrush x:Key="LW_ButtonBackground" Color="{DynamicResource LeadingColor}" Opacity="0.7"/>
     <Color x:Key="LW_onHoverShadow" >white</Color>
-    <Color x:Key="LW_onHoverButtonShadow">white</Color>
+    <Color x:Key="LW_onHoverButtonShadow">Lime</Color>
 
     <!-- MAIN WINDOW -->
     <SolidColorBrush x:Key="MW_Background" Color="{DynamicResource Background}"/>

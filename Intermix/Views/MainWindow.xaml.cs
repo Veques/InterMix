@@ -48,5 +48,11 @@ namespace Intermix
             Settings setting = new Settings();
             setting.Show();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            RateWindow window = new();
+            window.Show();
+        }
     }
 }

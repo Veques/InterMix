@@ -38,6 +38,8 @@ namespace Intermix.ViewModels.LibrarySystem.ForUCs
             return false;
         }
 
+        #region Properties
+
         private ICollectionView _booksCollectionView;
         public ICollectionView BooksCollectionView
         {
@@ -55,15 +57,7 @@ namespace Intermix.ViewModels.LibrarySystem.ForUCs
             get { return _titleFilter; }
             set
             {
-                if (value != null)
-                {
-                    _titleFilter = value;
-                }
-                else
-                {
-                    _titleFilter = String.Empty;
-                }
-
+                _titleFilter = value != null ? _titleFilter = value : _titleFilter = string.Empty;
                 OnPropertyChanged("TitleFilter");
                 BooksCollectionView.Refresh();
             }
@@ -76,14 +70,7 @@ namespace Intermix.ViewModels.LibrarySystem.ForUCs
             get { return _authorFilter; }
             set
             {
-                if (value != null)
-                {
-                    _authorFilter = value;
-                }
-                else
-                {
-                    _authorFilter = String.Empty;
-                }
+                _authorFilter = value != null ? _authorFilter = value : _authorFilter = string.Empty;
 
                 OnPropertyChanged("AuthorFilter");
                 BooksCollectionView.Refresh();
@@ -97,14 +84,7 @@ namespace Intermix.ViewModels.LibrarySystem.ForUCs
             get { return _publishDateFilter; }
             set
             {
-                if (value != null)
-                {
-                    _publishDateFilter = value;
-                }
-                else
-                {
-                    _publishDateFilter = String.Empty;
-                }
+                _publishDateFilter = value != null ? _publishDateFilter = value : _publishDateFilter = string.Empty;
 
                 OnPropertyChanged("PublishDateFilter");
                 BooksCollectionView.Refresh();
@@ -117,14 +97,7 @@ namespace Intermix.ViewModels.LibrarySystem.ForUCs
             get { return _publisherFilter; }
             set
             {
-                if (value != null)
-                {
-                    _publisherFilter = value;
-                }
-                else
-                {
-                    _publisherFilter = String.Empty;
-                }
+                _publisherFilter = value != null ? _publisherFilter = value : _publisherFilter = string.Empty;
 
                 OnPropertyChanged("PublisherFilter");
                 BooksCollectionView.Refresh();
@@ -141,6 +114,6 @@ namespace Intermix.ViewModels.LibrarySystem.ForUCs
                 OnPropertyChanged("AllBooks");
             }
         }
-
+        #endregion
     }
 }

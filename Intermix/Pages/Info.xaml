@@ -82,7 +82,7 @@
                     FontSize="17"
                     FontWeight="Light">
                 Konwerter Walut pobiera listę walut korzystając z tabeli na stronie znajdującej się w dokumentacji API. Po wybraniu odpowiedniej kwoty, walut i kliknięciu przycisku
-                zostaje wysłanie zapytanie do API na stronie https://currencyapi.com/docs. Następnie aplikacje przeprowadza deserializację przychodzącego skryptu w JSON i przelicza 
+                zostaje wysłanie zapytanie do API na stronie https://currencyapi.com/docs. Następnie aplikacja przeprowadza deserializację przychodzącego skryptu w JSON i przelicza 
                 wartość jednej waluty na drugą. API jest darmowe, ale ma 300 darmowych zapytań. Na własną aplikację jest to zdecydowanie wystarczająco.
             </TextBox>
         </StackPanel>
@@ -100,9 +100,10 @@
                     VerticalScrollBarVisibility="Auto"
                     FontSize="17"
                     FontWeight="Light">
-                Prosty system zarządzania biblioteką stworzony za pomocą C#, WPF, SQLite i Entity Framework. Nie jestem w stanie postawić własnego serwera dlatego SQLite wydaje się
+                Prosty system zarządzania biblioteką stworzony za pomocą C#, WPF, SQLite i Entity Framework. Nie jestem w stanie postawić własnego serwera, dlatego SQLite wydaje się
                 świetnym wyborem do tego typu aplikacji. Aby wejść do systemu należy się zalogować lub zarejestrować, jeśli aplikacja jest używana przez daną osobę po raz pierwszy. 
-                Aplikacja zawiera dane książek importowanych z przykładowej strony internetowej, listę studentów i wypożyczonych przez nich książek.
+                Aplikacja posiada możliwość importu książek z pliku Excel znajdującego się w folderze Other, przeglądania listy wypożyczających i wypożyczonych przez nich książek
+                poprzez konto admina i inne przydatne w tego typu aplikacji opcje. Domyślne hasło na konto admin to 1234.
             </TextBox>
         </StackPanel>
     </Grid>

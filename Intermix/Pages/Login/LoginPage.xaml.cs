@@ -24,15 +24,5 @@ namespace Intermix.Pages.Login
             NavigationService.Navigate(page);
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            PasswordBox.Clear();
-        }
-
-        private void PasswordBox_MouseMove(object sender, MouseEventArgs e)
-        {
-            var vm = (LoginPageViewModel)DataContext;
-            vm.Password = PasswordBox.Password;
-        }
     }
 }

@@ -10,8 +10,6 @@
 
     <Grid>
 
-
-
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
             <RowDefinition Height="10*"/>
@@ -51,56 +49,29 @@
 
             <DataGrid Grid.Row="1" Name="Grid" ItemsSource="{Binding ReturnBooksCollectionView}"
                    CellStyle="{StaticResource DataGridCell}" Style="{StaticResource LMS_DataGrids}">
-
                 <DataGrid.Columns>
-                    <DataGridCheckBoxColumn HeaderStyle="{StaticResource DataGridHeader}" Width="130" Header="Do oddania" Binding="{Binding IsChecked}">
-                        <DataGridCheckBoxColumn.ElementStyle>
-                            <Style>
-                                <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
-                                <Setter Property="TextBlock.TextAlignment" Value="Center"/>
-                                <Setter Property="TextBlock.VerticalAlignment" Value="Center"/>
-                            </Style>
-                        </DataGridCheckBoxColumn.ElementStyle>
-                    </DataGridCheckBoxColumn>
-                    <DataGridTextColumn HeaderStyle="{StaticResource DataGridHeader}" IsReadOnly="True" Width="230" Header="Tytuł" Binding="{Binding Title}">
-                        <DataGridTextColumn.ElementStyle>
-                            <Style>
-                                <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
-                                <Setter Property="TextBlock.TextAlignment" Value="Center"/>
-                                <Setter Property="TextBlock.VerticalAlignment" Value="Center"/>
-                            </Style>
-                        </DataGridTextColumn.ElementStyle>
-                    </DataGridTextColumn>
-                    <DataGridTextColumn HeaderStyle="{StaticResource DataGridHeader}" IsReadOnly="True" Width="200" Header="Autor" Binding="{Binding FullName}">
-                        <DataGridTextColumn.ElementStyle>
-                            <Style>
-                                <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
-                                <Setter Property="TextBlock.TextAlignment" Value="Center"/>
-                                <Setter Property="TextBlock.VerticalAlignment" Value="Center"/>
-                            </Style>
-                        </DataGridTextColumn.ElementStyle>
-                    </DataGridTextColumn>
-                    <DataGridTextColumn HeaderStyle="{StaticResource DataGridHeader}" IsReadOnly="True" Width="150" Header="Wypożyczono" Binding="{Binding LoanDate, StringFormat='{}{0:dd.MM.yyyy}'}">
-                        <DataGridTextColumn.ElementStyle>
-                            <Style>
-                                <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
-                                <Setter Property="TextBlock.TextAlignment" Value="Center"/>
-                                <Setter Property="TextBlock.VerticalAlignment" Value="Center"/>
-                            </Style>
-                        </DataGridTextColumn.ElementStyle>
-                    </DataGridTextColumn>
-                    <DataGridTextColumn HeaderStyle="{StaticResource DataGridHeader}" IsReadOnly="True" Width="150" Header="Wypożyczono do" Binding="{Binding ReturnDate, StringFormat='{}{0:dd.MM.yyyy}'}">
-                        <DataGridTextColumn.ElementStyle>
-                            <Style>
-                                <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
-                                <Setter Property="TextBlock.TextAlignment" Value="Center"/>
-                                <Setter Property="TextBlock.VerticalAlignment" Value="Center"/>
-                            </Style>
-                        </DataGridTextColumn.ElementStyle>
-                    </DataGridTextColumn>
+                    <DataGridCheckBoxColumn ElementStyle="{StaticResource DataGridColumnStyleChkbx}" 
+                                            HeaderStyle="{StaticResource DataGridHeader}" Width="130" 
+                                            Header="Do oddania" Binding="{Binding IsChecked}"/>
+
+                    <DataGridTextColumn ElementStyle="{StaticResource DataGridColumnStyle}" 
+                                        HeaderStyle="{StaticResource DataGridHeader}" IsReadOnly="True" Width="230" 
+                                        Header="Tytuł" Binding="{Binding Title}"/>
+
+                    <DataGridTextColumn ElementStyle="{StaticResource DataGridColumnStyle}" 
+                                        HeaderStyle="{StaticResource DataGridHeader}" IsReadOnly="True" Width="200"
+                                        Header="Autor" Binding="{Binding FullName}"/>
+
+                    <DataGridTextColumn ElementStyle="{StaticResource DataGridColumnStyle}" 
+                                        HeaderStyle="{StaticResource DataGridHeader}" IsReadOnly="True" Width="150" 
+                                        Header="Wypożyczono" Binding="{Binding LoanDate, StringFormat='{}{0:dd.MM.yyyy}'}"/>
+
+                    <DataGridTextColumn ElementStyle="{StaticResource DataGridColumnStyle}" 
+                                        HeaderStyle="{StaticResource DataGridHeader}" IsReadOnly="True" Width="150" 
+                                        Header="Wypożyczono do" Binding="{Binding ReturnDate, StringFormat='{}{0:dd.MM.yyyy}'}"/>
+
                 </DataGrid.Columns>
             </DataGrid>
-
         </Grid>
 
         <StackPanel Grid.Row="2" Margin="5 0 5 10">

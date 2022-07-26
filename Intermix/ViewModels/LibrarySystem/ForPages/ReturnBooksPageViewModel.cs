@@ -112,6 +112,8 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
             FillDataGrid();
         }
 
+        #region Properties
+
         private ICollectionView _returnBooksCollectionView;
         public ICollectionView ReturnBooksCollectionView
         {
@@ -183,6 +185,7 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
                 OnPropertyChanged("ReturnBooks");
             }
         }
+        #endregion
 
     }
 }

@@ -3,31 +3,31 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:Intermix.Pages.Login" xmlns:fa="http://schemas.fontawesome.com/icons/" xmlns:loginpage="clr-namespace:Intermix.ViewModels.LoginPage" d:DataContext="{d:DesignInstance Type=loginpage:LoginPageViewModel}"
-      mc:Ignorable="d" 
+      xmlns:local="clr-namespace:Intermix.Pages.Login" xmlns:fa="http://schemas.fontawesome.com/icons/" xmlns:loginpage="clr-namespace:Intermix.ViewModels.LoginPage" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" d:DataContext="{d:DesignInstance Type=loginpage:LoginPageViewModel}"
+      mc:Ignorable="d" xmlns:components="clr-namespace:Intermix.Components"
       d:DesignHeight="400" d:DesignWidth="300"
       Title="LoginPage">
 
     <Grid>
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="30"/>
-            <RowDefinition Height="3*"/>
+            <RowDefinition Height="2.5*"/>
             <RowDefinition Height="3*" />
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="20" />
+            <RowDefinition />
         </Grid.RowDefinitions>
 
         <!-- Welcome Back -->
 
-        <Grid Grid.Row="1">
-            <fa:ImageAwesome Height="80" Icon="Brands_DAndD" Foreground="{DynamicResource LW_Icon}" Margin="0 -5 0 10"/>
+        <Grid >
+            <materialDesign:PackIcon Kind="Bookshelf" Height="110" Width="110" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{DynamicResource LW_Icon}" Margin="0 -10 0 10"/>
             <TextBlock VerticalAlignment="Bottom" HorizontalAlignment="Center" FontSize="20" Foreground="{DynamicResource LW_Font}" 
-                       FontWeight="DemiBold" Text="Welcome back"/>
+                       FontWeight="SemiBold" Text="Welcome back"/>
         </Grid>
 
         <!-- Log in -->
 
-        <Grid Grid.Row="2" VerticalAlignment="Center">
+        <Grid Grid.Row="1" VerticalAlignment="Center">
             <Grid.RowDefinitions>
                 <RowDefinition/>
                 <RowDefinition/>
@@ -35,26 +35,45 @@
             </Grid.RowDefinitions>
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <fa:ImageAwesome HorizontalAlignment="Left" Margin="0 0 10 0"  Width="15" Icon="Solid_User" Foreground="{DynamicResource LW_TextBoxIcons}"/>
+                <materialDesign:PackIcon Kind="Account" HorizontalAlignment="Left" Margin="0 0 10 0"  Width="30"
+                                         Height="30" VerticalAlignment="Center" Foreground="{DynamicResource LW_TextBoxIcons}"/>
                 <TextBox Name="LoginBox" Text="{Binding Username}"
                          Style="{StaticResource LoginTextBox}"/>
             </StackPanel>
 
+
             <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
-                <fa:ImageAwesome Margin="0 0 10 0" HorizontalAlignment="Left" Width="15" Icon="Solid_Lock" Foreground="{DynamicResource LW_TextBoxIcons}"/>
-                <PasswordBox Name="PasswordBox" MouseMove="PasswordBox_MouseMove"
-                             Style="{StaticResource PasswordBox}"/>
+                <materialDesign:PackIcon Kind="Lock" Margin="0 0 10 0" HorizontalAlignment="Left" VerticalAlignment="Center" 
+                                         Width="30" Height="30" Foreground="{DynamicResource LW_TextBoxIcons}"/>
+
+                <components:BindablePasswordBoxMVVM Password="{Binding Password, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+
             </StackPanel>
 
-            <Button Grid.Row="2" Margin="7" Content="Log in" VerticalAlignment="Bottom"
-                    Command="{Binding LogIn}" Click="Button_Click" Style="{StaticResource LW_Buttons}"/>
+            <Grid Grid.Row="2">
+                
+                <Button Margin="0 5 0 0" Content="Log in" VerticalAlignment="Bottom" 
+                    Command="{Binding LogIn}" Style="{StaticResource LW_Buttons}"/>
 
+                
+            </Grid>
         </Grid>
 
-        <!-- Register -->
+        <Grid Grid.Row="2" Height="20" Width="178">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Separator VerticalAlignment="Center" Width="70"/>
+            <TextBlock Grid.Column="1" FontWeight="SemiBold" Foreground="{DynamicResource LW_Font}"
+                       FontSize="13" HorizontalAlignment="Center" Margin="10, 0" Text="OR"/>
+            <Separator  Grid.Column="2" VerticalAlignment="Center" Width="70"/>
+        </Grid>
 
-        <Grid Grid.Row="3" >
-            <Button Content="Or create an account" Width="200" Click="NewAccount_Click" VerticalAlignment="Top" Style="{StaticResource LW_Buttons}" />
+        <Grid Grid.Row="3" Margin="0 6 0 0">
+
+            <Button Grid.Row="1" Content="Create an account" Width="200" Click="NewAccount_Click" VerticalAlignment="Top" Style="{StaticResource LW_Buttons}" />
         </Grid>
 
 

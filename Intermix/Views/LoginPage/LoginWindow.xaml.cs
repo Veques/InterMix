@@ -1,4 +1,5 @@
 ﻿using Intermix.ViewModels.LoginPage;
+using System;
 using System.Windows;
 using System.Windows.Input;
 
@@ -21,7 +22,11 @@ namespace Intermix.Views.LoginPage
 
         private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            this.DragMove();
+            try
+            {
+                this.DragMove();
+            }
+            catch (Exception) { }
         }
     }
 }

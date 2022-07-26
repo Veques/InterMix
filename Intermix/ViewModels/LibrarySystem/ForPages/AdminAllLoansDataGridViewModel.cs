@@ -1,4 +1,5 @@
-﻿using Intermix.Models;
+﻿using Intermix.Commands;
+using Intermix.Models;
 using Intermix.ViewModels.Base;
 using Intermix.ViewModels.LoginPage;
 using System;
@@ -9,9 +10,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
+using System.Windows.Input;
 
 namespace Intermix.ViewModels.LibrarySystem.ForPages
 {
+
+    #region Model
     public class Loan
     {
         public string Username { get; set; }
@@ -20,9 +24,11 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
         public DateTime LoanDate { get; set; }
         public DateTime ExpectedReturnDate { get; set; }
     }
-
+    #endregion
     public class AdminAllLoansDataGridViewModel : BaseViewModel
     {
+
+        #region Constructor
         public AdminAllLoansDataGridViewModel()
         {
             AllLoans = new();
@@ -49,9 +55,11 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
             LoansCollectionView = CollectionViewSource.GetDefaultView(AllLoans);
             LoansCollectionView.GroupDescriptions.Add(new PropertyGroupDescription(nameof(Loan.Username)));
 
-            LoansCollectionView.Filter = FilterByTitle;
+            LoansCollectionView.Filter = Filter;
         }
-        public bool FilterByTitle(object obj)
+        #endregion
+
+        public bool Filter(object obj)
         {
             if (obj == null)
                 return false;
@@ -64,21 +72,16 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
                     loan.ExpectedReturnDate.ToString().Contains(ReturnDateFilter, StringComparison.InvariantCultureIgnoreCase); 
             }
             return false;
-        } 
+        }
+
+        #region Properties
 
         private string _titleFilter = string.Empty;
         public string TitleFilter
         {
             get { return _titleFilter; }
-            set { 
-                if (value != null)
-                {
-                    _titleFilter = value;
-                }
-                else
-                {
-                    _titleFilter = String.Empty;
-                }
+            set {
+                _titleFilter = value != null ? _titleFilter = value : _titleFilter = string.Empty;
 
                 OnPropertyChanged("TitleFilter");
                 LoansCollectionView.Refresh();
@@ -91,14 +94,7 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
             get { return _authorFilter; }
             set
             {
-                if (value != null)
-                {
-                    _authorFilter = value;
-                }
-                else
-                {
-                    _authorFilter = String.Empty;
-                }
+                _authorFilter = value != null ? _authorFilter = value : _authorFilter = string.Empty;
 
                 OnPropertyChanged("AuthorFilter");
                 LoansCollectionView.Refresh();
@@ -111,14 +107,7 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
             get { return _publishDateFilter; }
             set
             {
-                if (value != null)
-                {
-                    _publishDateFilter = value;
-                }
-                else
-                {
-                    _publishDateFilter = String.Empty;
-                }
+                _publishDateFilter = value != null ? _publishDateFilter = value : _publishDateFilter = string.Empty;
 
                 OnPropertyChanged("PublishDateFilter");
                 LoansCollectionView.Refresh();
@@ -131,14 +120,7 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
             get { return _returnDateFilter; }
             set
             {
-                if (value != null)
-                {
-                    _returnDateFilter = value;
-                }
-                else
-                {
-                    _returnDateFilter = String.Empty;
-                }
+                _returnDateFilter = value != null ? _returnDateFilter = value : _returnDateFilter = string.Empty;
 
                 OnPropertyChanged("ReturnDateFilter");
                 LoansCollectionView.Refresh();
@@ -165,5 +147,6 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
             }
         }
 
+        #endregion
     }
 }

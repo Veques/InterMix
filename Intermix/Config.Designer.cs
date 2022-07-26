@@ -37,25 +37,13 @@ namespace Intermix {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool FirstTime {
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool IsFeedbackSent {
             get {
-                return ((bool)(this["FirstTime"]));
+                return ((bool)(this["IsFeedbackSent"]));
             }
             set {
-                this["FirstTime"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public int Leading {
-            get {
-                return ((int)(this["Leading"]));
-            }
-            set {
-                this["Leading"] = value;
+                this["IsFeedbackSent"] = value;
             }
         }
         
@@ -68,6 +56,18 @@ namespace Intermix {
             }
             set {
                 this["Secondary"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int Leading {
+            get {
+                return ((int)(this["Leading"]));
+            }
+            set {
+                this["Leading"] = value;
             }
         }
     }

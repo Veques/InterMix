@@ -29,10 +29,14 @@
             <StackPanel.Background>
                 <SolidColorBrush Color="black" Opacity="0.3"/>
             </StackPanel.Background>
-            <TextBox Name="Title" Style="{StaticResource LMS_Filters}" Text="{Binding TitleFilter, UpdateSourceTrigger=PropertyChanged}" Margin="0 0 0 0" Width="200" />
-            <TextBox Name="Author" Style="{StaticResource LMS_Filters}" Text="{Binding AuthorFilter, UpdateSourceTrigger=PropertyChanged}" Margin="1 0 0 0" Width="170"/>
-            <TextBox Name="PublishDate"  Style="{StaticResource LMS_Filters}" Text="{Binding PublishDateFilter, UpdateSourceTrigger=PropertyChanged}" Margin="1 0 0 0" Width="170"/>
-            <TextBox Name="ReturnDate"  Style="{StaticResource LMS_Filters}" Text="{Binding ReturnDateFilter, UpdateSourceTrigger=PropertyChanged}" Margin="1 0 0 0" Width="170"/>
+            <TextBox Name="Title" Style="{StaticResource LMS_Filters}" 
+                     Text="{Binding TitleFilter, UpdateSourceTrigger=PropertyChanged}" Margin="0 0 0 0" Width="200" />
+            <TextBox Name="Author" Style="{StaticResource LMS_Filters}" 
+                     Text="{Binding AuthorFilter, UpdateSourceTrigger=PropertyChanged}" Margin="1 0 0 0" Width="170"/>
+            <TextBox Name="PublishDate"  Style="{StaticResource LMS_Filters}" 
+                     Text="{Binding PublishDateFilter, UpdateSourceTrigger=PropertyChanged}" Margin="1 0 0 0" Width="170"/>
+            <TextBox Name="ReturnDate"  Style="{StaticResource LMS_Filters}" 
+                     Text="{Binding ReturnDateFilter, UpdateSourceTrigger=PropertyChanged}" Margin="1 0 0 0" Width="170"/>
         </StackPanel>
 
         <DataGrid Name="Grid" Grid.Row="2" ItemsSource="{Binding LoansCollectionView}"
@@ -70,45 +74,21 @@
                 </GroupStyle>
             </DataGrid.GroupStyle>
             <DataGrid.Columns>
-                <DataGridTextColumn HeaderStyle="{StaticResource DataGridHeader}" Header="Tytuł" Binding="{Binding Title}" Width="200">
-                    <DataGridTextColumn.ElementStyle>
-                        <Style>
-                            <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
-                            <Setter Property="TextBlock.TextAlignment" Value="Center"/>
-                            <Setter Property="TextBlock.VerticalAlignment" Value="Center"/>
-                        </Style>
-                    </DataGridTextColumn.ElementStyle>
-                </DataGridTextColumn>
+                <DataGridTextColumn ElementStyle="{StaticResource DataGridColumnStyle}" 
+                                    HeaderStyle="{StaticResource DataGridHeader}" Header="Tytuł" 
+                                    Binding="{Binding Title}" Width="200"/>
+                
+                <DataGridTextColumn ElementStyle="{StaticResource DataGridColumnStyle}" 
+                                    HeaderStyle="{StaticResource DataGridHeader}" Header="Autor" 
+                                    Binding="{Binding Author}" Width="170"/>
+               
+                <DataGridTextColumn ElementStyle="{StaticResource DataGridColumnStyle}" 
+                                    HeaderStyle="{StaticResource DataGridHeader}" Header="Data Wypożyczenia" 
+                                    Binding="{Binding LoanDate, StringFormat='{}{0:dd.MM.yyyy}'}" Width="170"/>
 
-                <DataGridTextColumn HeaderStyle="{StaticResource DataGridHeader}" Header="Autor" Binding="{Binding Author}" Width="170">
-                    <DataGridTextColumn.ElementStyle>
-                        <Style>
-                            <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
-                            <Setter Property="TextBlock.TextAlignment" Value="Center"/>
-                            <Setter Property="TextBlock.VerticalAlignment" Value="Center"/>
-                        </Style>
-                    </DataGridTextColumn.ElementStyle>
-                </DataGridTextColumn>
-
-                <DataGridTextColumn HeaderStyle="{StaticResource DataGridHeader}" Header="Data Wypożyczenia" Binding="{Binding LoanDate, StringFormat='{}{0:dd.MM.yyyy}'}" Width="170">
-                    <DataGridTextColumn.ElementStyle>
-                        <Style>
-                            <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
-                            <Setter Property="TextBlock.TextAlignment" Value="Center"/>
-                            <Setter Property="TextBlock.VerticalAlignment" Value="Center"/>
-                        </Style>
-                    </DataGridTextColumn.ElementStyle>
-                </DataGridTextColumn>
-
-                <DataGridTextColumn HeaderStyle="{StaticResource DataGridHeader}" Header="Data Oddania" Binding="{Binding ExpectedReturnDate, StringFormat='{}{0:dd.MM.yyyy}'}" Width="170">
-                    <DataGridTextColumn.ElementStyle>
-                        <Style>
-                            <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
-                            <Setter Property="TextBlock.TextAlignment" Value="Center"/>
-                            <Setter Property="TextBlock.VerticalAlignment" Value="Center"/>
-                        </Style>
-                    </DataGridTextColumn.ElementStyle>
-                </DataGridTextColumn>
+                <DataGridTextColumn ElementStyle="{StaticResource DataGridColumnStyle}" 
+                                    HeaderStyle="{StaticResource DataGridHeader}" Header="Data Oddania" 
+                                    Binding="{Binding ExpectedReturnDate, StringFormat='{}{0:dd.MM.yyyy}'}" Width="170"/>
             </DataGrid.Columns>
 
         </DataGrid>
