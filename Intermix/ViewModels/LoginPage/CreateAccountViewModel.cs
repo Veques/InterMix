@@ -1,6 +1,8 @@
 ﻿using Intermix.Commands;
+using Intermix.Enums;
 using Intermix.Models;
 using Intermix.ViewModels.Base;
+using Intermix.Views;
 using System;
 using System.Windows;
 using System.Windows.Input;
@@ -31,13 +33,15 @@ namespace Intermix.ViewModels.LoginPage
             {
                 if (!Password.Equals(PasswordConfirm))
                 {
-                    MessageBox.Show("Hasła się nie zgadzają");
+                    _ = new CustomizedMessageBox("Passwords do not match", MessageType.Error, MessageButton.Ok).ShowDialog();
+
                     return;
                 }
 
                 if (Password.Length < 8)
                 {
-                    MessageBox.Show("Hasło jest za krótkie");
+                    _ = new CustomizedMessageBox("Password is to short", MessageType.Warning, MessageButton.Ok).ShowDialog();
+
                     return;
                 }
 
@@ -53,7 +57,8 @@ namespace Intermix.ViewModels.LoginPage
                 _dbContext.Users.Add(user);
                 if (_dbContext.SaveChanges() > 0)
                 {
-                    MessageBox.Show("You have been added to database");
+                    _ = new CustomizedMessageBox("You have been added to database", MessageType.Success, MessageButton.Ok).ShowDialog();
+
                 }
 
                 Name = String.Empty;
@@ -64,7 +69,8 @@ namespace Intermix.ViewModels.LoginPage
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error");
+                _ = new CustomizedMessageBox(ex.Message, MessageType.Error, MessageButton.Ok).ShowDialog();
+
             }
         }
 

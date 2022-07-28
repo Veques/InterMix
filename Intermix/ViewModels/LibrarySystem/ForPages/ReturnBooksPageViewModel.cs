@@ -1,7 +1,9 @@
 ﻿using Intermix.Commands;
+using Intermix.Enums;
 using Intermix.Models;
 using Intermix.ViewModels.Base;
 using Intermix.ViewModels.LoginPage;
+using Intermix.Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -83,9 +85,9 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
 
         private void ReturnBooksClicked()
         {
-            var result = MessageBox.Show("Czy napewno chcesz oddać te książki?", "fdf", MessageBoxButton.YesNo);
+            bool? result = new CustomizedMessageBox("Do you really want to return these books?", MessageType.Confirmation, MessageButton.OkCancel).ShowDialog();
 
-            if (result != MessageBoxResult.Yes)
+            if (!result.Value)
                 return;
 
             using ApplicationDbContext db = new();
@@ -104,10 +106,15 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
                 }
             }
 
-            if (db.SaveChanges() > 1)
-                MessageBox.Show("Usunięto z twojego konta");
+            if (db.SaveChanges() > 0)
+            {
+                _ = new CustomizedMessageBox("Return Successful", MessageType.Success, MessageButton.Ok).ShowDialog();
+            }
+            else
+            {
+               _ = new CustomizedMessageBox("Something went wrong", MessageType.Warning, MessageButton.Ok).ShowDialog();
+            }
 
-            //TODO: możnaby to zoptymalizować
             ReturnBooks.Clear();
             FillDataGrid();
         }

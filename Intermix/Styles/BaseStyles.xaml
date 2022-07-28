@@ -97,7 +97,7 @@
                         </Border.Effect>-->
                         <Border.Style>
                             <Style TargetType="{x:Type Border}">
-                                <Setter x:Name="background" Property="Background" Value="{DynamicResource LW_ButtonBackground}"/>
+                                <Setter Property="Background" Value="{Binding Background, RelativeSource={RelativeSource TemplatedParent}}"/>
                                 <Setter Property="BorderThickness" Value="0"/>
                                 <Setter Property="Opacity"  Value="0.85"/>
 

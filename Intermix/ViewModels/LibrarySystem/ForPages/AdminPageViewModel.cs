@@ -1,4 +1,5 @@
 ﻿using Intermix.Commands;
+using Intermix.Enums;
 using Intermix.Models;
 using Intermix.ViewModels.Base;
 using Intermix.Views;
@@ -15,11 +16,11 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
+
 namespace Intermix.ViewModels.LibrarySystem.ForPages
 {
     public class AdminPageViewModel : BaseViewModel
     {
-        readonly ApplicationDbContext db = new();
 
         #region Commands
         public ICommand AddBookCommand { get; set; }
@@ -31,6 +32,7 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
         #region Constructor
         public AdminPageViewModel()
         {
+            using var db = new ApplicationDbContext();
 
             if (db.Books.Count() > 99)
             {
@@ -70,6 +72,8 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
         #region ImportBooks
         private void ImportBooks()
         {
+            using var db = new ApplicationDbContext();
+
             var path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\Other\Top100Books.xlsx");
             try
             {
@@ -106,19 +110,21 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
                 {
                     db.Books.Add(item);
                 }
-                if (db.SaveChanges() > 1)
+                if (db.SaveChanges() > 0)
                 {
-                    MessageBox.Show("Dodano 100 rekordów");
+                    _ = new CustomizedMessageBox("Dodano 100 rekordów z pliku Excel", MessageType.Information, MessageButton.Ok).ShowDialog();
+
                     IsEnabled = false;
                 }
 
             }
             catch (OleDbException ex)
             {
-                MessageBox.Show(ex.Message);
+                _ = new CustomizedMessageBox(ex.Message, MessageType.Error, MessageButton.Ok).ShowDialog();
+
             }
 
-            
+
         }
 
 
@@ -151,16 +157,24 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
         }
         private void ChangePIN()
         {
+            using var db = new ApplicationDbContext();
+
+
 
             foreach(var user in db.Users.Where(d => d.Username.Equals("Admin")))
             {
                 user.Password = FirstPin;
             }
-            if (db.SaveChanges() > 1)
+            if (db.SaveChanges() > 0)
             {
-                MessageBox.Show("Zapisano");
-            }
+                _ = new CustomizedMessageBox("Zapisano", MessageType.Success, MessageButton.Ok).ShowDialog();
 
+            }
+            else
+            {
+                _ = new CustomizedMessageBox("Wystąpił błąd ", MessageType.Error, MessageButton.Ok).ShowDialog();
+
+            }
         }
 
         private string _firstPIN;

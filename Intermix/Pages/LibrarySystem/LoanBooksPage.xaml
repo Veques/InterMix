@@ -53,7 +53,7 @@
                   RowStyle="{StaticResource DataGridRow}" >
 
                 <DataGrid.Columns>
-                    <DataGridCheckBoxColumn ElementStyle="{StaticResource DataGridColumnStyleChkbx}" HeaderStyle="{StaticResource DataGridHeader}" Width="120" Binding="{Binding IsChecked}">
+                    <DataGridCheckBoxColumn ElementStyle="{StaticResource DataGridColumnStyleChkbx}" HeaderStyle="{StaticResource DataGridHeader}" Width="120" Binding="{Binding IsChecked, UpdateSourceTrigger=PropertyChanged}">
                         <DataGridCheckBoxColumn.Header>
                             <TextBlock TextWrapping="WrapWithOverflow" Text="Do wypożyczenia" TextAlignment="Center" />
                         </DataGridCheckBoxColumn.Header>

@@ -52,7 +52,7 @@
                 <DataGrid.Columns>
                     <DataGridCheckBoxColumn ElementStyle="{StaticResource DataGridColumnStyleChkbx}" 
                                             HeaderStyle="{StaticResource DataGridHeader}" Width="130" 
-                                            Header="Do oddania" Binding="{Binding IsChecked}"/>
+                                            Header="Do oddania" Binding="{Binding IsChecked, UpdateSourceTrigger=PropertyChanged}"/>
 
                     <DataGridTextColumn ElementStyle="{StaticResource DataGridColumnStyle}" 
                                         HeaderStyle="{StaticResource DataGridHeader}" IsReadOnly="True" Width="230" 

@@ -1,4 +1,5 @@
-﻿using Intermix.Models;
+﻿using Intermix.Enums;
+using Intermix.Models;
 using Intermix.ViewModels;
 using Intermix.ViewModels.LibrarySystem;
 using Intermix.Views;
@@ -65,7 +66,6 @@ namespace Intermix.Pages.LibrarySystem
             BrowseBooksPage page = new();
             NavigationService.Navigate(page);
         }
-
         private void PswdBox_PasswordChanged(object sender, RoutedEventArgs e)
         {
 
@@ -80,12 +80,10 @@ namespace Intermix.Pages.LibrarySystem
                 }
                 else
                 {
-                    MessageBox.Show("Nieprawidłowe Hasło");
+                    AdminButton.BorderBrush = Brushes.Red;
                     PswdBox.Password = String.Empty;
                 }
             }
-
-
         }
     }
 }

@@ -10,6 +10,8 @@ using System.Linq;
 using System;
 using System.ComponentModel;
 using System.Windows.Data;
+using Intermix.Views;
+using Intermix.Enums;
 
 namespace Intermix.ViewModels.LibrarySystem.ForPages
 {
@@ -38,8 +40,6 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
             LoanBooks = new();
             FillDataGrid();
 
-            LoanBooksCollectionView = CollectionViewSource.GetDefaultView(LoanBooks);
-            LoanBooksCollectionView.Filter = Filter;
         }
 
         private bool Filter(object obj)
@@ -70,12 +70,15 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
                     Publisher = book.Publisher
                 });
             }
+                LoanBooksCollectionView = CollectionViewSource.GetDefaultView(LoanBooks);
+                LoanBooksCollectionView.Filter = Filter;
         }
         private void LoanClicked()
         {
-            var result = MessageBox.Show("Czy napewno chcesz wypożyczyć te książki?", "fdf",MessageBoxButton.YesNo);
+            bool? result = new CustomizedMessageBox("Do you really want to borrow these books?", MessageType.Confirmation, MessageButton.OkCancel)
+                .ShowDialog();
 
-            if (result != MessageBoxResult.Yes)
+            if (!result.Value)
                 return;
 
             using ApplicationDbContext db = new();
@@ -96,8 +99,9 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
                 cell.IsAvailable = 0;
             }
 
-            if(db.SaveChanges() > 1) 
-                MessageBox.Show("Wypożyczenie udane");
+            if(db.SaveChanges() > 0)
+                _ = new CustomizedMessageBox("Loan successful", MessageType.Success, MessageButton.Ok)
+                    .ShowDialog();
 
             LoanBooks.Clear();
             FillDataGrid();

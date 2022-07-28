@@ -1,4 +1,5 @@
 ﻿using Intermix.Commands;
+using Intermix.Enums;
 using Intermix.Models;
 using Intermix.ViewModels.Base;
 using Intermix.ViewModels.MainWindowView.TicTacToeView;
@@ -37,11 +38,9 @@ namespace Intermix.ViewModels.LoginPage
             _dbContext.SaveChanges();
             }
 
-
-
             if (isValid == null)
             {
-                MessageBox.Show("Hasło i nazwa użytkownika nie zgadzają się");
+               _ = new CustomizedMessageBox("Passwords do not match", MessageType.Error, MessageButton.Ok).ShowDialog();
             }
             else
             {

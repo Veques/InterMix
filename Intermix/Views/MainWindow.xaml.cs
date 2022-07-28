@@ -1,4 +1,5 @@
-﻿using Intermix.ViewModels;
+﻿using Intermix.Enums;
+using Intermix.ViewModels;
 using Intermix.Views;
 using System.Windows;
 using System.Windows.Input;

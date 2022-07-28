@@ -1,5 +1,7 @@
 ﻿using Intermix.Commands;
+using Intermix.Enums;
 using Intermix.ViewModels.Base;
+using Intermix.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -50,7 +52,7 @@ namespace Intermix.ViewModels
                 };
                 
                 smtp.Send(message);
-                MessageBox.Show("Thank You");
+                _ = new CustomizedMessageBox("Thank for your input in making this perfection", MessageType.Success, MessageButton.Ok).ShowDialog();
                 Config.Default.IsFeedbackSent = true;
                 Config.Default.Save();
             }

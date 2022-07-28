@@ -113,7 +113,7 @@
                 </Button.Content>
             </Button>
 
-            <Button Name="SomeButton" >
+            <Button Name="AdminButton" >
                 <Button.Content>
                     <StackPanel>
                         <materialDesign:PackIcon Kind="StarCircle" Width="70" Height="70" HorizontalAlignment="Center" VerticalAlignment="Center"/>

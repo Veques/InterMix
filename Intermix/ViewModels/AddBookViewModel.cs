@@ -1,6 +1,8 @@
 ﻿using Intermix.Commands;
+using Intermix.Enums;
 using Intermix.Models;
 using Intermix.ViewModels.Base;
+using Intermix.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Intermix.ViewModels
 {
@@ -43,9 +46,9 @@ namespace Intermix.ViewModels
                 Publisher = Publisher
             });
 
-            if (db.SaveChanges() >= 1)
+            if (db.SaveChanges() > 0)
             {
-                MessageBox.Show("Dodano rekord");
+                _ = new CustomizedMessageBox("Rekord został dodany", MessageType.Information, MessageButton.Ok).ShowDialog();
             }
 
         }

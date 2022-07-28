@@ -40,5 +40,9 @@
     <SolidColorBrush x:Key="LMS_MainBackgrond" Color="#9933FF"/>
     <SolidColorBrush x:Key="LMS_MainBackgrondSimilar" Color="#832ED8"/>
     <SolidColorBrush x:Key="LMS_OnHoverButtons" Color="red"/>
-    
+
+    <!-- Custom MessageBox Colors -->
+    <SolidColorBrush x:Key="MB_ButtonBackground" Color="#9933FF"/>
+    <SolidColorBrush x:Key="MB_Background" Color="{DynamicResource BackgroundBackButton}"/>
+
 </ResourceDictionary>
