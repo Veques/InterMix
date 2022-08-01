@@ -1,30 +1,29 @@
-﻿using Intermix.ViewModels.Base;
+﻿using Intermix.Commands;
+using Intermix.Models;
+using Intermix.ViewModels.Base;
+using Intermix.ViewModels.LoginPage;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Input;
 
 namespace Intermix.ViewModels
 {
 
+
     public class LibraryMainWindowViewModel : BaseViewModel
     {
-        private static LibraryMainWindowViewModel _instance = new LibraryMainWindowViewModel();
-        public static LibraryMainWindowViewModel Instance { get { return _instance; } }
-
-
-
-        private static Visibility _loadingVisibility;
-        public Visibility LoadingVisibility
+        public LibraryMainWindowViewModel()
         {
-            get { return _loadingVisibility; }
-            set {
-                _loadingVisibility = value;
-                OnPropertyChanged("LoadingVisibility");
-            }
+
         }
+
+
+
 
     }
 }

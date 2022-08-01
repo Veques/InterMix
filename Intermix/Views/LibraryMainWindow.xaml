@@ -3,14 +3,15 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:po="http://schemas.microsoft.com/winfx/2006/xaml/presentation/options"
-        xmlns:local="clr-namespace:Intermix.Views" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:viewmodels="clr-namespace:Intermix.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:LibraryMainWindowViewModel}"
+        xmlns:local="clr-namespace:Intermix.Views" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:viewmodels="clr-namespace:Intermix.ViewModels" 
+        d:DataContext="{d:DesignInstance Type=viewmodels:LibraryMainWindowViewModel}"
         mc:Ignorable="d" MouseDown="Grid_MouseDown" Name="Window"
         Title="LibraryMainWindow" Height="600" Width="950" WindowStyle="None" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" >
     <Window.Background>
         <ImageBrush ImageSource="/Images/Library.jpg" Stretch="UniformToFill" Opacity="0.7" />
     </Window.Background>
 
-    <Border BorderBrush="{DynamicResource MW_Font}" BorderThickness="3" CornerRadius="1">
+    <Border BorderBrush="WhiteSmoke" BorderThickness="3" CornerRadius="1">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="45"/>
@@ -32,10 +33,12 @@
                              BorderBrush="Transparent"/>-->
 
             </Grid>
-            <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
-                <Frame Source="/Pages/LibrarySystem/MainLibraryPage.xaml" NavigationUIVisibility="Hidden"/>
+
+            <Grid Grid.Row="1" >
+
+                <Frame Source="/Pages/LibrarySystem/MainLibraryPage.xaml" NavigationUIVisibility="Hidden" Grid.ColumnSpan="2"/>
             </Grid>
-               
-    </Grid>
+
+        </Grid>
     </Border>
 </Window>

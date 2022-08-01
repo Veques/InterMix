@@ -405,7 +405,8 @@
 
     <!-- CURRENCY CONVERTER -->
     <!-- ComboBoxes in Converter -->
-    <Style x:Key="ComboBoxes_CC" TargetType="ComboBox" BasedOn="{StaticResource MaterialDesignOutlinedComboBox}">
+    <Style x:Key="ComboBoxes_CC" TargetType="ComboBox" 
+           BasedOn="{StaticResource MaterialDesignOutlinedComboBox}">
         <Setter Property="Width" Value="260"/>
         <Setter Property="BorderBrush" Value="{DynamicResource CC_ComboBoxBorder}"/>
         <Setter Property="FontWeight" Value="DemiBold"/>
@@ -416,7 +417,8 @@
     </Style>
 
     <!-- TextBoxes in Converter -->
-    <Style x:Key="TextBoxes_CC" TargetType="TextBox" BasedOn="{StaticResource MaterialDesignFloatingHintTextBox}">
+    <Style x:Key="TextBoxes_CC" TargetType="TextBox" 
+           BasedOn="{StaticResource MaterialDesignFloatingHintTextBox}">
 
         <Setter Property="Width" Value="260"/>
         <Setter Property="Height" Value="50"/>
@@ -431,7 +433,8 @@
     </Style>
     
     <!-- Convert Button -->
-    <Style x:Key="ConvertButton_CC" TargetType="Button" BasedOn="{StaticResource MaterialDesignFloatingActionLightButton}">
+    <Style x:Key="ConvertButton_CC" TargetType="Button" 
+           BasedOn="{StaticResource MaterialDesignFloatingActionLightButton}">
         <Setter Property="BorderBrush" Value="{DynamicResource CC_ComboBoxBorder}"/>
         <Setter Property="Foreground" Value="{DynamicResource MW_Font}"/>
         <Setter Property="Background" Value="{DynamicResource CC_ComboBoxBorder}"/>
@@ -447,7 +450,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
-                    <Border BorderThickness="0" Background="White" CornerRadius="6" Opacity="0.6">
+                    <Border BorderThickness="0" Background="WhiteSmoke" CornerRadius="6" Opacity="0.6">
                         <ContentPresenter HorizontalAlignment="Center"
                        VerticalAlignment="Center" />
                         <Border.Style>
@@ -481,17 +484,19 @@
 
     <!-- Main Buttons -->
     <Style x:Key="LMS_MainButtons" TargetType="Button">
+        <Setter Property="Foreground" Value="Black"/>
+        <Setter Property="Background" Value="WhiteSmoke"/>
         <Setter Property="Width" Value="135"/>
         <Setter Property="Height" Value="135"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
-                    <Border Name="border" BorderThickness="2" CornerRadius="15">
+                    <Border Name="border" BorderThickness="4" CornerRadius="13">
                         <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         <Border.Style>
                             <Style TargetType="Border">
-                                <Setter Property="Background" Value="white"/>
-                                <Setter Property="BorderThickness" Value="3"/>
+                                <Setter Property="Background" Value="{Binding Background, RelativeSource={RelativeSource TemplatedParent}}"/>
+
                                 <Style.Triggers>
                                     <Trigger Property="Border.IsMouseOver" Value="True">
                                         <Setter Property="Effect">
@@ -500,27 +505,37 @@
                                             </Setter.Value>
                                         </Setter>
                                     </Trigger>
+                                    <Trigger Property="Border.IsMouseOver" Value="True">
+                                        <Trigger.EnterActions>
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <ThicknessAnimation Duration="0:0:0.200" To="0" 
+                                                            Storyboard.TargetProperty="BorderThickness"  />
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </Trigger.EnterActions>
+                                        <Trigger.ExitActions>
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <ThicknessAnimation Duration="0:0:0.200" To="4" 
+                                                            Storyboard.TargetProperty="BorderThickness" FillBehavior="HoldEnd" />
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </Trigger.ExitActions>
+                                    </Trigger>
                                 </Style.Triggers>
                             </Style>
                         </Border.Style>
                     </Border>
-                    <ControlTemplate.Triggers>
-                        <EventTrigger RoutedEvent="Button.MouseEnter">
-                            <BeginStoryboard>
-                                <Storyboard>
-                                    <ColorAnimation  Storyboard.TargetName="border" AutoReverse="True"  
-                                                             Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)" 
-                                                             To="Blue" Duration="0:0:1"/>
-                                </Storyboard>
-                            </BeginStoryboard>
-                        </EventTrigger>
-                        <Trigger Property="IsPressed" Value="True">
-                            <Setter Property="Background" TargetName="border" Value="GreenYellow"/>
-                        </Trigger>
-                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Background" Value="Black"   />
+                <Setter Property="Foreground" Value="WhiteSmoke"/>
+            </Trigger>
+        </Style.Triggers>
     </Style>
     
     <!-- DataGrid Headers -->
@@ -551,10 +566,13 @@
     </Style>
 
     <!-- Same for checkbox columns -->
-    <Style x:Key="DataGridColumnStyleChkbx" TargetType="CheckBox">
+    <Style x:Key="DataGridColumnStyleChkbx" TargetType="CheckBox" 
+           BasedOn="{StaticResource MaterialDesignDarkCheckBox}">
         <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
         <Setter Property="TextBlock.TextAlignment" Value="Center"/>
         <Setter Property="TextBlock.VerticalAlignment" Value="Center"/>
+        <Setter Property="materialDesign:CheckBoxAssist.CheckBoxSize" Value="25"/>
+
     </Style>
 
     <!-- DataGrid Row -->
@@ -563,7 +581,8 @@
     </Style>
     
     <!-- Filters -->
-    <Style x:Key="LMS_Filters" TargetType="TextBox" BasedOn="{StaticResource MaterialDesignFilledTextBox}">
+    <Style x:Key="LMS_Filters" TargetType="TextBox" 
+           BasedOn="{StaticResource MaterialDesignFilledTextBox}">
 
         <Setter Property="Height" Value="50"/>
         <Setter Property="IsEnabled" Value="true"/>
@@ -578,7 +597,8 @@
     </Style>
 
     <!-- DataGrids -->
-    <Style x:Key="LMS_DataGrids" TargetType="DataGrid" BasedOn="{StaticResource MaterialDesignDataGrid}">
+    <Style x:Key="LMS_DataGrids" TargetType="DataGrid" 
+           BasedOn="{StaticResource MaterialDesignDataGrid}">
 
         <Setter Property="AutoGenerateColumns" Value="False"/>
         <Setter Property="CanUserAddRows" Value="False"/>

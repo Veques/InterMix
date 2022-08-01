@@ -64,7 +64,7 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
         private void AddBook()
         {
             AddBookWindow window = new();
-            window.Show();
+            window.ShowDialog();
         }
 
         #endregion
@@ -159,20 +159,17 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
         {
             using var db = new ApplicationDbContext();
 
-
-
             foreach(var user in db.Users.Where(d => d.Username.Equals("Admin")))
             {
                 user.Password = FirstPin;
             }
             if (db.SaveChanges() > 0)
             {
-                _ = new CustomizedMessageBox("Zapisano", MessageType.Success, MessageButton.Ok).ShowDialog();
-
+                _ = new CustomizedMessageBox("Saved!", MessageType.Success, MessageButton.Ok).ShowDialog();
             }
             else
             {
-                _ = new CustomizedMessageBox("Wystąpił błąd ", MessageType.Error, MessageButton.Ok).ShowDialog();
+                _ = new CustomizedMessageBox("Error has occured - try another PIN", MessageType.Error, MessageButton.Ok).ShowDialog();
 
             }
         }

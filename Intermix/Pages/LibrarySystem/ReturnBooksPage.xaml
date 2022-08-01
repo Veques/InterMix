@@ -49,6 +49,9 @@
 
             <DataGrid Grid.Row="1" Name="Grid" ItemsSource="{Binding ReturnBooksCollectionView}"
                    CellStyle="{StaticResource DataGridCell}" Style="{StaticResource LMS_DataGrids}">
+                <DataGrid.Resources>
+                    <SolidColorBrush x:Key="MaterialDesignTextBoxBorder" Color="Transparent"/>
+                </DataGrid.Resources>
                 <DataGrid.Columns>
                     <DataGridCheckBoxColumn ElementStyle="{StaticResource DataGridColumnStyleChkbx}" 
                                             HeaderStyle="{StaticResource DataGridHeader}" Width="130" 
@@ -74,9 +77,13 @@
             </DataGrid>
         </Grid>
 
-        <StackPanel Grid.Row="2" Margin="5 0 5 10">
+        <StackPanel Grid.Row="2">
 
-            <Button Content="Oddaj" Style="{StaticResource LW_Buttons}" Command="{Binding ReturnBooksCommand}"/>
+            <Button Style="{StaticResource LMS_MainButtons}" Width="170" Height="40" Command="{Binding ReturnBooksCommand}">
+                <Button.Content>
+                    <TextBlock FontWeight="SemiBold" FontSize="18" Text="Return"/>
+                </Button.Content>
+            </Button>
 
         </StackPanel>
 

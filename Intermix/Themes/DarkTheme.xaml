@@ -45,6 +45,6 @@
     <Color x:Key="LMS_HoverColor">#1BE4BB</Color> 
     
     <!-- Custom MessageBox Colors -->
-    <SolidColorBrush x:Key="MB_ButtonBackground" Color="#9933FF"/>
-    <SolidColorBrush x:Key="MB_Background" Color="{DynamicResource BackgroundBackButton}"/>
+
+    <SolidColorBrush x:Key="MB_Background" Color="#2F2F2F"/>
 </ResourceDictionary>

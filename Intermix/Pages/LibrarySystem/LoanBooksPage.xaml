@@ -50,8 +50,11 @@
 
             <DataGrid Grid.Row="1" Name="Grid" ItemsSource="{Binding LoanBooksCollectionView}"
                   CellStyle="{StaticResource DataGridCell}" Style="{StaticResource LMS_DataGrids}"
-                  RowStyle="{StaticResource DataGridRow}" >
-
+                  RowStyle="{StaticResource DataGridRow}">
+                <DataGrid.Resources>
+                    <SolidColorBrush x:Key="MaterialDesignTextBoxBorder" Color="Transparent"/>
+                </DataGrid.Resources>
+                
                 <DataGrid.Columns>
                     <DataGridCheckBoxColumn ElementStyle="{StaticResource DataGridColumnStyleChkbx}" HeaderStyle="{StaticResource DataGridHeader}" Width="120" Binding="{Binding IsChecked, UpdateSourceTrigger=PropertyChanged}">
                         <DataGridCheckBoxColumn.Header>
@@ -76,8 +79,12 @@
             
         </Grid>
             <StackPanel Grid.Row="2">
-                <Button HorizontalAlignment="Center" Content="Wypożycz" Style="{StaticResource LW_Buttons}"
-                        Command="{Binding LoanCommand}" ToolTip="Wypożycz książki"/>
+                <Button HorizontalAlignment="Center" Style="{StaticResource LMS_MainButtons}"
+                            Command="{Binding LoanCommand}" ToolTip="Wypożycz książki" Width="170" Height="40">
+                    <Button.Content>
+                        <TextBlock FontWeight="SemiBold" FontSize="18" Text="Loan"/>
+                    </Button.Content>
+                </Button>
             </StackPanel>
         
     </Grid>

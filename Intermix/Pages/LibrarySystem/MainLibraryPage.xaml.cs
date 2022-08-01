@@ -48,23 +48,25 @@ namespace Intermix.Pages.LibrarySystem
         private void LoanBooks_Click(object sender, RoutedEventArgs e)
         {
             LoanBooksPage page = new();
-            NavigationService.Navigate(page);       
+            NavigationService.Navigate(page);
+
+            
+
         }
         private void ReturnBooks_Click(object sender, RoutedEventArgs e)
         {
             ReturnBooksPage page = new();
             NavigationService.Navigate(page);
+
+
         }
         private void BrowseBooks_Click(object sender, RoutedEventArgs e)
         {
-            Dispatcher.Invoke(() =>
-            {
-                LibraryMainWindowViewModel.Instance.LoadingVisibility = Visibility.Collapsed;
-
-            });
 
             BrowseBooksPage page = new();
             NavigationService.Navigate(page);
+
+
         }
         private void PswdBox_PasswordChanged(object sender, RoutedEventArgs e)
         {
@@ -77,6 +79,8 @@ namespace Intermix.Pages.LibrarySystem
                 if (PswdBox.Password.Equals(PIN))
                 {
                     NavigationService.Navigate(page);
+
+
                 }
                 else
                 {

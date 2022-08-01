@@ -26,6 +26,9 @@
 
         <DataGrid Name="Grid" Grid.Row="1" ItemsSource="{Binding BooksCollectionView}" 
                   CellStyle="{StaticResource DataGridCell}" Style="{StaticResource LMS_DataGrids}">
+            <DataGrid.Resources>
+                <SolidColorBrush x:Key="MaterialDesignTextBoxBorder" Color="Transparent"/>
+            </DataGrid.Resources>
             <DataGrid.Columns>
                 <DataGridTextColumn ElementStyle="{StaticResource DataGridColumnStyle}" 
                                     HeaderStyle="{StaticResource DataGridHeader}" Header="ID" Binding="{Binding Id}" Width="70"/>

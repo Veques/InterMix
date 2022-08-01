@@ -35,7 +35,7 @@ namespace Intermix.Views
 
                 case MessageType.Confirmation:
                         txtTitle.Text = "Confirmation";
-                        cardHeader.Background = Brushes.DarkBlue;   
+                        cardHeader.Background = Brushes.Cyan;   
                     break;
 
                 case MessageType.Success:

@@ -20,6 +20,7 @@ namespace Intermix.ViewModels
         public ICommand AddBookCommand { get; set; }
         public AddBookViewModel()
         {
+            PublishDate = DateTime.Now.Date;
 
             var defaultDate = new DateTime(1000, 01, 01);
             AddBookCommand = new RelayCommand(
@@ -43,12 +44,18 @@ namespace Intermix.ViewModels
                 AuthorName = AuthorName,
                 AuthorSurname = AuthorSurname,
                 PublishDate = PublishDate,
-                Publisher = Publisher
+                Publisher = Publisher,
+                IsAvailable = 1
+                
             });
 
             if (db.SaveChanges() > 0)
             {
-                _ = new CustomizedMessageBox("Rekord został dodany", MessageType.Information, MessageButton.Ok).ShowDialog();
+                _ = new CustomizedMessageBox("Book has been added", MessageType.Information, MessageButton.Ok).ShowDialog();
+                Title = String.Empty;
+                AuthorName = String.Empty;
+                AuthorSurname = String.Empty;
+                Publisher = String.Empty;
             }
 
         }

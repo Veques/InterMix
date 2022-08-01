@@ -26,7 +26,7 @@
         
         <Button ToolTip="Zmiana PIN konta Admina">
             <Button.Content>
-                <TextBlock TextWrapping="WrapWithOverflow" Text="Zmień PIN" TextBlock.TextAlignment="Center"/>
+                <TextBlock TextWrapping="WrapWithOverflow" Text="Change PIN" TextBlock.TextAlignment="Center"/>
             </Button.Content>
             <Button.Style>
                 <Style TargetType="Button" BasedOn="{StaticResource LMS_MainButtons}">
@@ -90,35 +90,35 @@
             </Button.Style>
         </Button>
 
-        <Button Grid.Column="1" IsEnabled="{Binding IsEnabled}" Command="{Binding ImportBooksCommand}" Style="{StaticResource LMS_MainButtons}" ToolTip="Kliknięcie przycisku Wypełni bazę danych książkami z załączonego w projekcie Pliku Excel">
+        <Button Grid.Column="1" IsEnabled="{Binding IsEnabled}" Command="{Binding ImportBooksCommand}" Style="{StaticResource LMS_MainButtons}" ToolTip="Kliknięcie przycisku wypełni bazę danych książkami z załączonego w projekcie Pliku Excel">
             <Button.Content>
-                <TextBlock TextWrapping="WrapWithOverflow" Text="Wypełnij Bazę Danych" TextBlock.TextAlignment="Center"/>
+                <TextBlock TextWrapping="WrapWithOverflow" Text="Add book to database" TextBlock.TextAlignment="Center"/>
             </Button.Content>
         </Button>
         
 
         <Button Grid.Column="2" Style="{StaticResource LMS_MainButtons}" Command="{Binding AddBookCommand}" ToolTip="Umożliwia dodanie nowej książki możliwej do wypożyczenia">
             <Button.Content>
-                <TextBlock TextWrapping="WrapWithOverflow" Text="Dodaj książkę do Bazy Danych" TextBlock.TextAlignment="Center"/>
+                <TextBlock TextWrapping="WrapWithOverflow" Text="Add new book to database" TextBlock.TextAlignment="Center"/>
             </Button.Content>
         </Button>
         
-        <Button Grid.Column="3"  Style="{StaticResource LMS_MainButtons}" ToolTip="Zmiana PIN konta Admina">
+        <Button Grid.Column="3"  Style="{StaticResource LMS_MainButtons}" ToolTip="Anuluj rezerwacje">
             <Button.Content>
-                <TextBlock TextWrapping="WrapWithOverflow" Text="Sprawdź wszystkie wypożyczenia" TextBlock.TextAlignment="Center"/>
+                <TextBlock TextWrapping="WrapWithOverflow" Text="Cancel Reservations" TextBlock.TextAlignment="Center"/>
             </Button.Content>
         </Button>
         
-        <Button Grid.Column="4"  Style="{StaticResource LMS_MainButtons}" Click="AllLoand_Click" ToolTip="Zmiana PIN konta Admina">
+        <Button Grid.Column="4"  Style="{StaticResource LMS_MainButtons}" Click="AllLoand_Click" ToolTip="Przeglądaj wszystkie wypożyczenia">
             <Button.Content>
-                <TextBlock TextWrapping="WrapWithOverflow" Text="Sprawdź wszystkie wypożyczenia" TextBlock.TextAlignment="Center"/>
+                <TextBlock TextWrapping="WrapWithOverflow" Text="Browse all loans" TextBlock.TextAlignment="Center"/>
             </Button.Content>
         </Button>
 
 
         <Button Grid.Row="1" Grid.Column="2" Style="{StaticResource LMS_MainButtons}" Height="70" ToolTip="Zmiana PIN konta Admina" Click="Button_Click">
             <Button.Content>
-                <TextBlock TextWrapping="WrapWithOverflow" Text="Powrót" TextBlock.TextAlignment="Center"/>
+                <TextBlock TextWrapping="WrapWithOverflow" Text="Back" TextBlock.TextAlignment="Center"/>
             </Button.Content>
         </Button>
 

@@ -47,7 +47,7 @@ namespace Intermix.Pages.MainWindow
                 case "LibraryManagementSystem":
 
                     LoginWindow loginWindow = new();
-                    loginWindow.Show();
+                    loginWindow.ShowDialog();
                     break;
 
             }
