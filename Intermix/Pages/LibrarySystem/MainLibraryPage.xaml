@@ -6,42 +6,62 @@
       xmlns:local="clr-namespace:Intermix.Pages.LibrarySystem" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
       xmlns:librarysystem="clr-namespace:Intermix.ViewModels.LibrarySystem" d:DataContext="{d:DesignInstance Type=librarysystem:MainLibraryPageViewModel}"
       mc:Ignorable="d" Name="Page"
+      d:DesignHeight="450" d:DesignWidth="800"
       Title="MainLibraryPage">
     <Grid x:Name="Grid">
 
-        
 
-        <UniformGrid Width="350" Height="320" VerticalAlignment="Bottom" Columns="2">
 
-            <Button Style="{StaticResource LMS_MainButtons}" Click="LoanBooks_Click" >
+        <UniformGrid Grid.RowSpan="2" Width="350" Height="410" VerticalAlignment="Bottom" HorizontalAlignment="Center" Columns="2" >
+
+            <Button Style="{StaticResource LMS_MainButtons}" Click="Reservations_Click" Grid.ColumnSpan="2" ToolTip="Rezerwacja książek">
+                <Button.Content>
+                    <StackPanel>
+                        <materialDesign:PackIcon Kind="BookClock" Width="70" Height="70" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <TextBlock Text="New Reservation" VerticalAlignment="Center" Margin="0 5 0 0" HorizontalAlignment="Center" FontWeight="SemiBold"/>
+                    </StackPanel>
+                </Button.Content>
+            </Button>
+
+            <Button Style="{StaticResource LMS_MainButtons}" Click="YourReservations_Click" Grid.ColumnSpan="2" ToolTip="Zarządzaj rezerwacjami" IsEnabled="{Binding YourReservationsEnabled}">
+                <Button.Content>
+                    <StackPanel>
+                        <materialDesign:PackIcon Kind="BookAccount" Width="70" Height="70" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <TextBlock Text="Your Reservation" VerticalAlignment="Center" Margin="0 5 0 0" HorizontalAlignment="Center" FontWeight="SemiBold"/>
+                    </StackPanel>
+                </Button.Content>
+            </Button>
+
+
+            <Button Style="{StaticResource LMS_MainButtons}" Click="LoanBooks_Click" Grid.Row="1" >
                 <Button.Content>
                     <StackPanel>
                         <materialDesign:PackIcon  Kind="BookArrowRight" Width="70" Height="70" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        <TextBlock Text="Wypożycz książki" VerticalAlignment="Center" Margin="0 5 0 0" HorizontalAlignment="Center" FontWeight="SemiBold"/>
+                        <TextBlock Text="Loan books" VerticalAlignment="Center" Margin="0 5 0 0" HorizontalAlignment="Center" FontWeight="SemiBold"/>
                     </StackPanel>
                 </Button.Content>
-
             </Button>
-            <Button Style="{StaticResource LMS_MainButtons}" Click="ReturnBooks_Click" >
+
+            <Button Style="{StaticResource LMS_MainButtons}" Grid.Column="1" Grid.Row="1" Click="ReturnBooks_Click" ToolTip="Oddaj książki">
                 <Button.Content>
                     <StackPanel>
                         <materialDesign:PackIcon Kind="BookArrowLeft" Width="70" Height="70" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        <TextBlock Text="Oddaj książki" VerticalAlignment="Center" Margin="0 5 0 0" HorizontalAlignment="Center" FontWeight="SemiBold"/>
+                        <TextBlock Text="Return books" VerticalAlignment="Center" Margin="0 5 0 0" HorizontalAlignment="Center" FontWeight="SemiBold"/>
                     </StackPanel>
                 </Button.Content>
-
             </Button>
-            <Button Style="{StaticResource LMS_MainButtons}" Click="BrowseBooks_Click" >
+
+            <Button Style="{StaticResource LMS_MainButtons}" Click="BrowseBooks_Click" Grid.Row="2" 
+                    ToolTip="Przeglądaj książki">
                 <Button.Content>
                     <StackPanel>
                         <materialDesign:PackIcon Kind="BookSearch" Width="70" Height="70" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        <TextBlock Text="Przeglądaj książki" VerticalAlignment="Center" Margin="0 5 0 0" HorizontalAlignment="Center" FontWeight="SemiBold"/>
+                        <TextBlock Text="Browse books" VerticalAlignment="Center" Margin="0 5 0 0" HorizontalAlignment="Center" FontWeight="SemiBold"/>
                     </StackPanel>
                 </Button.Content>
-
             </Button>
 
-            <Button Name="AdminButton" >
+            <Button Name="AdminButton" Grid.Column="1" Grid.Row="2" ToolTip="Karta Admina">
                 <Button.Content>
                     <StackPanel>
                         <materialDesign:PackIcon Kind="StarCircle" Width="70" Height="70" HorizontalAlignment="Center" VerticalAlignment="Center"/>
@@ -109,7 +129,27 @@
             </Button>
         </UniformGrid>
 
-        <materialDesign:DrawerHost Grid.RowSpan="2" x:Name="DrawerHostLeft" Width="300" 
+
+        <!--<materialDesign:TransitioningContent VerticalAlignment="Top" 
+                                             HorizontalAlignment="Right" Margin="0 0 15 0">
+            <materialDesign:TransitioningContent.OpeningEffects >
+                <materialDesign:TransitionEffect Kind="FadeIn" />
+                <materialDesign:TransitionEffect Kind="SlideInFromRight" />
+            </materialDesign:TransitioningContent.OpeningEffects>
+
+
+            <Border Background="white" Width="160" Height="50" HorizontalAlignment="Center" CornerRadius="8" VerticalAlignment="Center" >
+                <StackPanel Orientation="Horizontal">
+                    <materialDesign:PackIcon Kind="PlusBold" VerticalAlignment="Center" HorizontalAlignment="Left" Width="30"
+                                                 Height="30" Margin="5 0 0 0"/>
+                    <TextBlock FontWeight="SemiBold" Text="New notification/s" VerticalAlignment="Center" HorizontalAlignment="Center" 
+                                   Margin="8 0 0 0"/>
+                </StackPanel>
+            </Border>
+        </materialDesign:TransitioningContent>-->
+
+        
+        <materialDesign:DrawerHost x:Name="DrawerHostLeft" Width="300" 
                                         HorizontalAlignment="Left" VerticalAlignment="Center" 
                                         LeftDrawerCornerRadius="0 10 10 0" ScrollViewer.CanContentScroll="True">
 
@@ -120,37 +160,37 @@
                     <Style TargetType="Border">
                         <Setter Property="Background" Value="WhiteSmoke"/>
                         <Style.Triggers>
-                                <Trigger Property="Border.IsMouseOver" Value="True">
-                                    <Setter Property="Effect">
-                                        <Setter.Value>
-                                            <DropShadowEffect BlurRadius="15" ShadowDepth="2" Color="{DynamicResource LW_onHoverShadow}"  Opacity="0.25"/>
-                                        </Setter.Value>
-                                    </Setter>
-                                </Trigger>
-                                <Trigger Property="Border.IsMouseOver" Value="True">
-                                    <Trigger.EnterActions>
-                                        <BeginStoryboard>
-                                            <Storyboard>
-                                                <ThicknessAnimation Duration="0:0:0.200" To="0" 
+                            <Trigger Property="Border.IsMouseOver" Value="True">
+                                <Setter Property="Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect BlurRadius="15" ShadowDepth="2" Color="{DynamicResource LW_onHoverShadow}"  Opacity="0.25"/>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                            <Trigger Property="Border.IsMouseOver" Value="True">
+                                <Trigger.EnterActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <ThicknessAnimation Duration="0:0:0.200" To="0" 
                                                             Storyboard.TargetProperty="BorderThickness"  />
-                                            </Storyboard>
-                                        </BeginStoryboard>
-                                    </Trigger.EnterActions>
-                                    <Trigger.ExitActions>
-                                        <BeginStoryboard>
-                                            <Storyboard>
-                                                <ThicknessAnimation Duration="0:0:0.200" To="0 2.5 2.5 2.5" 
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.EnterActions>
+                                <Trigger.ExitActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <ThicknessAnimation Duration="0:0:0.200" To="0 2.5 2.5 2.5" 
                                                             Storyboard.TargetProperty="BorderThickness" FillBehavior="HoldEnd" />
-                                            </Storyboard>
-                                        </BeginStoryboard>
-                                    </Trigger.ExitActions>
-                                </Trigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Border.Style>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.ExitActions>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Border.Style>
 
                 <Button Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand}" 
-                        CommandParameter="{x:Static Dock.Left}" Width="auto" Height="auto" 
+                        CommandParameter="{x:Static Dock.Left}" Width="100" Height="100" 
                         Background="Transparent" BorderThickness="0" >
 
                     <materialDesign:PackIcon Kind="AccountSchool" Foreground="Black" 
@@ -174,10 +214,10 @@
 
                     </StackPanel>
                     <Border Height="480" >
-
-                        <TreeView Margin="0 0 0 10" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Width="295" ScrollViewer.CanContentScroll="True"
-                                  DisplayMemberPath="Title"  ItemsSource="{Binding LoanedBooks}">
-                            <materialDesign:TreeViewAssist.AdditionalTemplate>
+                        <TreeView Margin="0 4 0 10" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Width="295" ScrollViewer.CanContentScroll="True"
+                                  DisplayMemberPath="Title" ItemsSource="{Binding LoanedBooks}">
+    
+                                    <materialDesign:TreeViewAssist.AdditionalTemplate>
                                 <DataTemplate>
                                     <Grid TextElement.FontSize="10" TextElement.FontStyle="Italic" Margin="8 0 0 0">
                                         <Grid.ColumnDefinitions>
@@ -214,11 +254,13 @@
 
         </materialDesign:DrawerHost>
 
-        <materialDesign:DrawerHost Grid.RowSpan="2" x:Name="DrawerHostRight" Width="300" 
-                                        HorizontalAlignment="Right" VerticalAlignment="Center" 
-                                        RightDrawerCornerRadius="0" ScrollViewer.CanContentScroll="True">
-        <Border CornerRadius="30 0 0 30" Background="WhiteSmoke" HorizontalAlignment="Right"                   VerticalAlignment="Center" Height="100" 
-                Width="100" BorderBrush="Black" BorderThickness="2">
+        
+        <materialDesign:DrawerHost x:Name="DrawerHostRight" Width="300" 
+                                        HorizontalAlignment="Right" VerticalAlignment="Center">
+            <materialDesign:Badged Badge="{Binding NotificationsCount}" VerticalAlignment="Center" HorizontalAlignment="Right" 
+                                   BadgePlacementMode="Left" BadgeBackground="WhiteSmoke">
+                
+            <Border CornerRadius="30 0 0 30" Background="WhiteSmoke" BorderBrush="Black" BorderThickness="2">
                 <Border.Style>
                     <Style TargetType="Border">
                         <Setter Property="Background" Value="WhiteSmoke"/>
@@ -251,14 +293,15 @@
                         </Style.Triggers>
                     </Style>
                 </Border.Style>
-
                 <Button Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand}" 
-                        CommandParameter="{x:Static Dock.Right}" Width="auto" Height="auto" 
-                        Background="Transparent" BorderThickness="0" >
+                        CommandParameter="{x:Static Dock.Right}" Width="100" Height="100" 
+                        Background="Transparent" BorderThickness="0">
 
                     <materialDesign:PackIcon Kind="Bell" Foreground="Black"  Width="50" Height="50"/>
                 </Button>
             </Border>
+            </materialDesign:Badged>
+
 
             <materialDesign:DrawerHost.RightDrawerContent>
                 <StackPanel Width="300" Background="WhiteSmoke" Margin="0 0 0 0" >
@@ -271,16 +314,16 @@
                                                          Width="25" Height="25" HorizontalAlignment="Center"/>
                         </Button.Content>
                     </Button>
-                        <TextBlock Text="Notifications" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="SemiBold" FontSize="16"/>
+                    <TextBlock Text="Notifications" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="SemiBold" FontSize="16"/>
                     <Border Height="490" >
 
-                        <TreeView Margin="0 0 0 10" ScrollViewer.HorizontalScrollBarVisibility="Disabled" FontWeight="Bold" Width="295" ScrollViewer.CanContentScroll="True"
+                        <TreeView Margin="0 3 0 10" ScrollViewer.HorizontalScrollBarVisibility="Disabled" FontWeight="Bold" Width="295" ScrollViewer.CanContentScroll="True"
                                   DisplayMemberPath="Title"  ItemsSource="{Binding Notifications}">
 
                             <materialDesign:TreeViewAssist.AdditionalTemplate>
                                 <DataTemplate>
                                     <Grid TextElement.FontSize="10" TextElement.FontStyle="Italic" TextElement.FontWeight="Regular" Margin="10 0 0 0">
-                                        
+
                                         <StackPanel Margin="0 0 0 7" Orientation="Horizontal" HorizontalAlignment="Left">
                                             <TextBlock Foreground="{Binding ExpiringNotifForeground, UpdateSourceTrigger=PropertyChanged}" Text="Return book before: " />
                                             <TextBlock Foreground="{Binding ExpiringNotifForeground, UpdateSourceTrigger=PropertyChanged}" Text="{Binding ReturnDate, StringFormat='{} {0:dd.MM.yyyy}'}" />

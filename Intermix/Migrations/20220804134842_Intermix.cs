@@ -20,7 +20,8 @@ namespace Intermix.Migrations
                     AuthorSurname = table.Column<string>(type: "TEXT", nullable: true),
                     PublishDate = table.Column<DateTime>(type: "TEXT", nullable: false),
                     Publisher = table.Column<string>(type: "TEXT", nullable: true),
-                    IsAvailable = table.Column<int>(type: "INTEGER", nullable: false)
+                    IsAvailable = table.Column<int>(type: "INTEGER", nullable: false),
+                    IsReserved = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -41,6 +42,22 @@ namespace Intermix.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Loans", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Reservations",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    BookId = table.Column<int>(type: "INTEGER", nullable: false),
+                    UserId = table.Column<int>(type: "INTEGER", nullable: false),
+                    ExpectedReturn = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    ReturnDate = table.Column<DateTime>(type: "TEXT", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Reservations", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -67,6 +84,9 @@ namespace Intermix.Migrations
 
             migrationBuilder.DropTable(
                 name: "Loans");
+
+            migrationBuilder.DropTable(
+                name: "Reservations");
 
             migrationBuilder.DropTable(
                 name: "Users");

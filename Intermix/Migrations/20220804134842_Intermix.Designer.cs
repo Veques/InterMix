@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Intermix.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220715230209_Intermix")]
+    [Migration("20220804134842_Intermix")]
     partial class Intermix
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -32,6 +32,9 @@ namespace Intermix.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<int>("IsAvailable")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("IsReserved")
                         .HasColumnType("INTEGER");
 
                     b.Property<DateTime>("PublishDate")
@@ -70,6 +73,29 @@ namespace Intermix.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Loans");
+                });
+
+            modelBuilder.Entity("Intermix.Models.Reservations", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("BookId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("ExpectedReturn")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("ReturnDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Reservations");
                 });
 
             modelBuilder.Entity("Intermix.Models.Users", b =>

@@ -19,6 +19,13 @@
             </Grid.RowDefinitions>
 
             <Grid Grid.Column="1">
+                <Grid.Background>
+                    <SolidColorBrush Color="Black" Opacity="0.2"/>
+                </Grid.Background>
+
+                <TextBlock Text="{Binding Date}" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="WhiteSmoke" 
+                           FontSize="23" FontWeight="DemiBold" Margin="15 0 0 0"/>
+
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Center">
                     <Button Style="{StaticResource LMS_WindowButtons}" Click="Exit_Click" >
                         <Button.Content>
@@ -26,16 +33,13 @@
                         </Button.Content>
                     </Button>
                 </StackPanel>
-                <!--<TextBlock Text="Ładowanie" Margin="0 0 0 2" Foreground="White" VerticalAlignment="Bottom" Visibility="{Binding LoadingVisibility}" 
-                           HorizontalAlignment="Center"/>
-                <ProgressBar IsIndeterminate="True" Height="4" VerticalAlignment="Bottom" Background="Transparent" 
-                             Foreground="red" Visibility="{Binding LoadingVisibility, FallbackValue=Visibility.Collapsed}" 
-                             BorderBrush="Transparent"/>-->
+
+                <TextBlock Text="{Binding Time}" VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="23" 
+                           Foreground="WhiteSmoke" FontWeight="DemiBold" Margin="0 0 15 0"/>
 
             </Grid>
 
             <Grid Grid.Row="1" >
-
                 <Frame Source="/Pages/LibrarySystem/MainLibraryPage.xaml" NavigationUIVisibility="Hidden" Grid.ColumnSpan="2"/>
             </Grid>
 

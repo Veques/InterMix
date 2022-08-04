@@ -89,5 +89,17 @@ namespace Intermix.Pages.LibrarySystem
                 }
             }
         }
+
+        private void Reservations_Click(object sender, RoutedEventArgs e)
+        {
+            ReservationsPage page = new();
+            NavigationService.Navigate(page);
+        }
+
+        private void YourReservations_Click(object sender, RoutedEventArgs e)
+        {
+            YourReservationsPage page = new();
+            NavigationService.Navigate(page);
+        }
     }
 }

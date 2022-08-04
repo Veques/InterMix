@@ -45,7 +45,8 @@ namespace Intermix.ViewModels
                 AuthorSurname = AuthorSurname,
                 PublishDate = PublishDate,
                 Publisher = Publisher,
-                IsAvailable = 1
+                IsAvailable = 1,
+                IsReserved = 0
                 
             });
 

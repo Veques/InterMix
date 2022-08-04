@@ -33,15 +33,17 @@ namespace Intermix.ViewModels.LibrarySystem
         }
         #endregion
 
+        #region Constructor
         public MainLibraryPageViewModel()
         {
+
             LoggedUser = LoginPageViewModel.User;
             UserId = LoginPageViewModel.UserId;
+            using var db = new ApplicationDbContext();
 
 
 
             LoanedBooks = new();
-            using var db = new ApplicationDbContext();
             foreach (var loanElement in db.Loans.Where(x => x.UserId == UserId))
             {
                 foreach (var bookElement in db.Books.Where(x => x.Id == loanElement.BookId))
@@ -56,9 +58,53 @@ namespace Intermix.ViewModels.LibrarySystem
                     });
                 }
             }
-            CheckDateAndAddNotifications();
 
+            ManageDateChanges();
+
+            if (db.Reservations.Any(x => x.UserId == LoginPageViewModel.UserId))
+            {
+                YourReservationsEnabled = true;
+            }
+            else
+            {
+                YourReservationsEnabled = false;
+            }
+            CheckDateAndAddNotifications();
         }
+        #endregion
+
+        #region Automatic returns to make reservations work 
+        private void ManageDateChanges()
+        {
+
+            using var db = new ApplicationDbContext();
+
+            foreach(var element in db.Books)
+            {
+                foreach (var reservation in db.Reservations.Where(x => x.BookId == element.Id))
+                {
+
+                    if(DateTime.Now.Date >= reservation.ExpectedReturn.Date && element.IsReserved == 0)
+                    {
+                        element.IsAvailable = 1;
+                        db.Loans.RemoveRange(db.Loans.Where(x => x.BookId == element.Id));
+
+                        db.SaveChanges();
+                    }
+
+
+                    if (element.IsReserved == 1 && DateTime.Now.Date > reservation.ExpectedReturn.Date.AddDays(2))
+                    { 
+                        element.IsReserved = 0;
+                        db.SaveChanges();
+                    }
+                }
+            }
+        }
+
+        #endregion
+
+        #region Notification
         private void CheckDateAndAddNotifications()
         {
             DateTime date = DateTime.Now.Date;
@@ -68,7 +114,7 @@ namespace Intermix.ViewModels.LibrarySystem
             {
                 var timeSpan = loanedBook.ReturnDate.Subtract(date);
 
-                if (timeSpan.TotalDays <= 3)
+                if (timeSpan.TotalDays <= 5)
                 {
 
                     Notifications.Add(new Notification
@@ -79,25 +125,17 @@ namespace Intermix.ViewModels.LibrarySystem
 
                     });
 
-                    NewNotificationVisibility = Visibility.Visible;
                     NotificationsCount += 1;
                 }
             }
         }
 
+        #endregion
+
+        #region Properties
 
         public int UserId { get; private set; }
 
-        private Visibility _mainTabsVisibiliy = Visibility.Visible;
-        public Visibility MainTabsVisibility
-        {
-            get { return _mainTabsVisibiliy; }
-            set
-            {
-                _mainTabsVisibiliy = value;
-                OnPropertyChanged("MainTabsVisibility");
-            }
-        }
 
         private Visibility _newNotificationVisibility = Visibility.Collapsed;
 
@@ -159,6 +197,17 @@ namespace Intermix.ViewModels.LibrarySystem
             }
         }
 
+        private bool _yourReservationsEnabled;
 
+        public bool YourReservationsEnabled
+        {
+            get { return _yourReservationsEnabled; }
+            set { _yourReservationsEnabled = value;
+                OnPropertyChanged("YourReservationsEnabled");
+            }
+        }
+
+
+        #endregion
     }
 }

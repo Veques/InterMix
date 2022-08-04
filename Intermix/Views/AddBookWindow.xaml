@@ -23,12 +23,6 @@
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="materialDesign:CalendarAssist.HeaderForeground" Value="red"/>
 
-            <Style.Resources>
-                <Style TargetType="{x:Type Button}" BasedOn="{StaticResource BaseStyle}">
-                    <Setter Property="Background" Value="red" />
-                </Style>
-            </Style.Resources>
-            
         </Style>
 
     </Window.Resources>

@@ -103,7 +103,8 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
                             AuthorSurname = dr["Surname"].ToString(),
                             PublishDate = (DateTime)dr["DataWydania"],
                             Publisher = dr["Wydawnictwo"].ToString(),
-                            IsAvailable = 1
+                            IsAvailable = 1,
+                            IsReserved = 0
                         }).ToList();
 
                 foreach (Books item in list)

@@ -451,8 +451,7 @@
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
                     <Border BorderThickness="0" Background="WhiteSmoke" CornerRadius="6" Opacity="0.6">
-                        <ContentPresenter HorizontalAlignment="Center"
-                       VerticalAlignment="Center" />
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
                         <Border.Style>
                             <Style TargetType="Border">
                                 <Setter Property="BorderThickness" Value="3"/>
@@ -523,6 +522,9 @@
                                             </BeginStoryboard>
                                         </Trigger.ExitActions>
                                     </Trigger>
+                                        <Trigger Property="IsEnabled" Value="false">
+                                            <Setter Property="Background" Value="Gray"/>
+                                        </Trigger>
                                 </Style.Triggers>
                             </Style>
                         </Border.Style>
@@ -572,7 +574,6 @@
         <Setter Property="TextBlock.TextAlignment" Value="Center"/>
         <Setter Property="TextBlock.VerticalAlignment" Value="Center"/>
         <Setter Property="materialDesign:CheckBoxAssist.CheckBoxSize" Value="25"/>
-
     </Style>
 
     <!-- DataGrid Row -->

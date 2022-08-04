@@ -17,7 +17,7 @@
         </Grid.RowDefinitions>
 
         <Grid VerticalAlignment="Center" HorizontalAlignment="Center" >
-            <Button Click="Back_Click" Style="{StaticResource LMS_WindowButtons}" Background="red" >
+            <Button Click="Back_Click" Style="{StaticResource LMS_WindowButtons}" >
                 <materialDesign:PackIcon Kind="Play" Foreground="black" Width="30" Height="30">
                     <materialDesign:PackIcon.LayoutTransform>
                         <RotateTransform Angle="180"/>
@@ -25,6 +25,7 @@
                 </materialDesign:PackIcon>
             </Button>
         </Grid>
+
 
         <Grid Grid.Row="1">
 
@@ -37,17 +38,16 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
 
-            <StackPanel Orientation="Horizontal" Width="{Binding ActualWidth, ElementName=Grid}">
-                <StackPanel.Background>
-                    <SolidColorBrush Color="black" Opacity="0.3"/>
-                </StackPanel.Background>
-                <TextBox Name="Title" Style="{StaticResource LMS_Filters}" Text="{Binding TitleFilter, UpdateSourceTrigger=PropertyChanged}" Margin="120 0 0 0" Width="250"/>
-                <TextBox Name="Author" Style="{StaticResource LMS_Filters}" Text="{Binding NameFilter, UpdateSourceTrigger=PropertyChanged}"  Margin="1 0 0 0" Width="150"/>
-                <TextBox Name="PublishDate"  Style="{StaticResource LMS_Filters}" Text="{Binding PublishDateFilter, UpdateSourceTrigger=PropertyChanged}" Margin="1 0 0 0" Width="150"/>
-                <TextBox Name="Publisher"  Style="{StaticResource LMS_Filters}" Text="{Binding PublisherFilter, UpdateSourceTrigger=PropertyChanged}" Margin="1 0 0 0" Width="200"/>
-            </StackPanel>
-
-
+        <StackPanel Orientation="Horizontal" Width="{Binding ActualWidth, ElementName=Grid}">
+            <StackPanel.Background>
+                <SolidColorBrush Color="black" Opacity="0.3"/>
+            </StackPanel.Background>
+                <TextBox Name="TitleFilter" Style="{StaticResource LMS_Filters}" Text="{Binding TitleFilter, UpdateSourceTrigger=PropertyChanged}" Margin="60 0 0 0" Width="320"/>
+                <TextBox Name="AuthorFilter" Style="{StaticResource LMS_Filters}"  Text="{Binding AuthorFilter, UpdateSourceTrigger=PropertyChanged}" Margin="1 0 0 0" Width="150"/>
+                <TextBox Name="PublishDateFilter"  Style="{StaticResource LMS_Filters}" Text="{Binding PublishDateFilter, UpdateSourceTrigger=PropertyChanged}" Margin="1 0 0 0" Width="150"/>
+                <TextBox Name="PublisherFilter"  Style="{StaticResource LMS_Filters}" Text="{Binding PublisherFilter, UpdateSourceTrigger=PropertyChanged}" Margin="1 0 0 0" Width="200"/>
+        </StackPanel>
+            
             <DataGrid Grid.Row="1" Name="Grid" ItemsSource="{Binding LoanBooksCollectionView}"
                   CellStyle="{StaticResource DataGridCell}" Style="{StaticResource LMS_DataGrids}"
                   RowStyle="{StaticResource DataGridRow}">
@@ -56,14 +56,14 @@
                 </DataGrid.Resources>
                 
                 <DataGrid.Columns>
-                    <DataGridCheckBoxColumn ElementStyle="{StaticResource DataGridColumnStyleChkbx}" HeaderStyle="{StaticResource DataGridHeader}" Width="120" Binding="{Binding IsChecked, UpdateSourceTrigger=PropertyChanged}">
+                    <DataGridCheckBoxColumn ElementStyle="{StaticResource DataGridColumnStyleChkbx}" HeaderStyle="{StaticResource DataGridHeader}" Width="60" Binding="{Binding IsChecked, UpdateSourceTrigger=PropertyChanged}">
                         <DataGridCheckBoxColumn.Header>
-                            <TextBlock TextWrapping="WrapWithOverflow" Text="Do wypożyczenia" TextAlignment="Center" />
+                            <TextBlock TextWrapping="WrapWithOverflow" Text="Loan" TextAlignment="Center" />
                         </DataGridCheckBoxColumn.Header>
                     </DataGridCheckBoxColumn>
 
                     <DataGridTextColumn ElementStyle="{StaticResource DataGridColumnStyle}" HeaderStyle="{StaticResource DataGridHeader}" IsReadOnly="True" 
-                                        Width="250" Header="Tytuł" Binding="{Binding Title}"/>
+                                        Width="320" Header="Tytuł" Binding="{Binding Title}"/>
 
                     <DataGridTextColumn ElementStyle="{StaticResource DataGridColumnStyle}" HeaderStyle="{StaticResource DataGridHeader}" IsReadOnly="True" 
                                         Width="150" Header="Autor" Binding="{Binding FullName}"/>

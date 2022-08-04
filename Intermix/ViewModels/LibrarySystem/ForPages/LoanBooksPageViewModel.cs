@@ -33,9 +33,11 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
 
         public LoanBooksPageViewModel()
         {
+
             LoanCommand = new RelayCommand(
                 o => LoanClicked(),
-                o => true);
+                o => LoanBooks.Any(x => x.IsChecked == true)
+                );
 
             LoanBooks = new();
             FillDataGrid();
@@ -47,7 +49,7 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
             if (obj is LoanBooksModel book)
             {
                 return book.Title.Contains(TitleFilter, StringComparison.InvariantCultureIgnoreCase) &&
-                    book.FullName.Contains(NameFilter, StringComparison.InvariantCultureIgnoreCase) &&
+                    book.FullName.Contains(AuthorFilter, StringComparison.InvariantCultureIgnoreCase) &&
                     book.PublishDate.ToString().Contains(PublishDateFilter, StringComparison.InvariantCultureIgnoreCase) &&
                     book.Publisher.Contains(PublisherFilter, StringComparison.InvariantCultureIgnoreCase);
             }
@@ -94,17 +96,22 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
                 var cell = db.Books.FirstOrDefault(x => x.Id == book.Id);
 
                 if (cell == null)
-                    return;
+                    continue;
                     
                 cell.IsAvailable = 0;
             }
 
             if(db.SaveChanges() > 0)
-                _ = new CustomizedMessageBox("Loan successful", MessageType.Success, MessageButton.Ok)
-                    .ShowDialog();
+            {
+                _ = new CustomizedMessageBox("Loan successful", MessageType.Success, MessageButton.Ok).ShowDialog();
+                LoanBooks.Clear();
+                FillDataGrid();
+            }
+            else
+            {
+                _ = new CustomizedMessageBox("Something went wrong", MessageType.Error, MessageButton.Ok).ShowDialog();
+            }
 
-            LoanBooks.Clear();
-            FillDataGrid();
         }
 
         #region Properties
@@ -131,14 +138,14 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
             }
         }
 
-        private string _nameFilter = string.Empty;
-        public string NameFilter
+        private string _authorFilter = string.Empty;
+        public string AuthorFilter
         {
-            get { return _nameFilter; }
+            get { return _authorFilter; }
             set
             {
-                _nameFilter = value != null ? _nameFilter = value : _nameFilter = string.Empty;
-                OnPropertyChanged("NameFilter");
+                _authorFilter = value != null ? _authorFilter = value : _authorFilter = string.Empty;
+                OnPropertyChanged("AuthorFilter");
                 LoanBooksCollectionView.Refresh();
             }
         }
@@ -156,7 +163,6 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
             }
         }
 
-
         private string _publisherFilter = string.Empty;
         public string PublisherFilter
         {
@@ -166,16 +172,6 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
                 _publisherFilter = value != null ? _publisherFilter = value : _publisherFilter = string.Empty;
                 OnPropertyChanged("PublisherFilter");
                 LoanBooksCollectionView.Refresh();
-            }
-        }
-
-        private ObservableCollection<Books> _books;
-        public ObservableCollection<Books> Books
-        {
-            get { return _books; }
-            set {
-                _books = value;
-                OnPropertyChanged("Books");
             }
         }
 

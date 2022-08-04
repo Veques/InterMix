@@ -41,6 +41,9 @@
 
         <DataGrid Name="Grid" Grid.Row="2" ItemsSource="{Binding LoansCollectionView}"
                   CellStyle="{StaticResource DataGridCell}" Style="{StaticResource LMS_DataGrids}">
+            <DataGrid.Resources>
+                <SolidColorBrush x:Key="MaterialDesignTextBoxBorder" Color="Transparent"/>
+            </DataGrid.Resources>
             <DataGrid.GroupStyle>
                 <GroupStyle>
                     <GroupStyle.ContainerStyle>

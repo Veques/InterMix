@@ -92,7 +92,7 @@
 
         <Button Grid.Column="1" IsEnabled="{Binding IsEnabled}" Command="{Binding ImportBooksCommand}" Style="{StaticResource LMS_MainButtons}" ToolTip="Kliknięcie przycisku wypełni bazę danych książkami z załączonego w projekcie Pliku Excel">
             <Button.Content>
-                <TextBlock TextWrapping="WrapWithOverflow" Text="Add book to database" TextBlock.TextAlignment="Center"/>
+                <TextBlock TextWrapping="WrapWithOverflow" Text="Add books to database" TextBlock.TextAlignment="Center"/>
             </Button.Content>
         </Button>
         

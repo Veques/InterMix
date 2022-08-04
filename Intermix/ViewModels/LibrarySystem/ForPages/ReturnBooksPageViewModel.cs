@@ -37,7 +37,8 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
         {
             ReturnBooksCommand = new RelayCommand(
                 o => ReturnBooksClicked(),
-                o => true);
+                o => ReturnBooks.Any(x => x.IsChecked == true
+                ));
 
             ReturnBooks = new();
             FillDataGrid();
@@ -97,12 +98,25 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
                 {
                     db.Loans.Remove(db.Loans.SingleOrDefault(s => s.BookId == book.Id));
 
+                    if (db.Reservations.Any(x => x.BookId == book.Id))
+                    {
+                        foreach (var reservation in db.Reservations.Where(x => x.BookId == book.Id))
+                        {
+                            reservation.ReturnDate = DateTime.Now.Date;
+                        }
+                    }                    
+
+
                     var cell = db.Books.FirstOrDefault(x => x.Id == book.Id);
 
-                    if (cell == null)
+                    if (cell.IsReserved == 0)
+                    {
+                        if (cell == null)
                         return;
 
-                    cell.IsAvailable = 1;
+                        cell.IsAvailable = 1;
+                    }
+
                 }
             }
 
