@@ -28,7 +28,6 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
         public DateTime ReturnDate { get; set; }
 
     }
-
     public class ReturnBooksPageViewModel : BaseViewModel
     {
         public ICommand ReturnBooksCommand { get; set; }

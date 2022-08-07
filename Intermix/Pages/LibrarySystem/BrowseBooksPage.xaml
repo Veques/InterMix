@@ -3,14 +3,15 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:Intermix.Pages.LibrarySystem" xmlns:usercontrol="clr-namespace:Intermix.UserControls" 
-      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:local="clr-namespace:Intermix.Pages.LibrarySystem"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:forpages="clr-namespace:Intermix.ViewModels.LibrarySystem.ForPages" d:DataContext="{d:DesignInstance Type=forpages:BrowseBooksPageViewModel}"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="BrowseBooksPage" Foreground="{DynamicResource LMS_Font}">
     <Page.Background>
         <SolidColorBrush Color="black" Opacity="0.17"/>
     </Page.Background>
+
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -33,8 +34,62 @@
         </Grid>
 
         <Grid Grid.Column="1" Grid.Row="1">
-            <usercontrol:BooksDataGridUserControl  Margin="0 10 0 20"/>
-        </Grid>
+
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <StackPanel Orientation="Horizontal" Width="{Binding ActualWidth, ElementName=Grid}">
+                    <StackPanel.Background>
+                        <SolidColorBrush Color="black" Opacity="0.3"/>
+                    </StackPanel.Background>
+                    <TextBox Name="Title" Style="{StaticResource LMS_Filters}" Text="{Binding TitleFilter, UpdateSourceTrigger=PropertyChanged}" Margin="70 0 0 0" Width="200"/>
+                    <TextBox Name="Author" Style="{StaticResource LMS_Filters}" Text="{Binding AuthorFilter, UpdateSourceTrigger=PropertyChanged}" Margin="1 0 0 0" Width="170"/>
+                    <TextBox Name="PublishDate"  Style="{StaticResource LMS_Filters}" Text="{Binding PublishDateFilter, UpdateSourceTrigger=PropertyChanged}" Margin="1 0 0 0" Width="170"/>
+                    <TextBox Name="Publisher"  Style="{StaticResource LMS_Filters}" Text="{Binding PublisherFilter, UpdateSourceTrigger=PropertyChanged}" Margin="1 0 0 0" Width="150"/>
+                </StackPanel>
+
+
+                <DataGrid Name="Grid" Grid.Row="1" ItemsSource="{Binding BooksCollectionView}" 
+                      CellStyle="{StaticResource DataGridCell}" Style="{StaticResource LMS_DataGrids}"
+                      RowStyle="{StaticResource DataGridRow}">
+                    <DataGrid.Resources>
+                        <SolidColorBrush x:Key="MaterialDesignTextBoxBorder" Color="Transparent"/>
+                    </DataGrid.Resources>
+                    <DataGrid.Columns>
+                    <DataGridTextColumn 
+                                        Header="Id" Binding="{Binding Id}" Width="70"/>
+
+                    <DataGridTextColumn ElementStyle="{StaticResource DataGridColumnStyle}" 
+                                    HeaderStyle="{StaticResource DataGridHeader}" Header="Title" Binding="{Binding Title}" Width="200"/>
+
+                    <DataGridTextColumn ElementStyle="{StaticResource DataGridColumnStyle}" Binding="{Binding Author}"
+                                        HeaderStyle="{StaticResource DataGridHeader}" Header="Author" Width="170"/>
+
+                    <DataGridTextColumn ElementStyle="{StaticResource DataGridColumnStyle}" 
+                                        HeaderStyle="{StaticResource DataGridHeader}" Header="Publish Date" 
+                                        Binding="{Binding PublishDate, StringFormat='{}{0:dd.MM.yyyy}'}" Width="170"/>
+
+                    <DataGridTextColumn ElementStyle="{StaticResource DataGridColumnStyle}" 
+                                        HeaderStyle="{StaticResource DataGridHeader}" Header="Publisher" Binding="{Binding Publisher}" Width="150"/>
+
+                    <DataGridTextColumn HeaderStyle="{StaticResource DataGridHeader}" Header="Status" Binding="{Binding Status}" Width="120">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock" BasedOn="{StaticResource DataGridColumnStyle}">
+                                <Setter Property="Foreground" Value="{Binding StatusColor}"/>
+                                <Setter Property="FontWeight" Value="SemiBold"/>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+
+                </DataGrid.Columns>
+
+            </DataGrid>
+
+            </Grid>
+
         
         </Grid>
 

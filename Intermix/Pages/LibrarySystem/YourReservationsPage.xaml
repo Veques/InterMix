@@ -46,7 +46,7 @@
             <StackPanel.Background>
                 <SolidColorBrush Color="black" Opacity="0.3"/>
             </StackPanel.Background>
-            <TextBox Name="Title" Style="{StaticResource LMS_Filters}" Text="{Binding TitleFilter, UpdateSourceTrigger=PropertyChanged}" Margin="90 0 1 0" Width="200"/>
+            <TextBox Name="Title" Style="{StaticResource LMS_Filters}" Text="{Binding TitleFilter, UpdateSourceTrigger=PropertyChanged}" Margin="70 0 1 0" Width="210"/>
             <TextBox Name="Author" Style="{StaticResource LMS_Filters}"  Text="{Binding AuthorFilter, UpdateSourceTrigger=PropertyChanged}" Width="150"/>
             <TextBox Name="OpenToLoan"  Style="{StaticResource LMS_Filters}" Text="{Binding OpenToLoanFilter, UpdateSourceTrigger=PropertyChanged}" Margin="1 0 0 0" Width="140"/>
         </StackPanel>
@@ -60,7 +60,7 @@
             </DataGrid.Resources>
 
             <DataGrid.Columns>
-                <DataGridCheckBoxColumn HeaderStyle="{StaticResource DataGridHeader}" Width="90" 
+                <DataGridCheckBoxColumn HeaderStyle="{StaticResource DataGridHeader}" Width="70" 
                                         Binding="{Binding IsChecked, UpdateSourceTrigger=PropertyChanged}">
                     <DataGridCheckBoxColumn.Header>
                         <TextBlock TextWrapping="WrapWithOverflow" Text="Loan" TextAlignment="Center" />
@@ -72,14 +72,23 @@
                     </DataGridCheckBoxColumn.ElementStyle>
                 </DataGridCheckBoxColumn>
 
-                <DataGridTextColumn ElementStyle="{StaticResource DataGridColumnStyle}" HeaderStyle="{StaticResource DataGridHeader}" IsReadOnly="True" 
-                                        Width="200" Header="Title" Binding="{Binding Title}"/>
+                <DataGridTextColumn ElementStyle="{StaticResource DataGridColumnStyle}" HeaderStyle="{StaticResource DataGridHeader}" IsReadOnly="True" Width="210" Header="Title" Binding="{Binding Title}"/>
 
                 <DataGridTextColumn ElementStyle="{StaticResource DataGridColumnStyle}" HeaderStyle="{StaticResource DataGridHeader}" IsReadOnly="True" 
                                         Width="150" Header="Author" Binding="{Binding Author}"/>
 
                 <DataGridTextColumn ElementStyle="{StaticResource DataGridColumnStyle}" HeaderStyle="{StaticResource DataGridHeader}" IsReadOnly="True" 
-                                        Width="150" Header="Open to Loan" Binding="{Binding OpenToLoan, StringFormat='{}{0:dd.MM.yyyy}'}"/>
+                                        Width="140" Header="Open to Loan" Binding="{Binding OpenToLoan, StringFormat='{}{0:dd.MM.yyyy}'}"/>
+                <DataGridTemplateColumn Header="Cancel" HeaderStyle="{StaticResource DataGridHeader}" IsReadOnly="True" Width="90">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Command="{Binding DataContext.CancelCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}, Path=DataContext}" Background="Transparent" BorderThickness="0"
+                                    Foreground="Red" Padding="1" TextBlock.TextAlignment="Center">
+                                <materialDesign:PackIcon Kind="CloseThick" Width="30" Height="30" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
 
             </DataGrid.Columns>
         </DataGrid>
@@ -89,18 +98,12 @@
                 <RowDefinition/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            
+
             <Button Width="150" Height="40" Command="{Binding LoanCommand}" Style="{StaticResource LMS_MainButtons}" ToolTip="Wypożycz wybrane książki">
                 <Button.Content>
                     <TextBlock FontWeight="SemiBold" FontSize="18" Text="Loan"/>
                 </Button.Content>
             </Button>
-
-            <Button Grid.Row="1" Width="150" Height="40" Command="{Binding CancelCommand}" Style="{StaticResource LMS_MainButtons}" ToolTip="Anuluj wybrane rezerwacje">
-                <Button.Content>
-                    <TextBlock FontWeight="SemiBold" FontSize="18" Text="Cancel"/>
-                </Button.Content>
-        </Button>
         </Grid>
 
     </Grid>

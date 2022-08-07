@@ -90,8 +90,6 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
             }
 
             return false;
-
-
         }
 
 
@@ -103,15 +101,14 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
             {
                 db.Reservations.Add(new Reservations
                 {
-                     UserId = LoginPageViewModel.UserId,
-                     BookId = element.Id,
-                     ExpectedReturn = element.ExpectedReturnDate
+                    UserId = LoginPageViewModel.UserId,
+                    BookId = element.Id,
+                    ExpectedReturn = element.PossibleLoanDate.Date.AddDays(16)
 
                 });
 
                 db.Books.FirstOrDefault(x => x.Id == element.Id).IsReserved = 1;
             }
-
 
             if(db.SaveChanges() > 0)
             {

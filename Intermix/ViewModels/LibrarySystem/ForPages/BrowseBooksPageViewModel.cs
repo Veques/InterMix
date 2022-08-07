@@ -8,32 +8,88 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
+using System.Windows.Media;
 
-namespace Intermix.ViewModels.LibrarySystem.ForUCs
+namespace Intermix.ViewModels.LibrarySystem.ForPages
 {
-    public class BooksDataGridViewModel : BaseViewModel
+    public class Book
     {
+        public int Id {get;set;}
+        public string Title {get;set;}
+        public string Author {get;set;}
+        public DateTime PublishDate {get;set;}
+        public string Publisher {get;set;}
+        public string Status {get;set;}
+        public SolidColorBrush StatusColor { get; set; }
 
-        public BooksDataGridViewModel()
+    }
+
+    public class BrowseBooksPageViewModel : BaseViewModel
+    {
+        public BrowseBooksPageViewModel()
         {
-            using var db = new ApplicationDbContext();
-            AllBooks = new(db.Books);
+
+            AllBooks = new();
+
+            FillDataGrid();
 
             BooksCollectionView = CollectionViewSource.GetDefaultView(AllBooks);
             BooksCollectionView.Filter = FilterBooks;
 
         }
 
+        private void FillDataGrid()
+        {
+            using var db = new ApplicationDbContext();
+
+            foreach (var element in db.Books)
+            {
+                string status = String.Empty;
+                var statusColor = Brushes.Black;
+
+                if (element.IsAvailable == 1 && element.IsReserved == 0)
+                {
+                    status = "Available";
+                    statusColor = Brushes.DarkSeaGreen;
+                }
+                if (element.IsAvailable == 0 && element.IsReserved == 0)
+                {
+                    status = $"Loaned till {db.Loans.Single(x => x.BookId == element.Id).ExpectedReturn.ToShortDateString()}";
+                    statusColor = Brushes.Red;
+                }
+                if (element.IsAvailable == 0 && element.IsReserved == 1)
+                {
+                    var whenAvailable = db.Reservations.Single(x => x.BookId == element.Id).ReturnDate == DateTime.MinValue ?
+                                        db.Reservations.Single(x => x.BookId == element.Id).ExpectedReturn.ToShortDateString() :
+                                        db.Reservations.Single(x => x.BookId == element.Id).ReturnDate.AddDays(2).ToShortDateString();
+
+                    status = $"Reserved till {whenAvailable}";
+                    statusColor = Brushes.OrangeRed;
+                }
+
+                
+                AllBooks.Add(new Book
+                {
+                    Id = element.Id,
+                    Title = element.Title,
+                    Author = $"{element.AuthorName} {element.AuthorSurname}",
+                    PublishDate = element.PublishDate,
+                    Publisher = element.Publisher,
+                    Status = status,
+                    StatusColor = statusColor
+                });
+            }
+        }
+
         private bool FilterBooks(object obj)
         {
-            if (obj is Books book)
+            if (obj is Book book)
             {
-                string Fullname = $"{book.AuthorName} {book.AuthorSurname}";
 
                 return book.Title.Contains(TitleFilter, StringComparison.InvariantCultureIgnoreCase) &&
                     book.Publisher.Contains(PublisherFilter, StringComparison.InvariantCultureIgnoreCase) &&
                     book.PublishDate.ToString().Contains(PublishDateFilter, StringComparison.InvariantCultureIgnoreCase) &&
-                    Fullname.Contains(AuthorFilter, StringComparison.InvariantCultureIgnoreCase);
+                    book.Author.Contains(AuthorFilter, StringComparison.InvariantCultureIgnoreCase);
             }
             return false;
         }
@@ -48,6 +104,17 @@ namespace Intermix.ViewModels.LibrarySystem.ForUCs
             {
                 _booksCollectionView = value;
                 OnPropertyChanged("BooksCollectionView");
+            }
+        }
+
+        private ObservableCollection<Book> _allBooks;
+        public ObservableCollection<Book> AllBooks
+        {
+            get { return _allBooks; }
+            set
+            {
+                _allBooks = value;
+                OnPropertyChanged("AllBooks");
             }
         }
 
@@ -104,16 +171,7 @@ namespace Intermix.ViewModels.LibrarySystem.ForUCs
             }
         }
 
-        private ObservableCollection<Books> _allBooks;
-        public ObservableCollection<Books> AllBooks
-        {
-            get { return _allBooks; }
-            set
-            {
-                _allBooks = value;
-                OnPropertyChanged("AllBooks");
-            }
-        }
         #endregion
+        
     }
 }

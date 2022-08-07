@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using Intermix.ViewModels.LibrarySystem.ForPages;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace Intermix.Pages.LibrarySystem
@@ -11,6 +12,7 @@ namespace Intermix.Pages.LibrarySystem
         public BrowseBooksPage()
         {
             InitializeComponent();
+            DataContext = new BrowseBooksPageViewModel();
         }
 
         private void Back_Click(object sender, RoutedEventArgs e)

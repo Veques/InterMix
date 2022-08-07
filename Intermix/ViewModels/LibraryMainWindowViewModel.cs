@@ -27,7 +27,7 @@ namespace Intermix.ViewModels
 
         private async void UpdateTime()
         {
-            Time = DateTime.Now.ToString("HH:m");
+            Time = DateTime.Now.ToString("HH:mm");
             Date = DateTime.Now.Date.ToString("D");
             await Task.Delay(1000);
             UpdateTime();

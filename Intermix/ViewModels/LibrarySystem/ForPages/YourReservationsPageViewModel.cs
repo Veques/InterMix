@@ -43,18 +43,35 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
                 o => Reservations.Any(x => x.IsChecked == true)
                 );
 
-            CancelCommand = new RelayCommand(
-                o => CancelClicked(),
-                o => Reservations.Any(x => x.IsChecked == true)
-                );
+            CancelCommand = new RelayCommand(CancelClicked, o => true);
 
 
             FillDataGrid();
         }
-
-        private void CancelClicked()
+        private void FillDataGrid()
         {
-            throw new NotImplementedException();
+            Reservations = new();
+            using var db = new ApplicationDbContext();
+
+            foreach (var reservation in db.Reservations.Where(x => x.UserId == LoginPageViewModel.UserId))
+            {
+                foreach (var book in db.Books.Where(x => x.Id == reservation.BookId && x.IsReserved == 1))
+                {
+
+                    Reservations.Add(new Reservation
+                    {
+                        IsChecked = false,
+                        IsEnabled = DateTime.Now.Date >= reservation.ReturnDate.Date && reservation.ReturnDate != DateTime.MinValue,
+                        Id = book.Id,
+                        Title = $"{book.Title}",
+                        Author = $"{book.AuthorName} {book.AuthorSurname}",
+                        OpenToLoan = reservation.ExpectedReturn.Date.AddDays(-16)
+                    });
+                }
+            }
+
+            ReservationsCollectionView = CollectionViewSource.GetDefaultView(Reservations);
+            ReservationsCollectionView.Filter = Filter;
         }
 
         private void LoanClicked()
@@ -98,34 +115,32 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
             }
         }
 
-        private void FillDataGrid()
+        private void CancelClicked(Object parameter)
         {
-            Reservations = new();
             using var db = new ApplicationDbContext();
+            
+            if (parameter == null)
+                return;
 
-            foreach (var reservation in db.Reservations.Where(x => x.UserId == LoginPageViewModel.UserId))
+            if (parameter is Reservation reservation)
             {
-                foreach (var book in db.Books.Where(x => x.Id == reservation.BookId && x.IsReserved == 1))
-                {
+                db.Reservations.Remove(db.Reservations.Where(x => x.BookId == reservation.Id).FirstOrDefault());
+                db.Books.Single(x => x.Id == reservation.Id).IsReserved = 0;
 
-                    Reservations.Add(new Reservation
-                    {
-                        IsChecked = false,
-                        IsEnabled = DateTime.Now.Date >= reservation.ReturnDate.Date && reservation.ReturnDate != DateTime.MinValue,
-                        Id = book.Id,
-                        Title = $"{book.Title}",
-                        Author = $"{book.AuthorName} {book.AuthorSurname}",
-                        OpenToLoan = reservation.ExpectedReturn.Date.AddDays(1)
-                    });
-                    
+                _ = new CustomizedMessageBox("Are you sure? \n You will not be able to reserve this book again",
+                    MessageType.Confirmation, MessageButton.OkCancel).ShowDialog();
+
+                if(db.SaveChanges() > 0)
+                {
+                    _ = new CustomizedMessageBox("Success!", MessageType.Success, MessageButton.Ok).ShowDialog();
+                    Reservations.Clear();
+                    FillDataGrid();
                 }
             }
 
-
-
-            ReservationsCollectionView = CollectionViewSource.GetDefaultView(Reservations);
-            ReservationsCollectionView.Filter = Filter;
         }
+
+
         private bool Filter(object obj)
         {
             if (obj is Reservation reservation)
@@ -142,7 +157,6 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
         #region Properties 
 
         private ICollectionView _reservationsCollectionView;
-
         public ICollectionView ReservationsCollectionView
         {
             get { return _reservationsCollectionView; }
@@ -158,6 +172,17 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
             get { return _reservations; }
             set { _reservations = value; }
         }
+
+        private Reservation _cancelCommandParameter;
+
+        public Reservation CancelCommandParameter
+        {
+            get { return _cancelCommandParameter; }
+            set { _cancelCommandParameter = value;
+                OnPropertyChanged("CancelCommandParameter");
+            }
+        }
+
 
         private string _titleFilter = string.Empty;
 

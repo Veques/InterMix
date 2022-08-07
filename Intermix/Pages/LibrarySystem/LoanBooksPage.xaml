@@ -4,7 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Intermix.Pages.LibrarySystem" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-      mc:Ignorable="d"  xmlns:usercontrol="clr-namespace:Intermix.UserControls" xmlns:forpages="clr-namespace:Intermix.ViewModels.LibrarySystem.ForPages" d:DataContext="{d:DesignInstance Type=forpages:LoanBooksPageViewModel}"
+      mc:Ignorable="d"  xmlns:forpages="clr-namespace:Intermix.ViewModels.LibrarySystem.ForPages" d:DataContext="{d:DesignInstance Type=forpages:LoanBooksPageViewModel}"
       d:DesignHeight="450" d:DesignWidth="800"
       Title="LoanBooksPage">
 
