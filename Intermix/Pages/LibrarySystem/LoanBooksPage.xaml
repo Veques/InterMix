@@ -49,8 +49,7 @@
         </StackPanel>
             
             <DataGrid Grid.Row="1" Name="Grid" ItemsSource="{Binding LoanBooksCollectionView}"
-                  CellStyle="{StaticResource DataGridCell}" Style="{StaticResource LMS_DataGrids}"
-                  RowStyle="{StaticResource DataGridRow}">
+                  CellStyle="{StaticResource DataGridCell}" Style="{StaticResource LMS_DataGrids}">
                 <DataGrid.Resources>
                     <SolidColorBrush x:Key="MaterialDesignTextBoxBorder" Color="Transparent"/>
                 </DataGrid.Resources>

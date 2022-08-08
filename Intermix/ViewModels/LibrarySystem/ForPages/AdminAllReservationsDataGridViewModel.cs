@@ -2,7 +2,6 @@
 using Intermix.Models;
 using Intermix.Models.ModelsForDataGrids;
 using Intermix.ViewModels.Base;
-using Intermix.ViewModels.LoginPage;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -12,25 +11,26 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
 using System.Windows.Input;
+using Reservations = Intermix.Models.ModelsForDataGrids.Loan;
 
 namespace Intermix.ViewModels.LibrarySystem.ForPages
 {
-
-    public class AdminAllLoansDataGridViewModel : BaseViewModel
+    public class AdminAllReservationsDataGridViewModel : BaseViewModel
     {
         public ICommand ClearFilterCommand { get; set; }
-        #region Constructor
-        public AdminAllLoansDataGridViewModel()
+        public AdminAllReservationsDataGridViewModel()
         {
-            AllLoans = new();
+            AllReservations = new();
             Users = new();
-            ClearFilterCommand = new RelayCommand(o => ClearFilter(), o => !SelectedUser.Equals(String.Empty));
+            ClearFilterCommand = new RelayCommand(o => ClearFilter() , o => !SelectedUser.Equals(String.Empty));
 
             FillDataGrid();
 
-            LoansCollectionView = CollectionViewSource.GetDefaultView(AllLoans);
-            LoansCollectionView.GroupDescriptions.Add(new PropertyGroupDescription(nameof(Loan.Username)));
-            LoansCollectionView.Filter = Filter;
+            ReservationCollectionView = CollectionViewSource.GetDefaultView(AllReservations);
+            ReservationCollectionView.GroupDescriptions.Add(new PropertyGroupDescription(nameof(Reservations.Username)));
+            ReservationCollectionView.Filter = Filter;
+
+
         }
 
         private void ClearFilter()
@@ -38,83 +38,75 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
             SelectedIndex = -1;
             SelectedUser = String.Empty;
         }
-        #endregion
 
         private void FillDataGrid()
         {
             using var db = new ApplicationDbContext();
 
-            foreach (var loan in db.Loans)
+            foreach (var reservation in db.Reservations)
             {
-                foreach (var book in db.Books.Where(x => x.Id == loan.BookId))
+                foreach (var book in db.Books.Where(x => x.Id == reservation.BookId))
                 {
-                    foreach (var user in db.Users.Where(x => x.Id == loan.UserId))
+                    foreach (var user in db.Users.Where(x => x.Id == reservation.UserId))
                     {
-                        var status = String.Empty;
-
-                        if (book.IsReserved == 1)
-                        {
-                            status = $"Reserved by {user.Name} {user.Surname}";
-                        }
-                        else
-                        {
-                            status= "Not reserved";
-                        }
 
                         if (!Users.Contains($"{user.Name} {user.Surname}"))
                         {
                             Users.Add($"{user.Name} {user.Surname}");
                         }
 
-                        AllLoans.Add(new Loan
+                        AllReservations.Add(new Reservations
                         {
                             Username = $"{user.Name} {user.Surname}",
                             Title = book.Title,
                             Author = $"{book.AuthorName} {book.AuthorSurname}",
-                            LoanDate = loan.LoanDate,
-                            ExpectedReturnDate = loan.ExpectedReturn,
-                            Status = status
+                            ExpectedReturnDate = reservation.ExpectedReturn,
+                            LastReservationDay = reservation.ExpectedReturn.Date.AddDays(2)
+                            
                         });
                     }
                 }
             }
         }
-
         public bool Filter(object obj)
         {
             if (obj == null)
                 return false;
 
-            if(obj is Loan loan)
+            if (obj is Reservations reservation)
             {
-                return loan.Title.Contains(TitleFilter, StringComparison.InvariantCultureIgnoreCase) &&
-                    loan.Author.Contains(AuthorFilter, StringComparison.InvariantCultureIgnoreCase) &&
-                    loan.LoanDate.ToString().Contains(PublishDateFilter, StringComparison.InvariantCultureIgnoreCase) &&
-                    loan.ExpectedReturnDate.ToString().Contains(ReturnDateFilter, StringComparison.InvariantCultureIgnoreCase) &&
-                    loan.Status.Contains(StatusFilter, StringComparison.InvariantCultureIgnoreCase) &&
-                    loan.Username.Contains(SelectedUser, StringComparison.InvariantCultureIgnoreCase);
+                return reservation.Title.Contains(TitleFilter, StringComparison.InvariantCultureIgnoreCase) &&
+                    reservation.Author.Contains(AuthorFilter, StringComparison.InvariantCultureIgnoreCase) &&
+                    reservation.ExpectedReturnDate.ToString().Contains(ReturnDateFilter, StringComparison.InvariantCultureIgnoreCase) &&
+                    reservation.LastReservationDay.ToString().Contains(ReservationEndFilter, StringComparison.InvariantCultureIgnoreCase) &&
+                    reservation.Username.Contains(SelectedUser, StringComparison.InvariantCultureIgnoreCase);
             }
             return false;
         }
 
+
         #region Properties
 
-        private ICollectionView _loanCollectionView;
-        public ICollectionView LoansCollectionView
+        private ICollectionView _reservationsCollectionView;
+        public ICollectionView ReservationCollectionView
         {
-            get { return _loanCollectionView; }
-            set { _loanCollectionView = value;
-                OnPropertyChanged("LoansCollectionView");
+            get { return _reservationsCollectionView; }
+            set
+            {
+                _reservationsCollectionView = value;
+                OnPropertyChanged("ReservationCollectionView");
             }
         }
 
 
-        private ObservableCollection<Loan> _allLoans;
-        public ObservableCollection<Loan> AllLoans
+        private ObservableCollection<Reservations> _allReservations;
+        public ObservableCollection<Reservations> AllReservations
         {
-            get { return _allLoans; }
-            set { _allLoans = value;
-                OnPropertyChanged("AllLoans");
+            get { return _allReservations; }
+            set
+            {
+                _allReservations = value;
+                OnPropertyChanged("AllReservations");
             }
         }
 
@@ -123,7 +115,9 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
         public ObservableCollection<string> Users
         {
             get { return _users; }
-            set { _users = value;
+            set
+            {
+                _users = value;
                 OnPropertyChanged("Users");
             }
         }
@@ -136,7 +130,7 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
             {
                 _selectedUser = value != null ? _selectedUser = value : _selectedUser = string.Empty;
                 OnPropertyChanged("SelectedUser");
-                LoansCollectionView.Refresh();
+                ReservationCollectionView.Refresh();
             }
         }
 
@@ -157,11 +151,12 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
         public string TitleFilter
         {
             get { return _titleFilter; }
-            set {
+            set
+            {
                 _titleFilter = value != null ? _titleFilter = value : _titleFilter = string.Empty;
 
                 OnPropertyChanged("TitleFilter");
-                LoansCollectionView.Refresh();
+                ReservationCollectionView.Refresh();
             }
         }
 
@@ -174,20 +169,20 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
                 _authorFilter = value != null ? _authorFilter = value : _authorFilter = string.Empty;
 
                 OnPropertyChanged("AuthorFilter");
-                LoansCollectionView.Refresh();
+                ReservationCollectionView.Refresh();
             }
         }
 
-        private string _publishDateFilter = string.Empty;
-        public string PublishDateFilter
+        private string _reservationEndFilter = string.Empty;
+        public string ReservationEndFilter
         {
-            get { return _publishDateFilter; }
+            get { return _reservationEndFilter; }
             set
             {
-                _publishDateFilter = value != null ? _publishDateFilter = value : _publishDateFilter = string.Empty;
+                _reservationEndFilter = value != null ? _reservationEndFilter = value : _reservationEndFilter = string.Empty;
 
-                OnPropertyChanged("PublishDateFilter");
-                LoansCollectionView.Refresh();
+                OnPropertyChanged("ReservationEndFilter");
+                ReservationCollectionView.Refresh();
             }
         }
 
@@ -200,24 +195,11 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
                 _returnDateFilter = value != null ? _returnDateFilter = value : _returnDateFilter = string.Empty;
 
                 OnPropertyChanged("ReturnDateFilter");
-                LoansCollectionView.Refresh();
+                ReservationCollectionView.Refresh();
             }
         }
-
-        private string _statusFilter = string.Empty;
-        public string StatusFilter
-        {
-            get { return _statusFilter; }
-            set
-            {
-                _statusFilter = value != null ? _statusFilter = value : _statusFilter = string.Empty;
-
-                OnPropertyChanged("ReservedFilter");
-                LoansCollectionView.Refresh();
-            }
-        }
-
 
         #endregion
+
     }
 }

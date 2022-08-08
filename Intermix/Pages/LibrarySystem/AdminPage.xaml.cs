@@ -28,7 +28,7 @@ namespace Intermix.Pages.LibrarySystem
             DataContext = new AdminPageViewModel();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Back_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.GoBack();
         }
@@ -43,9 +43,15 @@ namespace Intermix.Pages.LibrarySystem
             e.Handled = regex.IsMatch(e.Text);
         }
 
-        private void AllLoand_Click(object sender, RoutedEventArgs e)
+        private void AllLoans_Click(object sender, RoutedEventArgs e)
         {
             AdminAllLoansDataGridPage page = new();
+            NavigationService.Navigate(page);
+        }
+
+        private void Reservations_Click(object sender, RoutedEventArgs e)
+        {
+            AdminAllReservationsDataGridPage page = new();
             NavigationService.Navigate(page);
         }
     }

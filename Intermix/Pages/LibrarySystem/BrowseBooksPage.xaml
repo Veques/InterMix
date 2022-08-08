@@ -49,12 +49,12 @@
                     <TextBox Name="Author" Style="{StaticResource LMS_Filters}" Text="{Binding AuthorFilter, UpdateSourceTrigger=PropertyChanged}" Margin="1 0 0 0" Width="170"/>
                     <TextBox Name="PublishDate"  Style="{StaticResource LMS_Filters}" Text="{Binding PublishDateFilter, UpdateSourceTrigger=PropertyChanged}" Margin="1 0 0 0" Width="170"/>
                     <TextBox Name="Publisher"  Style="{StaticResource LMS_Filters}" Text="{Binding PublisherFilter, UpdateSourceTrigger=PropertyChanged}" Margin="1 0 0 0" Width="150"/>
+                    <TextBox Name="Status"  Style="{StaticResource LMS_Filters}" Text="{Binding StatusFilter, UpdateSourceTrigger=PropertyChanged}" Margin="1 0 0 0" Width="120"/>
                 </StackPanel>
 
 
                 <DataGrid Name="Grid" Grid.Row="1" ItemsSource="{Binding BooksCollectionView}" 
-                      CellStyle="{StaticResource DataGridCell}" Style="{StaticResource LMS_DataGrids}"
-                      RowStyle="{StaticResource DataGridRow}">
+                      CellStyle="{StaticResource DataGridCell}" Style="{StaticResource LMS_DataGrids}">
                     <DataGrid.Resources>
                         <SolidColorBrush x:Key="MaterialDesignTextBoxBorder" Color="Transparent"/>
                     </DataGrid.Resources>

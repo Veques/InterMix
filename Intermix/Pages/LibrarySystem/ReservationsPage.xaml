@@ -48,7 +48,7 @@
 
             <DataGrid Grid.Row="1" Name="Grid" ItemsSource="{Binding ReservedBooksCollectionView}"
                   CellStyle="{StaticResource DataGridCell}" Style="{StaticResource LMS_DataGrids}"
-                  RowStyle="{StaticResource DataGridRow}" HorizontalContentAlignment="Center">
+                  HorizontalContentAlignment="Center">
                 <DataGrid.Resources>
                     <SolidColorBrush x:Key="MaterialDesignTextBoxBorder" Color="Transparent"/>
                 </DataGrid.Resources>

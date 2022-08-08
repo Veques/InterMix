@@ -55,7 +55,7 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
                 if (element.IsAvailable == 0 && element.IsReserved == 0)
                 {
                     status = $"Loaned till {db.Loans.Single(x => x.BookId == element.Id).ExpectedReturn.ToShortDateString()}";
-                    statusColor = Brushes.Red;
+                    statusColor = Brushes.Orange;
                 }
                 if (element.IsAvailable == 0 && element.IsReserved == 1)
                 {
@@ -64,7 +64,7 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
                                         db.Reservations.Single(x => x.BookId == element.Id).ReturnDate.AddDays(2).ToShortDateString();
 
                     status = $"Reserved till {whenAvailable}";
-                    statusColor = Brushes.OrangeRed;
+                    statusColor = Brushes.Red;
                 }
 
                 
@@ -85,11 +85,11 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
         {
             if (obj is Book book)
             {
-
                 return book.Title.Contains(TitleFilter, StringComparison.InvariantCultureIgnoreCase) &&
                     book.Publisher.Contains(PublisherFilter, StringComparison.InvariantCultureIgnoreCase) &&
                     book.PublishDate.ToString().Contains(PublishDateFilter, StringComparison.InvariantCultureIgnoreCase) &&
-                    book.Author.Contains(AuthorFilter, StringComparison.InvariantCultureIgnoreCase);
+                    book.Author.Contains(AuthorFilter, StringComparison.InvariantCultureIgnoreCase) &&
+                    book.Status.Contains(StatusFilter, StringComparison.InvariantCultureIgnoreCase);
             }
             return false;
         }
@@ -171,7 +171,20 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
             }
         }
 
+        private string _statusFilter = string.Empty;
+        public string StatusFilter
+        {
+            get { return _statusFilter; }
+            set
+            {
+                _statusFilter = value != null ? _statusFilter = value : _statusFilter = string.Empty;
+
+                OnPropertyChanged("StatusFilter");
+                BooksCollectionView.Refresh();
+            }
+        }
+
         #endregion
-        
+
     }
 }

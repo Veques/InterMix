@@ -15,16 +15,43 @@
             <RowDefinition Height="10*"/>
         </Grid.RowDefinitions>
 
-        <Grid VerticalAlignment="Center" HorizontalAlignment="Center" >
-            <Button Click="Back_Click" Style="{StaticResource LMS_WindowButtons}" Background="red" >
+        <Grid >
+            <Button Click="Back_Click" Style="{StaticResource LMS_WindowButtons}" >
                 <materialDesign:PackIcon Kind="Play" Foreground="black" Width="30" Height="30">
                     <materialDesign:PackIcon.LayoutTransform>
                         <RotateTransform Angle="180"/>
                     </materialDesign:PackIcon.LayoutTransform>
                 </materialDesign:PackIcon>
             </Button>
-        </Grid>
+            <StackPanel Orientation="Horizontal">
+                
+            <ComboBox Margin="25 0 0 0" Width="200" Height="40" HorizontalAlignment="Left"                                           materialDesign:HintAssist.Foreground="white" materialDesign:TextFieldAssist.UnderlineBrush="White"
+                      materialDesign:HintAssist.Hint="Filter" VerticalContentAlignment="Center" 
+                      Padding="15 0 9 9 " ItemsSource="{Binding Users, UpdateSourceTrigger=PropertyChanged}" 
+                      SelectedItem="{Binding SelectedUser, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                      SelectedIndex="{Binding SelectedIndex, UpdateSourceTrigger=PropertyChanged, TargetNullValue= -1}">
+                <ComboBox.Style>
+                    <Style TargetType="ComboBox" BasedOn="{StaticResource MaterialDesignFloatingHintComboBox}">
+                        <Setter Property="Foreground" Value="White"/>
+                    </Style>
+                </ComboBox.Style>
+                <ComboBox.ItemContainerStyle>
+                    <Style TargetType="ComboBoxItem">
+                        <Setter Property="Foreground" Value="black"/>
+                    </Style>
+                </ComboBox.ItemContainerStyle>
+                <ComboBox.Background>
+                    <SolidColorBrush Color="black" Opacity="0.3"/>
+                </ComboBox.Background>
 
+            </ComboBox>
+                <Button Width="40" Margin="2 0 0 0" Height="40" Style="{StaticResource LMS_WindowButtons}" 
+                    Command="{Binding ClearFilterCommand}">
+                    <materialDesign:PackIcon Kind="CloseThick" Width="35" Height="35"/>
+                </Button>
+            </StackPanel>
+        </Grid>
+        
         <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0 0 0 3" Width="{Binding ActualWidth, ElementName=Grid}">
             <StackPanel.Background>
                 <SolidColorBrush Color="black" Opacity="0.3"/>
@@ -37,6 +64,8 @@
                      Text="{Binding PublishDateFilter, UpdateSourceTrigger=PropertyChanged}" Margin="1 0 0 0" Width="170"/>
             <TextBox Name="ReturnDate"  Style="{StaticResource LMS_Filters}" 
                      Text="{Binding ReturnDateFilter, UpdateSourceTrigger=PropertyChanged}" Margin="1 0 0 0" Width="170"/>
+            <TextBox Name="Status"  Style="{StaticResource LMS_Filters}" 
+                     Text="{Binding StatusFilter, UpdateSourceTrigger=PropertyChanged}" Margin="1 0 0 0" Width="180"/>
         </StackPanel>
 
         <DataGrid Name="Grid" Grid.Row="2" ItemsSource="{Binding LoansCollectionView}"
@@ -92,6 +121,10 @@
                 <DataGridTextColumn ElementStyle="{StaticResource DataGridColumnStyle}" 
                                     HeaderStyle="{StaticResource DataGridHeader}" Header="Data Oddania" 
                                     Binding="{Binding ExpectedReturnDate, StringFormat='{}{0:dd.MM.yyyy}'}" Width="170"/>
+                
+                <DataGridTextColumn ElementStyle="{StaticResource DataGridColumnStyle}" 
+                                    HeaderStyle="{StaticResource DataGridHeader}" Header="Reserved" 
+                                    Binding="{Binding Status}" Width="180"/>
             </DataGrid.Columns>
 
         </DataGrid>

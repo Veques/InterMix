@@ -54,7 +54,7 @@
 
         <DataGrid Grid.Row="3" Name="Grid" ItemsSource="{Binding ReservationsCollectionView}"
                   CellStyle="{StaticResource DataGridCell}" Style="{StaticResource LMS_DataGrids}"
-                  RowStyle="{StaticResource DataGridRow}" HorizontalContentAlignment="Center">
+                  HorizontalContentAlignment="Center">
             <DataGrid.Resources>
                 <SolidColorBrush x:Key="MaterialDesignTextBoxBorder" Color="Transparent"/>
             </DataGrid.Resources>
