@@ -20,7 +20,7 @@
         </Setter>
         <Style.Triggers>
             <Trigger Property="IsChecked" Value="False">
-                <Setter Property="Opacity" Value="0.43"/>
+                <Setter Property="Opacity" Value="0.2"/>
             </Trigger>
             <Trigger Property="IsChecked" Value="True">
                 <Setter Property="Height" Value="60"/>
@@ -165,9 +165,9 @@
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter Property="Background">
                                 <Setter.Value>
-                                    <LinearGradientBrush EndPoint="0.7,1" StartPoint="0,0">
-                                        <GradientStop Color="{DynamicResource LeadingColor}" Offset="1"/>
-                                        <GradientStop Color="{DynamicResource SecondaryLeadingColor}" Offset="0"/>
+                                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1" >
+                                        <GradientStop Color="{DynamicResource LeadingColor}" Offset="0.15"/>
+                                        <GradientStop Color="{DynamicResource SecondaryLeadingColor}" Offset="0.78"/>
                                     </LinearGradientBrush>
                                 </Setter.Value>
                             </Setter>
@@ -189,18 +189,20 @@
     <!-- Window Button styles -->
     <Style x:Key="WindowBarButtons" TargetType="{x:Type Button}">
         <Setter Property="Width" Value="40"/>
+        <Setter Property="Foreground" Value="{DynamicResource MW_Font}"/>
         <Setter Property="Height" Value="40"/>
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
-                    <Border BorderThickness="0" Background="WhiteSmoke" CornerRadius="6" Opacity="0.6">
+                    <Border BorderThickness="0" Background="Transparent" Name="border" CornerRadius="6" Opacity="0.6">
                         <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
                         <Border.Style>
                             <Style TargetType="Border">
                                 <Setter Property="BorderThickness" Value="3"/>
                                 <Style.Triggers>
-                                    <Trigger Property="IsMouseOver" Value="True">
+                                    <Trigger Property="Border.IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="red"/>
                                         <Trigger.EnterActions>
                                             <BeginStoryboard>
                                                 <Storyboard>
@@ -430,7 +432,7 @@
     
     <!-- Convert Button -->
     <Style x:Key="ConvertButton_CC" TargetType="Button" 
-           BasedOn="{StaticResource MaterialDesignFloatingActionLightButton}">
+           BasedOn="{StaticResource MaterialDesignIconButton}">
         <Setter Property="BorderBrush" Value="{DynamicResource CC_ComboBoxBorder}"/>
         <Setter Property="Foreground" Value="{DynamicResource MW_Font}"/>
         <Setter Property="Background" Value="{DynamicResource CC_ComboBoxBorder}"/>

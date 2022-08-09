@@ -14,7 +14,7 @@
             <ColumnDefinition Width="2.8*"/>
         </Grid.ColumnDefinitions>
 
-        <ListView ScrollViewer.VerticalScrollBarVisibility="Hidden" BorderThickness="0" Name="listView1" Background="Transparent">
+        <ListView materialDesign:ShadowAssist.ShadowDepth="Depth3" ScrollViewer.VerticalScrollBarVisibility="Hidden" BorderThickness="0" Name="listView1" Background="Transparent">
 
             <!-- Info -->
             <ListViewItem Name="Info" Height="150" >
@@ -37,7 +37,7 @@
                                             <Setter Property="Background">
                                                 <Setter.Value>
                                                     <LinearGradientBrush EndPoint="1,1" StartPoint="0.5,0">
-                                                        <GradientStop Color="OrangeRed" Offset="0.5"/>
+                                                        <GradientStop Color="Purple" Offset="0.5"/>
                                                         <GradientStop Color="Red" Offset="0"/>
                                                     </LinearGradientBrush>
                                                 </Setter.Value>
@@ -58,7 +58,6 @@
                     </Style>
                 </ListViewItem.Style>
             </ListViewItem>
-            <Grid></Grid>
 
             <!-- TicTacToe -->
             <ListViewItem Name="TicTacToe">

@@ -71,11 +71,11 @@
 
             </Grid>
 
-            <Button Grid.Column="1"
-                      Style="{StaticResource ConvertButton_CC}"
-                      Command="{Binding ConvertCommand}"
-                      materialDesign:ButtonProgressAssist.IsIndicatorVisible="true">
-                <materialDesign:PackIcon Height="24" Width="24" Kind="Cached"/>
+            <Button Grid.Column="1" Height="90" Width="90"
+                      Style="{StaticResource ConvertButton_CC}" Padding="0"
+                      Command="{Binding ConvertCommand}">
+                <materialDesign:PackIcon Height="40" Width="40" Kind="Cached" VerticalAlignment="Center"
+                                         HorizontalAlignment="Center"/>
             </Button>
             <Grid VerticalAlignment="Center" Grid.Column="2">
                 <Grid.RowDefinitions>
