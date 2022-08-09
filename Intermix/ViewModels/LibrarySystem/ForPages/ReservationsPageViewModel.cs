@@ -13,24 +13,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
 using System.Windows.Input;
+using ReserveBook = Intermix.Models.ModelsForDataGrids.ReservarionDataGrids;
 
 namespace Intermix.ViewModels.LibrarySystem.ForPages
 {
-
-    #region Models
-
-    public class ReserveBook
-    {
-        public bool IsChecked { get; set; }
-        public int Id { get; set; }
-        public string Title { get; set; }
-        public string Author { get; set; }
-        public DateTime ExpectedReturnDate { get; set; }
-        public DateTime PossibleLoanDate { get; set; }
-
-    }
-
-    #endregion
 
     public class ReservationsPageViewModel : BaseViewModel
     {
@@ -67,8 +53,9 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
                         Title = $"{book.Title}",
                         Author = $"{book.AuthorName} {book.AuthorSurname}",
                         ExpectedReturnDate = loan.ExpectedReturn,
-                        PossibleLoanDate = loan.ExpectedReturn.AddDays(1)
-
+                        PossibleLoanDate = loan.ExpectedReturn.AddDays(1),
+                        EndOfReservation = loan.ExpectedReturn.AddDays(2),
+       
                     });
                 }
             }
@@ -103,8 +90,8 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
                 {
                     UserId = LoginPageViewModel.UserId,
                     BookId = element.Id,
-                    ExpectedReturn = element.PossibleLoanDate.Date.AddDays(16)
-
+                    ExpectedReturn = element.EndOfReservation.Date.AddDays(14),
+                    EndOfReservation = element.EndOfReservation
                 });
 
                 db.Books.FirstOrDefault(x => x.Id == element.Id).IsReserved = 1;

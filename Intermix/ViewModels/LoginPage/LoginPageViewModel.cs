@@ -14,29 +14,19 @@ namespace Intermix.ViewModels.LoginPage
     {
         public ICommand LogIn { get; set; }
 
+        #region Constructor
         public LoginPageViewModel()
         {
             LogIn = new RelayCommand(o => LogInCommand(Username, Password),
                                      o => !string.IsNullOrEmpty(Username) && !string.IsNullOrEmpty(Password));
         }
+        #endregion
+
         private static void LogInCommand(string Username, string Password)
         {
             ApplicationDbContext _dbContext = new();
 
             var isValid = _dbContext.Users.FirstOrDefault(u => u.Username == Username && u.Password == Password);
-
-            if (!_dbContext.Users.Any(o => o.Username == "Admin"))
-            {
-            _dbContext.Users.Add(new Users
-            {
-                Name = "",
-                Surname = "",
-                Username = "Admin",
-                Password = "1234",
-            });
-
-            _dbContext.SaveChanges();
-            }
 
             if (isValid == null)
             {
@@ -47,15 +37,25 @@ namespace Intermix.ViewModels.LoginPage
                 UserId = isValid.Id;
                 User = $"{isValid.Name} {isValid.Surname}";
 
+                LibraryMainWindow window = new()
+                {
+                    Name = "LibraryMainWindow"
+                };
+                window.Show();
+
                 foreach (Window item in Application.Current.Windows)
                 {
-                    item.Hide();
+                    if(item.Name != "LibraryMainWindow")
+                    {
+                        item.Close();
+                    }
                 }
 
-                LibraryMainWindow window = new();
-                window.Show();
+
             }
         }
+
+        #region Properties
 
         public static string? User { get; private set; }
         public static int UserId { get; private set; }
@@ -86,6 +86,6 @@ namespace Intermix.ViewModels.LoginPage
             }
         }
 
-
+        #endregion
     }
 }

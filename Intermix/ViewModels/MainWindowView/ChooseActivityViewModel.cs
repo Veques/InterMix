@@ -5,24 +5,9 @@ namespace Intermix.ViewModels.MainWindowView.TicTacToeView
 {
     public class ChooseActivityViewModel : BaseViewModel
     {
-
-        private readonly static ChooseActivityViewModel _instance = new();
-        public static ChooseActivityViewModel Instance { get { return _instance; } }
-
-        private string _chosenUsername;
-        public string ChosenUsername
-        {
-            get { return _chosenUsername; }
-            set
-            {
-                _chosenUsername = value;
-                OnPropertyChanged("ChosenUsername");
-            }
-        }
-
+        #region Constructor
         public ChooseActivityViewModel()
         {
-
             if (Config.Default.Theme == 0)
             {
                 DarkLogo_TTT = Visibility.Visible;
@@ -34,7 +19,20 @@ namespace Intermix.ViewModels.MainWindowView.TicTacToeView
                 LightLogo_TTT = Visibility.Visible;
             }
         }
+        #endregion
 
+        #region Properties
+
+        private string _chosenUsername;
+        public string ChosenUsername
+        {
+            get { return _chosenUsername; }
+            set
+            {
+                _chosenUsername = value;
+                OnPropertyChanged("ChosenUsername");
+            }
+        }
 
         private Visibility _lightLogo_TTT;
 
@@ -60,5 +58,6 @@ namespace Intermix.ViewModels.MainWindowView.TicTacToeView
             }
         }
 
+        #endregion
     }
 }

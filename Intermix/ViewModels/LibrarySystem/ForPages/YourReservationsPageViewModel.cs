@@ -16,10 +16,7 @@ using System.Windows.Input;
 
 namespace Intermix.ViewModels.LibrarySystem.ForPages
 {
-    public class YourReservationsPageViewModel : BaseViewModel
-    {
-
-        #region Models
+    #region Models
         public class Reservation
         {
             public bool IsChecked { get; set; }
@@ -32,10 +29,12 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
         }
 
         #endregion
-
+    public class YourReservationsPageViewModel : BaseViewModel
+    {
         public ICommand LoanCommand { get; set; }
         public ICommand CancelCommand { get; set; }
 
+        #region Constructor
         public YourReservationsPageViewModel()
         {
             LoanCommand = new RelayCommand(
@@ -45,9 +44,14 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
 
             CancelCommand = new RelayCommand(CancelClicked, o => true);
 
-
             FillDataGrid();
+
+            ReservationsCollectionView = CollectionViewSource.GetDefaultView(Reservations);
+            ReservationsCollectionView.Filter = Filter;
         }
+        #endregion
+
+        #region Fill Data Grid
         private void FillDataGrid()
         {
             Reservations = new();
@@ -57,22 +61,21 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
             {
                 foreach (var book in db.Books.Where(x => x.Id == reservation.BookId && x.IsReserved == 1))
                 {
+                    bool isLoanable = DateTime.Now.Date >= reservation.EndOfReservation.Date.AddDays(-1);
 
                     Reservations.Add(new Reservation
                     {
                         IsChecked = false,
-                        IsEnabled = DateTime.Now.Date >= reservation.ReturnDate.Date && reservation.ReturnDate != DateTime.MinValue,
+                        IsEnabled = isLoanable || reservation.ReturnDate != DateTime.MinValue,
                         Id = book.Id,
                         Title = $"{book.Title}",
                         Author = $"{book.AuthorName} {book.AuthorSurname}",
-                        OpenToLoan = reservation.ExpectedReturn.Date.AddDays(-16)
+                        OpenToLoan = reservation.EndOfReservation.Date.AddDays(-1)
                     });
                 }
             }
-
-            ReservationsCollectionView = CollectionViewSource.GetDefaultView(Reservations);
-            ReservationsCollectionView.Filter = Filter;
         }
+        #endregion
 
         private void LoanClicked()
         {
@@ -100,6 +103,7 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
                     continue;
 
                 cell.IsAvailable = 0;
+                cell.IsReserved = 0;
 
             }
 
@@ -140,7 +144,7 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
 
         }
 
-
+        #region Filter
         private bool Filter(object obj)
         {
             if (obj is Reservation reservation)
@@ -153,6 +157,7 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
             }
             return false;
         }
+        #endregion
 
         #region Properties 
 
@@ -225,11 +230,6 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
 
 
         #endregion
-
-
-
-
-
 
     }
 }

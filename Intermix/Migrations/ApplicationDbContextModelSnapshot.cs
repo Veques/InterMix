@@ -82,6 +82,9 @@ namespace Intermix.Migrations
                     b.Property<int>("BookId")
                         .HasColumnType("INTEGER");
 
+                    b.Property<DateTime>("EndOfReservation")
+                        .HasColumnType("TEXT");
+
                     b.Property<DateTime>("ExpectedReturn")
                         .HasColumnType("TEXT");
 

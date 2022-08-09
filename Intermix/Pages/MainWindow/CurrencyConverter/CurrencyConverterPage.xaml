@@ -74,50 +74,9 @@
             <Button Grid.Column="1"
                       Style="{StaticResource ConvertButton_CC}"
                       Command="{Binding ConvertCommand}"
-                      materialDesign:ButtonProgressAssist.IsIndicatorVisible="true"
-                      materialDesign:ButtonProgressAssist.Value="{Binding IsConverting}">
-                <!-- simple example of toggling/animating pack icon with a data trigger-->
-                <materialDesign:PackIcon Height="24" Width="24">
-                    <materialDesign:PackIcon.Style>
-                        <Style TargetType="materialDesign:PackIcon" BasedOn="{StaticResource {x:Type materialDesign:PackIcon}}">
-                            <Setter Property="Kind" Value="Cached" />
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding HasConverted}" Value="True">
-                                    <Setter Property="Kind" Value="Check" />
-                                    <Setter Property="Background" Value="{DynamicResource CC_ComboBoxBorder}"/>
-                                    <DataTrigger.EnterActions>
-                                        <BeginStoryboard>
-                                            <Storyboard>
-                                                <DoubleAnimation
-                                                    Storyboard.TargetProperty="Opacity"
-                                                    From="0"
-                                                    To="1"
-                                                    Duration="0:0:0.8" />
-                                            </Storyboard>
-                                        </BeginStoryboard>
-                                    </DataTrigger.EnterActions>
-                                </DataTrigger>
-                                <DataTrigger Binding="{Binding HasConverted}" Value="False">
-                                    <Setter Property="Kind" Value="Cached" />
-                                    <DataTrigger.EnterActions>
-                                        <BeginStoryboard>
-                                            <Storyboard>
-                                                <DoubleAnimation
-                                                    Storyboard.TargetProperty="Opacity"
-                                                    From="0"
-                                                    To="1"
-                                                    Duration="0:0:0.8" />
-                                            </Storyboard>
-                                        </BeginStoryboard>
-                                    </DataTrigger.EnterActions>
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </materialDesign:PackIcon.Style>
-                </materialDesign:PackIcon>
+                      materialDesign:ButtonProgressAssist.IsIndicatorVisible="true">
+                <materialDesign:PackIcon Height="24" Width="24" Kind="Cached"/>
             </Button>
-
-
             <Grid VerticalAlignment="Center" Grid.Column="2">
                 <Grid.RowDefinitions>
                     <RowDefinition/>

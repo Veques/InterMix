@@ -12,6 +12,7 @@ using System.Windows.Media;
 
 namespace Intermix.ViewModels.LibrarySystem.ForPages
 {
+    #region Model
     public class Book
     {
         public int Id {get;set;}
@@ -23,12 +24,13 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
         public SolidColorBrush StatusColor { get; set; }
 
     }
-
+    #endregion
     public class BrowseBooksPageViewModel : BaseViewModel
     {
+
+        #region Constructor
         public BrowseBooksPageViewModel()
         {
-
             AllBooks = new();
 
             FillDataGrid();
@@ -38,6 +40,9 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
 
         }
 
+        #endregion
+
+        #region Fill Data Grid
         private void FillDataGrid()
         {
             using var db = new ApplicationDbContext();
@@ -57,7 +62,7 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
                     status = $"Loaned till {db.Loans.Single(x => x.BookId == element.Id).ExpectedReturn.ToShortDateString()}";
                     statusColor = Brushes.Orange;
                 }
-                if (element.IsAvailable == 0 && element.IsReserved == 1)
+                if (element.IsAvailable == 0 && element.IsReserved == 1 && db.Reservations.Any())
                 {
                     var whenAvailable = db.Reservations.Single(x => x.BookId == element.Id).ReturnDate == DateTime.MinValue ?
                                         db.Reservations.Single(x => x.BookId == element.Id).ExpectedReturn.ToShortDateString() :
@@ -80,7 +85,9 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
                 });
             }
         }
+        #endregion
 
+        #region Filter
         private bool FilterBooks(object obj)
         {
             if (obj is Book book)
@@ -93,6 +100,7 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
             }
             return false;
         }
+        #endregion
 
         #region Properties
 

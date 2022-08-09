@@ -10,6 +10,8 @@ namespace Intermix.ViewModels.MainWindowView.TicTacToeView
 
         }
 
+        #region Properties
+
         private bool _onePlayer;
         public bool OnePlayer
         {
@@ -57,6 +59,6 @@ namespace Intermix.ViewModels.MainWindowView.TicTacToeView
             }
         }
 
-
+        #endregion
     }
 }

@@ -14,24 +14,25 @@ using System.Windows.Media;
 
 namespace Intermix.ViewModels.LibrarySystem
 {   
+    #region Models
+    public class PrivateLoans
+    {
+        public string Author { get; set; }
+        public string Title { get; set; }
+        public DateTime LoanDate { get; set; }
+        public DateTime ReturnDate { get; set; }
+    }
+
+    public class Notification
+    {
+        public string Title { get; set; }
+        public DateTime ReturnDate { get; set; }
+        public SolidColorBrush ExpiringNotifForeground { get; set; }
+    }
+    #endregion
+
     public class MainLibraryPageViewModel : BaseViewModel
     {
-        #region Models
-        public class PrivateLoans
-        {
-            public string Author { get; set; }
-            public string Title { get; set; }
-            public DateTime LoanDate { get; set; }
-            public DateTime ReturnDate { get; set; }
-        }
-
-        public class Notification
-        {
-            public string Title { get; set; }
-            public DateTime ReturnDate { get; set; }
-            public SolidColorBrush ExpiringNotifForeground { get; set; }
-        }
-        #endregion
 
         #region Constructor
         public MainLibraryPageViewModel()
@@ -74,9 +75,8 @@ namespace Intermix.ViewModels.LibrarySystem
         #endregion
 
         #region Automatic returns to make reservations work 
-        private void ManageDateChanges()
+        private static void ManageDateChanges()
         {
-
             using var db = new ApplicationDbContext();
 
             foreach(var element in db.Books)
@@ -93,8 +93,9 @@ namespace Intermix.ViewModels.LibrarySystem
                     }
 
 
-                    if (element.IsReserved == 1 && DateTime.Now.Date > reservation.ExpectedReturn.Date.AddDays(2))
-                    { 
+                    if (element.IsReserved == 1 && DateTime.Now.Date > reservation.EndOfReservation.Date)
+                    {
+                        db.Reservations.RemoveRange(db.Reservations.Where(x => x.BookId == element.Id));
                         element.IsReserved = 0;
                         db.SaveChanges();
                     }

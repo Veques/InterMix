@@ -15,10 +15,10 @@ using System.Windows.Input;
 
 namespace Intermix.ViewModels.LibrarySystem.ForPages
 {
-
     public class AdminAllLoansDataGridViewModel : BaseViewModel
     {
         public ICommand ClearFilterCommand { get; set; }
+
         #region Constructor
         public AdminAllLoansDataGridViewModel()
         {
@@ -40,6 +40,7 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
         }
         #endregion
 
+        #region Fill Data Grid
         private void FillDataGrid()
         {
             using var db = new ApplicationDbContext();
@@ -79,7 +80,9 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
                 }
             }
         }
+        #endregion
 
+        #region Filter
         public bool Filter(object obj)
         {
             if (obj == null)
@@ -96,6 +99,7 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
             }
             return false;
         }
+        #endregion
 
         #region Properties
 

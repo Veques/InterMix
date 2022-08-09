@@ -36,7 +36,7 @@
             <materialDesign:PackIcon Kind="ExclamationBold" Foreground="red" Width="25" Height="50" VerticalAlignment="Center" />
 
             <TextBox IsReadOnly="True" TextWrapping="WrapWithOverflow" FontWeight="DemiBold" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="25,0,25,0" Grid.ColumnSpan="2" materialDesign:TextFieldAssist.DecorationVisibility="Hidden" BorderThickness="0">
-                After succesful reservation, you can access your reserved books there. Books you reserved, those returned to Library, will be available to loan only by YOU, only on THIS TAB and only for TWO DAYS. After this time - the reservation is canceled.</TextBox>
+                After succesful reservation, you can access your reserved books there. Books you reserved, those returned to Library, will be available to loan only by YOU, only on THIS TAB and only for TWO DAYS. After this time - the reservation is canceled automatically.</TextBox>
 
             <materialDesign:PackIcon Kind="ExclamationBold" Foreground="red" Width="25" Height="50" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" />
         

@@ -53,7 +53,8 @@ namespace Intermix.Migrations
                     BookId = table.Column<int>(type: "INTEGER", nullable: false),
                     UserId = table.Column<int>(type: "INTEGER", nullable: false),
                     ExpectedReturn = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    ReturnDate = table.Column<DateTime>(type: "TEXT", nullable: false)
+                    ReturnDate = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    EndOfReservation = table.Column<DateTime>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {

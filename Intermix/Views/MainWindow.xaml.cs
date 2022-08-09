@@ -46,14 +46,14 @@ namespace Intermix
 
         private void Settings_Click(object sender, RoutedEventArgs e)
         {
-            Settings setting = new Settings();
-            setting.Show();
+            Settings setting = new();
+            setting.ShowDialog();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             RateWindow window = new();
-            window.Show();
+            window.ShowDialog();
         }
     }
 }

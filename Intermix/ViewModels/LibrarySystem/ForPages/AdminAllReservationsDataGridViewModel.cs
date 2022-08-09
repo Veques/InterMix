@@ -18,6 +18,8 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
     public class AdminAllReservationsDataGridViewModel : BaseViewModel
     {
         public ICommand ClearFilterCommand { get; set; }
+
+        #region Constructor
         public AdminAllReservationsDataGridViewModel()
         {
             AllReservations = new();
@@ -29,16 +31,15 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
             ReservationCollectionView = CollectionViewSource.GetDefaultView(AllReservations);
             ReservationCollectionView.GroupDescriptions.Add(new PropertyGroupDescription(nameof(Reservations.Username)));
             ReservationCollectionView.Filter = Filter;
-
-
         }
-
+        #endregion
         private void ClearFilter()
         {
             SelectedIndex = -1;
             SelectedUser = String.Empty;
         }
 
+        #region Fill Data Grid
         private void FillDataGrid()
         {
             using var db = new ApplicationDbContext();
@@ -68,6 +69,9 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
                 }
             }
         }
+        #endregion
+
+        #region Filter
         public bool Filter(object obj)
         {
             if (obj == null)
@@ -83,7 +87,7 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
             }
             return false;
         }
-
+        #endregion
 
         #region Properties
 

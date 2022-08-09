@@ -13,6 +13,7 @@ namespace Intermix.Models
         public int UserId { get; set; }
         public DateTime ExpectedReturn { get; set; }
         public DateTime ReturnDate { get; set; }
+        public DateTime EndOfReservation { get; set; }
 
     }
 }

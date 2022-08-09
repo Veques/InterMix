@@ -25,19 +25,19 @@
 
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0 0 5 0">
                     <Button HorizontalAlignment="Left" ToolTip="Rate" Click="Button_Click"
-                            Margin="0 0 1 0" FontWeight="SemiBold"  Style="{StaticResource WindowBarButtons}">
+                            Margin="0 0 1 0" FontWeight="SemiBold" Style="{StaticResource LMS_WindowButtons}">
                         <Button.Content>
                             <materialDesign:PackIcon Kind="Star" Width="30" Height="30"/>
                         </Button.Content>
                     </Button>
                     <Button Click="Settings_Click" HorizontalAlignment="Left" Margin="0 0 1 0" 
-                            ToolTip="Personalization" FontWeight="SemiBold"  Style="{StaticResource WindowBarButtons}">
+                            ToolTip="Personalization" FontWeight="SemiBold"  Style="{StaticResource LMS_WindowButtons}">
                         <Button.Content>
                             <materialDesign:PackIcon Kind="ThemeLightDark" Width="30" Height="30"/>
                         </Button.Content>
                     </Button>
                     <Button fa:Awesome.Content="Regular_WindowMinimize" ToolTip="Minimize"
-                            HorizontalAlignment="Left" FontWeight="SemiBold" Click="Minimize_Click" Style="{StaticResource WindowBarButtons}">
+                            HorizontalAlignment="Left" FontWeight="SemiBold" Click="Minimize_Click" Style="{StaticResource WindowBarButtons1}">
                         <Button.Content>
                             <materialDesign:PackIcon Kind="WindowMinimize" Width="30" Height="30" />
                         </Button.Content>

@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Intermix.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220804134842_Intermix")]
+    [Migration("20220808180855_Intermix")]
     partial class Intermix
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -83,6 +83,9 @@ namespace Intermix.Migrations
 
                     b.Property<int>("BookId")
                         .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("EndOfReservation")
+                        .HasColumnType("TEXT");
 
                     b.Property<DateTime>("ExpectedReturn")
                         .HasColumnType("TEXT");

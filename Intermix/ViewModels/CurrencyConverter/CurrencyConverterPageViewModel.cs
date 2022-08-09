@@ -12,7 +12,7 @@ using System.Windows.Input;
 
 namespace Intermix.ViewModels.CurrencyConverter
 {
-    #region Model
+    #region Models
 
     public class CurrenciesModel
     {
@@ -28,15 +28,19 @@ namespace Intermix.ViewModels.CurrencyConverter
         private const string CURRENCY_FROM = "currencies=";
         private const string CURRENCY_TO = "&base_currency=";
         private const string API_KEY = "apikey=fc3685a0-39a4-11ec-87f9-a764dd5862af&";
+        private const string URL = @"https://currencyapi.com/docs/currency-list#currency-list";
         #endregion
 
         public ICommand ConvertCommand { get; set; }
+
+        #region Constructor
         public CurrencyConverterPageViewModel()
         {
             ConvertCommand = new RelayCommand(o => ConvertCurrencies(), o => true);
 
             LoadMethodAsync();
         }
+        #endregion
 
         private async Task LoadMethodAsync()
         {
@@ -56,28 +60,26 @@ namespace Intermix.ViewModels.CurrencyConverter
             }
         }
 
-        public async Task<List<List<string>>> GetCurrencies()
+        private async Task<List<List<string>>> GetCurrencies()
         {
-            string url = @"https://currencyapi.com/docs/currency-list#currency-list";
-            using (var client = new HttpClient())
-            {
-                var html = await client.GetStringAsync(url);
-                var doc = new HtmlAgilityPack.HtmlDocument();
-                doc.LoadHtml(html);
+          
+            using var client = new HttpClient();
+            
+            var html = await client.GetStringAsync(URL);
+            var doc = new HtmlAgilityPack.HtmlDocument();
+            doc.LoadHtml(html);
 
-                var table = doc.DocumentNode.SelectSingleNode("//table");
-                return table.Descendants("tr")
-                            .Skip(2)
-                            .Select(tr => tr.Descendants("td")
-                                            .Select(td => WebUtility.HtmlDecode(td.InnerText))
-                                            .ToList())
-                            .ToList();
-            }
+            var table = doc.DocumentNode.SelectSingleNode("//table");
+            return table.Descendants("tr")
+                        .Skip(2)
+                        .Select(tr => tr.Descendants("td")
+                                        .Select(td => WebUtility.HtmlDecode(td.InnerText))
+                                        .ToList())
+                        .ToList();
         }
 
         private async void ConvertCurrencies()
         {
-            IsConverting = true;
             using (var client = new HttpClient())
             {
                 try
@@ -101,9 +103,6 @@ namespace Intermix.ViewModels.CurrencyConverter
                 { }
 
             }
-            IsConverting = false;
-            HasConverted = true;
-
         }
 
         private ObservableCollection<CurrenciesModel> _currencies;
@@ -165,33 +164,5 @@ namespace Intermix.ViewModels.CurrencyConverter
             }
 
         }
-
-        private bool _isConverting;
-
-        public bool IsConverting
-        {
-            get { return _isConverting; }
-            set
-            {
-                _isConverting = value;
-                OnPropertyChanged("IsConverting");
-            }
-        }
-
-        private bool _hasConverted = false;
-        public bool HasConverted
-        {
-            get { return _hasConverted; }
-            set
-            {
-                _hasConverted = value;
-                OnPropertyChanged("HasConverted");
-
-
-            }
-        }
-
-
-
     }
 }

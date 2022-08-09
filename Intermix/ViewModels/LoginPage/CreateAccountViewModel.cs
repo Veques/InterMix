@@ -4,6 +4,7 @@ using Intermix.Models;
 using Intermix.ViewModels.Base;
 using Intermix.Views;
 using System;
+using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 
@@ -11,9 +12,9 @@ namespace Intermix.ViewModels.LoginPage
 {
     public class CreateAccountViewModel : BaseViewModel
     {
-
         public ICommand CreateAccount { get; set; }
 
+        #region Constructor
         public CreateAccountViewModel()
         {
             CreateAccount = new RelayCommand(
@@ -23,12 +24,10 @@ namespace Intermix.ViewModels.LoginPage
                      !string.IsNullOrEmpty(Username) && !string.IsNullOrEmpty(Password) &&
                      !string.IsNullOrEmpty(PasswordConfirm));
         }
-
+        #endregion
         private void CreateAnAccount(string name, string surname, string username, string password)
         {
-
             ApplicationDbContext _dbContext = new ApplicationDbContext();
-
             try
             {
                 if (!Password.Equals(PasswordConfirm))
@@ -54,7 +53,19 @@ namespace Intermix.ViewModels.LoginPage
                     Username = username
                 };
 
+                if (!_dbContext.Users.Any(o => o.Username == "Admin"))
+                {
+                    _dbContext.Users.Add(new Users
+                    {
+                        Name = "",
+                        Surname = "",
+                        Username = "Admin",
+                        Password = "1234",
+                    });
+                }
+
                 _dbContext.Users.Add(user);
+
                 if (_dbContext.SaveChanges() > 0)
                 {
                     _ = new CustomizedMessageBox("You have been added to database", MessageType.Success, MessageButton.Ok).ShowDialog();
@@ -64,8 +75,8 @@ namespace Intermix.ViewModels.LoginPage
                 Name = String.Empty;
                 Surname = String.Empty;
                 Username = String.Empty;
-
-
+                Password = String.Empty;
+                PasswordConfirm = String.Empty;
             }
             catch (Exception ex)
             {
@@ -73,6 +84,8 @@ namespace Intermix.ViewModels.LoginPage
 
             }
         }
+
+        #region Properties
 
         private string _name;
 
@@ -134,6 +147,7 @@ namespace Intermix.ViewModels.LoginPage
             }
         }
 
+        #endregion
 
     }
 }
