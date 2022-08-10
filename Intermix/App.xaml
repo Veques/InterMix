@@ -1,9 +1,90 @@
 ﻿<Application x:Class="Intermix.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+             
+             xmlns:views="clr-namespace:Intermix.Views"
+             xmlns:pages="clr-namespace:Intermix.Pages"
+             xmlns:PGconverter="clr-namespace:Intermix.Pages.MainWindow.CurrencyConverter"
+             xmlns:PGtictactoe="clr-namespace:Intermix.Pages.MainWindow.TicTacToe"
+             xmlns:PGlogin="clr-namespace:Intermix.Pages.Login"
+             xmlns:PGlibrary="clr-namespace:Intermix.Pages.LibrarySystem"
+             
+             xmlns:VM="clr-namespace:Intermix.ViewModels"
+             xmlns:VMlogin="clr-namespace:Intermix.ViewModels.LoginPage"
+             xmlns:VMconverter="clr-namespace:Intermix.ViewModels.CurrencyConverter"
+             xmlns:VMtictactoe="clr-namespace:Intermix.ViewModels.TicTacToe"
+             xmlns:VMlibrary="clr-namespace:Intermix.ViewModels.LibrarySystem.ForPages"
+             xmlns:VMlibrarymain="clr-namespace:Intermix.ViewModels.LibrarySystem"
+             
+             xmlns:intermix="clr-namespace:Intermix"
              StartupUri="Views\MainWindow.xaml" LoadCompleted="Application_LoadCompleted">
     <Application.Resources>
         <ResourceDictionary>
+            
+            <DataTemplate DataType="{x:Type VM:MainWindowViewModel}">
+                <intermix:MainWindow/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type VM:InfoViewModel}">
+                <pages:Info/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type VM:ChooseActivityViewModel}">
+                <pages:ChooseActivity/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type VMconverter:CurrencyConverterViewModel}">
+                <PGconverter:CurrencyConverterPage/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type VMtictactoe:GameTypeViewModel}">
+                <PGtictactoe:GameType/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type VMtictactoe:GameOnePlayerEasyViewModel}">
+                <PGtictactoe:GamePageForOnePlayerEasy/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type VMtictactoe:GameOnePlayerHardViewModel}">
+                <PGtictactoe:GamePageForOnePlayerHard/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type VMtictactoe:GameTwoPlayersViewModel}">
+                <PGtictactoe:GamePageForTwoPlayers/>
+            </DataTemplate>
+            
+            
+            <DataTemplate DataType="{x:Type VM:LoginWindowViewModel}">
+                <views:LoginWindow/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type VMlogin:CreateAccountViewModel}">
+                <PGlogin:CreateAccountPage/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type VMlogin:LoginPageViewModel}">
+                <PGlogin:LoginPage/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type VMlibrarymain:MainLibraryPageViewModel}">
+                <PGlibrary:MainLibraryPage/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type VMlibrary:AdminAllLoansDataGridViewModel}">
+                <PGlibrary:AdminAllLoansDataGridPage/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type VMlibrary:AdminAllReservationsDataGridViewModel}">
+                <PGlibrary:AdminAllReservationsDataGridPage/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type VMlibrary:AdminPageViewModel}">
+                <PGlibrary:AdminPage/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type VMlibrary:BrowseBooksPageViewModel}">
+                <PGlibrary:BrowseBooksPage/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type VMlibrary:LoanBooksPageViewModel}">
+                <PGlibrary:LoanBooksPage/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type VMlibrary:ReturnBooksPageViewModel}">
+                <PGlibrary:ReturnBooksPage/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type VMlibrary:YourReservationsPageViewModel}">
+                <PGlibrary:YourReservationsPage/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type VMlibrary:ReservationsPageViewModel}">
+                <PGlibrary:ReservationsPage/>
+            </DataTemplate>
+
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />

@@ -1,4 +1,7 @@
-﻿using Intermix.Models;
+﻿using Intermix.Commands;
+using Intermix.Models;
+using Intermix.Models.LibrarySystemModels;
+using Intermix.Stores;
 using Intermix.ViewModels.Base;
 using System;
 using System.Collections.Generic;
@@ -8,29 +11,23 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
+using System.Windows.Input;
 using System.Windows.Media;
 
 namespace Intermix.ViewModels.LibrarySystem.ForPages
 {
-    #region Model
-    public class Book
-    {
-        public int Id {get;set;}
-        public string Title {get;set;}
-        public string Author {get;set;}
-        public DateTime PublishDate {get;set;}
-        public string Publisher {get;set;}
-        public string Status {get;set;}
-        public SolidColorBrush StatusColor { get; set; }
 
-    }
-    #endregion
     public class BrowseBooksPageViewModel : BaseViewModel
     {
+        public ICommand BackMainCommand { get; set; }
 
         #region Constructor
-        public BrowseBooksPageViewModel()
+        public BrowseBooksPageViewModel(NavigationStore navigationStore)
         {
+            BackMainCommand = new NavigationCommand<MainLibraryPageViewModel>(navigationStore,
+                () => new MainLibraryPageViewModel(navigationStore),
+                x => true);
+
             AllBooks = new();
 
             FillDataGrid();

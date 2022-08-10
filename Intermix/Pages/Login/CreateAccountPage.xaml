@@ -21,7 +21,8 @@ Title="CreateAccountPage" Foreground="{DynamicResource LW_Font}">
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
-            <Button Width="50" Height="30" Content="Back" Click="Back_Click" VerticalAlignment="Top" HorizontalAlignment="Left" Style="{StaticResource LW_Buttons}"/>
+            <Button Width="50" Height="30" Content="Back" VerticalAlignment="Top" HorizontalAlignment="Left" 
+                    Command="{Binding BackMainButton}" Style="{StaticResource LW_Buttons}"/>
             <TextBlock Grid.Column="1" Text="Enter your data" FontWeight="Regular" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Top" />
         </Grid>
 

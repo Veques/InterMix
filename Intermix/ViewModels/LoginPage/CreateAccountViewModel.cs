@@ -1,6 +1,7 @@
 ﻿using Intermix.Commands;
 using Intermix.Enums;
 using Intermix.Models;
+using Intermix.Stores;
 using Intermix.ViewModels.Base;
 using Intermix.Views;
 using System;
@@ -13,16 +14,21 @@ namespace Intermix.ViewModels.LoginPage
     public class CreateAccountViewModel : BaseViewModel
     {
         public ICommand CreateAccount { get; set; }
+        public ICommand BackMainButton { get; set; }
 
         #region Constructor
-        public CreateAccountViewModel()
-        {
-            CreateAccount = new RelayCommand(
+        public CreateAccountViewModel(NavigationStore navigationStore)
+        {       
+           CreateAccount = new RelayCommand(
                 o => CreateAnAccount(Name, Surname, Username, Password),
 
                 o => !string.IsNullOrEmpty(Name) && !string.IsNullOrEmpty(Surname) &&
                      !string.IsNullOrEmpty(Username) && !string.IsNullOrEmpty(Password) &&
                      !string.IsNullOrEmpty(PasswordConfirm));
+
+            BackMainButton = new NavigationCommand<LoginPageViewModel>(navigationStore,
+                () => new LoginPageViewModel(navigationStore),
+                x => true);
         }
         #endregion
         private void CreateAnAccount(string name, string surname, string username, string password)

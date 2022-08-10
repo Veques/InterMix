@@ -3,7 +3,7 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:Intermix.Pages.LibrarySystem" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:forpages="clr-namespace:Intermix.ViewModels.LibrarySystem.ForPages" d:DataContext="{d:DesignInstance Type=forpages:ReturnBooksPageViewModel}"
+       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:forpages="clr-namespace:Intermix.ViewModels.LibrarySystem.ForPages" d:DataContext="{d:DesignInstance Type=forpages:ReturnBooksPageViewModel}"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="ReturnBooksPage">
@@ -17,7 +17,7 @@
         </Grid.RowDefinitions>
 
         <Grid VerticalAlignment="Center" HorizontalAlignment="Center" >
-            <Button Click="Back_Click" Style="{StaticResource LMS_WindowButtons}" Background="red" >
+            <Button Command="{Binding BackMainCommand}" Style="{StaticResource LMS_WindowButtons}" Background="red" >
                 <materialDesign:PackIcon Kind="Play" Foreground="black" Width="30" Height="30">
                     <materialDesign:PackIcon.LayoutTransform>
                         <RotateTransform Angle="180"/>

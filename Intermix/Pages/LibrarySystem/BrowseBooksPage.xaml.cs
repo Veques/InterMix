@@ -12,12 +12,6 @@ namespace Intermix.Pages.LibrarySystem
         public BrowseBooksPage()
         {
             InitializeComponent();
-            DataContext = new BrowseBooksPageViewModel();
-        }
-
-        private void Back_Click(object sender, RoutedEventArgs e)
-        {
-            NavigationService.GoBack();
         }
     }
 }

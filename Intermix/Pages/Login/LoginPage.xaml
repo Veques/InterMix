@@ -20,7 +20,10 @@
         <!-- Welcome Back -->
 
         <Grid >
-            <materialDesign:PackIcon Kind="Bookshelf" Height="110" Width="110" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{DynamicResource LW_Icon}" Margin="0 -10 0 10"/>
+            <materialDesign:PackIcon Kind="Bookshelf" Height="110" Width="110" VerticalAlignment="Center" 
+                                     HorizontalAlignment="Center" Foreground="{DynamicResource LW_Icon}" 
+                                     Margin="0 -10 0 10"/>
+            
             <TextBlock VerticalAlignment="Bottom" HorizontalAlignment="Center" FontSize="20" Foreground="{DynamicResource LW_Font}" 
                        FontWeight="SemiBold" Text="Welcome back"/>
         </Grid>
@@ -53,7 +56,7 @@
             <Grid Grid.Row="2">
                 
                 <Button Margin="0 5 0 0" Content="Log in" VerticalAlignment="Bottom" 
-                    Command="{Binding LogIn}" Style="{StaticResource LW_Buttons}"/>
+                    Command="{Binding LogInCommand}" Style="{StaticResource LW_Buttons}"/>
 
                 
             </Grid>
@@ -73,7 +76,8 @@
 
         <Grid Grid.Row="3" Margin="0 6 0 0">
 
-            <Button Grid.Row="1" Content="Create an account" Width="200" Click="NewAccount_Click" VerticalAlignment="Top" Style="{StaticResource LW_Buttons}" />
+            <Button Grid.Row="1" Content="Create an account" Width="200" Command="{Binding CreateAccountCommand}"
+                    VerticalAlignment="Top" Style="{StaticResource LW_Buttons}" />
         </Grid>
 
 

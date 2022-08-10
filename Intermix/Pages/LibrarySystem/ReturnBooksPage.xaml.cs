@@ -24,13 +24,6 @@ namespace Intermix.Pages.LibrarySystem
         public ReturnBooksPage()
         {
             InitializeComponent();
-            DataContext = new ReturnBooksPageViewModel();
         }
-
-        private void Back_Click(object sender, RoutedEventArgs e)
-        {
-            NavigationService.GoBack();
-        }
-
     }
 }

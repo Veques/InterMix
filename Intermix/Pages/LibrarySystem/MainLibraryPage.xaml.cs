@@ -25,81 +25,9 @@ namespace Intermix.Pages.LibrarySystem
     /// </summary>
     public partial class MainLibraryPage : Page
     {
-
-        public string PIN { get; private set; }
-
         public MainLibraryPage()
         {
             InitializeComponent();
-            DataContext = new MainLibraryPageViewModel();
-
-            using var db = new ApplicationDbContext();
-
-            foreach (var user in db.Users)
-            {
-                if (user.Username.Equals("Admin"))
-                {
-                    PIN = user.Password;
-                }
-            }
-
-        }
-
-        private void LoanBooks_Click(object sender, RoutedEventArgs e)
-        {
-            LoanBooksPage page = new();
-            NavigationService.Navigate(page);
-
-            
-
-        }
-        private void ReturnBooks_Click(object sender, RoutedEventArgs e)
-        {
-            ReturnBooksPage page = new();
-            NavigationService.Navigate(page);
-
-
-        }
-        private void BrowseBooks_Click(object sender, RoutedEventArgs e)
-        {
-
-            BrowseBooksPage page = new();
-            NavigationService.Navigate(page);
-
-
-        }
-        private void PswdBox_PasswordChanged(object sender, RoutedEventArgs e)
-        {
-
-            var PswdBox = sender as PasswordBox;
-            AdminPage page = new();
-
-            if (PswdBox.Password.Length == 4)
-            {
-                if (PswdBox.Password.Equals(PIN))
-                {
-                    NavigationService.Navigate(page);
-
-
-                }
-                else
-                {
-                    AdminButton.BorderBrush = Brushes.Red;
-                    PswdBox.Password = String.Empty;
-                }
-            }
-        }
-
-        private void Reservations_Click(object sender, RoutedEventArgs e)
-        {
-            ReservationsPage page = new();
-            NavigationService.Navigate(page);
-        }
-
-        private void YourReservations_Click(object sender, RoutedEventArgs e)
-        {
-            YourReservationsPage page = new();
-            NavigationService.Navigate(page);
         }
     }
 }

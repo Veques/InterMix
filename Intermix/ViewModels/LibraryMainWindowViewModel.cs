@@ -1,5 +1,6 @@
 ﻿using Intermix.Commands;
 using Intermix.Models;
+using Intermix.Stores;
 using Intermix.ViewModels.Base;
 using Intermix.ViewModels.LoginPage;
 using System;
@@ -17,12 +18,20 @@ namespace Intermix.ViewModels
 
     public class LibraryMainWindowViewModel : BaseViewModel
     {
+        private readonly NavigationStore _navigationStore;
 
+        public BaseViewModel CurrentViewModel => _navigationStore.CurrentViewModel;
 
-        public LibraryMainWindowViewModel()
+        public LibraryMainWindowViewModel(NavigationStore navigationStore)
         {
-
+            _navigationStore = navigationStore;
+            _navigationStore.CurrentViewModelChanged += OnViewModelChanged;
             UpdateTime();
+        }
+
+        private void OnViewModelChanged()
+        {
+            OnPropertyChanged(nameof(CurrentViewModel));
         }
 
         private async void UpdateTime()
@@ -33,6 +42,8 @@ namespace Intermix.ViewModels
             UpdateTime();
         }
 
+
+        #region Properties
         private string _date;
 
         public string Date
@@ -44,6 +55,7 @@ namespace Intermix.ViewModels
         }
 
         private string _time;
+        private NavigationStore navigationStore;
 
         public string Time
         {
@@ -52,7 +64,7 @@ namespace Intermix.ViewModels
                 OnPropertyChanged("Time");
             }
         }
-
+        #endregion
 
     }
 }

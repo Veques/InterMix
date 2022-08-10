@@ -38,7 +38,7 @@
         </StackPanel>
         
             <Grid VerticalAlignment="Bottom" x:Name="Back" Background="Transparent" Grid.RowSpan="4" HorizontalAlignment="Left" >
-                <Button HorizontalAlignment="Center" Style="{StaticResource BackButtons}" Click="Back_Click">
+                <Button HorizontalAlignment="Center" Style="{StaticResource BackButtons}" Command="{Binding BackMainCommand}">
                     <Button.Content>
                         <fa:FontAwesome Icon="Solid_AngleLeft" Foreground="{DynamicResource MW_Font}" FontSize="70"/>
                     </Button.Content>

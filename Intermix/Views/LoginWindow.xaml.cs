@@ -1,9 +1,11 @@
-﻿using Intermix.ViewModels.LoginPage;
+﻿using Intermix.Stores;
+using Intermix.ViewModels;
+using Intermix.ViewModels.LoginPage;
 using System;
 using System.Windows;
 using System.Windows.Input;
 
-namespace Intermix.Views.LoginPage
+namespace Intermix.Views
 {
     /// <summary>
     /// Interaction logic for LoginWindow.xaml
@@ -13,11 +15,11 @@ namespace Intermix.Views.LoginPage
         public LoginWindow()
         {
             InitializeComponent();
-            DataContext = new LoginPageViewModel();
-        }
-        private void Exit_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
+
+            NavigationStore _navigationStore = new();
+            _navigationStore.CurrentViewModel = new LoginPageViewModel(_navigationStore);
+            DataContext = new LoginWindowViewModel(_navigationStore);
+
         }
 
         private void Grid_MouseDown(object sender, MouseButtonEventArgs e)

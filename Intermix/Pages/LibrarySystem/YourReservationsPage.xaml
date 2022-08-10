@@ -22,7 +22,7 @@
         </Grid.ColumnDefinitions>
 
         <Grid VerticalAlignment="Center" HorizontalAlignment="Center" Grid.ColumnSpan="2" >
-            <Button Click="Back_Click" Style="{StaticResource LMS_WindowButtons}" >
+            <Button Command="{Binding BackMainCommand}" Style="{StaticResource LMS_WindowButtons}" >
                 <materialDesign:PackIcon Kind="Play" Foreground="black" Width="30" Height="30">
                     <materialDesign:PackIcon.LayoutTransform>
                         <RotateTransform Angle="180"/>

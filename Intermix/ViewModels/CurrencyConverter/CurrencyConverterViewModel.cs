@@ -1,4 +1,6 @@
 ﻿using Intermix.Commands;
+using Intermix.Models.MainWindowModels;
+using Intermix.Stores;
 using Intermix.ViewModels.Base;
 using Newtonsoft.Json;
 using System;
@@ -12,16 +14,7 @@ using System.Windows.Input;
 
 namespace Intermix.ViewModels.CurrencyConverter
 {
-    #region Models
-
-    public class CurrenciesModel
-    {
-        public string ShortName { get; set; }
-        public string LongName { get; set; }
-    }
-
-    #endregion
-    public class CurrencyConverterPageViewModel : BaseViewModel
+    public class CurrencyConverterViewModel : BaseViewModel
     {
         #region CONST
         private const string BASE_HTTPS_URL = @"https://api.currencyapi.com/v3/latest?";
@@ -31,11 +24,21 @@ namespace Intermix.ViewModels.CurrencyConverter
         private const string URL = @"https://currencyapi.com/docs/currency-list#currency-list";
         #endregion
 
+        public ICommand BackMainCommand { get; set; }
         public ICommand ConvertCommand { get; set; }
 
         #region Constructor
-        public CurrencyConverterPageViewModel()
+        public CurrencyConverterViewModel()
         {
+
+        }
+
+        public CurrencyConverterViewModel(NavigationStore navigationStore)
+        {
+            BackMainCommand = new NavigationCommand<ChooseActivityViewModel>(navigationStore,
+                () => new ChooseActivityViewModel(navigationStore),
+                x => true);  
+            
             ConvertCommand = new RelayCommand(o => ConvertCurrencies(), o => true);
 
             LoadMethodAsync();
@@ -49,18 +52,18 @@ namespace Intermix.ViewModels.CurrencyConverter
 
             tableValues = tableData.SelectMany(x => x).ToList();
 
-            Currencies = new ObservableCollection<CurrenciesModel>();
+            Currencies = new ObservableCollection<Currency>();
 
             for (int i = 0; i < tableValues.Count; i += 2)
             {
                 string x = tableValues[i];
                 string y = tableValues[i + 1];
 
-                Currencies.Add(new CurrenciesModel { ShortName = x, LongName = y });
+                Currencies.Add(new Currency { ShortName = x, LongName = y });
             }
         }
 
-        private async Task<List<List<string>>> GetCurrencies()
+        private static async Task<List<List<string>>> GetCurrencies()
         {
           
             using var client = new HttpClient();
@@ -80,33 +83,32 @@ namespace Intermix.ViewModels.CurrencyConverter
 
         private async void ConvertCurrencies()
         {
-            using (var client = new HttpClient())
+            using var client = new HttpClient();
+            
+            try
             {
-                try
-                {
-                    string primary = Currencies.Select(x => x.ShortName).ElementAt(PrimaryCurrency);
-                    string secondary = Currencies.Select(x => x.ShortName).ElementAt(SecondaryCurrency);
+                string primary = Currencies.Select(x => x.ShortName).ElementAt(PrimaryCurrency);
+                string secondary = Currencies.Select(x => x.ShortName).ElementAt(SecondaryCurrency);
 
-                    var response = await client.GetAsync(BASE_HTTPS_URL + API_KEY + CURRENCY_FROM + secondary + CURRENCY_TO + primary);
-                    var stringResult = await response.Content.ReadAsStringAsync();
+                var response = await client.GetAsync(BASE_HTTPS_URL + API_KEY + CURRENCY_FROM + secondary + CURRENCY_TO + primary);
+                var stringResult = await response.Content.ReadAsStringAsync();
 
-                    dynamic deserialize = JsonConvert.DeserializeObject(stringResult);
-                    double exchangeRate = deserialize["data"][secondary]["value"];
+                dynamic deserialize = JsonConvert.DeserializeObject(stringResult);
+                double exchangeRate = deserialize["data"][secondary]["value"];
 
-                    CalculatedValue = exchangeRate * Amount;
-                    CalculatedValue = Math.Round(CalculatedValue, 2);
-
-                }
-                catch (HttpRequestException httpRequestException)
-                { }
-                catch (NullReferenceException e)
-                { }
+                CalculatedValue = exchangeRate * Amount;
+                CalculatedValue = Math.Round(CalculatedValue, 2);
 
             }
+            //TODO: CATCH
+            catch (HttpRequestException httpRequestException)
+            { }
+            catch (NullReferenceException e)
+            { }
         }
 
-        private ObservableCollection<CurrenciesModel> _currencies;
-        public ObservableCollection<CurrenciesModel> Currencies
+        private ObservableCollection<Currency> _currencies;
+        public ObservableCollection<Currency> Currencies
 
         {
             get { return _currencies; }

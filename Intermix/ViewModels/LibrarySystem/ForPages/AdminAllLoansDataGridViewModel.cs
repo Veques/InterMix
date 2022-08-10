@@ -1,6 +1,6 @@
 ﻿using Intermix.Commands;
 using Intermix.Models;
-using Intermix.Models.ModelsForDataGrids;
+using Intermix.Models.LibrarySystemModels;
 using Intermix.ViewModels.Base;
 using Intermix.ViewModels.LoginPage;
 using System;
@@ -18,13 +18,19 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
     public class AdminAllLoansDataGridViewModel : BaseViewModel
     {
         public ICommand ClearFilterCommand { get; set; }
+        public ICommand BackMainCommand { get; set; }
 
         #region Constructor
-        public AdminAllLoansDataGridViewModel()
+        public AdminAllLoansDataGridViewModel(Stores.NavigationStore navigationStore)
         {
             AllLoans = new();
             Users = new();
+
             ClearFilterCommand = new RelayCommand(o => ClearFilter(), o => !SelectedUser.Equals(String.Empty));
+
+            BackMainCommand = new NavigationCommand<AdminPageViewModel>(navigationStore,
+                () => new AdminPageViewModel(navigationStore),
+                x => true);
 
             FillDataGrid();
 

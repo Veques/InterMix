@@ -4,7 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="clr-namespace:Intermix.Pages.LibrarySystem" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
-      xmlns:librarysystem="clr-namespace:Intermix.ViewModels.LibrarySystem" d:DataContext="{d:DesignInstance Type=librarysystem:MainLibraryPageViewModel}"
+      xmlns:librarysystem="clr-namespace:Intermix.ViewModels.LibrarySystem" d:DataContext="{d:DesignInstance Type=librarysystem:MainLibraryPageViewModel}" xmlns:co="clr-namespace:Intermix.Components"
       mc:Ignorable="d" Name="Page"
       d:DesignHeight="450" d:DesignWidth="800"
       Title="MainLibraryPage">
@@ -14,7 +14,7 @@
 
         <UniformGrid Grid.RowSpan="2" Width="350" Height="410" VerticalAlignment="Bottom" HorizontalAlignment="Center" Columns="2" >
 
-            <Button Style="{StaticResource LMS_MainButtons}" Click="Reservations_Click" Grid.ColumnSpan="2" ToolTip="Rezerwacja książek">
+            <Button Style="{StaticResource LMS_MainButtons}" Command="{Binding ReservationsCommand}" Grid.ColumnSpan="2" ToolTip="Rezerwacja książek">
                 <Button.Content>
                     <StackPanel>
                         <materialDesign:PackIcon Kind="BookClock" Width="70" Height="70" HorizontalAlignment="Center" VerticalAlignment="Center"/>
@@ -23,7 +23,7 @@
                 </Button.Content>
             </Button>
 
-            <Button Style="{StaticResource LMS_MainButtons}" Click="YourReservations_Click" Grid.ColumnSpan="2" ToolTip="Zarządzaj rezerwacjami" IsEnabled="{Binding YourReservationsEnabled}">
+            <Button Style="{StaticResource LMS_MainButtons}" Command="{Binding YourReservationsCommand}" Grid.ColumnSpan="2" ToolTip="Zarządzaj rezerwacjami" IsEnabled="{Binding YourReservationsEnabled}">
                 <Button.Content>
                     <StackPanel>
                         <materialDesign:PackIcon Kind="BookAccount" Width="70" Height="70" HorizontalAlignment="Center" VerticalAlignment="Center"/>
@@ -33,7 +33,7 @@
             </Button>
 
 
-            <Button Style="{StaticResource LMS_MainButtons}" Click="LoanBooks_Click" Grid.Row="1" >
+            <Button Style="{StaticResource LMS_MainButtons}" Command="{Binding LoanBooksCommand}" Grid.Row="1" >
                 <Button.Content>
                     <StackPanel>
                         <materialDesign:PackIcon  Kind="BookArrowRight" Width="70" Height="70" HorizontalAlignment="Center" VerticalAlignment="Center"/>
@@ -42,7 +42,7 @@
                 </Button.Content>
             </Button>
 
-            <Button Style="{StaticResource LMS_MainButtons}" Grid.Column="1" Grid.Row="1" Click="ReturnBooks_Click" ToolTip="Oddaj książki">
+            <Button Style="{StaticResource LMS_MainButtons}" Grid.Column="1" Grid.Row="1" Command="{Binding ReturnBooksCommand}" ToolTip="Oddaj książki">
                 <Button.Content>
                     <StackPanel>
                         <materialDesign:PackIcon Kind="BookArrowLeft" Width="70" Height="70" HorizontalAlignment="Center" VerticalAlignment="Center"/>
@@ -51,7 +51,7 @@
                 </Button.Content>
             </Button>
 
-            <Button Style="{StaticResource LMS_MainButtons}" Click="BrowseBooks_Click" Grid.Row="2" 
+            <Button Style="{StaticResource LMS_MainButtons}" Command="{Binding BrowseBooksCommand}" Grid.Row="2" 
                     ToolTip="Przeglądaj książki">
                 <Button.Content>
                     <StackPanel>
@@ -82,9 +82,10 @@
                                                 <materialDesign:PackIcon VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0 10 0 0 "
                                                                      Name="LockIcon"  Kind="LockOpen"
                                                                      Width="70" Height="70" />
-                                                <PasswordBox  Name="PswdBox" HorizontalAlignment="Center" 
-                                                         VerticalAlignment="Bottom"  Width="75"
-                                                         MaxLength="4" TextBlock.TextAlignment="Center" PasswordChanged="PswdBox_PasswordChanged"/>
+                                                <co:BindablePasswordBoxMVVM HorizontalAlignment="Center" 
+                                                         VerticalAlignment="Bottom"  Width="75" 
+                                                          TextBlock.TextAlignment="Center" Password="{Binding Password, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+
                                             </Grid>
                                         </Grid>
                                         <Border.Style>
@@ -128,25 +129,6 @@
                 </Button.Style>
             </Button>
         </UniformGrid>
-
-
-        <!--<materialDesign:TransitioningContent VerticalAlignment="Top" 
-                                             HorizontalAlignment="Right" Margin="0 0 15 0">
-            <materialDesign:TransitioningContent.OpeningEffects >
-                <materialDesign:TransitionEffect Kind="FadeIn" />
-                <materialDesign:TransitionEffect Kind="SlideInFromRight" />
-            </materialDesign:TransitioningContent.OpeningEffects>
-
-
-            <Border Background="white" Width="160" Height="50" HorizontalAlignment="Center" CornerRadius="8" VerticalAlignment="Center" >
-                <StackPanel Orientation="Horizontal">
-                    <materialDesign:PackIcon Kind="PlusBold" VerticalAlignment="Center" HorizontalAlignment="Left" Width="30"
-                                                 Height="30" Margin="5 0 0 0"/>
-                    <TextBlock FontWeight="SemiBold" Text="New notification/s" VerticalAlignment="Center" HorizontalAlignment="Center" 
-                                   Margin="8 0 0 0"/>
-                </StackPanel>
-            </Border>
-        </materialDesign:TransitioningContent>-->
 
         
         <materialDesign:DrawerHost x:Name="DrawerHostLeft" Width="300" 

@@ -11,12 +11,7 @@ namespace Intermix.Pages
         public Info()
         {
             InitializeComponent();
-            DataContext = new InfoViewModel();
         }
 
-        private void Back_Click(object sender, System.Windows.RoutedEventArgs e)
-        {
-            NavigationService.GoBack();
-        }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Intermix.Enums;
+using Intermix.Stores;
 using Intermix.ViewModels;
 using Intermix.Views;
 using System.Windows;
@@ -14,7 +15,10 @@ namespace Intermix
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = new MainWindowViewModel();
+
+            NavigationStore _navigationStore = new();
+            _navigationStore.CurrentViewModel = new ChooseActivityViewModel(_navigationStore);
+            DataContext = new MainWindowViewModel(_navigationStore);
         }
 
         private void Drag_MouseDown(object sender, MouseButtonEventArgs e)

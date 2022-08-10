@@ -1,6 +1,7 @@
 ﻿using Intermix.Commands;
 using Intermix.Enums;
 using Intermix.Models;
+using Intermix.Stores;
 using Intermix.ViewModels.Base;
 using Intermix.ViewModels.LoginPage;
 using Intermix.Views;
@@ -13,7 +14,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
 using System.Windows.Input;
-using ReserveBook = Intermix.Models.ModelsForDataGrids.ReservarionDataGrids;
+using ReserveBook = Intermix.Models.LibrarySystemModels.ReservarionDataGrids;
 
 namespace Intermix.ViewModels.LibrarySystem.ForPages
 {
@@ -21,16 +22,22 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
     public class ReservationsPageViewModel : BaseViewModel
     {
         public ICommand ReserveCommand { get; set; }
+        public ICommand BackMainCommand { get; set; }
         
 
-        public ReservationsPageViewModel()
+        public ReservationsPageViewModel(NavigationStore navigationStore)
         {
             ReserveCommand = new RelayCommand(
                 o => AddReservation(),
                 o => ReservedBooks.Any(x => x.IsChecked == true));
 
+            BackMainCommand = new NavigationCommand<MainLibraryPageViewModel>(navigationStore,
+                () => new MainLibraryPageViewModel(navigationStore),
+                x => true);
+
             FillDataGrid();
         }
+
 
         private void FillDataGrid()
         {

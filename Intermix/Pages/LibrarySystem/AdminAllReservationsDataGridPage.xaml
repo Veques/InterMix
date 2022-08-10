@@ -15,14 +15,14 @@
             <RowDefinition Height="10*"/>
         </Grid.RowDefinitions>
 
-        <Button Click="Back_Click" Style="{StaticResource LMS_WindowButtons}" >
+        <Button Command="{Binding BackMainCommand}" Style="{StaticResource LMS_WindowButtons}" >
             <materialDesign:PackIcon Kind="Play" Foreground="black" Width="30" Height="30">
                 <materialDesign:PackIcon.LayoutTransform>
                     <RotateTransform Angle="180"/>
                 </materialDesign:PackIcon.LayoutTransform>
             </materialDesign:PackIcon>
         </Button>
-        <StackPanel Orientation="Horizontal">
+        <StackPanel Orientation="Horizontal" Height="40" VerticalAlignment="Top">
             <ComboBox Margin="25 0 0 0" Width="200" Height="40" HorizontalAlignment="Left" materialDesign:HintAssist.Foreground="white" materialDesign:TextFieldAssist.UnderlineBrush="White"
                           materialDesign:HintAssist.Hint="Filter" VerticalContentAlignment="Center" 
                           Padding="15 0 9 9 " ItemsSource="{Binding Users}" SelectedItem="{Binding SelectedUser, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" SelectedIndex="{Binding SelectedIndex, UpdateSourceTrigger=PropertyChanged, TargetNullValue= -1}">

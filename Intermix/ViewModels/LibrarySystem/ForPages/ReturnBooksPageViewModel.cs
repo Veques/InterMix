@@ -1,43 +1,36 @@
 ﻿using Intermix.Commands;
 using Intermix.Enums;
 using Intermix.Models;
+using Intermix.Models.LibrarySystemModels;
+using Intermix.Stores;
 using Intermix.ViewModels.Base;
 using Intermix.ViewModels.LoginPage;
 using Intermix.Views;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Data;
 using System.Windows.Input;
 
 namespace Intermix.ViewModels.LibrarySystem.ForPages
 {
 
-    public class ReturnBookModel
-    {
-        public bool IsChecked { get; set; }
-        public int Id { get; set; }
-        public string Title { get; set; }
-        public string FullName { get; set; }
-        public DateTime LoanDate { get; set; }
-        public DateTime ReturnDate { get; set; }
-
-    }
     public class ReturnBooksPageViewModel : BaseViewModel
     {
         public ICommand ReturnBooksCommand { get; set; }
+        public ICommand BackMainCommand { get; set; }
         
-        public ReturnBooksPageViewModel()
+        public ReturnBooksPageViewModel(NavigationStore navigationStore)
         {
             ReturnBooksCommand = new RelayCommand(
                 o => ReturnBooksClicked(),
                 o => ReturnBooks.Any(x => x.IsChecked == true
                 ));
+
+            BackMainCommand = new NavigationCommand<MainLibraryPageViewModel>(navigationStore,
+                () => new MainLibraryPageViewModel(navigationStore),
+                x => true);
 
             ReturnBooks = new();
             FillDataGrid();
@@ -50,7 +43,7 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
 
         private bool Filter(object obj)
         {
-            if (obj is ReturnBookModel book)
+            if (obj is ReturnBook book)
             {
                 return book.Title.Contains(TitleFilter, StringComparison.InvariantCultureIgnoreCase) &&
                     book.FullName.Contains(AuthorFilter, StringComparison.InvariantCultureIgnoreCase) &&
@@ -70,7 +63,7 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
                 foreach (var book in db.Books.Where(d => d.Id == loan.BookId))
                 {
 
-                    ReturnBooks.Add(new ReturnBookModel
+                    ReturnBooks.Add(new ReturnBook
                     {
                         IsChecked = false,
                         Id = book.Id,
@@ -196,9 +189,9 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
             }
         }
 
-        private ObservableCollection<ReturnBookModel> _returnBooks;
+        private ObservableCollection<ReturnBook> _returnBooks;
 
-        public ObservableCollection<ReturnBookModel> ReturnBooks
+        public ObservableCollection<ReturnBook> ReturnBooks
         {
             get { return _returnBooks; }
             set { _returnBooks = value;

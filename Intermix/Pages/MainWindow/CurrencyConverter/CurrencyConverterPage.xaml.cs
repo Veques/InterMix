@@ -14,12 +14,6 @@ namespace Intermix.Pages.MainWindow.CurrencyConverter
         public CurrencyConverterPage()
         {
             InitializeComponent();
-            DataContext = new CurrencyConverterPageViewModel();
-        }
-
-        private void Back_Click(object sender, RoutedEventArgs e)
-        {
-            NavigationService.GoBack();
         }
 
         private void TextBox_PreviewTextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)

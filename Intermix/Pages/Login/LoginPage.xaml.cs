@@ -1,8 +1,4 @@
-﻿using Intermix.ViewModels.LoginPage;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Input;
-using System.Windows.Navigation;
+﻿using System.Windows.Controls;
 
 namespace Intermix.Pages.Login
 {
@@ -14,15 +10,6 @@ namespace Intermix.Pages.Login
         public LoginPage()
         {
             InitializeComponent();
-            DataContext = new LoginPageViewModel();
         }
-
-        private void NewAccount_Click(object sender, RoutedEventArgs e)
-        {
-            CreateAccountPage page = new();
-
-            NavigationService.Navigate(page);
-        }
-
     }
 }

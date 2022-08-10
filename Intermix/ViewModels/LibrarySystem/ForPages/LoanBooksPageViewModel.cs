@@ -1,37 +1,27 @@
 ﻿using Intermix.Commands;
+using Intermix.Enums;
 using Intermix.Models;
+using Intermix.Models.LibrarySystemModels;
+using Intermix.Stores;
 using Intermix.ViewModels.Base;
 using Intermix.ViewModels.LoginPage;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Windows;
-using System.Windows.Input;
-using System.Linq;
-using System;
-using System.ComponentModel;
-using System.Windows.Data;
 using Intermix.Views;
-using Intermix.Enums;
+using System;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Linq;
+using System.Windows.Data;
+using System.Windows.Input;
 
 namespace Intermix.ViewModels.LibrarySystem.ForPages
 {
 
-    public class LoanBooksModel 
-    {
-        public bool IsChecked { get; set; }
-        public int Id { get; set; }
-        public string? Title { get; set; }
-        public string? FullName { get; set; }
-        public DateTime PublishDate { get; set; }
-        public string Publisher { get; set; }
-        public int? IsAvailable { get; set; }
-    }
-
     public class LoanBooksPageViewModel : BaseViewModel
     {
         public ICommand LoanCommand { get; set; }
+        public ICommand BackMainCommand { get; set; }
 
-        public LoanBooksPageViewModel()
+        public LoanBooksPageViewModel(NavigationStore navigationStore)
         {
 
             LoanCommand = new RelayCommand(
@@ -39,14 +29,17 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
                 o => LoanBooks.Any(x => x.IsChecked == true)
                 );
 
+            BackMainCommand = new NavigationCommand<MainLibraryPageViewModel>(navigationStore,
+                () => new MainLibraryPageViewModel(navigationStore),
+                x => true);
+            
             LoanBooks = new();
             FillDataGrid();
-
         }
 
         private bool Filter(object obj)
         {
-            if (obj is LoanBooksModel book)
+            if (obj is LoanBook book)
             {
                 return book.Title.Contains(TitleFilter, StringComparison.InvariantCultureIgnoreCase) &&
                     book.FullName.Contains(AuthorFilter, StringComparison.InvariantCultureIgnoreCase) &&
@@ -62,7 +55,7 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
             using var db = new ApplicationDbContext();
             foreach (var book in db.Books.Where(d => d.IsAvailable == 1))
             {
-                LoanBooks.Add(new LoanBooksModel
+                LoanBooks.Add(new LoanBook
                 {
                     IsChecked = false,
                     Id = book.Id,
@@ -125,6 +118,17 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
             }
         }
 
+        private ObservableCollection<LoanBook> _loanBooks;
+        public ObservableCollection<LoanBook> LoanBooks
+        {
+            get { return _loanBooks; }
+            set
+            {
+                _loanBooks = value;
+                OnPropertyChanged("LoanBooks");
+            }
+        }
+
         private string _titleFilter = string.Empty;
 
         public string TitleFilter
@@ -172,17 +176,6 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
                 _publisherFilter = value != null ? _publisherFilter = value : _publisherFilter = string.Empty;
                 OnPropertyChanged("PublisherFilter");
                 LoanBooksCollectionView.Refresh();
-            }
-        }
-
-        private ObservableCollection<LoanBooksModel> _loanBooks;
-        public ObservableCollection<LoanBooksModel> LoanBooks
-        {
-            get { return _loanBooks; }
-            set
-            {
-                _loanBooks = value;
-                OnPropertyChanged("LoanBooks");
             }
         }
         #endregion

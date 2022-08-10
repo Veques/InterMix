@@ -1,19 +1,18 @@
 ﻿using Intermix.Commands;
 using Intermix.Models;
+using Intermix.Stores;
 using Intermix.ViewModels.Base;
+using Intermix.ViewModels.LibrarySystem.ForPages;
 using Intermix.ViewModels.LoginPage;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
 
 namespace Intermix.ViewModels.LibrarySystem
-{   
+{
     #region Models
     public class PrivateLoans
     {
@@ -33,18 +32,71 @@ namespace Intermix.ViewModels.LibrarySystem
 
     public class MainLibraryPageViewModel : BaseViewModel
     {
+        public ICommand ReservationsCommand { get; set; }
+        public ICommand YourReservationsCommand { get; set; }
+        public ICommand LoanBooksCommand { get; set; }
+        public ICommand ReturnBooksCommand { get; set; }
+        public ICommand BrowseBooksCommand { get; set; }
+        public ICommand AdminCommand { get; set; }
+
 
         #region Constructor
-        public MainLibraryPageViewModel()
+        public MainLibraryPageViewModel(NavigationStore navigationStore)
         {
 
             LoggedUser = LoginPageViewModel.User;
             UserId = LoginPageViewModel.UserId;
+
             using var db = new ApplicationDbContext();
 
-
-
             LoanedBooks = new();
+            FillPrivateLoans();
+            ManageDateChanges();
+
+            YourReservationsEnabled = db.Reservations.Any(x => x.UserId == LoginPageViewModel.UserId);
+            CheckDateAndAddNotifications();
+
+            ReservationsCommand = new NavigationCommand<ReservationsPageViewModel>(navigationStore,
+                () => new ReservationsPageViewModel(navigationStore),
+                x => true);
+
+            YourReservationsCommand = new NavigationCommand<YourReservationsPageViewModel>(navigationStore,
+                () => new YourReservationsPageViewModel(navigationStore),
+                x => true);
+
+            LoanBooksCommand = new NavigationCommand<LoanBooksPageViewModel>(navigationStore,
+                () => new LoanBooksPageViewModel(navigationStore),
+                x => true);
+
+            ReturnBooksCommand = new NavigationCommand<ReturnBooksPageViewModel>(navigationStore,
+                () => new ReturnBooksPageViewModel(navigationStore),
+                x => true);
+
+            BrowseBooksCommand = new NavigationCommand<BrowseBooksPageViewModel>(navigationStore,
+                () => new BrowseBooksPageViewModel(navigationStore),
+                x => true);
+
+            AdminCommand = new NavigationCommand<AdminPageViewModel>(navigationStore,
+                () => new AdminPageViewModel(navigationStore),
+                x => true);
+        }
+        #endregion
+
+        private void CheckPassword(string value)
+        {
+            using var db = new ApplicationDbContext();
+
+            if (value == db.Users.Single(x => x.Username == "Admin").Password)
+            {
+                AdminCommand.Execute(this);
+            }
+        }
+
+        #region FillProfile
+        private void FillPrivateLoans()
+        {
+            using var db = new ApplicationDbContext();
+
             foreach (var loanElement in db.Loans.Where(x => x.UserId == UserId))
             {
                 foreach (var bookElement in db.Books.Where(x => x.Id == loanElement.BookId))
@@ -59,19 +111,8 @@ namespace Intermix.ViewModels.LibrarySystem
                     });
                 }
             }
-
-            ManageDateChanges();
-
-            if (db.Reservations.Any(x => x.UserId == LoginPageViewModel.UserId))
-            {
-                YourReservationsEnabled = true;
-            }
-            else
-            {
-                YourReservationsEnabled = false;
-            }
-            CheckDateAndAddNotifications();
         }
+        
         #endregion
 
         #region Automatic returns to make reservations work 
@@ -135,8 +176,8 @@ namespace Intermix.ViewModels.LibrarySystem
 
         #region Properties
 
-        public int UserId { get; private set; }
-
+        public static int UserId { get; private set; }
+        public static string LoggedUser { get; private set; }
 
         private Visibility _newNotificationVisibility = Visibility.Collapsed;
 
@@ -186,18 +227,6 @@ namespace Intermix.ViewModels.LibrarySystem
             }
         }
 
-        private string _loggedUser;
-
-        public string LoggedUser
-        {
-            get { return _loggedUser; }
-            set
-            {
-                _loggedUser = value;
-                OnPropertyChanged("LoggedUser");
-            }
-        }
-
         private bool _yourReservationsEnabled;
 
         public bool YourReservationsEnabled
@@ -208,6 +237,21 @@ namespace Intermix.ViewModels.LibrarySystem
             }
         }
 
+        private string _passwordBox;
+
+        public string Password
+        {
+            get { return _passwordBox; }
+            set { _passwordBox = value;
+                OnPropertyChanged(nameof(Password));
+                
+                if (Password.Length == 4)
+                {
+                    CheckPassword(value);
+                    Password = String.Empty;
+                }
+            }
+        }
 
         #endregion
     }

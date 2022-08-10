@@ -1,19 +1,5 @@
-﻿using Intermix.ViewModels.LibrarySystem.ForPages;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Text.RegularExpressions;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Intermix.Pages.LibrarySystem
 {
@@ -25,12 +11,6 @@ namespace Intermix.Pages.LibrarySystem
         public AdminPage()
         {
             InitializeComponent();
-            DataContext = new AdminPageViewModel();
-        }
-
-        private void Back_Click(object sender, RoutedEventArgs e)
-        {
-            NavigationService.GoBack();
         }
 
         private void TextBox_PreviewTextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)
@@ -43,16 +23,5 @@ namespace Intermix.Pages.LibrarySystem
             e.Handled = regex.IsMatch(e.Text);
         }
 
-        private void AllLoans_Click(object sender, RoutedEventArgs e)
-        {
-            AdminAllLoansDataGridPage page = new();
-            NavigationService.Navigate(page);
-        }
-
-        private void Reservations_Click(object sender, RoutedEventArgs e)
-        {
-            AdminAllReservationsDataGridPage page = new();
-            NavigationService.Navigate(page);
-        }
     }
 }

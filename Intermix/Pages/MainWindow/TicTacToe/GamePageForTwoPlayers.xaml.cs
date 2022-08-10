@@ -18,7 +18,6 @@ namespace Intermix.Pages.MainWindow.TicTacToe
         /// </summary>
 
         #region Private Variables
-        public static ICommand AnyButtonClick { get; set; }
         private static MarkTypeTTT[] _results;
         private static bool _isPlayerOneTurn;
         private static bool _hasGameEnded;
@@ -28,7 +27,6 @@ namespace Intermix.Pages.MainWindow.TicTacToe
         double X1;
         double X2;
         #endregion
-
 
         #region Constructor
         public GamePageForTwoPlayers()
@@ -265,6 +263,7 @@ namespace Intermix.Pages.MainWindow.TicTacToe
             #endregion
 
         }
+
         private void AnimationStart(double Y1, double Y2, double X1, double X2)
         {
             Line line = new();
@@ -294,11 +293,6 @@ namespace Intermix.Pages.MainWindow.TicTacToe
         private void CommunicateWinner(string winner)
         {
             Winner.Text = $"Player {winner} won this one";
-        }
-
-        private void Back_Click(object sender, RoutedEventArgs e)
-        {
-            NavigationService.GoBack();
         }
 
         private void Reset_Click(object sender, RoutedEventArgs e)

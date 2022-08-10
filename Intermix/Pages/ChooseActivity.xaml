@@ -1,12 +1,14 @@
-﻿<Page x:Class="Intermix.Pages.MainWindow.ChooseActivity"
+﻿<Page x:Class="Intermix.Pages.ChooseActivity"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:Intermix.Pages.MainWindow" xmlns:fa="http://schemas.fontawesome.com/icons/" xmlns:tictactoeview="clr-namespace:Intermix.ViewModels.MainWindowView.TicTacToeView" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" d:DataContext="{d:DesignInstance Type=tictactoeview:ChooseActivityViewModel}"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
+      xmlns:i="http://schemas.microsoft.com/xaml/behaviors" 
+      xmlns:viewmodels="clr-namespace:Intermix.ViewModels" 
+      d:DataContext="{d:DesignInstance Type=viewmodels:ChooseActivityViewModel}"
       mc:Ignorable="d" 
       Title="ChooseActivity">
-
     <Grid>
 
         <Grid.ColumnDefinitions>
@@ -15,17 +17,27 @@
         </Grid.ColumnDefinitions>
 
         <ListView materialDesign:ShadowAssist.ShadowDepth="Depth3" ScrollViewer.VerticalScrollBarVisibility="Hidden" BorderThickness="0" Name="listView1" Background="Transparent">
+            
+
 
             <!-- Info -->
-            <ListViewItem Name="Info" Height="150" >
-                <StackPanel ScrollViewer.VerticalScrollBarVisibility="Disabled" Orientation="Horizontal" HorizontalAlignment="Stretch">
-                    <materialDesign:PackIcon Kind="InformationOutline" Width="100" Height="100" Foreground="{DynamicResource MW_Font}" />
+            <ListViewItem Name="Info" Height="150">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="PreviewMouseLeftButtonDown" >
+                        <i:InvokeCommandAction Command="{Binding CheckItemCommand}" CommandParameter="Info" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+                
+                <StackPanel ScrollViewer.VerticalScrollBarVisibility="Disabled" 
+                            Orientation="Horizontal" HorizontalAlignment="Stretch">
+                    <materialDesign:PackIcon Kind="InformationOutline" Width="100" Height="100" 
+                                             Foreground="{DynamicResource MW_Font}" />
+                    
                     <TextBlock Margin="15 0 0 0" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Stretch" 
                                Text="Project description" Foreground="{DynamicResource MW_Font}"/>
                 </StackPanel>
                 <ListViewItem.Style>
                     <Style BasedOn="{StaticResource ListViewItemStyle}" TargetType="ListViewItem">
-                        <EventSetter Event="PreviewMouseLeftButtonDown" Handler="ListViewItem_PreviewMouseLeftButtonDown_1" />
                         <Setter Property="Template">
                             <Setter.Value>
                                 <ControlTemplate TargetType="{x:Type ListViewItem}">
@@ -60,7 +72,13 @@
             </ListViewItem>
 
             <!-- TicTacToe -->
-            <ListViewItem Name="TicTacToe">
+            <ListViewItem Name="TicTacToe" Style="{StaticResource ListViewItemStyle}">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="PreviewMouseLeftButtonDown" >
+                        <i:InvokeCommandAction Command="{Binding CheckItemCommand}" CommandParameter="TicTacToe" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+
                 <StackPanel ScrollViewer.VerticalScrollBarVisibility="Disabled" Orientation="Horizontal" HorizontalAlignment="Stretch">
                     <Image Source="/Images/TicTacToe.png" Visibility="{Binding LightLogo_TTT}"
                            Style="{StaticResource MW_Images}"/>
@@ -69,39 +87,35 @@
                     <TextBlock Margin="15 0 0 0" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Stretch" 
                                Text="TicTacToe" Foreground="{DynamicResource MW_Font}"/>
                 </StackPanel>
-                <ListViewItem.Style>
-                    <Style BasedOn="{StaticResource ListViewItemStyle}" TargetType="ListViewItem">
-                        <EventSetter Event="PreviewMouseLeftButtonDown" Handler="ListViewItem_PreviewMouseLeftButtonDown_1" />
-                    </Style>
-                </ListViewItem.Style>
             </ListViewItem>
 
             <!-- Currency Converter -->
-            <ListViewItem Name="CurrencyConverter">
+            <ListViewItem Name="CurrencyConverter" Style="{StaticResource ListViewItemStyle}">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="PreviewMouseLeftButtonDown" >
+                        <i:InvokeCommandAction Command="{Binding CheckItemCommand}" CommandParameter="CurrencyConverter" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+
                 <StackPanel Orientation="Horizontal">
                     <materialDesign:PackIcon Kind="CurrencyEur" Width="100" Height="100" Foreground="{DynamicResource LW_Font}"/>
                     <TextBlock Margin="15 0 0 0" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Stretch" 
                                Text="API Currency Converter" Foreground="{DynamicResource MW_Font}"/>
                 </StackPanel>
-                <ListViewItem.Style>
-                    <Style BasedOn="{StaticResource ListViewItemStyle}" TargetType="ListViewItem">
-                        <EventSetter Event="PreviewMouseLeftButtonDown" Handler="ListViewItem_PreviewMouseLeftButtonDown_1" />
-                    </Style>
-                </ListViewItem.Style>
             </ListViewItem>
 
             <!-- Currency Converter -->
-            <ListViewItem Name="LibraryManagementSystem">
+            <ListViewItem Name="LibraryManagementSystem" Style="{StaticResource ListViewItemStyle}">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="PreviewMouseLeftButtonDown" >
+                        <i:InvokeCommandAction Command="{Binding CheckItemCommand}" CommandParameter="Library" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
                 <StackPanel Orientation="Horizontal">
                     <materialDesign:PackIcon Kind="LibraryShelves" Height="100" Width="100" Foreground="{DynamicResource MW_Font}" />
                     <TextBlock Margin="15 0 0 0" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Stretch" 
                                Text="Library Management" Foreground="{DynamicResource MW_Font}"/>
                 </StackPanel>
-                <ListViewItem.Style>
-                    <Style BasedOn="{StaticResource ListViewItemStyle}" TargetType="ListViewItem">
-                        <EventSetter Event="PreviewMouseLeftButtonDown" Handler="ListViewItem_PreviewMouseLeftButtonDown_1" />
-                    </Style>
-                </ListViewItem.Style>
             </ListViewItem>
         </ListView>
 

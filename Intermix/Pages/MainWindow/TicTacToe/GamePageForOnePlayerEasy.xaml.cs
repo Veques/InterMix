@@ -318,11 +318,6 @@ namespace Intermix.Pages.MainWindow.TicTacToe
             Winner.Text = $"Player {winner} won this one";
         }
 
-        private void Back_Click(object sender, RoutedEventArgs e)
-        {
-            NavigationService.GoBack();
-        }
-
         private void Reset_Click(object sender, RoutedEventArgs e)
         {
             NewGame();

@@ -1,13 +1,28 @@
-﻿using Intermix.ViewModels.Base;
+﻿using Intermix.Commands;
+using Intermix.Stores;
+using Intermix.ViewModels.Base;
 using System.Windows;
+using System.Windows.Input;
 
 namespace Intermix.ViewModels
 {
     public class InfoViewModel : BaseViewModel
     {
+        public ICommand BackMainCommand { get; set; }
 
+        #region Constructors
         public InfoViewModel()
         {
+
+        }
+
+        public InfoViewModel(NavigationStore navigationStore)
+        {
+
+            BackMainCommand = new NavigationCommand<ChooseActivityViewModel>(navigationStore,
+                    () => new ChooseActivityViewModel(navigationStore),
+                    x => true);
+            
             if (Config.Default.Theme == 0)
             {
                 DarkLogo_TTT = Visibility.Visible;
@@ -19,7 +34,9 @@ namespace Intermix.ViewModels
                 LightLogo_TTT = Visibility.Visible;
             }
         }
+        #endregion
 
+        #region Properties
         private Visibility _lightLogo_TTT;
         public Visibility LightLogo_TTT
         {
@@ -41,6 +58,6 @@ namespace Intermix.ViewModels
                 OnPropertyChanged("DarkLogo_TTT");
             }
         }
-
+        #endregion
     }
 }

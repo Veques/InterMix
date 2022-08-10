@@ -40,7 +40,7 @@
             </Grid>
 
             <Grid Grid.Row="1" >
-                <Frame Source="/Pages/LibrarySystem/MainLibraryPage.xaml" NavigationUIVisibility="Hidden" Grid.ColumnSpan="2"/>
+                <Frame Content="{Binding CurrentViewModel}" NavigationUIVisibility="Hidden" Grid.ColumnSpan="2"/>
             </Grid>
 
         </Grid>

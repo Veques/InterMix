@@ -1,6 +1,5 @@
 ﻿using Intermix.Commands;
 using Intermix.Models;
-using Intermix.Models.ModelsForDataGrids;
 using Intermix.ViewModels.Base;
 using System;
 using System.Collections.Generic;
@@ -11,20 +10,25 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
 using System.Windows.Input;
-using Reservations = Intermix.Models.ModelsForDataGrids.Loan;
+using Reservations = Intermix.Models.LibrarySystemModels.Loan;
 
 namespace Intermix.ViewModels.LibrarySystem.ForPages
 {
     public class AdminAllReservationsDataGridViewModel : BaseViewModel
     {
         public ICommand ClearFilterCommand { get; set; }
+        public ICommand BackMainCommand { get; set; }
 
         #region Constructor
-        public AdminAllReservationsDataGridViewModel()
+        public AdminAllReservationsDataGridViewModel(Stores.NavigationStore navigationStore)
         {
             AllReservations = new();
             Users = new();
             ClearFilterCommand = new RelayCommand(o => ClearFilter() , o => !SelectedUser.Equals(String.Empty));
+
+            BackMainCommand = new NavigationCommand<AdminPageViewModel>(navigationStore, 
+                () => new AdminPageViewModel(navigationStore),
+                x => true);
 
             FillDataGrid();
 

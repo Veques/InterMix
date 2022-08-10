@@ -13,12 +13,6 @@ namespace Intermix.Pages.Login
         public CreateAccountPage()
         {
             InitializeComponent();
-            DataContext = new CreateAccountViewModel();
-        }
-
-        private void Back_Click(object sender, RoutedEventArgs e)
-        {
-            NavigationService.GoBack();
         }
 
     }

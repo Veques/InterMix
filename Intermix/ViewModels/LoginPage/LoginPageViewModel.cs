@@ -1,8 +1,8 @@
 ﻿using Intermix.Commands;
 using Intermix.Enums;
 using Intermix.Models;
+using Intermix.Stores;
 using Intermix.ViewModels.Base;
-using Intermix.ViewModels.MainWindowView.TicTacToeView;
 using Intermix.Views;
 using System.Linq;
 using System.Windows;
@@ -12,30 +12,35 @@ namespace Intermix.ViewModels.LoginPage
 {
     public class LoginPageViewModel : BaseViewModel
     {
-        public ICommand LogIn { get; set; }
+        public ICommand LogInCommand { get; set; }
+        public ICommand CreateAccountCommand { get; set; }
 
         #region Constructor
-        public LoginPageViewModel()
+        public LoginPageViewModel(NavigationStore navigationStore)
         {
-            LogIn = new RelayCommand(o => LogInCommand(Username, Password),
+            LogInCommand = new RelayCommand(o => LogIn(Username, Password),
                                      o => !string.IsNullOrEmpty(Username) && !string.IsNullOrEmpty(Password));
+
+            CreateAccountCommand = new NavigationCommand<CreateAccountViewModel>(navigationStore,
+                () => new CreateAccountViewModel(navigationStore),
+                x => true);
         }
         #endregion
 
-        private static void LogInCommand(string Username, string Password)
+        private static void LogIn(string Username, string Password)
         {
             ApplicationDbContext _dbContext = new();
 
-            var isValid = _dbContext.Users.FirstOrDefault(u => u.Username == Username && u.Password == Password);
+            var doesExist = _dbContext.Users.FirstOrDefault(u => u.Username == Username && u.Password == Password);
 
-            if (isValid == null)
+            if (doesExist == null)
             {
                _ = new CustomizedMessageBox("Passwords do not match", MessageType.Error, MessageButton.Ok).ShowDialog();
             }
             else
             {
-                UserId = isValid.Id;
-                User = $"{isValid.Name} {isValid.Surname}";
+                UserId = doesExist.Id;
+                User = $"{doesExist.Name} {doesExist.Surname}";
 
                 LibraryMainWindow window = new()
                 {
@@ -74,6 +79,7 @@ namespace Intermix.ViewModels.LoginPage
         }
 
         private string _password;
+        private NavigationStore navigationStore;
 
         public string Password
 

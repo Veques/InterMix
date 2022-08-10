@@ -1,6 +1,7 @@
 ﻿using Intermix.Commands;
 using Intermix.Enums;
 using Intermix.Models;
+using Intermix.Stores;
 using Intermix.ViewModels.Base;
 using Intermix.ViewModels.LoginPage;
 using Intermix.Views;
@@ -33,9 +34,10 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
     {
         public ICommand LoanCommand { get; set; }
         public ICommand CancelCommand { get; set; }
+        public ICommand BackMainCommand { get; set; }
 
         #region Constructor
-        public YourReservationsPageViewModel()
+        public YourReservationsPageViewModel(NavigationStore navigationStore)
         {
             LoanCommand = new RelayCommand(
                 o => LoanClicked(),
@@ -44,11 +46,16 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
 
             CancelCommand = new RelayCommand(CancelClicked, o => true);
 
+            BackMainCommand = new NavigationCommand<MainLibraryPageViewModel>(navigationStore,
+                () => new MainLibraryPageViewModel(navigationStore),
+                x => true);
+
             FillDataGrid();
 
             ReservationsCollectionView = CollectionViewSource.GetDefaultView(Reservations);
             ReservationsCollectionView.Filter = Filter;
         }
+
         #endregion
 
         #region Fill Data Grid

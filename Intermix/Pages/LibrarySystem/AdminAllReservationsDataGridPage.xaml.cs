@@ -24,12 +24,6 @@ namespace Intermix.Pages.LibrarySystem
         public AdminAllReservationsDataGridPage()
         {
             InitializeComponent();
-            DataContext = new AdminAllReservationsDataGridViewModel();
-        }
-
-        private void Back_Click(object sender, RoutedEventArgs e)
-        {
-            NavigationService.GoBack();
         }
     }
 }

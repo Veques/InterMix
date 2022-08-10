@@ -1,6 +1,7 @@
 ﻿using Intermix.Commands;
 using Intermix.Enums;
 using Intermix.Models;
+using Intermix.Stores;
 using Intermix.ViewModels.Base;
 using Intermix.Views;
 using System;
@@ -21,27 +22,20 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
 {
     public class AdminPageViewModel : BaseViewModel
     {
-
         #region Commands
         public ICommand AddBookCommand { get; set; }
         public ICommand ChangePINCommand { get; set; }
         public ICommand ImportBooksCommand { get; set; }
+        public ICommand BrowseReservationsCommand { get; set; }
+        public ICommand BrowseLoansCommand { get; set; }
+        public ICommand BackMainCommand { get; set; }
 
         #endregion
 
         #region Constructor
-        public AdminPageViewModel()
+        public AdminPageViewModel(NavigationStore navigationStore)
         {
             using var db = new ApplicationDbContext();
-
-            if (db.Books.Count() > 99)
-            {
-                IsEnabled = false;
-            }
-            else
-            {
-                IsEnabled = true;
-            }
 
             AddBookCommand = new RelayCommand(
                 o => AddBook(),
@@ -56,6 +50,19 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
                 o => ImportBooks(),
                 o => true
                 );
+
+            BrowseReservationsCommand = new NavigationCommand<AdminAllReservationsDataGridViewModel>(navigationStore,
+                () => new AdminAllReservationsDataGridViewModel(navigationStore),
+                x => true);
+
+            BrowseLoansCommand = new NavigationCommand<AdminAllLoansDataGridViewModel>(navigationStore,
+                () => new AdminAllLoansDataGridViewModel(navigationStore),
+                x => true);
+
+            BackMainCommand = new NavigationCommand<MainLibraryPageViewModel>(navigationStore,
+                () => new MainLibraryPageViewModel(navigationStore),
+                x => true);
+
 
         }
         #endregion
