@@ -27,7 +27,7 @@
                            FontSize="23" FontWeight="DemiBold" Margin="15 0 0 0"/>
 
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Center">
-                    <Button Style="{StaticResource LMS_WindowButtons}" Click="Exit_Click" >
+                    <Button Style="{StaticResource LMS_WindowButtons}" Click="Exit_Click" IsCancel="false">
                         <Button.Content>
                             <materialDesign:PackIcon Margin="2 0 2 0" Kind="PowerStandby" Width="30" Height="30"      />
                         </Button.Content>

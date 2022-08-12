@@ -33,6 +33,14 @@ namespace Intermix.ViewModels.LoginPage
 
             var doesExist = _dbContext.Users.FirstOrDefault(u => u.Username == Username && u.Password == Password);
 
+            if (Username == "Admin")
+            {
+               _ = new CustomizedMessageBox("You can Log as Admin in App, use yours own account", MessageType.Warning, MessageButton.Ok).ShowDialog();
+                Username = string.Empty;
+                Password = string.Empty;
+                return;
+            }
+
             if (doesExist == null)
             {
                _ = new CustomizedMessageBox("Passwords do not match", MessageType.Error, MessageButton.Ok).ShowDialog();

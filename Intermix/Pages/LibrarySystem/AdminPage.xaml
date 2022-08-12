@@ -90,7 +90,7 @@
             </Button.Style>
         </Button>
 
-        <Button Grid.Column="1" IsEnabled="{Binding IsEnabled}" Command="{Binding ImportBooksCommand}" Style="{StaticResource LMS_MainButtons}" ToolTip="Kliknięcie przycisku wypełni bazę danych książkami z załączonego w projekcie Pliku Excel">
+        <Button Grid.Column="1" Command="{Binding ImportBooksCommand}" Style="{StaticResource LMS_MainButtons}" ToolTip="Kliknięcie przycisku wypełni bazę danych książkami z załączonego w projekcie Pliku Excel">
             <Button.Content>
                 <TextBlock TextWrapping="WrapWithOverflow" Text="Add books to database" TextBlock.TextAlignment="Center"/>
             </Button.Content>
@@ -116,7 +116,7 @@
         </Button>
 
 
-        <Button Grid.Row="1" Grid.Column="2" Style="{StaticResource LMS_MainButtons}" Height="70" ToolTip="Powrót" Command="{Binding BackMainCommand}">
+        <Button IsCancel="True"  Grid.Row="1" Grid.Column="2" Style="{StaticResource LMS_MainButtons}" Height="70" ToolTip="Powrót" Command="{Binding BackMainCommand}">
             <Button.Content>
                 <TextBlock TextWrapping="WrapWithOverflow" Text="Back" TextBlock.TextAlignment="Center"/>
             </Button.Content>

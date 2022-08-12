@@ -13,17 +13,12 @@ namespace Intermix.ViewModels.TicTacToe
         public ICommand OnePlayerHDCommand { get; set; }
         public ICommand TwoPlayersCommand { get; set; }
         public ICommand BackMainCommand { get; set; }
-        
-        public GameTypeViewModel()
-        {
-
-        }
 
         public GameTypeViewModel(NavigationStore navigationStore)
         {
 
             StartCommand = new RelayCommand(x => CheckGameType(),
-                x => OnePlayer == true || (EasyMode == true || EasyMode != true));
+                x => ValidateChoice());
 
             OnePlayerEZCommand = new NavigationCommand<GameOnePlayerEasyViewModel>(navigationStore,
                 () => new GameOnePlayerEasyViewModel(navigationStore),
@@ -39,41 +34,32 @@ namespace Intermix.ViewModels.TicTacToe
                 x => true);
         }
 
+        private bool ValidateChoice()
+        {
+            if (HardMode == false && EasyMode == false && TwoPlayers== false)
+            {
+                return false;
+            }
+            return true;
+        }
+
         private void CheckGameType()
         {
-            switch (OnePlayer)
+            if (EasyMode == true)
             {
-                case false:
-                    TwoPlayersCommand.Execute(this);
-                    break;
-
-                case true:
-                    {
-                        if (EasyMode)
-                        {
-                            OnePlayerEZCommand.Execute(this);
-                        }
-                        else
-                        {
-                            OnePlayerHDCommand.Execute(this);
-                        }
-                        break;
-                    }
+                OnePlayerEZCommand.Execute(this);
+            }
+            if (HardMode == true)
+            {
+                OnePlayerHDCommand.Execute(this);
+            }
+            if (TwoPlayers == true)
+            {
+                TwoPlayersCommand.Execute(this);
             }
         }
 
         #region Properties
-
-        private bool _onePlayer;
-        public bool OnePlayer
-        {
-            get { return _onePlayer; }
-            set
-            {
-                _onePlayer = value;
-                OnPropertyChanged("OnePlayer");
-            }
-        }
 
         private bool _easyMode;
 
@@ -86,30 +72,29 @@ namespace Intermix.ViewModels.TicTacToe
                 OnPropertyChanged("EasyMode");
             }
         }
+        private bool _hardMode;
 
-        private bool _isSelectableDifficulty = true;
-
-        public bool IsSelectableDifficulty
+        public bool HardMode
         {
-            get { return _isSelectableDifficulty; }
+            get { return _hardMode; }
             set
             {
-                _isSelectableDifficulty = value;
-                OnPropertyChanged("IsSelectableDifficulty");
+                _hardMode = value;
+                OnPropertyChanged("HardMode");
+            }
+        }
+        private bool _twoPlayers;
+
+        public bool TwoPlayers
+        {
+            get { return _twoPlayers; }
+            set
+            {
+                _twoPlayers = value;
+                OnPropertyChanged("TwoPlayers");
             }
         }
 
-        private bool _isStartClickable = false;
-
-        public bool IsStartClickable
-        {
-            get { return _isStartClickable; }
-            set
-            {
-                _isStartClickable = value;
-                OnPropertyChanged("IsStartClickable");
-            }
-        }
 
         #endregion
     }

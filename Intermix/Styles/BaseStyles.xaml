@@ -284,7 +284,7 @@
     <Style TargetType="ToggleButton">
         <Setter Property="Foreground" Value="{DynamicResource MW_Font}"/>
         <Setter Property="Background" Value="{DynamicResource TTT_ButtonsColor}"/>
-        <Setter Property="Height" Value="75"/>
+        <Setter Property="Height" Value="50"/>
         <Setter Property="Margin" Value="10"/>
         <Setter Property="Width" Value="150"/>
         <Setter Property="FontSize" Value="20"/>
@@ -405,6 +405,7 @@
     <!-- ComboBoxes in Converter -->
     <Style x:Key="ComboBoxes_CC" TargetType="ComboBox" 
            BasedOn="{StaticResource MaterialDesignOutlinedComboBox}">
+        <Setter Property="Foreground" Value="{DynamicResource MW_Font}"/>
         <Setter Property="Width" Value="260"/>
         <Setter Property="BorderBrush" Value="{DynamicResource CC_ComboBoxBorder}"/>
         <Setter Property="FontWeight" Value="DemiBold"/>
@@ -418,6 +419,7 @@
     <Style x:Key="TextBoxes_CC" TargetType="TextBox" 
            BasedOn="{StaticResource MaterialDesignFloatingHintTextBox}">
 
+        <Setter Property="Foreground" Value="{DynamicResource MW_Font}"/>
         <Setter Property="Width" Value="260"/>
         <Setter Property="Height" Value="50"/>
         <Setter Property="FontSize" Value="16"/>
@@ -444,6 +446,7 @@
     <Style x:Key="LMS_WindowButtons" TargetType="Button">
         <Setter Property="Width" Value="40"/>
         <Setter Property="Height" Value="40"/>
+        <Setter Property="IsCancel" Value="true"/>
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="Template">
             <Setter.Value>

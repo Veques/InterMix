@@ -55,7 +55,7 @@
 
             <Grid Grid.Row="2">
                 
-                <Button Margin="0 5 0 0" Content="Log in" VerticalAlignment="Bottom" 
+                <Button Margin="0 5 0 0" Content="Log in" IsDefault="True" VerticalAlignment="Bottom" 
                     Command="{Binding LogInCommand}" Style="{StaticResource LW_Buttons}"/>
 
                 

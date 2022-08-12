@@ -90,6 +90,7 @@ namespace Intermix.ViewModels.LibrarySystem
             {
                 AdminCommand.Execute(this);
             }
+                Password = String.Empty;
         }
 
         #region FillProfile
@@ -248,7 +249,6 @@ namespace Intermix.ViewModels.LibrarySystem
                 if (Password.Length == 4)
                 {
                     CheckPassword(value);
-                    Password = String.Empty;
                 }
             }
         }

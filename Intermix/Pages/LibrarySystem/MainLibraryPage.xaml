@@ -82,9 +82,11 @@
                                                 <materialDesign:PackIcon VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0 10 0 0 "
                                                                      Name="LockIcon"  Kind="LockOpen"
                                                                      Width="70" Height="70" />
-                                                <co:BindablePasswordBoxMVVM HorizontalAlignment="Center" 
-                                                         VerticalAlignment="Bottom"  Width="75" 
-                                                          TextBlock.TextAlignment="Center" Password="{Binding Password, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+                                                <co:AdminLoginPasswordBox HorizontalAlignment="Center"
+                                                         VerticalAlignment="Bottom" Width="75" Foreground="Black"
+                                                          TextBlock.TextAlignment="Center" Password="{Binding Password, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+  
+                                                </co:AdminLoginPasswordBox>
 
                                             </Grid>
                                         </Grid>
@@ -185,7 +187,7 @@
                 <StackPanel Width="300" Background="WhiteSmoke">
                     <StackPanel Orientation="Vertical">
 
-                        <Button Width="50" Height="50" Background="WhiteSmoke" BorderThickness="0"
+                        <Button Width="50" Height="50" Background="WhiteSmoke" BorderThickness="0" IsCancel="true"
                                     materialDesign:ShadowAssist.ShadowDepth="Depth0" HorizontalAlignment="Right"
                                     Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}" CommandParameter="{x:Static Dock.Left}">
                             <materialDesign:PackIcon Kind="ArrowLeftBold" Width="25" Height="25" Foreground="Black" BorderBrush="Black" VerticalAlignment="Center" HorizontalAlignment="Center"/>
@@ -288,7 +290,7 @@
             <materialDesign:DrawerHost.RightDrawerContent>
                 <StackPanel Width="300" Background="WhiteSmoke" Margin="0 0 0 0" >
 
-                    <Button Width="50" Height="50" Background="WhiteSmoke" 
+                    <Button Width="50" Height="50" Background="WhiteSmoke" IsCancel="true"
                                     Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}" CommandParameter="{x:Static Dock.Right}"
                             VerticalAlignment="Center" HorizontalAlignment="Left" BorderThickness="0" materialDesign:ShadowAssist.ShadowDepth="Depth0">
                         <Button.Content>

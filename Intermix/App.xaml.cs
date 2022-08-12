@@ -15,7 +15,7 @@ namespace Intermix
 
         }
 
-        private void Application_LoadCompleted(object sender, System.Windows.Navigation.NavigationEventArgs e)
+        private void Application_Startup(object sender, StartupEventArgs e)
         {
             switch (Config.Default.Theme)
             {
@@ -26,10 +26,7 @@ namespace Intermix
                     ThemeController.SetTheme(ThemeController.ThemesTypes.Dark);
                     break;
             }
-
             _ = new SettingsViewModel();
-
-
         }
     }
 }

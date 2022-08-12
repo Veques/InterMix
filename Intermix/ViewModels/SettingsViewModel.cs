@@ -46,7 +46,7 @@ namespace Intermix.ViewModels
             LeadingColorCollection = new ObservableCollection<LeadingColors>()
             {
 
-                new LeadingColors { color =new SolidColorBrush (Color.FromArgb(255, (byte)224, (byte)255, (byte)0))},
+                new LeadingColors { color =new SolidColorBrush (Color.FromArgb(255, (byte)0, (byte)185, (byte)105))},
                 new LeadingColors { color =new SolidColorBrush (Color.FromArgb(255, (byte)0, (byte)255, (byte)68))},
                 new LeadingColors { color =new SolidColorBrush (Color.FromArgb(255, (byte)255, (byte)0, (byte)0))},
                 new LeadingColors { color =new SolidColorBrush (Color.FromArgb(255, (byte)255, (byte)0, (byte)175))},

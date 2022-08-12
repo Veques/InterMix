@@ -22,9 +22,11 @@
             <RowDefinition />
             <RowDefinition />
             <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
         </Grid.RowDefinitions>
 
-        <Grid x:Name="Back" Background="Transparent" Grid.RowSpan="4" VerticalAlignment="Stretch" HorizontalAlignment="Center" >
+        <Grid x:Name="Back" Background="Transparent" Grid.RowSpan="6" VerticalAlignment="Stretch" HorizontalAlignment="Center" >
             <Button HorizontalAlignment="Center" Style="{StaticResource BackButtons}" Command="{Binding BackMainCommand}">
                 <Button.Content>
                     <fa:FontAwesome Icon="Solid_AngleLeft" Foreground="{DynamicResource MW_Font}" FontSize="70"/>
@@ -36,22 +38,45 @@
                    FontSize="40" Foreground="{DynamicResource MW_Font}" Margin="0 10 0 0"
                    />
 
-        <StackPanel Grid.Column="1" HorizontalAlignment="Center" Orientation="Horizontal" Grid.Row="1">
+        <Grid Height="35" Grid.Column="1" Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="1" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"
+                       Text="One Player" Margin="5 0 5 0" Foreground="{DynamicResource MW_Font}"/>
+            <Separator Grid.Column="0" VerticalAlignment="Center"/>
+            <Separator Grid.Column="2" VerticalAlignment="Center"/>
+        </Grid>
 
-            <RadioButton HorizontalAlignment="Left" Content="1 player"
-                    Style="{StaticResource {x:Type ToggleButton}}" IsChecked="{Binding OnePlayer}"/>
-            <RadioButton HorizontalAlignment="Right" Content="2 players"
-                    Style="{StaticResource {x:Type ToggleButton}}" />
-        </StackPanel>
 
         <StackPanel Grid.Column="1" HorizontalAlignment="Center" Orientation="Horizontal" Grid.Row="2">
-            <RadioButton Name="Easy"  HorizontalAlignment="Left" Content="Łatwy" IsEnabled="{Binding IsSelectableDifficulty}"
+
+            <RadioButton Name="Easy" GroupName="Group" HorizontalAlignment="Left" Content="Łatwy" 
                     Style="{StaticResource {x:Type ToggleButton}}" IsChecked="{Binding EasyMode}"/>
-            <RadioButton Name="Hard" HorizontalAlignment="Right" Content="Trudny" IsEnabled="{Binding IsSelectableDifficulty}"
-                    Style="{StaticResource {x:Type ToggleButton}}"/>
+            <RadioButton Name="Hard" GroupName="Group" HorizontalAlignment="Right" Content="Trudny"
+                    Style="{StaticResource {x:Type ToggleButton}}" IsChecked="{Binding HardMode}"/>
+
         </StackPanel>
 
-        <Button Grid.Column="1" Grid.Row="3" HorizontalAlignment="Center" Content="Start"
+        <Grid Height="35" Grid.Column="1" Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="1" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"
+                       Text="Two Players" Margin="5 0 5 0" Foreground="{DynamicResource MW_Font}"/>
+            <Separator Grid.Column="0" VerticalAlignment="Center"/>
+            <Separator Grid.Column="2" VerticalAlignment="Center"/>
+        </Grid>
+
+        <RadioButton  Grid.Column="1" GroupName="Group" Grid.Row="4" HorizontalAlignment="Center" Content="2 players"
+                    Style="{StaticResource {x:Type ToggleButton}}" IsChecked="{Binding TwoPlayers}" />
+
+
+        <Button Grid.Column="1" Grid.Row="5" HorizontalAlignment="Center" Content="Start"
                 Width="100" Height="50" Command="{Binding StartCommand}"
                 Style="{StaticResource LW_Buttons}" />
 

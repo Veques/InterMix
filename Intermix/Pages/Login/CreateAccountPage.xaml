@@ -22,7 +22,7 @@ Title="CreateAccountPage" Foreground="{DynamicResource LW_Font}">
             </Grid.ColumnDefinitions>
 
             <Button Width="50" Height="30" Content="Back" VerticalAlignment="Top" HorizontalAlignment="Left" 
-                    Command="{Binding BackMainButton}" Style="{StaticResource LW_Buttons}"/>
+                    Command="{Binding BackMainButton}" Style="{StaticResource LW_Buttons}" IsCancel="True"/>
             <TextBlock Grid.Column="1" Text="Enter your data" FontWeight="Regular" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Top" />
         </Grid>
 
@@ -41,13 +41,13 @@ Title="CreateAccountPage" Foreground="{DynamicResource LW_Font}">
             </Grid.ColumnDefinitions>
 
             <TextBlock Text="Name" VerticalAlignment="Center"/>
-            <TextBox Text="{Binding Name}" Grid.Column="1" Style="{StaticResource LoginTextBox}"/>
+            <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Style="{StaticResource LoginTextBox}"/>
 
             <TextBlock Grid.Row="1" VerticalAlignment="Center" Text="Surname"/>
-            <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Surname}" Style="{StaticResource LoginTextBox}"/>
+            <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Surname, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource LoginTextBox}"/>
 
             <TextBlock Grid.Row="2" VerticalAlignment="Center" Text="Login"/>
-            <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Username}" Style="{StaticResource LoginTextBox}"/>
+            <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource LoginTextBox}"/>
 
             <TextBlock Grid.Row="3" VerticalAlignment="Center" Text="Password"/>
             <components:BindablePasswordBoxMVVM Grid.Row="3" Grid.Column="1" 
@@ -59,7 +59,7 @@ Title="CreateAccountPage" Foreground="{DynamicResource LW_Font}">
         </Grid>
 
         <Grid Margin="0 5 0 5" Grid.Row="2">
-            <Button Command="{Binding CreateAccount}" Content="Create account" Width="150" Height="35" Style="{StaticResource LW_Buttons}"></Button>
+            <Button IsDefault="True" Command="{Binding CreateAccount}" Content="Create account" Width="150" Height="35" Style="{StaticResource LW_Buttons}"></Button>
         </Grid>
     </Grid>
 </Page>

@@ -1,7 +1,9 @@
 ﻿using Intermix.Commands;
+using Intermix.Enums;
 using Intermix.Models.MainWindowModels;
 using Intermix.Stores;
 using Intermix.ViewModels.Base;
+using Intermix.Views;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -40,7 +42,6 @@ namespace Intermix.ViewModels.CurrencyConverter
                 x => true);  
             
             ConvertCommand = new RelayCommand(o => ConvertCurrencies(), o => true);
-
             LoadMethodAsync();
         }
         #endregion
@@ -49,6 +50,7 @@ namespace Intermix.ViewModels.CurrencyConverter
         {
             List<List<string>> tableData = new(await GetCurrencies());
             List<string> tableValues = new();
+
 
             tableValues = tableData.SelectMany(x => x).ToList();
 
@@ -82,11 +84,10 @@ namespace Intermix.ViewModels.CurrencyConverter
         }
 
         private async void ConvertCurrencies()
-        {
-            using var client = new HttpClient();
-            
+        {         
             try
             {
+            using var client = new HttpClient();
                 string primary = Currencies.Select(x => x.ShortName).ElementAt(PrimaryCurrency);
                 string secondary = Currencies.Select(x => x.ShortName).ElementAt(SecondaryCurrency);
 
@@ -100,11 +101,14 @@ namespace Intermix.ViewModels.CurrencyConverter
                 CalculatedValue = Math.Round(CalculatedValue, 2);
 
             }
-            //TODO: CATCH
-            catch (HttpRequestException httpRequestException)
-            { }
-            catch (NullReferenceException e)
-            { }
+            //catch (HttpRequestException httpRequestException)
+            //{
+            //    _ = new CustomizedMessageBox(httpRequestException.Message, MessageType.Error, MessageButton.Ok).ShowDialog();
+            //}
+            catch (ArgumentNullException nullException)
+            {
+                _ = new CustomizedMessageBox("Pole nie może być puste, uzupełnij lub połącz z Internetem", MessageType.Warning, MessageButton.Ok).ShowDialog();
+            }
         }
 
         private ObservableCollection<Currency> _currencies;

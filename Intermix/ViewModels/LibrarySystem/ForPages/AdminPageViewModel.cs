@@ -79,6 +79,13 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
         #region ImportBooks
         private void ImportBooks()
         {
+            bool? dialog = new CustomizedMessageBox("Do You really want to add 100 new books to database?", MessageType.Confirmation, MessageButton.OkCancel).ShowDialog();
+
+            if (!dialog.Value)
+            {
+                return;
+            }
+
             using var db = new ApplicationDbContext();
 
             var path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\Other\Top100Books.xlsx");
@@ -103,8 +110,7 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
 
                 list = (from DataRow dr in Data.Rows
                         select new Books()
-                        {
-                            Id = Convert.ToInt32(dr["Position"]),
+                        {   
                             Title = dr["Title"].ToString(),
                             AuthorName = dr["Name"].ToString(),
                             AuthorSurname = dr["Surname"].ToString(),
@@ -162,6 +168,8 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
             {
                 return false;
             }
+            first = String.Empty;
+            second = String.Empty;
         }
         private void ChangePIN()
         {

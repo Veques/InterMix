@@ -6,10 +6,10 @@
         d:DataContext="{d:DesignInstance Type=viewmodels:SettingsViewModel}"
         mc:Ignorable="d"
         Title="Settings" Height="250" Width="500" WindowStartupLocation="CenterScreen" WindowStyle="None"
-        Background="Transparent" AllowsTransparency="True" FontWeight="SemiBold" Foreground="{DynamicResource MW_Font}">
+        Background="Transparent" AllowsTransparency="True" ResizeMode="NoResize" FontWeight="SemiBold" Foreground="{DynamicResource MW_Font}">
 
 
-    <Border Background="{DynamicResource MW_Background}" BorderBrush="{DynamicResource LW_Font}" BorderThickness="1.5" CornerRadius="5">
+    <Border Background="{DynamicResource MW_Background}" BorderBrush="{DynamicResource LW_Font}" BorderThickness="1.5" CornerRadius="10">
 
         <Grid>
 

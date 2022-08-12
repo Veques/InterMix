@@ -39,14 +39,18 @@ namespace Intermix.ViewModels.LoginPage
                 if (!Password.Equals(PasswordConfirm))
                 {
                     _ = new CustomizedMessageBox("Passwords do not match", MessageType.Error, MessageButton.Ok).ShowDialog();
-
                     return;
                 }
 
                 if (Password.Length < 8)
                 {
                     _ = new CustomizedMessageBox("Password is to short", MessageType.Warning, MessageButton.Ok).ShowDialog();
+                    return;
+                }
 
+                if (_dbContext.Users.Any(x => x.Username == username))
+                {
+                    _ = new CustomizedMessageBox("User with this name exists", MessageType.Warning, MessageButton.Ok).ShowDialog();
                     return;
                 }
 

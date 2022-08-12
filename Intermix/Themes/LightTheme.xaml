@@ -5,8 +5,8 @@
     <Color x:Key="LeadingColor">red</Color>
     <Color x:Key="SecondaryLeadingColor">purple</Color>
     <Color x:Key="LeadingFont">black</Color>
-    <Color x:Key="Background">#81C9FF</Color>
-    <Color x:Key="BackgroundBackButton">#68B5F0</Color>
+    <Color x:Key="Background">whitesmoke</Color>
+    <Color x:Key="BackgroundBackButton">lightgray</Color>
 
     <!-- Logging Window -->
     <SolidColorBrush x:Key="LW_Background" Color="{DynamicResource Background}"/>
