@@ -11,13 +11,13 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Intermix.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220808180855_Intermix")]
+    [Migration("20220812203150_Intermix")]
     partial class Intermix
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder.HasAnnotation("ProductVersion", "6.0.6");
+            modelBuilder.HasAnnotation("ProductVersion", "6.0.8");
 
             modelBuilder.Entity("Intermix.Models.Books", b =>
                 {
@@ -68,6 +68,9 @@ namespace Intermix.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<int>("UserId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("WasExtended")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");

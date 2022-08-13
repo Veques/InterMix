@@ -301,18 +301,51 @@
                     <TextBlock Text="Notifications" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="SemiBold" FontSize="16"/>
                     <Border Height="490" >
 
-                        <TreeView Margin="0 3 0 10" ScrollViewer.HorizontalScrollBarVisibility="Disabled" FontWeight="Bold" Width="295" ScrollViewer.CanContentScroll="True"
+                        <TreeView Margin="0 3 0 0" ScrollViewer.HorizontalScrollBarVisibility="Disabled" FontWeight="Bold" Width="295" ScrollViewer.CanContentScroll="True"
                                   DisplayMemberPath="Title"  ItemsSource="{Binding Notifications}">
 
+                            <TreeView.GroupStyle>
+                                <GroupStyle>
+                                    <GroupStyle.ContainerStyle>
+                                        <Style TargetType="{x:Type GroupItem}">
+                                            <Setter Property="Template">
+                                                <Setter.Value>
+                                                    <ControlTemplate TargetType="{x:Type GroupItem}">
+                                                        <Expander IsExpanded="True" materialDesign:ExpanderAssist.HeaderBackground="DarkCyan" >
+                                                            <Expander.Header>
+                                                                <StackPanel>
+                                                                    <TextBlock Margin="0 5 0 5" FontWeight="DemiBold" Foreground="White">
+                                                                        <TextBlock.Text>
+                                                                            <MultiBinding StringFormat="{}{0} - {1}">
+                                                                                <Binding Path="Name" />
+                                                                                <Binding Path="ItemCount" />
+                                                                            </MultiBinding>
+                                                                        </TextBlock.Text>
+                                                                    </TextBlock>
+
+                                                                </StackPanel>
+                                                            </Expander.Header>
+                                                            <Expander.Content>
+                                                                <ItemsPresenter />
+                                                            </Expander.Content>
+                                                        </Expander>
+                                                    </ControlTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Style>
+                                    </GroupStyle.ContainerStyle>
+                                </GroupStyle>
+                            </TreeView.GroupStyle>
                             <materialDesign:TreeViewAssist.AdditionalTemplate>
                                 <DataTemplate>
-                                    <Grid TextElement.FontSize="10" TextElement.FontStyle="Italic" TextElement.FontWeight="Regular" Margin="10 0 0 0">
+                                    <StackPanel TextElement.FontSize="10" 
+                                          TextElement.FontStyle="Italic" 
+                                          TextElement.FontWeight="Regular" Margin="10 0 0 5">
 
-                                        <StackPanel Margin="0 0 0 7" Orientation="Horizontal" HorizontalAlignment="Left">
-                                            <TextBlock Foreground="{Binding ExpiringNotifForeground, UpdateSourceTrigger=PropertyChanged}" Text="Return book before: " />
-                                            <TextBlock Foreground="{Binding ExpiringNotifForeground, UpdateSourceTrigger=PropertyChanged}" Text="{Binding ReturnDate, StringFormat='{} {0:dd.MM.yyyy}'}" />
-                                        </StackPanel>
-                                    </Grid>
+                                        <TextBlock Foreground="{Binding Foreground, UpdateSourceTrigger=PropertyChanged}" 
+                                                       Text="{Binding AdditionalDescription, UpdateSourceTrigger=PropertyChanged}" />
+
+                                    </StackPanel>
                                 </DataTemplate>
                             </materialDesign:TreeViewAssist.AdditionalTemplate>
                         </TreeView>

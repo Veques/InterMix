@@ -100,7 +100,8 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
                     UserId = LoginPageViewModel.UserId,
                     BookId = element.Id,
                     ExpectedReturn = DateTime.Now.Date.AddDays(14),
-                    LoanDate = DateTime.Now.Date
+                    LoanDate = DateTime.Now.Date,
+                    WasExtended = 0
                 });
 
                 db.Reservations.RemoveRange(db.Reservations.Where(x => x.BookId == element.Id));

@@ -62,15 +62,15 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <Button x:Name="btnOk" Click="Ok_Click" Grid.Column="1" Style="{StaticResource LMS_MainButtons}" Margin="5" Width="100" Content="OK" Height="35" ToolTip="Ok"
+                <Button x:Name="btnOk" Click="Ok_Click" IsDefault="True" Grid.Column="1" Style="{StaticResource LMS_MainButtons}" Margin="5" Width="100" Content="OK" Height="35" ToolTip="Ok"
                             />
 
-                <Button x:Name="btnCancel" Click="Cancel_Click" Grid.Column="2" Style="{StaticResource LMS_MainButtons}" Margin="5" Width="100" Height="35" Content="Cancel" ToolTip="Cancel" />
+                <Button x:Name="btnCancel" IsCancel="True" Click="Cancel_Click" Grid.Column="2" Style="{StaticResource LMS_MainButtons}" Margin="5" Width="100" Height="35" Content="Cancel" ToolTip="Cancel" />
 
-                <Button x:Name="btnYes" Click="Yes_Click" Grid.Column="1" Style="{StaticResource LMS_MainButtons}" Margin="5" Width="100" Height="35" Content="Yes" ToolTip="Yes"
+                <Button x:Name="btnYes" IsDefault="True" Click="Yes_Click" Grid.Column="1" Style="{StaticResource LMS_MainButtons}" Margin="5" Width="100" Height="35" Content="Yes" ToolTip="Yes"
                             />
 
-                <Button x:Name="btnNo" Click="No_Click" Grid.Column="2" Style="{StaticResource LMS_MainButtons}" Margin="5" Width="100" Content="No" Height="35" ToolTip="No"/>
+                <Button x:Name="btnNo" IsCancel="true" Click="No_Click" Grid.Column="2" Style="{StaticResource LMS_MainButtons}" Margin="5" Width="100" Content="No" Height="35" ToolTip="No"/>
             </Grid>
 
         </Grid>

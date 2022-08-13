@@ -1,35 +1,21 @@
 ﻿using Intermix.Commands;
 using Intermix.Models;
+using Intermix.Models.LibrarySystemModels;
 using Intermix.Stores;
 using Intermix.ViewModels.Base;
 using Intermix.ViewModels.LibrarySystem.ForPages;
 using Intermix.ViewModels.LoginPage;
 using System;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Windows;
+using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media;
 
 namespace Intermix.ViewModels.LibrarySystem
 {
-    #region Models
-    public class PrivateLoans
-    {
-        public string Author { get; set; }
-        public string Title { get; set; }
-        public DateTime LoanDate { get; set; }
-        public DateTime ReturnDate { get; set; }
-    }
-
-    public class Notification
-    {
-        public string Title { get; set; }
-        public DateTime ReturnDate { get; set; }
-        public SolidColorBrush ExpiringNotifForeground { get; set; }
-    }
-    #endregion
-
     public class MainLibraryPageViewModel : BaseViewModel
     {
         public ICommand ReservationsCommand { get; set; }
@@ -54,7 +40,7 @@ namespace Intermix.ViewModels.LibrarySystem
             ManageDateChanges();
 
             YourReservationsEnabled = db.Reservations.Any(x => x.UserId == LoginPageViewModel.UserId);
-            CheckDateAndAddNotifications();
+            ManageNewNotifications();
 
             ReservationsCommand = new NavigationCommand<ReservationsPageViewModel>(navigationStore,
                 () => new ReservationsPageViewModel(navigationStore),
@@ -79,7 +65,12 @@ namespace Intermix.ViewModels.LibrarySystem
             AdminCommand = new NavigationCommand<AdminPageViewModel>(navigationStore,
                 () => new AdminPageViewModel(navigationStore),
                 x => true);
+
+
+            NotificationsCollectionView = CollectionViewSource.GetDefaultView(Notifications);
+            NotificationsCollectionView.GroupDescriptions.Add(new PropertyGroupDescription(nameof(Notification.NotificationType)));
         }
+
         #endregion
 
         private void CheckPassword(string value)
@@ -148,31 +139,84 @@ namespace Intermix.ViewModels.LibrarySystem
         #endregion
 
         #region Notification
-        private void CheckDateAndAddNotifications()
+
+        private void ManageNewNotifications()
         {
-            DateTime date = DateTime.Now.Date;
+            using var db = new ApplicationDbContext();
+
             Notifications = new();
+            DateTime date = DateTime.Now.Date;
 
-            foreach (var loanedBook in LoanedBooks)
+            //End of Loan
+            foreach (var loan in db.Loans.Where(x => x.UserId == UserId))
             {
-                var timeSpan = loanedBook.ReturnDate.Subtract(date);
+                var timeSpan = loan.ExpectedReturn.Subtract(date);
 
-                if (timeSpan.TotalDays <= 5)
+                if (timeSpan.TotalDays <= 5 && timeSpan.TotalDays >= 0)
                 {
-
                     Notifications.Add(new Notification
                     {
-                        Title = loanedBook.Title,
-                        ReturnDate = loanedBook.ReturnDate,
-                        ExpiringNotifForeground = Brushes.Red
-
+                        Title = db.Books.Single(x => x.Id == loan.BookId).Title,
+                        AdditionalDescription = $"Return Books before: {loan.ExpectedReturn.Date.ToShortDateString()}",
+                        Foreground = Brushes.Red,
+                        NotificationType = "End of Loan"
                     });
 
                     NotificationsCount += 1;
                 }
             }
-        }
 
+            //End of Reservation
+            foreach (var reservation in db.Reservations.Where(x => x.UserId == UserId))
+            {
+                var timeSpan = reservation.EndOfReservation.Subtract(date);
+
+                if (timeSpan.TotalDays <= 2 && timeSpan.TotalDays >= 0)
+                {
+                    Notifications.Add(new Notification
+                    {
+                        Title = db.Books.Single(x => x.Id == reservation.BookId).Title,
+                        AdditionalDescription = $"Your reservation expires at: {reservation.EndOfReservation.Date.ToShortDateString()}" ,
+                        Foreground = Brushes.BlueViolet,
+                        NotificationType = "End of Reservation"
+                    });
+
+                    NotificationsCount += 1;
+                }
+            }
+
+            //Possible Faster Reservation
+            foreach (var reservation in db.Reservations.Where(x => x.UserId == UserId))
+            {
+                DateTime fasterLoan = DateTime.MinValue;
+
+                if (reservation.ReturnDate.Date == DateTime.MinValue.Date)
+                {
+                    continue;
+                }
+                else
+                {
+                    
+                    fasterLoan = reservation.ReturnDate.Date;
+                }
+
+                if (reservation.EndOfReservation.Date.AddDays(-1) <= DateTime.Now.Date)
+                {
+                    continue;
+                }
+
+                Notifications.Add(new Notification
+                {
+                    Title = db.Books.Single(x => x.Id == reservation.BookId).Title,
+                    Foreground = Brushes.DarkGreen,
+                    NotificationType = "Possible faster loan",
+                    AdditionalDescription = "Previous user returned the book, you can freely loan it now"
+                    
+                });
+
+                NotificationsCount += 1;
+            }  
+        }
         #endregion
 
         #region Properties
@@ -180,17 +224,6 @@ namespace Intermix.ViewModels.LibrarySystem
         public static int UserId { get; private set; }
         public static string LoggedUser { get; private set; }
 
-        private Visibility _newNotificationVisibility = Visibility.Collapsed;
-
-        public Visibility NewNotificationVisibility
-        {
-            get { return _newNotificationVisibility; }
-            set
-            {
-                _newNotificationVisibility = value;
-                OnPropertyChanged("NewNotificationVisibility");
-            }
-        }
 
         private int _notificationsCount;
 
@@ -203,6 +236,15 @@ namespace Intermix.ViewModels.LibrarySystem
                 OnPropertyChanged("NotificationsCount");
             }
         }
+
+        private ICollectionView _notificationsCollectionView;
+
+        public ICollectionView NotificationsCollectionView
+        {
+            get { return _notificationsCollectionView; }
+            set { _notificationsCollectionView = value; }
+        }
+
 
         private ObservableCollection<Notification> _notifications;
 

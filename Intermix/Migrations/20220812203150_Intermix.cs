@@ -37,7 +37,8 @@ namespace Intermix.Migrations
                     UserId = table.Column<int>(type: "INTEGER", nullable: false),
                     BookId = table.Column<int>(type: "INTEGER", nullable: false),
                     LoanDate = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    ExpectedReturn = table.Column<DateTime>(type: "TEXT", nullable: false)
+                    ExpectedReturn = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    WasExtended = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {

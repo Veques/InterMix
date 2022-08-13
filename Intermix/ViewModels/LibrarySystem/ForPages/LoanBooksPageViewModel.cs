@@ -79,11 +79,13 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
             using ApplicationDbContext db = new();
             foreach (var book in LoanBooks.Where(a => a.IsChecked == true))
             {
-                db.Loans.Add(new Loans { 
-                    UserId= LoginPageViewModel.UserId,
+                db.Loans.Add(new Loans
+                {
+                    UserId = LoginPageViewModel.UserId,
                     BookId = book.Id,
                     LoanDate = DateTime.Now.Date,
-                    ExpectedReturn = DateTime.Now.Date.AddDays(14)
+                    ExpectedReturn = DateTime.Now.Date.AddDays(14),
+                    WasExtended = 0
                 });
 
                 var cell = db.Books.FirstOrDefault(x => x.Id == book.Id);

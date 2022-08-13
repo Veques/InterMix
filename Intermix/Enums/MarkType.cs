@@ -1,6 +1,6 @@
 ﻿namespace Intermix.Enums
 {
-    public enum MarkTypeTTT
+    public enum MarkType
     {
         Cross,
         Circle,

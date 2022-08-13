@@ -13,5 +13,6 @@ namespace Intermix.Models
         public int BookId { get; set; }
         public DateTime LoanDate { get; set; }
         public DateTime ExpectedReturn { get; set; }
+        public int WasExtended { get; set; }
     }
 }

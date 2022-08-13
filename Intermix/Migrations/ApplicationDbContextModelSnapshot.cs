@@ -15,7 +15,7 @@ namespace Intermix.Migrations
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder.HasAnnotation("ProductVersion", "6.0.6");
+            modelBuilder.HasAnnotation("ProductVersion", "6.0.8");
 
             modelBuilder.Entity("Intermix.Models.Books", b =>
                 {
@@ -66,6 +66,9 @@ namespace Intermix.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<int>("UserId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("WasExtended")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");

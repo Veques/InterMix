@@ -20,7 +20,7 @@ namespace Intermix.Pages.MainWindow.TicTacToe
 
         #region Private Variables
         public static ICommand AnyButtonClick { get; set; }
-        private static MarkTypeTTT[] _results;
+        private static MarkType[] _results;
         private static bool _isPlayerOneTurn;
         private List<int> _freeFields;
         private static bool _hasGameEnded;
@@ -41,13 +41,13 @@ namespace Intermix.Pages.MainWindow.TicTacToe
         #endregion
         private void NewGame()
         {
-            _results = new MarkTypeTTT[9];
+            _results = new MarkType[9];
             _freeFields = new List<int>();
 
 
             for (int i = 0; i < _results.Length; i++)
             {
-                _results[i] = MarkTypeTTT.Blank;
+                _results[i] = MarkType.Blank;
             }
 
             _isPlayerOneTurn = true;
@@ -87,14 +87,14 @@ namespace Intermix.Pages.MainWindow.TicTacToe
             var index = column + (row * 3);
             Random randomBlankSpace = new();
 
-            if (_results[index] != MarkTypeTTT.Blank)
+            if (_results[index] != MarkType.Blank)
             {
                 return;
             }
 
             if (_isPlayerOneTurn)
             {
-                _results[index] = MarkTypeTTT.Cross;
+                _results[index] = MarkType.Cross;
 
                 button.Content = "X";
                 button.Foreground = Brushes.Red;
@@ -111,13 +111,13 @@ namespace Intermix.Pages.MainWindow.TicTacToe
             {
                 randomButton = rnd.Next(0, allButtons.Count);
 
-                if (!_results.Contains(MarkTypeTTT.Blank))
+                if (!_results.Contains(MarkType.Blank))
                 {
                     isRandomInArray = true;
 
                 }
 
-                if (_results.ElementAt(randomButton).Equals(MarkTypeTTT.Blank))
+                if (_results.ElementAt(randomButton).Equals(MarkType.Blank))
                 {
 
                     isRandomInArray = true;
@@ -130,7 +130,7 @@ namespace Intermix.Pages.MainWindow.TicTacToe
             {
                 allButtons.ElementAt(randomButton).Content = "O";
                 allButtons.ElementAt(randomButton).Foreground = Brushes.Blue;
-                _results[randomButton] = MarkTypeTTT.Circle;
+                _results[randomButton] = MarkType.Circle;
                 CheckIfWinner();
             }
 
@@ -141,7 +141,7 @@ namespace Intermix.Pages.MainWindow.TicTacToe
         {
             #region Draw|No Winners
 
-            if (!_results.Any(x => x == MarkTypeTTT.Blank))
+            if (!_results.Any(x => x == MarkType.Blank))
             {
                 _hasGameEnded = true;
                 GameGrid.Children.Cast<Button>().ToList().ForEach(button =>
@@ -165,7 +165,7 @@ namespace Intermix.Pages.MainWindow.TicTacToe
             double różnica = (ParentGridHeight - GridHeight) / 2;
 
             //1 row
-            if (_results[0] != MarkTypeTTT.Blank && _results[1] == _results[0] && _results[2] == _results[0])
+            if (_results[0] != MarkType.Blank && _results[1] == _results[0] && _results[2] == _results[0])
             {
                 _hasGameEnded = true;
                 x1y1.Foreground = x1y2.Foreground = x1y3.Foreground = Brushes.Gold;
@@ -179,7 +179,7 @@ namespace Intermix.Pages.MainWindow.TicTacToe
 
             }
             //2 row
-            if (_results[3] != MarkTypeTTT.Blank && _results[4] == _results[3] && _results[5] == _results[3])
+            if (_results[3] != MarkType.Blank && _results[4] == _results[3] && _results[5] == _results[3])
             {
                 _hasGameEnded = true;
                 x2y1.Foreground = x2y2.Foreground = x2y3.Foreground = Brushes.Gold;
@@ -193,7 +193,7 @@ namespace Intermix.Pages.MainWindow.TicTacToe
 
             }
             //3 row
-            if (_results[6] != MarkTypeTTT.Blank && _results[7] == _results[6] && _results[8] == _results[6])
+            if (_results[6] != MarkType.Blank && _results[7] == _results[6] && _results[8] == _results[6])
             {
                 _hasGameEnded = true;
                 x3y1.Foreground = x3y2.Foreground = x3y3.Foreground = Brushes.Gold;
@@ -210,7 +210,7 @@ namespace Intermix.Pages.MainWindow.TicTacToe
 
             #region VerticalWins
             //column 1
-            if (_results[0] != MarkTypeTTT.Blank && _results[3] == _results[0] && _results[6] == _results[0])
+            if (_results[0] != MarkType.Blank && _results[3] == _results[0] && _results[6] == _results[0])
             {
                 _hasGameEnded = true;
                 x1y1.Foreground = x2y1.Foreground = x3y1.Foreground = Brushes.Gold;
@@ -224,7 +224,7 @@ namespace Intermix.Pages.MainWindow.TicTacToe
 
             }
             //column 2
-            if (_results[1] != MarkTypeTTT.Blank && _results[4] == _results[1] && _results[7] == _results[1])
+            if (_results[1] != MarkType.Blank && _results[4] == _results[1] && _results[7] == _results[1])
             {
                 _hasGameEnded = true;
                 x1y2.Foreground = x2y2.Foreground = x3y2.Foreground = Brushes.Gold;
@@ -238,7 +238,7 @@ namespace Intermix.Pages.MainWindow.TicTacToe
 
             }
             //column 3
-            if (_results[2] != MarkTypeTTT.Blank && _results[5] == _results[2] && _results[8] == _results[2])
+            if (_results[2] != MarkType.Blank && _results[5] == _results[2] && _results[8] == _results[2])
             {
                 _hasGameEnded = true;
                 x1y3.Foreground = x2y3.Foreground = x3y3.Foreground = Brushes.Gold;
@@ -255,7 +255,7 @@ namespace Intermix.Pages.MainWindow.TicTacToe
 
             #region DiagonalWins
             //Diagonal 0 to 9
-            if (_results[0] != MarkTypeTTT.Blank && _results[4] == _results[0] && _results[8] == _results[0])
+            if (_results[0] != MarkType.Blank && _results[4] == _results[0] && _results[8] == _results[0])
             {
                 _hasGameEnded = true;
                 x1y1.Foreground = x2y2.Foreground = x3y3.Foreground = Brushes.Gold;
@@ -269,7 +269,7 @@ namespace Intermix.Pages.MainWindow.TicTacToe
 
             }
             //Diagonal 2 to 6
-            if (_results[2] != MarkTypeTTT.Blank && _results[4] == _results[2] && _results[6] == _results[2])
+            if (_results[2] != MarkType.Blank && _results[4] == _results[2] && _results[6] == _results[2])
             {
                 _hasGameEnded = true;
                 x1y3.Foreground = x2y2.Foreground = x3y1.Foreground = Brushes.Gold;

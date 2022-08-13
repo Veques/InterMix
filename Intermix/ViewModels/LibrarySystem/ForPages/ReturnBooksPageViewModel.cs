@@ -12,6 +12,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Windows.Data;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace Intermix.ViewModels.LibrarySystem.ForPages
 {
@@ -19,10 +20,13 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
     public class ReturnBooksPageViewModel : BaseViewModel
     {
         public ICommand ReturnBooksCommand { get; set; }
+        public ICommand ExtendCommand { get; set; }
         public ICommand BackMainCommand { get; set; }
         
         public ReturnBooksPageViewModel(NavigationStore navigationStore)
         {
+            using var db = new ApplicationDbContext();
+
             ReturnBooksCommand = new RelayCommand(
                 o => ReturnBooksClicked(),
                 o => ReturnBooks.Any(x => x.IsChecked == true
@@ -32,6 +36,8 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
                 () => new MainLibraryPageViewModel(navigationStore),
                 x => true);
 
+            ExtendCommand = new RelayCommand(ExtendLoan, x => true);
+
             ReturnBooks = new();
             FillDataGrid();
 
@@ -39,6 +45,33 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
             ReturnBooksCollectionView = CollectionViewSource.GetDefaultView(ReturnBooks);
             ReturnBooksCollectionView.Filter = Filter;
 
+        }
+
+        private void ExtendLoan(object parameter)
+        {
+            using var db = new ApplicationDbContext();
+
+            if (parameter == null)
+                return;
+
+            bool? result = new CustomizedMessageBox("Are you sure you want to extend your Loan?", MessageType.Confirmation, MessageButton.YesNo).ShowDialog();
+
+            if (!result.Value)
+                return;
+
+            if(parameter is ReturnBook book)
+            {
+                db.Loans.Single(x => x.Id == book.Id).ExpectedReturn = book.ReturnDate.AddDays(7);
+                db.Loans.Single(x => x.Id == book.Id).WasExtended = 1;
+                
+                if (db.SaveChanges() > 0)
+                {
+                    _ = new CustomizedMessageBox("Saved", MessageType.Success, MessageButton.Ok).ShowDialog();
+
+                    ReturnBooks.Clear();
+                    FillDataGrid();
+                }
+            }
         }
 
         private bool Filter(object obj)
@@ -62,15 +95,15 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
             {
                 foreach (var book in db.Books.Where(d => d.Id == loan.BookId))
                 {
-
                     ReturnBooks.Add(new ReturnBook
                     {
                         IsChecked = false,
+                        IsEnabled = book.IsReserved == 0 && loan.WasExtended == 0,
                         Id = book.Id,
                         FullName = $"{book.AuthorName} {book.AuthorSurname}",
                         Title = book.Title,
                         LoanDate = loan.LoanDate,
-                        ReturnDate = loan.ExpectedReturn
+                        ReturnDate = loan.ExpectedReturn,
                     });
                 }
             }
@@ -138,6 +171,16 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
             }
         }
 
+        private ObservableCollection<ReturnBook> _returnBooks;
+
+        public ObservableCollection<ReturnBook> ReturnBooks
+        {
+            get { return _returnBooks; }
+            set { _returnBooks = value;
+                OnPropertyChanged("ReturnBooks");
+            }
+        }
+
         private string _titleFilter = string.Empty;
 
         public string TitleFilter
@@ -189,15 +232,6 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
             }
         }
 
-        private ObservableCollection<ReturnBook> _returnBooks;
-
-        public ObservableCollection<ReturnBook> ReturnBooks
-        {
-            get { return _returnBooks; }
-            set { _returnBooks = value;
-                OnPropertyChanged("ReturnBooks");
-            }
-        }
         #endregion
 
     }

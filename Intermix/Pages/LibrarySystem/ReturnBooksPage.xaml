@@ -25,9 +25,9 @@
                 </materialDesign:PackIcon>
             </Button>
         </Grid>
-        
+
         <Grid Grid.Row="1">
-            
+
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
@@ -40,14 +40,14 @@
                 <StackPanel.Background>
                     <SolidColorBrush Color="black" Opacity="0.3"/>
                 </StackPanel.Background>
-                <TextBox Name="Title" Style="{StaticResource LMS_Filters}" Text="{Binding TitleFilter, UpdateSourceTrigger=PropertyChanged}" Margin="130 0 0 0" Width="230"/>
+                <TextBox Name="Title" Style="{StaticResource LMS_Filters}" Text="{Binding TitleFilter, UpdateSourceTrigger=PropertyChanged}" Margin="130 0 0 0" Width="280"/>
                 <TextBox Name="Author" Style="{StaticResource LMS_Filters}"  Text="{Binding AuthorFilter, UpdateSourceTrigger=PropertyChanged}" Margin="1 0 0 0" Width="200"/>
-                <TextBox Name="LoanDate"  Style="{StaticResource LMS_Filters}" Text="{Binding LoanDateFilter, UpdateSourceTrigger=PropertyChanged}" Margin="1 0 0 0" Width="150"/>
                 <TextBox Name="ExpectedReturn"  Style="{StaticResource LMS_Filters}" Text="{Binding ReturnDateFilter, UpdateSourceTrigger=PropertyChanged}" Margin="1 0 0 0" Width="150"/>
             </StackPanel>
 
-
-            <DataGrid Grid.Row="1" Name="Grid" ItemsSource="{Binding ReturnBooksCollectionView}"
+        </Grid>
+        <Grid Grid.Row="1">
+            <DataGrid Grid.Row="1" Name="Grid" ItemsSource="{Binding ReturnBooks}"
                    CellStyle="{StaticResource DataGridCell}" Style="{StaticResource LMS_DataGrids}">
                 <DataGrid.Resources>
                     <SolidColorBrush x:Key="MaterialDesignTextBoxBorder" Color="Transparent"/>
@@ -58,20 +58,33 @@
                                             Header="Do oddania" Binding="{Binding IsChecked, UpdateSourceTrigger=PropertyChanged}"/>
 
                     <DataGridTextColumn ElementStyle="{StaticResource DataGridColumnStyle}" 
-                                        HeaderStyle="{StaticResource DataGridHeader}" IsReadOnly="True" Width="230" 
+                                        HeaderStyle="{StaticResource DataGridHeader}" IsReadOnly="True" Width="280" 
                                         Header="Tytuł" Binding="{Binding Title}"/>
 
                     <DataGridTextColumn ElementStyle="{StaticResource DataGridColumnStyle}" 
                                         HeaderStyle="{StaticResource DataGridHeader}" IsReadOnly="True" Width="200"
                                         Header="Autor" Binding="{Binding FullName}"/>
 
-                    <DataGridTextColumn ElementStyle="{StaticResource DataGridColumnStyle}" 
-                                        HeaderStyle="{StaticResource DataGridHeader}" IsReadOnly="True" Width="150" 
-                                        Header="Wypożyczono" Binding="{Binding LoanDate, StringFormat='{}{0:dd.MM.yyyy}'}"/>
-
-                    <DataGridTextColumn ElementStyle="{StaticResource DataGridColumnStyle}" 
+                    <DataGridTextColumn ElementStyle="{StaticResource DataGridColumnStyle}"
                                         HeaderStyle="{StaticResource DataGridHeader}" IsReadOnly="True" Width="150" 
                                         Header="Wypożyczono do" Binding="{Binding ReturnDate, StringFormat='{}{0:dd.MM.yyyy}'}"/>
+
+                    <DataGridTemplateColumn  HeaderStyle="{StaticResource DataGridHeader}" IsReadOnly="True" Width="130">
+                        <DataGridTemplateColumn.Header>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Extend Loan" VerticalAlignment="Center"/>
+                                <materialDesign:PackIcon Kind="HelpBox" VerticalAlignment="Center" Margin="3 0 0 0" ToolTip="You can extend book ONLY ONCE and if it has not been reserved"/>
+                            </StackPanel>
+                        </DataGridTemplateColumn.Header>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button IsEnabled="{Binding IsEnabled}" Command="{Binding DataContext.ExtendCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}, Path=DataContext}" Background="Transparent" BorderThickness="0"
+                                    Foreground="Black" Padding="1" TextBlock.TextAlignment="Center">
+                                    <materialDesign:PackIcon Kind="ArrowLeftRightBold" Width="30" Height="30" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                                </Button>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
 
                 </DataGrid.Columns>
             </DataGrid>

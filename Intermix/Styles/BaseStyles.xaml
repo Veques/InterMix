@@ -605,6 +605,7 @@
         <Setter Property="AutoGenerateColumns" Value="False"/>
         <Setter Property="CanUserAddRows" Value="False"/>
         <Setter Property="CanUserResizeColumns" Value="False"/>
+        <Setter Property="CanUserReorderColumns" Value="False"/>
         <Setter Property="CanUserResizeRows" Value="False"/>
         <Setter Property="BorderBrush" Value="Black"/>
         <Setter Property="BorderThickness" Value="3"/>
