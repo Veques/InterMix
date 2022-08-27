@@ -12,7 +12,6 @@ using System.ComponentModel;
 using System.Linq;
 using System.Windows.Data;
 using System.Windows.Input;
-using System.Windows.Media;
 
 namespace Intermix.ViewModels.LibrarySystem.ForPages
 {
@@ -22,7 +21,7 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
         public ICommand ReturnBooksCommand { get; set; }
         public ICommand ExtendCommand { get; set; }
         public ICommand BackMainCommand { get; set; }
-        
+
         public ReturnBooksPageViewModel(NavigationStore navigationStore)
         {
             using var db = new ApplicationDbContext();
@@ -59,11 +58,11 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
             if (!result.Value)
                 return;
 
-            if(parameter is ReturnBook book)
+            if (parameter is ReturnBook book)
             {
                 db.Loans.Single(x => x.Id == book.Id).ExpectedReturn = book.ReturnDate.AddDays(7);
                 db.Loans.Single(x => x.Id == book.Id).WasExtended = 1;
-                
+
                 if (db.SaveChanges() > 0)
                 {
                     _ = new CustomizedMessageBox("Saved", MessageType.Success, MessageButton.Ok).ShowDialog();
@@ -129,7 +128,7 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
                         {
                             reservation.ReturnDate = DateTime.Now.Date;
                         }
-                    }                    
+                    }
 
 
                     var cell = db.Books.FirstOrDefault(x => x.Id == book.Id);
@@ -137,7 +136,7 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
                     if (cell.IsReserved == 0)
                     {
                         if (cell == null)
-                        return;
+                            return;
 
                         cell.IsAvailable = 1;
                     }
@@ -151,7 +150,7 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
             }
             else
             {
-               _ = new CustomizedMessageBox("Something went wrong", MessageType.Warning, MessageButton.Ok).ShowDialog();
+                _ = new CustomizedMessageBox("Something went wrong", MessageType.Warning, MessageButton.Ok).ShowDialog();
             }
 
             ReturnBooks.Clear();
@@ -176,7 +175,9 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
         public ObservableCollection<ReturnBook> ReturnBooks
         {
             get { return _returnBooks; }
-            set { _returnBooks = value;
+            set
+            {
+                _returnBooks = value;
                 OnPropertyChanged("ReturnBooks");
             }
         }

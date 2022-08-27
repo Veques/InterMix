@@ -17,11 +17,12 @@
         </Grid.ColumnDefinitions>
 
         <StackPanel x:Name="Panel1" Orientation="Vertical" Margin="6 0 2 0">
+            
             <materialDesign:PackIcon Kind="InformationOutline" HorizontalAlignment="Center" Margin="0 0 0 20"
                                      Height="120" Width="120" Foreground="{DynamicResource MW_Font}"/>
-            <TextBlock Text="Project description" HorizontalAlignment="Center" FontSize="18" FontWeight="DemiBold"/>
+            <TextBlock Text="Project description" HorizontalAlignment="Center" FontSize="18" FontWeight="DemiBold" Foreground="{StaticResource MW_Font}"/>
             <TextBlock Style="{StaticResource MaterialDesignBody2TextBlock}"
-                    HorizontalAlignment="Center"
+                    HorizontalAlignment="Center" Foreground="{StaticResource MW_Font}"
                     Width="{Binding ElementName=Panel1, Path=ActualWidth}"
                     Margin="1 0 0 0" Padding="2"
                     TextWrapping="WrapWithOverflow"
@@ -46,15 +47,15 @@
             </Grid>
 
         <StackPanel Grid.Column="1" Margin="2 0 2 0" >
-            <Image Source="/Images/TicTacToe.png" Visibility="{Binding LightLogo_TTT}"
+            <Image Source="/Images/TicTacToe.png" Visibility="{Binding LightLogo}"
                    Style="{StaticResource MW_Images}" Height="120" Width="120"
                    Margin="0 0 0 20"/>
-            <Image Source="/Images/TicTacToe_Black.png" Visibility="{Binding DarkLogo_TTT}"
+            <Image Source="/Images/TicTacToe_Black.png" Visibility="{Binding DarkLogo}"
                    Style="{StaticResource MW_Images}" Height="120" Width="120"
                    Margin="0 0 0 20"/>
-            <TextBlock Text="TicTacToe" HorizontalAlignment="Center" FontSize="18" FontWeight="DemiBold"/>
+            <TextBlock Text="TicTacToe" HorizontalAlignment="Center" FontSize="18" FontWeight="DemiBold" Foreground="{StaticResource MW_Font}"/>
             <TextBlock Style="{StaticResource MaterialDesignBody1TextBlock}"
-                    HorizontalAlignment="Center"
+                    HorizontalAlignment="Center" Foreground="{StaticResource MW_Font}"
                     Width="{Binding ElementName=Panel1, Path=ActualWidth}"
                     Margin="1 0 0 0" Padding="2"
                     TextWrapping="WrapWithOverflow"
@@ -70,11 +71,11 @@
         <StackPanel Grid.Column="2" Margin="2 0 2 0">
             <materialDesign:PackIcon Kind="CurrencyEur" Width="120" Height="120" Foreground="{DynamicResource LW_Font}" Margin="0 0 0 15"
                                      HorizontalAlignment="Center"/>
-            <TextBlock Text="Currency Converter" HorizontalAlignment="Center" FontSize="18" FontWeight="DemiBold"/>
+            <TextBlock Text="Currency Converter" HorizontalAlignment="Center" FontSize="18" FontWeight="DemiBold" Foreground="{StaticResource MW_Font}"/>
             <TextBlock Style="{StaticResource MaterialDesignBody2TextBlock}"
                     HorizontalAlignment="Center"
                     Width="{Binding ElementName=Panel1, Path=ActualWidth}"
-                    Margin="1 0 0 0" Padding="2"
+                    Margin="1 0 0 0" Padding="2" Foreground="{StaticResource MW_Font}"
                     TextWrapping="WrapWithOverflow"
                     TextAlignment="Justify"
                     FontSize="17"
@@ -88,9 +89,9 @@
         <StackPanel Grid.Column="3" Margin="2 0 6 0">
             <materialDesign:PackIcon Kind="LibraryShelves" Width="120" Height="120" Foreground="{DynamicResource MW_Font}" Margin="0 0 0 15"
                                      HorizontalAlignment="Center"/>
-            <TextBlock Text="Library Management System" HorizontalAlignment="Center" FontSize="18" FontWeight="DemiBold"/>
+            <TextBlock Text="Library Management System" HorizontalAlignment="Center" FontSize="18" FontWeight="DemiBold" Foreground="{StaticResource MW_Font}"/>
             <TextBlock Style="{StaticResource MaterialDesignBody2TextBlock}"
-                    HorizontalAlignment="Center"
+                    HorizontalAlignment="Center" Foreground="{StaticResource MW_Font}"
                     Width="{Binding ElementName=Panel1, Path=ActualWidth}"
                     Margin="1 0 0 0" Padding="2"
                     TextWrapping="WrapWithOverflow"

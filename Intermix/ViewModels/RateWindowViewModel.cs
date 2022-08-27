@@ -3,13 +3,8 @@ using Intermix.Enums;
 using Intermix.ViewModels.Base;
 using Intermix.Views;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Net.Mail;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Input;
 
 namespace Intermix.ViewModels
@@ -22,7 +17,7 @@ namespace Intermix.ViewModels
         {
             SendCommand = new RelayCommand(
                 o => SendFeedBack(OpinionText),
-                o => !string.IsNullOrEmpty(OpinionText) && !string.IsNullOrEmpty(Name) && Rating > 0 && Config.Default.IsFeedbackSent == false ) ;
+                o => !string.IsNullOrEmpty(OpinionText) && !string.IsNullOrEmpty(Name) && Rating > 0 && Config.Default.IsFeedbackSent == false);
         }
 
         private void SendFeedBack(string opinion)
@@ -50,13 +45,13 @@ namespace Intermix.ViewModels
                     Subject = subject,
                     Body = opinion
                 };
-                
+
                 smtp.Send(message);
                 _ = new CustomizedMessageBox("Thank for your input in making this perfection", MessageType.Success, MessageButton.Ok).ShowDialog();
                 Config.Default.IsFeedbackSent = true;
                 Config.Default.Save();
             }
-            catch(Exception) { }
+            catch (Exception) { }
         }
 
         private string _opinionText;
@@ -64,7 +59,9 @@ namespace Intermix.ViewModels
         public string OpinionText
         {
             get { return _opinionText; }
-            set { _opinionText = value;
+            set
+            {
+                _opinionText = value;
                 OnPropertyChanged("OpinionText");
             }
         }
@@ -86,7 +83,9 @@ namespace Intermix.ViewModels
         public int Rating
         {
             get { return _rating; }
-            set { _rating = value;
+            set
+            {
+                _rating = value;
                 OnPropertyChanged("Rating");
             }
         }

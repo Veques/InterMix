@@ -1,9 +1,5 @@
 ﻿using Intermix.ViewModels.Base;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Intermix.Stores
 {
@@ -16,7 +12,9 @@ namespace Intermix.Stores
         public BaseViewModel CurrentViewModel
         {
             get { return _baseViewModel; }
-            set { _baseViewModel = value;
+            set
+            {
+                _baseViewModel = value;
                 OnCurrentViewModelChanged();
             }
         }

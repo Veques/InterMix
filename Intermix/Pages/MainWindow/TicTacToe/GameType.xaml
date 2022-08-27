@@ -50,14 +50,9 @@
             <Separator Grid.Column="2" VerticalAlignment="Center"/>
         </Grid>
 
-
         <StackPanel Grid.Column="1" HorizontalAlignment="Center" Orientation="Horizontal" Grid.Row="2">
-
             <RadioButton Name="Easy" GroupName="Group" HorizontalAlignment="Left" Content="Łatwy" 
                     Style="{StaticResource {x:Type ToggleButton}}" IsChecked="{Binding EasyMode}"/>
-            <RadioButton Name="Hard" GroupName="Group" HorizontalAlignment="Right" Content="Trudny"
-                    Style="{StaticResource {x:Type ToggleButton}}" IsChecked="{Binding HardMode}"/>
-
         </StackPanel>
 
         <Grid Height="35" Grid.Column="1" Grid.Row="3">

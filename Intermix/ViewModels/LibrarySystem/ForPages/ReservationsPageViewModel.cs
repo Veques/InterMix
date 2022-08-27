@@ -6,12 +6,9 @@ using Intermix.ViewModels.Base;
 using Intermix.ViewModels.LoginPage;
 using Intermix.Views;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Data;
 using System.Windows.Input;
 using ReserveBook = Intermix.Models.LibrarySystemModels.ReservarionDataGrids;
@@ -23,7 +20,7 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
     {
         public ICommand ReserveCommand { get; set; }
         public ICommand BackMainCommand { get; set; }
-        
+
 
         public ReservationsPageViewModel(NavigationStore navigationStore)
         {
@@ -47,7 +44,7 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
 
             foreach (var book in db.Books.Where(x => x.IsAvailable == 0))
             {
-                foreach(var loan in db.Loans.Where(x => x.UserId != LoginPageViewModel.UserId && x.BookId == book.Id))
+                foreach (var loan in db.Loans.Where(x => x.UserId != LoginPageViewModel.UserId && x.BookId == book.Id))
                 {
 
                     if (db.Reservations.Any(x => x.BookId == book.Id))
@@ -62,7 +59,7 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
                         ExpectedReturnDate = loan.ExpectedReturn,
                         PossibleLoanDate = loan.ExpectedReturn.AddDays(1),
                         EndOfReservation = loan.ExpectedReturn.AddDays(2),
-       
+
                     });
                 }
             }
@@ -90,7 +87,7 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
         private void AddReservation()
         {
             using var db = new ApplicationDbContext();
-            
+
             foreach (var element in ReservedBooks.Where(x => x.IsChecked))
             {
                 db.Reservations.Add(new Reservations
@@ -104,7 +101,7 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
                 db.Books.FirstOrDefault(x => x.Id == element.Id).IsReserved = 1;
             }
 
-            if(db.SaveChanges() > 0)
+            if (db.SaveChanges() > 0)
             {
                 _ = new CustomizedMessageBox("Saved!", MessageType.Success, MessageButton.Ok).ShowDialog();
                 ReservedBooks.Clear();
@@ -126,7 +123,9 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
         public ICollectionView ReservedBooksCollectionView
         {
             get { return _reservedBooksCollectionView; }
-            set { _reservedBooksCollectionView = value;
+            set
+            {
+                _reservedBooksCollectionView = value;
                 OnPropertyChanged("ReservedBooksCollectionView");
             }
         }
@@ -167,7 +166,7 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
             }
         }
 
-        private string _expectedReturn= string.Empty;
+        private string _expectedReturn = string.Empty;
 
         public string ExpectedReturn
         {

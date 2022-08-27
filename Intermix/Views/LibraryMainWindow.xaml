@@ -40,7 +40,7 @@
             </Grid>
 
             <Grid Grid.Row="1" >
-                <Frame Content="{Binding CurrentViewModel}" NavigationUIVisibility="Hidden" Grid.ColumnSpan="2"/>
+                <Frame Content="{Binding CurrentViewModel}" NavigationUIVisibility="Hidden" Grid.ColumnSpan="2" Navigating="Frame_Navigating" Name="frame"/>
             </Grid>
 
         </Grid>

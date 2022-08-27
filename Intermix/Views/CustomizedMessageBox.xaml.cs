@@ -1,17 +1,8 @@
 ﻿using Intermix.Enums;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace Intermix.Views
 {
@@ -29,28 +20,28 @@ namespace Intermix.Views
             {
 
                 case MessageType.Information:
-                        txtTitle.Text = "Information";
-                        cardHeader.Background = Brushes.DeepSkyBlue;
+                    txtTitle.Text = "Information";
+                    cardHeader.Background = Brushes.DeepSkyBlue;
                     break;
 
                 case MessageType.Confirmation:
-                        txtTitle.Text = "Confirmation";
-                        cardHeader.Background = Brushes.Cyan;   
+                    txtTitle.Text = "Confirmation";
+                    cardHeader.Background = Brushes.Cyan;
                     break;
 
                 case MessageType.Success:
-                        txtTitle.Text = "Success";
-                        cardHeader.Background = Brushes.LawnGreen;
+                    txtTitle.Text = "Success";
+                    cardHeader.Background = Brushes.LawnGreen;
                     break;
 
                 case MessageType.Warning:
-                        txtTitle.Text = "Warning";
-                        cardHeader.Background = Brushes.Orange;
+                    txtTitle.Text = "Warning";
+                    cardHeader.Background = Brushes.Orange;
                     break;
 
                 case MessageType.Error:
-                        txtTitle.Text = "Error";
-                        cardHeader.Background = Brushes.Red;
+                    txtTitle.Text = "Error";
+                    cardHeader.Background = Brushes.Red;
                     break;
             }
             switch (Buttons)

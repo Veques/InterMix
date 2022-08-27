@@ -2,12 +2,9 @@
 using Intermix.Models;
 using Intermix.ViewModels.Base;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Data;
 using System.Windows.Input;
 using Reservations = Intermix.Models.LibrarySystemModels.Loan;
@@ -24,9 +21,9 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
         {
             AllReservations = new();
             Users = new();
-            ClearFilterCommand = new RelayCommand(o => ClearFilter() , o => !SelectedUser.Equals(String.Empty));
+            ClearFilterCommand = new RelayCommand(o => ClearFilter(), o => !SelectedUser.Equals(String.Empty));
 
-            BackMainCommand = new NavigationCommand<AdminPageViewModel>(navigationStore, 
+            BackMainCommand = new NavigationCommand<AdminPageViewModel>(navigationStore,
                 () => new AdminPageViewModel(navigationStore),
                 x => true);
 
@@ -67,7 +64,7 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
                             Author = $"{book.AuthorName} {book.AuthorSurname}",
                             ExpectedReturnDate = reservation.ExpectedReturn,
                             LastReservationDay = reservation.ExpectedReturn.Date.AddDays(2)
-                            
+
                         });
                     }
                 }

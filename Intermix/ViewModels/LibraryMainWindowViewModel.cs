@@ -40,7 +40,9 @@ namespace Intermix.ViewModels
         public string Date
         {
             get { return _date; }
-            set { _date = value;
+            set
+            {
+                _date = value;
                 OnPropertyChanged("Date");
             }
         }
@@ -51,7 +53,9 @@ namespace Intermix.ViewModels
         public string Time
         {
             get { return _time; }
-            set { _time = value;
+            set
+            {
+                _time = value;
                 OnPropertyChanged("Time");
             }
         }

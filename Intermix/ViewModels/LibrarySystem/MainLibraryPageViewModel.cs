@@ -9,7 +9,6 @@ using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
-using System.Windows;
 using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -81,7 +80,7 @@ namespace Intermix.ViewModels.LibrarySystem
             {
                 AdminCommand.Execute(this);
             }
-                Password = String.Empty;
+            Password = String.Empty;
         }
 
         #region FillProfile
@@ -104,7 +103,7 @@ namespace Intermix.ViewModels.LibrarySystem
                 }
             }
         }
-        
+
         #endregion
 
         #region Automatic returns to make reservations work 
@@ -112,12 +111,12 @@ namespace Intermix.ViewModels.LibrarySystem
         {
             using var db = new ApplicationDbContext();
 
-            foreach(var element in db.Books)
+            foreach (var element in db.Books)
             {
                 foreach (var reservation in db.Reservations.Where(x => x.BookId == element.Id))
                 {
 
-                    if(DateTime.Now.Date >= reservation.ExpectedReturn.Date && element.IsReserved == 0)
+                    if (DateTime.Now.Date >= reservation.ExpectedReturn.Date && element.IsReserved == 0)
                     {
                         element.IsAvailable = 1;
                         db.Loans.RemoveRange(db.Loans.Where(x => x.BookId == element.Id));
@@ -176,7 +175,7 @@ namespace Intermix.ViewModels.LibrarySystem
                     Notifications.Add(new Notification
                     {
                         Title = db.Books.Single(x => x.Id == reservation.BookId).Title,
-                        AdditionalDescription = $"Your reservation expires at: {reservation.EndOfReservation.Date.ToShortDateString()}" ,
+                        AdditionalDescription = $"Your reservation expires at: {reservation.EndOfReservation.Date.ToShortDateString()}",
                         Foreground = Brushes.BlueViolet,
                         NotificationType = "End of Reservation"
                     });
@@ -196,7 +195,7 @@ namespace Intermix.ViewModels.LibrarySystem
                 }
                 else
                 {
-                    
+
                     fasterLoan = reservation.ReturnDate.Date;
                 }
 
@@ -211,11 +210,11 @@ namespace Intermix.ViewModels.LibrarySystem
                     Foreground = Brushes.DarkGreen,
                     NotificationType = "Possible faster loan",
                     AdditionalDescription = "Previous user returned the book, you can freely loan it now"
-                    
+
                 });
 
                 NotificationsCount += 1;
-            }  
+            }
         }
         #endregion
 
@@ -275,7 +274,9 @@ namespace Intermix.ViewModels.LibrarySystem
         public bool YourReservationsEnabled
         {
             get { return _yourReservationsEnabled; }
-            set { _yourReservationsEnabled = value;
+            set
+            {
+                _yourReservationsEnabled = value;
                 OnPropertyChanged("YourReservationsEnabled");
             }
         }
@@ -285,9 +286,11 @@ namespace Intermix.ViewModels.LibrarySystem
         public string Password
         {
             get { return _passwordBox; }
-            set { _passwordBox = value;
+            set
+            {
+                _passwordBox = value;
                 OnPropertyChanged(nameof(Password));
-                
+
                 if (Password.Length == 4)
                 {
                     CheckPassword(value);

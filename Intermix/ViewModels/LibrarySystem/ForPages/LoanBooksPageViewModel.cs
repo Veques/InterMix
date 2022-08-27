@@ -32,7 +32,7 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
             BackMainCommand = new NavigationCommand<MainLibraryPageViewModel>(navigationStore,
                 () => new MainLibraryPageViewModel(navigationStore),
                 x => true);
-            
+
             LoanBooks = new();
             FillDataGrid();
         }
@@ -51,7 +51,7 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
         }
 
         private void FillDataGrid()
-        {            
+        {
             using var db = new ApplicationDbContext();
             foreach (var book in db.Books.Where(d => d.IsAvailable == 1))
             {
@@ -65,8 +65,8 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
                     Publisher = book.Publisher
                 });
             }
-                LoanBooksCollectionView = CollectionViewSource.GetDefaultView(LoanBooks);
-                LoanBooksCollectionView.Filter = Filter;
+            LoanBooksCollectionView = CollectionViewSource.GetDefaultView(LoanBooks);
+            LoanBooksCollectionView.Filter = Filter;
         }
         private void LoanClicked()
         {
@@ -92,11 +92,11 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
 
                 if (cell == null)
                     continue;
-                    
+
                 cell.IsAvailable = 0;
             }
 
-            if(db.SaveChanges() > 0)
+            if (db.SaveChanges() > 0)
             {
                 _ = new CustomizedMessageBox("Loan successful", MessageType.Success, MessageButton.Ok).ShowDialog();
                 LoanBooks.Clear();
@@ -115,7 +115,9 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
         public ICollectionView LoanBooksCollectionView
         {
             get { return _loanBooksCollectionView; }
-            set { _loanBooksCollectionView = value;
+            set
+            {
+                _loanBooksCollectionView = value;
                 OnPropertyChanged("LoanBooksCollectionView");
             }
         }

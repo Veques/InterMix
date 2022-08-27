@@ -2,14 +2,10 @@
 using Intermix.Models;
 using Intermix.Models.LibrarySystemModels;
 using Intermix.ViewModels.Base;
-using Intermix.ViewModels.LoginPage;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Data;
 using System.Windows.Input;
 
@@ -65,7 +61,7 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
                         }
                         else
                         {
-                            status= "Not reserved";
+                            status = "Not reserved";
                         }
 
                         if (!Users.Contains($"{user.Name} {user.Surname}"))
@@ -94,7 +90,7 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
             if (obj == null)
                 return false;
 
-            if(obj is Loan loan)
+            if (obj is Loan loan)
             {
                 return loan.Title.Contains(TitleFilter, StringComparison.InvariantCultureIgnoreCase) &&
                     loan.Author.Contains(AuthorFilter, StringComparison.InvariantCultureIgnoreCase) &&
@@ -113,7 +109,9 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
         public ICollectionView LoansCollectionView
         {
             get { return _loanCollectionView; }
-            set { _loanCollectionView = value;
+            set
+            {
+                _loanCollectionView = value;
                 OnPropertyChanged("LoansCollectionView");
             }
         }
@@ -123,7 +121,9 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
         public ObservableCollection<Loan> AllLoans
         {
             get { return _allLoans; }
-            set { _allLoans = value;
+            set
+            {
+                _allLoans = value;
                 OnPropertyChanged("AllLoans");
             }
         }
@@ -133,7 +133,9 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
         public ObservableCollection<string> Users
         {
             get { return _users; }
-            set { _users = value;
+            set
+            {
+                _users = value;
                 OnPropertyChanged("Users");
             }
         }
@@ -167,7 +169,8 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
         public string TitleFilter
         {
             get { return _titleFilter; }
-            set {
+            set
+            {
                 _titleFilter = value != null ? _titleFilter = value : _titleFilter = string.Empty;
 
                 OnPropertyChanged("TitleFilter");

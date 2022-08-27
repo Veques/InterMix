@@ -17,6 +17,8 @@
 
   <ItemGroup>
     <None Remove="Images\Library.jpg" />
+    <None Remove="Images\Snake.png" />
+    <None Remove="Images\Snake_Black.png" />
     <None Remove="Images\TicTacToe.png" />
     <None Remove="Images\TicTacToe_Black.png" />
   </ItemGroup>

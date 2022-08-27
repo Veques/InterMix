@@ -1,12 +1,5 @@
-﻿using Intermix.Commands;
-using Intermix.Stores;
+﻿using Intermix.Stores;
 using Intermix.ViewModels.Base;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Input;
 
 namespace Intermix.ViewModels
@@ -24,7 +17,7 @@ namespace Intermix.ViewModels
             _navigationStore.CurrentViewModelChanged += OnViewModelChanged;
 
             //ExitCommand = new RelayCommand(x => foreach(var window in Application.Current.Windows) { window.Close(); },
-               
+
         }
 
         private void OnViewModelChanged()

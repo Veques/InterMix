@@ -8,6 +8,7 @@
              xmlns:PGtictactoe="clr-namespace:Intermix.Pages.MainWindow.TicTacToe"
              xmlns:PGlogin="clr-namespace:Intermix.Pages.Login"
              xmlns:PGlibrary="clr-namespace:Intermix.Pages.LibrarySystem"
+
              
              xmlns:VM="clr-namespace:Intermix.ViewModels"
              xmlns:VMlogin="clr-namespace:Intermix.ViewModels.LoginPage"
@@ -15,6 +16,7 @@
              xmlns:VMtictactoe="clr-namespace:Intermix.ViewModels.TicTacToe"
              xmlns:VMlibrary="clr-namespace:Intermix.ViewModels.LibrarySystem.ForPages"
              xmlns:VMlibrarymain="clr-namespace:Intermix.ViewModels.LibrarySystem"
+
              
              xmlns:intermix="clr-namespace:Intermix"
              StartupUri="Views\MainWindow.xaml" Startup="Application_Startup" >
@@ -38,9 +40,6 @@
             </DataTemplate>
             <DataTemplate DataType="{x:Type VMtictactoe:GameOnePlayerEasyViewModel}">
                 <PGtictactoe:GamePageForOnePlayerEasy/>
-            </DataTemplate>
-            <DataTemplate DataType="{x:Type VMtictactoe:GameOnePlayerHardViewModel}">
-                <PGtictactoe:GamePageForOnePlayerHard/>
             </DataTemplate>
             <DataTemplate DataType="{x:Type VMtictactoe:GameTwoPlayersViewModel}">
                 <PGtictactoe:GamePageForTwoPlayers/>

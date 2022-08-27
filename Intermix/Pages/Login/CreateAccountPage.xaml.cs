@@ -1,7 +1,4 @@
-﻿using Intermix.ViewModels.LoginPage;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Navigation;
+﻿using System.Windows.Controls;
 
 namespace Intermix.Pages.Login
 {

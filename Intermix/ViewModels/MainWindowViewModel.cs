@@ -2,7 +2,6 @@
 using Intermix.Stores;
 using Intermix.ViewModels.Base;
 using Intermix.Views;
-using System;
 using System.Windows.Input;
 
 namespace Intermix.ViewModels

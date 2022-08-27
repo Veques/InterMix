@@ -4,13 +4,7 @@ using Intermix.Models;
 using Intermix.ViewModels.Base;
 using Intermix.Views;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Input;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace Intermix.ViewModels
 {
@@ -38,7 +32,7 @@ namespace Intermix.ViewModels
                 Publisher = "";
             }
 
-            db.Books.Add(new Books 
+            db.Books.Add(new Books
             {
                 Title = Title,
                 AuthorName = AuthorName,
@@ -47,7 +41,7 @@ namespace Intermix.ViewModels
                 Publisher = Publisher,
                 IsAvailable = 1,
                 IsReserved = 0
-                
+
             });
 
             if (db.SaveChanges() > 0)
@@ -66,7 +60,9 @@ namespace Intermix.ViewModels
         public string Title
         {
             get { return _title; }
-            set { _title = value;
+            set
+            {
+                _title = value;
                 OnPropertyChanged("Title");
             }
         }

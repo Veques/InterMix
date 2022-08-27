@@ -6,7 +6,6 @@ using Intermix.ViewModels.Base;
 using Intermix.Views;
 using System;
 using System.Linq;
-using System.Windows;
 using System.Windows.Input;
 
 namespace Intermix.ViewModels.LoginPage
@@ -18,13 +17,13 @@ namespace Intermix.ViewModels.LoginPage
 
         #region Constructor
         public CreateAccountViewModel(NavigationStore navigationStore)
-        {       
-           CreateAccount = new RelayCommand(
-                o => CreateAnAccount(Name, Surname, Username, Password),
+        {
+            CreateAccount = new RelayCommand(
+                 o => CreateAnAccount(Name, Surname, Username, Password),
 
-                o => !string.IsNullOrEmpty(Name) && !string.IsNullOrEmpty(Surname) &&
-                     !string.IsNullOrEmpty(Username) && !string.IsNullOrEmpty(Password) &&
-                     !string.IsNullOrEmpty(PasswordConfirm));
+                 o => !string.IsNullOrEmpty(Name) && !string.IsNullOrEmpty(Surname) &&
+                      !string.IsNullOrEmpty(Username) && !string.IsNullOrEmpty(Password) &&
+                      !string.IsNullOrEmpty(PasswordConfirm));
 
             BackMainButton = new NavigationCommand<LoginPageViewModel>(navigationStore,
                 () => new LoginPageViewModel(navigationStore),

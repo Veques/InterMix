@@ -1,7 +1,6 @@
 ﻿using Intermix.Commands;
 using Intermix.Stores;
 using Intermix.ViewModels.Base;
-using System;
 using System.Windows.Input;
 
 namespace Intermix.ViewModels.TicTacToe
@@ -10,7 +9,6 @@ namespace Intermix.ViewModels.TicTacToe
     {
         public ICommand StartCommand { get; set; }
         public ICommand OnePlayerEZCommand { get; set; }
-        public ICommand OnePlayerHDCommand { get; set; }
         public ICommand TwoPlayersCommand { get; set; }
         public ICommand BackMainCommand { get; set; }
 
@@ -23,9 +21,6 @@ namespace Intermix.ViewModels.TicTacToe
             OnePlayerEZCommand = new NavigationCommand<GameOnePlayerEasyViewModel>(navigationStore,
                 () => new GameOnePlayerEasyViewModel(navigationStore),
                 x => true);
-            OnePlayerHDCommand = new NavigationCommand<GameOnePlayerHardViewModel>(navigationStore,
-                () => new GameOnePlayerHardViewModel(navigationStore),
-                x => true);
             TwoPlayersCommand = new NavigationCommand<GameTwoPlayersViewModel>(navigationStore,
                 () => new GameTwoPlayersViewModel(navigationStore),
                 x => true);
@@ -36,7 +31,7 @@ namespace Intermix.ViewModels.TicTacToe
 
         private bool ValidateChoice()
         {
-            if (HardMode == false && EasyMode == false && TwoPlayers== false)
+            if (HardMode == false && EasyMode == false && TwoPlayers == false)
             {
                 return false;
             }
@@ -48,10 +43,6 @@ namespace Intermix.ViewModels.TicTacToe
             if (EasyMode == true)
             {
                 OnePlayerEZCommand.Execute(this);
-            }
-            if (HardMode == true)
-            {
-                OnePlayerHDCommand.Execute(this);
             }
             if (TwoPlayers == true)
             {

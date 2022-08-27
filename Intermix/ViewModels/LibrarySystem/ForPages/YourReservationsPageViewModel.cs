@@ -6,30 +6,27 @@ using Intermix.ViewModels.Base;
 using Intermix.ViewModels.LoginPage;
 using Intermix.Views;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Data;
 using System.Windows.Input;
 
 namespace Intermix.ViewModels.LibrarySystem.ForPages
 {
     #region Models
-        public class Reservation
-        {
-            public bool IsChecked { get; set; }
-            public bool IsEnabled { get; set; }
-            public int Id { get; set; }
-            public string Title { get; set; }
-            public string Author { get; set; }
-            public DateTime OpenToLoan { get; set; }
+    public class Reservation
+    {
+        public bool IsChecked { get; set; }
+        public bool IsEnabled { get; set; }
+        public int Id { get; set; }
+        public string Title { get; set; }
+        public string Author { get; set; }
+        public DateTime OpenToLoan { get; set; }
 
-        }
+    }
 
-        #endregion
+    #endregion
     public class YourReservationsPageViewModel : BaseViewModel
     {
         public ICommand LoanCommand { get; set; }
@@ -93,7 +90,7 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
 
             using var db = new ApplicationDbContext();
 
-            foreach(var element in Reservations.Where(x => x.IsChecked == true))
+            foreach (var element in Reservations.Where(x => x.IsChecked == true))
             {
                 db.Loans.Add(new Loans
                 {
@@ -115,7 +112,7 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
 
             }
 
-            if(db.SaveChanges() > 0)
+            if (db.SaveChanges() > 0)
             {
                 _ = new CustomizedMessageBox("Saved!", MessageType.Success, MessageButton.Ok).ShowDialog();
                 Reservations.Clear();
@@ -130,7 +127,7 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
         private void CancelClicked(Object parameter)
         {
             using var db = new ApplicationDbContext();
-            
+
             if (parameter == null)
                 return;
 
@@ -142,7 +139,7 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
                 _ = new CustomizedMessageBox("Are you sure? \n You will not be able to reserve this book again",
                     MessageType.Confirmation, MessageButton.OkCancel).ShowDialog();
 
-                if(db.SaveChanges() > 0)
+                if (db.SaveChanges() > 0)
                 {
                     _ = new CustomizedMessageBox("Success!", MessageType.Success, MessageButton.Ok).ShowDialog();
                     Reservations.Clear();
@@ -173,7 +170,9 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
         public ICollectionView ReservationsCollectionView
         {
             get { return _reservationsCollectionView; }
-            set { _reservationsCollectionView = value;
+            set
+            {
+                _reservationsCollectionView = value;
                 OnPropertyChanged("ReservationsCollectionView");
             }
         }
@@ -191,7 +190,9 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
         public Reservation CancelCommandParameter
         {
             get { return _cancelCommandParameter; }
-            set { _cancelCommandParameter = value;
+            set
+            {
+                _cancelCommandParameter = value;
                 OnPropertyChanged("CancelCommandParameter");
             }
         }

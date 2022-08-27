@@ -10,52 +10,47 @@ namespace Intermix.ViewModels
     {
         public ICommand BackMainCommand { get; set; }
 
-        #region Constructors
-        public InfoViewModel()
-        {
-
-        }
-
+        #region Constructor
         public InfoViewModel(NavigationStore navigationStore)
         {
 
             BackMainCommand = new NavigationCommand<ChooseActivityViewModel>(navigationStore,
                     () => new ChooseActivityViewModel(navigationStore),
                     x => true);
-            
+
             if (Config.Default.Theme == 0)
             {
-                DarkLogo_TTT = Visibility.Visible;
-                LightLogo_TTT = Visibility.Collapsed;
+                DarkLogo = Visibility.Visible;
+                LightLogo = Visibility.Collapsed;
             }
             else
             {
-                DarkLogo_TTT = Visibility.Collapsed;
-                LightLogo_TTT = Visibility.Visible;
+                DarkLogo = Visibility.Collapsed;
+                LightLogo = Visibility.Visible;
             }
         }
         #endregion
 
         #region Properties
-        private Visibility _lightLogo_TTT;
-        public Visibility LightLogo_TTT
+        private Visibility _lightLogo;
+        public Visibility LightLogo
         {
-            get { return _lightLogo_TTT; }
+            get { return _lightLogo; }
             set
             {
-                _lightLogo_TTT = value;
-                OnPropertyChanged("LightLogo_TTT");
+                _lightLogo = value;
+                OnPropertyChanged("LightLogo");
             }
         }
 
-        private Visibility _darkLogo_TTT;
-        public Visibility DarkLogo_TTT
+        private Visibility _darkLogo;
+        public Visibility DarkLogo
         {
-            get { return _darkLogo_TTT; }
+            get { return _darkLogo; }
             set
             {
-                _darkLogo_TTT = value;
-                OnPropertyChanged("DarkLogo_TTT");
+                _darkLogo = value;
+                OnPropertyChanged("DarkLogo");
             }
         }
         #endregion

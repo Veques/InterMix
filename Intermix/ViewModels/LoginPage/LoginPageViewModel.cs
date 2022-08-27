@@ -35,7 +35,7 @@ namespace Intermix.ViewModels.LoginPage
 
             if (Username == "Admin")
             {
-               _ = new CustomizedMessageBox("You can Log as Admin in App, use yours own account", MessageType.Warning, MessageButton.Ok).ShowDialog();
+                _ = new CustomizedMessageBox("You can Log as Admin in App, use yours own account", MessageType.Warning, MessageButton.Ok).ShowDialog();
                 Username = string.Empty;
                 Password = string.Empty;
                 return;
@@ -43,7 +43,7 @@ namespace Intermix.ViewModels.LoginPage
 
             if (doesExist == null)
             {
-               _ = new CustomizedMessageBox("Passwords do not match", MessageType.Error, MessageButton.Ok).ShowDialog();
+                _ = new CustomizedMessageBox("Passwords do not match", MessageType.Error, MessageButton.Ok).ShowDialog();
             }
             else
             {
@@ -58,7 +58,7 @@ namespace Intermix.ViewModels.LoginPage
 
                 foreach (Window item in Application.Current.Windows)
                 {
-                    if(item.Name != "LibraryMainWindow")
+                    if (item.Name != "LibraryMainWindow")
                     {
                         item.Close();
                     }

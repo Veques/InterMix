@@ -30,17 +30,13 @@ namespace Intermix.ViewModels.CurrencyConverter
         public ICommand ConvertCommand { get; set; }
 
         #region Constructor
-        public CurrencyConverterViewModel()
-        {
-
-        }
 
         public CurrencyConverterViewModel(NavigationStore navigationStore)
         {
             BackMainCommand = new NavigationCommand<ChooseActivityViewModel>(navigationStore,
                 () => new ChooseActivityViewModel(navigationStore),
-                x => true);  
-            
+                x => true);
+
             ConvertCommand = new RelayCommand(o => ConvertCurrencies(), o => true);
             LoadMethodAsync();
         }
@@ -67,9 +63,9 @@ namespace Intermix.ViewModels.CurrencyConverter
 
         private static async Task<List<List<string>>> GetCurrencies()
         {
-          
+
             using var client = new HttpClient();
-            
+
             var html = await client.GetStringAsync(URL);
             var doc = new HtmlAgilityPack.HtmlDocument();
             doc.LoadHtml(html);
@@ -84,10 +80,10 @@ namespace Intermix.ViewModels.CurrencyConverter
         }
 
         private async void ConvertCurrencies()
-        {         
+        {
             try
             {
-            using var client = new HttpClient();
+                using var client = new HttpClient();
                 string primary = Currencies.Select(x => x.ShortName).ElementAt(PrimaryCurrency);
                 string secondary = Currencies.Select(x => x.ShortName).ElementAt(SecondaryCurrency);
 

@@ -1,12 +1,11 @@
-﻿using Intermix.Stores;
+﻿using Intermix.Commands;
+using Intermix.Stores;
 using Intermix.ViewModels.Base;
-using Intermix.Commands;
+using Intermix.ViewModels.CurrencyConverter;
+using Intermix.ViewModels.TicTacToe;
+using Intermix.Views;
 using System.Windows;
 using System.Windows.Input;
-using System;
-using Intermix.ViewModels.TicTacToe;
-using Intermix.ViewModels.CurrencyConverter;
-using Intermix.Views;
 
 namespace Intermix.ViewModels
 {
@@ -17,6 +16,7 @@ namespace Intermix.ViewModels
         public ICommand NavigateTicTacToe { get; set; }
         public ICommand NavigateLibrary { get; set; }
         public ICommand NavigateConverter { get; set; }
+        public ICommand NavigateSnake { get; set; }
         public ICommand CheckItemCommand { get; set; }
         private NavigationStore _navigationStore { get; set; }
         #endregion
@@ -45,13 +45,13 @@ namespace Intermix.ViewModels
             //TODO: Theming
             if (Config.Default.Theme == 0)
             {
-                DarkLogo_TTT = Visibility.Visible;
-                LightLogo_TTT = Visibility.Collapsed;
+                DarkLogo = Visibility.Visible;
+                LightLogo = Visibility.Collapsed;
             }
             else
             {
-                DarkLogo_TTT = Visibility.Collapsed;
-                LightLogo_TTT = Visibility.Visible;
+                DarkLogo = Visibility.Collapsed;
+                LightLogo = Visibility.Visible;
             }
 
         }
@@ -72,7 +72,6 @@ namespace Intermix.ViewModels
                     NavigateConverter.Execute(this);
                     break;
 
-                    //TODO: LIbrary
                 case "Library":
                     ShowWindow();
                     break;
@@ -100,27 +99,27 @@ namespace Intermix.ViewModels
             }
         }
 
-        private Visibility _lightLogo_TTT;
+        private Visibility _lightLogo;
 
-        public Visibility LightLogo_TTT
+        public Visibility LightLogo
         {
-            get { return _lightLogo_TTT; }
+            get { return _lightLogo; }
             set
             {
-                _lightLogo_TTT = value;
-                OnPropertyChanged("LightLogo_TTT");
+                _lightLogo = value;
+                OnPropertyChanged("LightLogo");
             }
         }
 
-        private Visibility _darkLogo_TTT;
+        private Visibility _darkLogo;
 
-        public Visibility DarkLogo_TTT
+        public Visibility DarkLogo
         {
-            get { return _darkLogo_TTT; }
+            get { return _darkLogo; }
             set
             {
-                _darkLogo_TTT = value;
-                OnPropertyChanged("DarkLogo_TTT");
+                _darkLogo = value;
+                OnPropertyChanged("DarkLogo");
             }
         }
 

@@ -4,12 +4,9 @@ using Intermix.Models.LibrarySystemModels;
 using Intermix.Stores;
 using Intermix.ViewModels.Base;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -69,7 +66,7 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
                     statusColor = Brushes.Red;
                 }
 
-                
+
                 AllBooks.Add(new Book
                 {
                     Id = element.Id,

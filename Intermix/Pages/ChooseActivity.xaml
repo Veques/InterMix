@@ -8,8 +8,9 @@
       xmlns:viewmodels="clr-namespace:Intermix.ViewModels" 
       d:DataContext="{d:DesignInstance Type=viewmodels:ChooseActivityViewModel}"
       mc:Ignorable="d" 
-      Title="ChooseActivity">
-    <Grid>
+      Title="ChooseActivity"  >
+
+    <Grid x:Name="grid">
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -17,7 +18,7 @@
         </Grid.ColumnDefinitions>
 
         <ListView materialDesign:ShadowAssist.ShadowDepth="Depth3" ScrollViewer.VerticalScrollBarVisibility="Hidden" BorderThickness="0" Name="listView1" Background="Transparent">
-            
+
 
 
             <!-- Info -->
@@ -27,12 +28,12 @@
                         <i:InvokeCommandAction Command="{Binding CheckItemCommand}" CommandParameter="Info" />
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
-                
+
                 <StackPanel ScrollViewer.VerticalScrollBarVisibility="Disabled" 
                             Orientation="Horizontal" HorizontalAlignment="Stretch">
                     <materialDesign:PackIcon Kind="InformationOutline" Width="100" Height="100" 
                                              Foreground="{DynamicResource MW_Font}" />
-                    
+
                     <TextBlock Margin="15 0 0 0" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Stretch" 
                                Text="Project description" Foreground="{DynamicResource MW_Font}"/>
                 </StackPanel>
@@ -80,9 +81,9 @@
                 </i:Interaction.Triggers>
 
                 <StackPanel ScrollViewer.VerticalScrollBarVisibility="Disabled" Orientation="Horizontal" HorizontalAlignment="Stretch">
-                    <Image Source="/Images/TicTacToe.png" Visibility="{Binding LightLogo_TTT}"
+                    <Image Source="/Images/TicTacToe.png" Visibility="{Binding LightLogo}"
                            Style="{StaticResource MW_Images}"/>
-                    <Image Source="/Images/TicTacToe_Black.png" Visibility="{Binding DarkLogo_TTT}"
+                    <Image Source="/Images/TicTacToe_Black.png" Visibility="{Binding DarkLogo}"
                            Style="{StaticResource MW_Images}"/>
                     <TextBlock Margin="15 0 0 0" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Stretch" 
                                Text="TicTacToe" Foreground="{DynamicResource MW_Font}"/>
@@ -127,8 +128,8 @@
                        Text="Welcome to InterMIX"/>
 
         </Grid>
-        
-                
+
+
 
     </Grid>
 </Page>

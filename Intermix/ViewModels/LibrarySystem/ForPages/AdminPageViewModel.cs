@@ -8,13 +8,8 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.OleDb;
-using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
 
 
@@ -110,7 +105,7 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
 
                 list = (from DataRow dr in Data.Rows
                         select new Books()
-                        {   
+                        {
                             Title = dr["Title"].ToString(),
                             AuthorName = dr["Name"].ToString(),
                             AuthorSurname = dr["Surname"].ToString(),
@@ -147,7 +142,9 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
         public bool IsEnabled
         {
             get { return _isEnabled; }
-            set { _isEnabled = value;
+            set
+            {
+                _isEnabled = value;
                 OnPropertyChanged("IsEnabled");
             }
         }
@@ -175,7 +172,7 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
         {
             using var db = new ApplicationDbContext();
 
-            foreach(var user in db.Users.Where(d => d.Username.Equals("Admin")))
+            foreach (var user in db.Users.Where(d => d.Username.Equals("Admin")))
             {
                 user.Password = FirstPin;
             }
@@ -194,7 +191,9 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
         public string FirstPin
         {
             get { return _firstPIN; }
-            set { _firstPIN = value;
+            set
+            {
+                _firstPIN = value;
                 OnPropertyChanged("FirstPIN");
             }
         }

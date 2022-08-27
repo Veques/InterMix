@@ -18,7 +18,7 @@ namespace Intermix.Pages.LibrarySystem
             var ue = e.Source as TextBox;
             Regex regex;
 
-                regex = new Regex("[^0-9]+");
+            regex = new Regex("[^0-9]+");
 
             e.Handled = regex.IsMatch(e.Text);
         }
