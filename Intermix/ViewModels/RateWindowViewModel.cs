@@ -20,6 +20,8 @@ namespace Intermix.ViewModels
                 o => !string.IsNullOrEmpty(OpinionText) && !string.IsNullOrEmpty(Name) && Rating > 0 && Config.Default.IsFeedbackSent == false);
         }
 
+        #region Methods
+
         private void SendFeedBack(string opinion)
         {
             var fromAddress = new MailAddress("feedback112342@gmail.com", Name);
@@ -54,6 +56,9 @@ namespace Intermix.ViewModels
             catch (Exception) { }
         }
 
+        #endregion
+
+        #region Properties
         private string _opinionText;
 
         public string OpinionText
@@ -89,5 +94,6 @@ namespace Intermix.ViewModels
                 OnPropertyChanged("Rating");
             }
         }
+        #endregion
     }
 }

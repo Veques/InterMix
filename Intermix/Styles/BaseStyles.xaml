@@ -641,7 +641,6 @@
         </DoubleAnimationUsingKeyFrames>
     </Storyboard>
     
-
     <!-- Windows Buttons Animation -->
     <Storyboard x:Key="WindowsBarStoryboard">
         <DoubleAnimationUsingKeyFrames  Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">

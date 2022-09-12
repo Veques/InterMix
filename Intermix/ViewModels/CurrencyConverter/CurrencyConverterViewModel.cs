@@ -107,6 +107,9 @@ namespace Intermix.ViewModels.CurrencyConverter
             }
         }
 
+
+        #region Properties
+
         private ObservableCollection<Currency> _currencies;
         public ObservableCollection<Currency> Currencies
 
@@ -166,5 +169,7 @@ namespace Intermix.ViewModels.CurrencyConverter
             }
 
         }
+
+        #endregion
     }
 }

@@ -24,15 +24,16 @@
             <TextBlock Style="{StaticResource MaterialDesignBody2TextBlock}"
                     HorizontalAlignment="Center" Foreground="{StaticResource MW_Font}"
                     Width="{Binding ElementName=Panel1, Path=ActualWidth}"
-                    Margin="1 0 0 0" Padding="2"
+                    Margin="2 0 0 0" Padding="2"
                     TextWrapping="WrapWithOverflow"
                     FontSize="17"
                     TextAlignment="Justify"
                     FontWeight="Light" >
                 Projekt zawiera wszystko co kiedykolwiek chciałem przećwiczyć lub się nauczyć. Kod tej aplikacji nie jest idealny 
-                i często był utrudniany na siłę (np. w przypadku walut z konwertera, które są pobierane ze strony zamiast z APi, 
+                i często był utrudniany na siłę (np. w przypadku walut z konwertera, które są pobierane ze strony zamiast z API, 
                 ponieważ chciałem dowiedzieć się jak to robić, a nigdy nie miałem okazji). Zdaję sobię sprawę, że przede mną jeszcze 
-                wiele nauki itp ..
+                wiele nauki, ale ciągłe siedzenie przy komputerze, nauka nowych zagadnień i tworzenie tej aplikacji (a także innych) 
+                pokazały mi, że zawód programisty jest dla mnie.
             </TextBlock>
 
             
@@ -57,14 +58,14 @@
             <TextBlock Style="{StaticResource MaterialDesignBody1TextBlock}"
                     HorizontalAlignment="Center" Foreground="{StaticResource MW_Font}"
                     Width="{Binding ElementName=Panel1, Path=ActualWidth}"
-                    Margin="1 0 0 0" Padding="2"
+                    Margin="2 0 0 0" Padding="2"
                     TextWrapping="WrapWithOverflow"
                     TextAlignment="Justify"
                     FontSize="17"
                     FontWeight="Light" >
                 Kółko- krzyżyk zawiera możliwość gry w dwóch graczy, a także z komputerem. Przy wyborze poziomu łatwego, komputer wybiera losowe wolne pole
-                i tam stawia kółko. Natomiast w trybie trudnym, komputer stara się, biorąc pod uwagę strategię wygrywania w kółko- krzyżyk, ustawiać kółko w taki sposób by
-                wygrać lub minimum - zremisować.
+                i tam stawia kółko. Na etapie tworzenia tej gry stosowanie w pełni MVVM było dla mnie trudne, dlatego kod tej gry znajduje się w tzw. 
+                code- behind. Nie przepisuję go na bardziej zgodny, ponieważ przypomina mi o progresie jaki udało mi się zrobić przez poprzednie miesiące.
             </TextBlock>
         </StackPanel>
 
@@ -75,14 +76,14 @@
             <TextBlock Style="{StaticResource MaterialDesignBody2TextBlock}"
                     HorizontalAlignment="Center"
                     Width="{Binding ElementName=Panel1, Path=ActualWidth}"
-                    Margin="1 0 0 0" Padding="2" Foreground="{StaticResource MW_Font}"
+                    Margin="2 0 0 0" Padding="2" Foreground="{StaticResource MW_Font}"
                     TextWrapping="WrapWithOverflow"
                     TextAlignment="Justify"
                     FontSize="17"
                     FontWeight="Light">
                 Konwerter Walut pobiera listę walut korzystając z tabeli na stronie znajdującej się w dokumentacji API. Po wybraniu odpowiedniej kwoty, walut i kliknięciu przycisku
                 zostaje wysłanie zapytanie do API na stronie https://currencyapi.com/docs. Następnie aplikacja przeprowadza deserializację przychodzącego skryptu w JSON i przelicza 
-                wartość jednej waluty na drugą. API jest darmowe, ale ma 300 darmowych zapytań. Na własną aplikację jest to zdecydowanie wystarczająco.
+                wartość jednej waluty na drugą. API jest darmowe, ale tylko do 300 darmowych zapytań miesięcznie. Na własną aplikację jest to zdecydowanie wystarczająco.
             </TextBlock>
         </StackPanel>
 
@@ -93,15 +94,15 @@
             <TextBlock Style="{StaticResource MaterialDesignBody2TextBlock}"
                     HorizontalAlignment="Center" Foreground="{StaticResource MW_Font}"
                     Width="{Binding ElementName=Panel1, Path=ActualWidth}"
-                    Margin="1 0 0 0" Padding="2"
+                    Margin="2 0 0 0" Padding="2"
                     TextWrapping="WrapWithOverflow"
                     TextAlignment="Justify"
                     FontSize="17"
                     FontWeight="Light">
                 Prosty system zarządzania biblioteką stworzony za pomocą C#, WPF, SQLite i Entity Framework. Nie jestem w stanie postawić własnego serwera, dlatego SQLite wydaje się
-                świetnym wyborem do tego typu aplikacji. Aby wejść do systemu należy się zalogować lub zarejestrować, jeśli aplikacja jest używana przez daną osobę po raz pierwszy. 
-                Aplikacja posiada możliwość importu książek z pliku Excel znajdującego się w folderze Other, przeglądania listy wypożyczających i wypożyczonych przez nich książek
-                poprzez konto admina i inne przydatne w tego typu aplikacji opcje. Domyślne hasło na konto admin to 1234.
+                świetnym wyborem do tego typu aplikacji. Aby wejść do systemu należy się zalogować lub zarejestrować, jeśli aplikacja jest używana przez daną osobę po raz pierwszy (zostanie też wtedy stworzona baza danych SQLite). 
+                Aplikacja posiada możliwość importu przykładowych książek z pliku Excel (w celu testów) znajdującego się w folderze Other, przeglądania listy wypożyczających i wypożyczonych przez nich książek
+                poprzez konto admina i inne, przydatne w tego typu aplikacji, opcje. Domyślne hasło na konto admin to 1234.
             </TextBlock>
         </StackPanel>
     </Grid>

@@ -9,11 +9,10 @@ namespace Intermix.ViewModels
     public class MainWindowViewModel : BaseViewModel
     {
         private readonly NavigationStore _navigationStore;
-
         public ICommand OpenRatingCommand { get; set; }
         public ICommand OpenSettingsCommand { get; set; }
-
         public BaseViewModel CurrentViewModel => _navigationStore.CurrentViewModel;
+
 
         public MainWindowViewModel(NavigationStore navigationStore)
         {
@@ -23,6 +22,8 @@ namespace Intermix.ViewModels
             OpenRatingCommand = new RelayCommand(x => ShowRatingWindow(), x => true);
             OpenSettingsCommand = new RelayCommand(x => ShowSettingsWindow(), x => true);
         }
+
+
 
         private static void ShowSettingsWindow()
         {

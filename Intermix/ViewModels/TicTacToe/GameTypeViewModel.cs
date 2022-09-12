@@ -12,6 +12,8 @@ namespace Intermix.ViewModels.TicTacToe
         public ICommand TwoPlayersCommand { get; set; }
         public ICommand BackMainCommand { get; set; }
 
+
+
         public GameTypeViewModel(NavigationStore navigationStore)
         {
 
@@ -28,6 +30,9 @@ namespace Intermix.ViewModels.TicTacToe
                 () => new ChooseActivityViewModel(navigationStore),
                 x => true);
         }
+
+
+
 
         private bool ValidateChoice()
         {

@@ -18,10 +18,14 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
 
     public class ReturnBooksPageViewModel : BaseViewModel
     {
+        #region Fields
         public ICommand ReturnBooksCommand { get; set; }
         public ICommand ExtendCommand { get; set; }
         public ICommand BackMainCommand { get; set; }
 
+        #endregion
+
+        #region Constructor
         public ReturnBooksPageViewModel(NavigationStore navigationStore)
         {
             using var db = new ApplicationDbContext();
@@ -46,6 +50,10 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
 
         }
 
+        #endregion
+
+        #region Methods
+
         private void ExtendLoan(object parameter)
         {
             using var db = new ApplicationDbContext();
@@ -60,8 +68,8 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
 
             if (parameter is ReturnBook book)
             {
-                db.Loans.Single(x => x.Id == book.Id).ExpectedReturn = book.ReturnDate.AddDays(7);
-                db.Loans.Single(x => x.Id == book.Id).WasExtended = 1;
+                db.Loans.Single(x => x.BookId == book.Id).ExpectedReturn = book.ReturnDate.AddDays(7);
+                db.Loans.Single(x => x.BookId == book.Id).WasExtended = 1;
 
                 if (db.SaveChanges() > 0)
                 {
@@ -156,6 +164,8 @@ namespace Intermix.ViewModels.LibrarySystem.ForPages
             ReturnBooks.Clear();
             FillDataGrid();
         }
+
+        #endregion
 
         #region Properties
 

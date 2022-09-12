@@ -10,8 +10,10 @@ namespace Intermix.ViewModels
 {
     public class AddBookViewModel : BaseViewModel
     {
-
         public ICommand AddBookCommand { get; set; }
+
+
+
         public AddBookViewModel()
         {
             PublishDate = DateTime.Now.Date;
@@ -21,6 +23,10 @@ namespace Intermix.ViewModels
                 o => AddBooks(),
                 o => !String.IsNullOrEmpty(Title) && !String.IsNullOrEmpty(AuthorName) && !String.IsNullOrEmpty(AuthorSurname) && PublishDate > defaultDate);
         }
+
+
+
+
 
         private void AddBooks()
         {
@@ -55,6 +61,7 @@ namespace Intermix.ViewModels
 
         }
 
+        #region Properties
         private string _title;
 
         public string Title
@@ -112,6 +119,6 @@ namespace Intermix.ViewModels
             }
         }
 
-
+        #endregion
     }
 }

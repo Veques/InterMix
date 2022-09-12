@@ -52,8 +52,8 @@ namespace Intermix.Pages.MainWindow.TicTacToe
             _isPlayerOneTurn = true;
 
             //deleting line
-            int intTotalChildren = ggg.Children.Count - 1;
-            for (int intCounter = intTotalChildren; intCounter > 0; intCounter--)
+            int totalChildren = ggg.Children.Count - 1;
+            for (int intCounter = totalChildren; intCounter > 0; intCounter--)
             {
                 if (ggg.Children[intCounter].GetType() == typeof(Line))
                 {
@@ -84,7 +84,6 @@ namespace Intermix.Pages.MainWindow.TicTacToe
             var row = Grid.GetRow(button);
 
             var index = column + (row * 3);
-            Random randomBlankSpace = new();
 
             if (_results[index] != MarkType.Blank)
             {

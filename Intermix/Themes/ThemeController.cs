@@ -16,13 +16,11 @@ namespace Intermix.Themes
         {
             get { return Application.Current.Resources.MergedDictionaries[6]; }
             set { Application.Current.Resources.MergedDictionaries[6] = value; }
-
         }
 
         private static void ChangeTheme(Uri uri)
         {
             ThemeDictionary = new ResourceDictionary() { Source = uri };
-
         }
 
         public static void SetTheme(ThemesTypes theme)
@@ -34,7 +32,6 @@ namespace Intermix.Themes
                 case ThemesTypes.Light: themeName = "LightTheme"; break;
                 case ThemesTypes.Dark: themeName = "DarkTheme"; break;
             }
-
             try
             {
                 if (!string.IsNullOrEmpty(themeName))

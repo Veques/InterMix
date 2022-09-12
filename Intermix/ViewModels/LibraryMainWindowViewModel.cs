@@ -5,13 +5,12 @@ using System.Threading.Tasks;
 
 namespace Intermix.ViewModels
 {
-
-
     public class LibraryMainWindowViewModel : BaseViewModel
     {
         private readonly NavigationStore _navigationStore;
-
         public BaseViewModel CurrentViewModel => _navigationStore.CurrentViewModel;
+
+
 
         public LibraryMainWindowViewModel(NavigationStore navigationStore)
         {
@@ -20,11 +19,13 @@ namespace Intermix.ViewModels
             UpdateTime();
         }
 
+
+
+
         private void OnViewModelChanged()
         {
             OnPropertyChanged(nameof(CurrentViewModel));
         }
-
         private async void UpdateTime()
         {
             Time = DateTime.Now.ToString("HH:mm");

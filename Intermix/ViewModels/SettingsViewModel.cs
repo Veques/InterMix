@@ -137,7 +137,7 @@ namespace Intermix.ViewModels
         }
 
 
-        private void ApplyColors(Color leading, Color secondary)
+        private static void ApplyColors(Color leading, Color secondary)
         {
             Application.Current.Resources["LeadingColor"] = leading;
             Application.Current.Resources["SecondaryLeadingColor"] = secondary;

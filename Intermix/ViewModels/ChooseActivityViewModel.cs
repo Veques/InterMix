@@ -21,7 +21,7 @@ namespace Intermix.ViewModels
         private NavigationStore _navigationStore { get; set; }
         #endregion
 
-        #region Constructors
+        #region Constructor
 
         public ChooseActivityViewModel(NavigationStore navigationStore)
         {

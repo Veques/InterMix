@@ -8,17 +8,18 @@ namespace Intermix.ViewModels
     {
         readonly NavigationStore _navigationStore;
         public ICommand ExitCommand { get; set; }
-
         public BaseViewModel CurrentViewModel => _navigationStore.CurrentViewModel;
+
+
 
         public LoginWindowViewModel(NavigationStore navigationStore)
         {
             _navigationStore = navigationStore;
             _navigationStore.CurrentViewModelChanged += OnViewModelChanged;
-
-            //ExitCommand = new RelayCommand(x => foreach(var window in Application.Current.Windows) { window.Close(); },
-
         }
+
+
+
 
         private void OnViewModelChanged()
         {
